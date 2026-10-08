@@ -1,0 +1,688 @@
+<title>Untitled Foundations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Instrument+Serif:ital@0;1&family=Fragment+Mono&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: a working spec sheet. Neutral dark-first chrome; each foundation (brand, neutrals, status, tokens, type) is a section with paired light/dark frames. */
+:root {
+  color-scheme: dark;
+  --bg: oklch(0.145 0 0);
+  --surface: oklch(0.18 0 0);
+  --surface-2: oklch(0.215 0 0);
+  --ink: oklch(0.96 0 0);
+  --muted: oklch(0.68 0 0);
+  --line: oklch(0.27 0 0);
+  --focus: oklch(0.9 0 0);
+  --font: "Geist", "Segoe UI", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "Cascadia Mono", monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-xl: 2rem;
+  --fs-hero: clamp(2.25rem, 5vw, 3.5rem);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: oklch(0.985 0 0); --surface: oklch(1 0 0); --surface-2: oklch(0.955 0 0);
+    --ink: oklch(0.17 0 0); --muted: oklch(0.48 0 0); --line: oklch(0.9 0 0); --focus: oklch(0.25 0 0);
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: oklch(0.985 0 0); --surface: oklch(1 0 0); --surface-2: oklch(0.955 0 0);
+  --ink: oklch(0.17 0 0); --muted: oklch(0.48 0 0); --line: oklch(0.9 0 0); --focus: oklch(0.25 0 0);
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: var(--fs-base); line-height: 1.55; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 80px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin-inline: auto; display: grid; gap: 96px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code { font-family: var(--mono); font-size: 0.875em; }
+.label { font-family: var(--mono); font-size: var(--fs-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.prose { max-width: 68ch; color: var(--muted); }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+.top { padding-block: 64px 0; display: grid; gap: 18px; }
+.top h1 { font-size: var(--fs-hero); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; max-width: 16ch; }
+.top .prose { font-size: var(--fs-md); }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { font-size: var(--fs-sm); color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 99px; padding: 5px 12px; }
+.toc a:hover { color: var(--ink); border-color: var(--muted); }
+
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+.sec-head h2 { font-size: var(--fs-xl); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; }
+
+.bar { display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; padding: 12px 14px; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.grp { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sw-btn { appearance: none; cursor: pointer; border: 0; padding: 0; width: 26px; height: 26px; border-radius: 99px; box-shadow: inset 0 0 0 1px oklch(1 0 0 / .15); outline-offset: 3px; }
+.sw-btn[aria-pressed="true"] { outline: 2px solid var(--ink); }
+#hue { width: 140px; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 99px; background: linear-gradient(90deg, oklch(.65 .16 0), oklch(.65 .16 60), oklch(.65 .16 120), oklch(.65 .16 180), oklch(.65 .16 240), oklch(.65 .16 300), oklch(.65 .16 360)); }
+#hue::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 99px; background: oklch(0.98 0 0); border: 2px solid oklch(0.2 0 0); }
+#hue::-moz-range-thumb { width: 12px; height: 12px; border-radius: 99px; background: oklch(0.98 0 0); border: 2px solid oklch(0.2 0 0); }
+.hue-val { font-family: var(--mono); font-size: var(--fs-xs); color: var(--muted); min-width: 4ch; }
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 9px; background: var(--surface-2); border: 1px solid var(--line); flex-wrap: wrap; }
+.seg button { appearance: none; border: 0; cursor: pointer; background: transparent; color: var(--muted); font: 500 var(--fs-xs)/1 var(--font); padding: 8px 11px; border-radius: 6px; }
+.seg button[aria-pressed="true"] { background: var(--bg); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* Frames: fixed theme, independent of the page theme */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 16px; }
+.frame { border-radius: 16px; padding: 18px; display: grid; gap: 16px; align-content: start; background: var(--f-bg); color: var(--f-ink); box-shadow: inset 0 0 0 1px var(--f-line); }
+.frame.dark { color-scheme: dark; --f-bg: oklch(0.13 0 0); --f-surface: oklch(0.16 0 0); --f-ink: oklch(0.97 0 0); --f-muted: oklch(0.72 0 0); --f-line: oklch(0.285 0 0); }
+.frame.light { color-scheme: light; --f-bg: oklch(1 0 0); --f-surface: oklch(0.985 0 0); --f-ink: oklch(0.17 0 0); --f-muted: oklch(0.48 0 0); --f-line: oklch(0.905 0 0); }
+.frame-top { display: flex; justify-content: space-between; align-items: center; }
+.frame-top .tag { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .06em; text-transform: uppercase; color: var(--f-muted); }
+
+/* Brand hero tile */
+.brand-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; margin-bottom: 16px; }
+@media (max-width: 860px) { .brand-hero { grid-template-columns: 1fr; } }
+.brand-tile { border-radius: 16px; min-height: 220px; padding: 22px; display: grid; align-content: space-between; color: var(--on); background: var(--pool-bg); box-shadow: inset 0 1px 0 oklch(1 0 0 / .28); }
+.brand-tile .bt-name { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 600; letter-spacing: -0.05em; line-height: 1; }
+.brand-tile .bt-vals { font-family: var(--mono); font-size: var(--fs-xs); opacity: .82; display: grid; gap: 2px; }
+.brand-facts { border: 1px solid var(--line); background: var(--surface); border-radius: 16px; padding: 18px; display: grid; gap: 12px; align-content: start; font-size: var(--fs-sm); }
+.brand-facts dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+.brand-facts dt { color: var(--muted); }
+.brand-facts dd { margin: 0; font-family: var(--mono); font-size: var(--fs-xs); display: flex; align-items: center; gap: 8px; }
+.brand-facts dd i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; flex: none; box-shadow: inset 0 0 0 1px oklch(1 0 0 / .12); }
+.note { font-size: var(--fs-sm); color: var(--muted); border-left: 2px solid var(--line); padding-left: 12px; }
+.note b { color: var(--ink); font-weight: 600; }
+
+/* Scale rows */
+.scale { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; }
+.cell { height: 54px; border-radius: 6px; display: flex; align-items: flex-end; padding: 5px 6px; font-family: var(--mono); font-size: 0.625rem; }
+.roles { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; font-size: 0.625rem; color: var(--f-muted); line-height: 1.25; }
+.roles span { overflow: hidden; text-overflow: ellipsis; }
+.scale-wrap { overflow-x: auto; }
+.scale-wrap > div { min-width: 520px; display: grid; gap: 6px; }
+
+/* Brand in use */
+.use { display: grid; gap: 12px; }
+.use-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.8125rem; }
+.ann-pill { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 8px; border-radius: 99px; color: var(--f-muted); border: 1px solid transparent;
+  background: linear-gradient(var(--f-surface), var(--f-surface)) padding-box, linear-gradient(90deg, color-mix(in oklch, var(--b-9) 75%, transparent), var(--f-line) 45%, var(--f-line)) border-box; }
+.ann-pill i { width: 6px; height: 6px; border-radius: 99px; background: var(--b-9); }
+.ann-pill b { color: var(--f-ink); font-weight: 500; }
+.badge { font-size: 0.6875rem; font-weight: 600; padding: 3px 8px; border-radius: 99px; color: var(--b-11); background: var(--b-3); }
+.pro-link { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 8px; border-radius: 99px; border: 1px solid transparent; color: var(--f-ink);
+  background: linear-gradient(var(--f-bg), var(--f-bg)) padding-box, linear-gradient(135deg, color-mix(in oklch, var(--b-9) 85%, transparent), var(--f-line) 65%) border-box; }
+.pro-link i { width: 6px; height: 6px; border-radius: 99px; background: var(--b-9); }
+.sel { background: color-mix(in oklch, var(--b-9) 35%, transparent); padding: 1px 2px; }
+.use-cards { display: grid; grid-template-columns: 1fr 1.3fr; gap: 10px; }
+.pro-mini { border-radius: 12px; padding: 14px; display: grid; gap: 6px; align-content: start; color: var(--on); background: var(--pool-bg); box-shadow: inset 0 1px 0 oklch(1 0 0 / .28), 0 0 0 1px color-mix(in oklch, var(--b-9) 50%, transparent), 0 14px 30px -18px oklch(0 0 0 / .5); font-size: 0.75rem; }
+.pro-mini b { font-size: 0.875rem; }
+.pro-mini span { opacity: .8; }
+.pro-mini .tiny-btn { opacity: 1; justify-self: start; margin-top: 4px; font-weight: 600; padding: 5px 9px; border-radius: 7px; background: var(--on); color: var(--grad-bottom); }
+.foot-mini { border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: end; color: var(--on); background: var(--pool-foot); box-shadow: inset 0 1px 0 oklch(1 0 0 / .3); }
+.foot-mini b { font-size: 1.75rem; letter-spacing: -0.06em; font-weight: 600; line-height: 1; background: linear-gradient(180deg, var(--on) 40%, color-mix(in oklch, var(--on) 55%, transparent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.foot-mini span { font-size: 0.6875rem; opacity: .8; }
+
+/* Side-by-side comparison */
+.cmp-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; margin-top: 40px; margin-bottom: 12px; }
+.cmp-head h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
+.cmp-head span { font-size: var(--fs-sm); color: var(--muted); }
+.cmp { display: grid; gap: 10px; }
+.cmp-group { margin-top: 10px; }
+.cmp-row { display: grid; grid-template-columns: minmax(180px, 250px) minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-items: stretch; }
+@media (max-width: 900px) { .cmp-row { grid-template-columns: 1fr 1fr; } .cmp-name { grid-column: 1 / -1; } }
+@media (max-width: 480px) { .cmp-row { grid-template-columns: 1fr; } }
+.cmp-name { appearance: none; cursor: pointer; text-align: left; font: inherit; color: var(--ink); border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; align-content: center; }
+.cmp-name[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.cmp-name b { display: flex; align-items: center; gap: 8px; font-size: 1rem; font-weight: 600; }
+.cmp-name b i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; flex: none; }
+.cmp-name span { font-size: 0.8125rem; color: var(--muted); line-height: 1.4; }
+.cmp-name .cmp-vals { font-family: var(--mono); font-size: 0.6875rem; }
+.cmp-frame { padding: 10px; gap: 8px; border-radius: 12px; }
+.cmp-frame .use-cards { grid-template-columns: 1fr 1.4fr; gap: 8px; }
+.cmp-frame .pro-mini { padding: 10px 12px; }
+.cmp-frame .foot-mini { padding: 12px; }
+.cmp-frame .foot-mini b { font-size: 1.25rem; }
+
+.cmp-name.static { cursor: default; }
+.cmp-name.static:hover { border-color: var(--line); }
+
+/* Status */
+.status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+.alert { border-radius: 10px; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 0.8125rem; background: var(--s-3); box-shadow: inset 0 0 0 1px var(--s-6); }
+.alert i { grid-row: span 2; width: 8px; height: 8px; margin-top: 6px; border-radius: 99px; background: var(--s-9); }
+.alert b { color: var(--s-12); font-weight: 600; }
+.alert span { color: var(--s-11); }
+.solid-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.solid { font-size: 0.75rem; font-weight: 600; padding: 5px 10px; border-radius: 8px; background: var(--s-9); color: var(--s-on); }
+
+/* Tokens table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: var(--fs-sm); }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--mono); font-size: var(--fs-xs); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+td.tok { font-family: var(--mono); font-size: 0.8125rem; white-space: nowrap; }
+td.val { font-family: var(--mono); font-size: 0.6875rem; color: var(--muted); white-space: nowrap; }
+td.val i { width: 16px; height: 16px; border-radius: 4px; display: inline-block; vertical-align: -4px; margin-right: 8px; box-shadow: inset 0 0 0 1px oklch(0.5 0 0 / .35); }
+td.use { color: var(--muted); }
+tr.grp-row td { font-family: var(--mono); font-size: var(--fs-xs); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); background: var(--surface-2); padding-block: 8px; }
+
+/* Typography */
+.type-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; margin-bottom: 16px; }
+.topt { appearance: none; cursor: pointer; text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 14px; padding: 16px; display: grid; gap: 8px; align-content: start; font: inherit; }
+.topt[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.topt .kind { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.topt .tname { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.topt .tsample { font-size: 1.75rem; line-height: 1; letter-spacing: -0.03em; }
+.topt p { font-size: var(--fs-sm); color: var(--muted); }
+
+.spec { font-family: var(--t-sans); }
+.spec .t-over { font-family: var(--t-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--f-muted); }
+.spec .t-display { font-family: var(--t-display); font-weight: var(--t-dw); font-size: clamp(2.4rem, 1.4rem + 3.6vw, 4rem); line-height: 1.0; letter-spacing: var(--t-dtrack); max-width: 15ch;
+  background: linear-gradient(180deg, var(--f-ink) 35%, color-mix(in oklch, var(--f-ink) 58%, var(--f-bg))); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.spec .t-display em { font-family: var(--t-accent); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+.spec .t-h2 { font-weight: 600; font-size: 2rem; line-height: 1.15; letter-spacing: calc(var(--t-k) * -0.022em); }
+.spec .t-h3 { font-weight: 600; font-size: 1.25rem; line-height: 1.4; letter-spacing: calc(var(--t-k) * -0.01em); }
+.spec .t-body { font-size: 1rem; line-height: 1.65; color: var(--f-muted); max-width: 62ch; }
+.spec .t-body b { color: var(--f-ink); font-weight: 500; }
+.spec .t-ui { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.875rem; font-weight: 500; }
+.spec .t-btn { padding: 9px 14px; border-radius: 9px; background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom)); color: var(--f-bg); box-shadow: inset 0 1px 0 oklch(1 0 0 / .25); }
+.spec .t-btn.o { background: transparent; color: var(--f-ink); box-shadow: inset 0 0 0 1px var(--f-line); }
+.spec .t-tabs { display: inline-flex; padding: 3px; gap: 2px; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--f-line); font-size: 0.8125rem; }
+.spec .t-tabs span { padding: 6px 11px; border-radius: 6px; color: var(--f-muted); }
+.spec .t-tabs .on { color: var(--f-ink); box-shadow: inset 0 0 0 1px var(--f-line); background: var(--f-surface); }
+.spec .t-code { font-family: var(--t-mono); font-size: 0.8125rem; line-height: 1.65; background: var(--f-surface); box-shadow: inset 0 0 0 1px var(--f-line); border-radius: 10px; padding: 12px 14px; overflow-x: auto; white-space: pre; color: var(--f-muted); margin: 0; }
+.spec .t-code .k { color: var(--f-ink); }
+.spec .t-nums { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; font-variant-numeric: tabular-nums; }
+.spec .t-nums b { font-size: 2rem; font-weight: 600; letter-spacing: calc(var(--t-k) * -0.022em); }
+.spec .t-nums span { font-size: 0.8125rem; color: var(--f-muted); }
+.spec .t-word { font-family: var(--t-display); font-weight: var(--t-dw); font-size: 2.25rem; letter-spacing: var(--t-dtrack); line-height: 1; color: var(--on); }
+.spec .t-foot { border-radius: 12px; padding: 18px; display: flex; justify-content: space-between; align-items: end; background: var(--pool-foot); color: var(--on); }
+.spec .t-foot span { font-size: 0.75rem; opacity: .8; }
+.frame.dark .spec { --btn-top: oklch(0.99 0 0); --btn-bottom: oklch(0.86 0 0); }
+.frame.light .spec { --btn-top: oklch(0.32 0 0); --btn-bottom: oklch(0.13 0 0); }
+.t-meta { display: grid; gap: 8px; font-size: var(--fs-sm); color: var(--muted); margin-top: 16px; }
+.t-meta b { color: var(--ink); font-weight: 600; }
+
+.scale-table td.sample { font-family: var(--t-sans); color: var(--ink); white-space: nowrap; max-width: 560px; overflow: hidden; text-overflow: ellipsis; }
+
+.asks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.ask { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.ask h3 { font-size: var(--fs-md); font-weight: 600; }
+.ask p { color: var(--muted); font-size: var(--fs-sm); }
+.lean { border-left: 2px solid var(--ink); padding: 2px 0 2px 16px; max-width: 76ch; margin-top: 26px; color: var(--muted); display: grid; gap: 8px; }
+.lean b { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Design system · Foundations · Decided 8 Oct 2026</span>
+    <h1>Colour and type, defined once</h1>
+    <p class="prose">The system so far: a brand colour with a full 12-step scale, a pure neutral scale for everything else, four status colours, the semantic tokens components will use, and typography with a type scale. <strong>Decided:</strong> Navy as the brand colour, Geist and Geist Mono for type, and status colours in Navy’s deep, muted tone. This page is kept as the exploration record. The implemented system is specified in <code>docs-internal/01-brand/design-system.md</code> and lives in <code>packages/ui/src/styles</code>. </p>
+    <nav class="toc" aria-label="Sections">
+      <a href="#brand">Brand colour</a><a href="#neutral">Neutrals</a><a href="#status">Status colours</a><a href="#tokens">Tokens</a><a href="#type">Typography</a><a href="#scale">Type scale</a><a href="#call">Your call</a>
+    </nav>
+  </header>
+
+  <!-- BRAND -->
+  <section id="brand" aria-labelledby="brand-h">
+    <div class="sec-head">
+      <span class="label">1 · Brand colour</span>
+      <h2 id="brand-h">One accent, used sparingly</h2>
+      <p class="prose">The brand colour only appears in the footer, Pro areas, "New" signals and text selection. You picked Midnight and Clay, so this draft explores six variations of each: shifts in hue, depth and saturation within the same tone. Compare them all at the end of this section and click any row to load it into the full system. Below that, the two families are shown working together.</p>
+    </div>
+    <div class="bar" role="group" aria-label="Brand colour">
+      <div class="grp"><span class="label">Midnight</span><span id="sw-blue" class="grp"></span></div>
+      <div class="grp"><span class="label">Clay</span><span id="sw-beyond" class="grp"></span></div>
+      <div class="grp"><label class="label" for="hue">Custom hue</label><input type="range" id="hue" min="0" max="360" step="1" value="262"><span class="hue-val" id="hue-val">262</span></div>
+    </div>
+    <div class="brand-hero">
+      <div class="brand-tile" id="brand-tile"><span class="label" style="color:inherit;opacity:.8">Brand</span><div><div class="bt-name" id="bt-name">Ember</div><div class="bt-vals" id="bt-vals"></div></div></div>
+      <div class="brand-facts">
+        <dl id="brand-facts"></dl>
+        <p class="note" id="clash-note"></p>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="frame dark" data-frame="dark">
+        <div class="frame-top"><span class="tag">Brand scale · Dark</span></div>
+        <div class="scale-wrap"><div><div class="scale" data-scale="brand"></div><div class="roles" data-roles></div></div></div>
+        <div class="use" data-use></div>
+      </div>
+      <div class="frame light" data-frame="light">
+        <div class="frame-top"><span class="tag">Brand scale · Light</span></div>
+        <div class="scale-wrap"><div><div class="scale" data-scale="brand"></div><div class="roles" data-roles></div></div></div>
+        <div class="use" data-use></div>
+      </div>
+    </div>
+    <div class="cmp-head"><h3>Both families side by side</h3><span>Badge, Pro link, Pro card and footer in dark and light. Click a name to load it above.</span></div>
+    <div class="cmp" id="cmp"></div>
+    <div class="cmp-head"><h3>Together: Midnight and Clay</h3><span id="pair-sub"></span></div>
+    <p class="prose" style="margin-bottom:12px">You allowed up to two colours. Navy and terracotta are a classic pairing: cool and warm, calm and human. Three ways to divide the work:</p>
+    <div class="cmp" id="pairs"></div>
+  </section>
+
+  <!-- NEUTRAL -->
+  <section id="neutral" aria-labelledby="neutral-h">
+    <div class="sec-head">
+      <span class="label">2 · Neutrals</span>
+      <h2 id="neutral-h">Pure black, white and grey</h2>
+      <p class="prose">Everything outside the brand moments uses this scale. It has no tint, so the site reads as plain near-black or white. Steps follow the Radix model: backgrounds, interactive surfaces, borders, solids and text, each with a fixed job.</p>
+    </div>
+    <div class="pair">
+      <div class="frame dark" data-frame="dark">
+        <div class="frame-top"><span class="tag">Gray · Dark</span></div>
+        <div class="scale-wrap"><div><div class="scale" data-scale="gray"></div><div class="roles" data-roles></div></div></div>
+      </div>
+      <div class="frame light" data-frame="light">
+        <div class="frame-top"><span class="tag">Gray · Light</span></div>
+        <div class="scale-wrap"><div><div class="scale" data-scale="gray"></div><div class="roles" data-roles></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section id="status" aria-labelledby="status-h">
+    <div class="sec-head">
+      <span class="label">3 · Status colours</span>
+      <h2 id="status-h">Success, warning, error, info</h2>
+      <p class="prose">Components need these for alerts, form errors and toasts. Draft 2 makes them calmer: about a third less saturated than before, so they inform without shouting and sit comfortably next to the neutral site. They follow the same 12-step recipe as the brand colour and never appear as decoration.</p>
+    </div>
+    <div class="pair">
+      <div class="frame dark" data-frame="dark"><div class="frame-top"><span class="tag">Status · Dark</span></div><div class="status-grid" data-status></div><div class="solid-row" data-solids></div></div>
+      <div class="frame light" data-frame="light"><div class="frame-top"><span class="tag">Status · Light</span></div><div class="status-grid" data-status></div><div class="solid-row" data-solids></div></div>
+    </div>
+  </section>
+
+  <!-- TOKENS -->
+  <section id="tokens" aria-labelledby="tokens-h">
+    <div class="sec-head">
+      <span class="label">4 · Semantic tokens</span>
+      <h2 id="tokens-h">What components actually use</h2>
+      <p class="prose">Components never reference a raw step. They use these names, which match shadcn/ui so registry components drop into existing projects. Our brand colour is called <strong>brand</strong>, because shadcn already uses <code>accent</code> for hover surfaces.</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Used for</th></tr></thead><tbody id="tok-body"></tbody></table></div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type" aria-labelledby="type-h">
+    <div class="sec-head">
+      <span class="label">5 · Typography · Decided</span>
+      <h2 id="type-h">Geist and Geist Mono</h2>
+      <p class="prose">One family for everything, with its matching mono. Free under the SIL Open Font License, so it ships in the MIT repo. We will self-host the files from the <code>geist</code> npm package rather than Google Fonts, because only that build includes the stylistic alternates. Because Geist is also Vercel's typeface, the brand colour, layout and motion carry our identity.</p>
+    </div>
+    <div class="type-opts" id="type-opts"></div>
+    <div class="pair">
+      <div class="frame dark" data-frame="dark"><div class="frame-top"><span class="tag">Specimen · Dark</span></div><div class="spec" data-spec></div></div>
+      <div class="frame light" data-frame="light"><div class="frame-top"><span class="tag">Specimen · Light</span></div><div class="spec" data-spec></div></div>
+    </div>
+    <div class="t-meta" id="t-meta"></div>
+  </section>
+
+  <!-- SCALE -->
+  <section id="scale" aria-labelledby="scale-h">
+    <div class="sec-head">
+      <span class="label">6 · Type scale</span>
+      <h2 id="scale-h">Sizes, spacing and weights</h2>
+      <p class="prose">Fixed sizes for all UI and docs text. Only display and h1 grow with the screen. Letter-spacing tightens as size grows. The values follow Vercel's own Geist scale: about −0.05em at display sizes, −0.04em at 32px, −0.02em at 20px, and none for body text.</p>
+    </div>
+    <div class="table-wrap scale-table"><table><thead><tr><th scope="col">Token</th><th scope="col">Size / line</th><th scope="col">Tracking</th><th scope="col">Weight</th><th scope="col">Sample</th></tr></thead><tbody id="scale-body"></tbody></table></div>
+  </section>
+
+  <!-- CALL -->
+  <section id="call" aria-labelledby="call-h">
+    <div class="sec-head">
+      <span class="label">Your call</span>
+      <h2 id="call-h">What I need from you</h2>
+    </div>
+    <div class="asks">
+      <div class="ask"><h3>Brand colour</h3><p>One variation from either family, or a pairing from "Together". Or tell me which direction to push, such as "Midnight but a bit lighter".</p></div>
+      <div class="ask"><h3>Status colours</h3><p>Are they muted enough now, or should they go further?</p></div>
+      <div class="ask"><h3>Anything that feels off</h3><p>A scale step, a token, a size. Everything here is a draft until you sign off.</p></div>
+    </div>
+    <div class="lean">
+      <p><b>My lean: Midnight leads, with Clay as the warm highlight.</b> Midnight on its own is beautifully quiet, but deep navy in a dark theme sits close to the near-black background. A small amount of Clay on "New" badges and the announcement dot gives the brand a warm spark where it matters. If you want a single colour, <b>Navy</b> is the Midnight variation that holds up best in dark mode, and <b>Sienna</b> is the Clay variation that stays clearest of the error red.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  // Draft 3: only the two families the owner liked, Midnight (deep navy) and Clay (muted terracotta)
+  var ACCENTS = [
+    { id: 'midnight', group: 'midnight', name: 'Midnight', h: 262, c: 0.12, l: 0.42, desc: 'The original. Deep navy, quiet and premium, close to ink.' },
+    { id: 'ink', group: 'midnight', name: 'Ink', h: 265, c: 0.085, l: 0.36, desc: 'Darker and less saturated. Nearly black-blue, like fountain-pen ink.' },
+    { id: 'navy', group: 'midnight', name: 'Navy', h: 258, c: 0.14, l: 0.46, desc: 'A touch brighter and bluer. Classic navy, easier to spot in dark mode.' },
+    { id: 'prussian', group: 'midnight', name: 'Prussian', h: 238, c: 0.09, l: 0.43, desc: 'Leans slightly green, like Prussian blue pigment. Cooler and more unusual.' },
+    { id: 'dusk', group: 'midnight', name: 'Dusk', h: 278, c: 0.1, l: 0.43, desc: 'Leans slightly violet. Navy at sunset, softer and warmer.' },
+    { id: 'denim', group: 'midnight', name: 'Denim', h: 252, c: 0.08, l: 0.5, desc: 'Greyer and lighter, like washed denim. Relaxed rather than formal.' },
+    { id: 'clay', group: 'clay', name: 'Clay', h: 45, c: 0.11, l: 0.6, desc: 'The original. Muted terracotta, warm and earthy without shouting.' },
+    { id: 'terracotta', group: 'clay', name: 'Terracotta', h: 40, c: 0.13, l: 0.56, desc: 'Richer and slightly redder, like a fired pot.' },
+    { id: 'rust', group: 'clay', name: 'Rust', h: 38, c: 0.12, l: 0.48, desc: 'Deeper and darker. Grounded and serious.' },
+    { id: 'sienna', group: 'clay', name: 'Sienna', h: 55, c: 0.105, l: 0.57, desc: 'More orange-brown, like burnt sienna. Sits furthest from the error red.' },
+    { id: 'adobe', group: 'clay', name: 'Adobe', h: 50, c: 0.085, l: 0.65, desc: 'Lighter and dustier, like sun-dried brick.' },
+    { id: 'sandstone', group: 'clay', name: 'Sandstone', h: 62, c: 0.07, l: 0.72, desc: 'Pale warm sand with dark text. The softest of the family.' }
+  ];
+  // Status colours: deliberately muted (lower chroma) so they inform without shouting
+  var STATUS = [
+    { id: 'success', name: 'Success', h: 150, c: 0.105, l: 0.52, title: 'Component installed', text: 'Toggle was added to components/ui.' },
+    { id: 'warning', name: 'Warning', h: 70, c: 0.11, l: 0.66, title: 'Peer dependency', text: 'motion 12 or newer is recommended.' },
+    { id: 'danger', name: 'Error', h: 25, c: 0.13, l: 0.5, title: 'Install failed', text: 'components.json was not found.' },
+    { id: 'info', name: 'Info', h: 250, c: 0.095, l: 0.6, title: 'New version', text: 'Sidebar v2 is available.' }
+  ];
+  var ROLES = ['App bg', 'Subtle bg', 'Element', 'Hover', 'Active', 'Subtle border', 'Border', 'Strong border', 'Solid', 'Solid hover', 'Text muted', 'Text'];
+  var GRAY = {
+    light: [1, 0.985, 0.965, 0.945, 0.925, 0.905, 0.875, 0.81, 0.62, 0.57, 0.48, 0.17],
+    dark: [0.13, 0.16, 0.195, 0.225, 0.255, 0.285, 0.33, 0.42, 0.52, 0.58, 0.72, 0.97]
+  };
+  var DEPTH = 0.11;
+  var state = { h: 258, c: 0.14, l: 0.46, preset: 'navy', type: 'geist', lastMid: 'navy', lastClay: 'clay' };
+
+  function r3(n) { return Math.round(n * 1000) / 1000; }
+  function hueScale(h, c, l9, mode) {
+    var L, M;
+    if (mode === 'light') {
+      L = [0.993, 0.98, 0.955, 0.93, 0.9, 0.865, 0.815, 0.75, l9, l9 - 0.045, Math.min(0.52, l9 - 0.1), 0.3];
+      M = [0.03, 0.07, 0.14, 0.22, 0.3, 0.38, 0.5, 0.66, 1, 1, 0.9, 0.5];
+    } else {
+      L = [0.16, 0.185, 0.23, 0.265, 0.3, 0.345, 0.405, 0.49, l9, Math.min(0.9, l9 + 0.05), Math.min(0.9, Math.max(0.78, l9 + 0.13)), 0.94];
+      M = [0.1, 0.14, 0.25, 0.33, 0.4, 0.47, 0.56, 0.7, 1, 0.95, 0.75, 0.3];
+    }
+    return L.map(function (l, i) { return { l: r3(l), c: r3(c * M[i]), h: h }; });
+  }
+  function grayScale(mode) { return GRAY[mode].map(function (l) { return { l: l, c: 0, h: 0 }; }); }
+  function css(s) { return 'oklch(' + s.l + ' ' + s.c + ' ' + s.h + ')'; }
+  function onColor(l) { return l >= 0.7 ? 'oklch(0.2 0.02 0)' : 'oklch(0.99 0 0)'; }
+  function hueDist(a, b) { var d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; }
+
+  function brandVars(el, mode, a) {
+    a = a || state;
+    var s = hueScale(a.h, a.c, a.l, mode);
+    s.forEach(function (x, i) { el.style.setProperty('--b-' + (i + 1), css(x)); });
+    var top = 'oklch(' + r3(a.l + DEPTH / 2) + ' ' + a.c + ' ' + a.h + ')';
+    var bot = 'oklch(' + r3(a.l - DEPTH / 2) + ' ' + a.c + ' ' + a.h + ')';
+    var pool = 'oklch(' + r3(a.l + 0.07) + ' ' + a.c + ' ' + a.h + ' / 0.9)';
+    el.style.setProperty('--grad-top', top);
+    el.style.setProperty('--grad-bottom', bot);
+    el.style.setProperty('--on', onColor(a.l));
+    el.style.setProperty('--pool-bg', 'radial-gradient(90% 70% at 25% 0%, ' + pool + ', transparent 70%), linear-gradient(180deg, ' + top + ', ' + bot + ')');
+    el.style.setProperty('--pool-foot', 'radial-gradient(70% 60% at 50% 0%, ' + pool + ', transparent 72%), radial-gradient(140% 120% at 50% 0%, ' + top + ', ' + bot + ')');
+    return s;
+  }
+
+  function scaleHTML(s) {
+    return s.map(function (x, i) {
+      return '<div class="cell" title="Step ' + (i + 1) + ': ' + css(x) + '" style="background:' + css(x) + ';color:' + (x.l >= 0.62 ? 'oklch(0.2 0 0)' : 'oklch(0.97 0 0)') + '">' + (i + 1) + '</div>';
+    }).join('');
+  }
+  var rolesHTML = ROLES.map(function (r) { return '<span>' + r + '</span>'; }).join('');
+
+  var useHTML =
+    '<div class="use-row"><span class="ann-pill"><i></i><b>New</b> Sidebar v2</span><span class="badge">New</span><span class="pro-link"><i></i>Pro</span></div>' +
+    '<div class="use-row"><span>Text selection looks <span class="sel">like this in the brand colour</span>.</span></div>' +
+    '<div class="use-cards"><div class="pro-mini"><b>Pro</b><span>Blocks and templates</span><span class="tiny-btn">Join waitlist</span></div>' +
+    '<div class="foot-mini"><b>untitled/ui</b><span>MIT · 2026</span></div></div>';
+
+  function renderBrand() {
+    document.querySelectorAll('[data-frame]').forEach(function (fr) {
+      var mode = fr.getAttribute('data-frame');
+      var s = brandVars(fr, mode);
+      var bs = fr.querySelector('[data-scale="brand"]');
+      if (bs) bs.innerHTML = scaleHTML(s);
+      var gs = fr.querySelector('[data-scale="gray"]');
+      if (gs) gs.innerHTML = scaleHTML(grayScale(mode));
+      fr.querySelectorAll('[data-roles]').forEach(function (r) { r.innerHTML = rolesHTML; });
+      var u = fr.querySelector('[data-use]');
+      if (u) u.innerHTML = useHTML;
+      var st = fr.querySelector('[data-status]');
+      if (st) {
+        st.innerHTML = STATUS.map(function (x) {
+          var sc = hueScale(x.h, x.c, x.l, mode);
+          return '<div class="alert" style="--s-3:' + css(sc[2]) + ';--s-6:' + css(sc[5]) + ';--s-9:' + css(sc[8]) + ';--s-11:' + css(sc[10]) + ';--s-12:' + css(sc[11]) + '"><i></i><b>' + x.title + '</b><span>' + x.text + '</span></div>';
+        }).join('');
+        fr.querySelector('[data-solids]').innerHTML = STATUS.map(function (x) {
+          var sc = hueScale(x.h, x.c, x.l, mode);
+          return '<span class="solid" style="--s-9:' + css(sc[8]) + ';--s-on:' + (x.id === 'warning' ? 'oklch(0.2 0.02 0)' : onColor(x.l)) + '">' + x.name + '</span>';
+        }).join('');
+      }
+    });
+    var tile = document.getElementById('brand-tile');
+    brandVars(tile, 'dark');
+    var name = state.preset ? ACCENTS.filter(function (a) { return a.id === state.preset; })[0].name : 'Custom';
+    document.getElementById('bt-name').textContent = name;
+    document.getElementById('bt-vals').innerHTML =
+      '<span>oklch(' + state.l + ' ' + state.c + ' ' + state.h + ')</span><span>gradient ' + r3(state.l + DEPTH / 2) + ' → ' + r3(state.l - DEPTH / 2) + ' lightness, chroma fixed</span>';
+    var lt = hueScale(state.h, state.c, state.l, 'light'), dk = hueScale(state.h, state.c, state.l, 'dark');
+    function row(label, v) { return '<dt>' + label + '</dt><dd><i style="background:' + v + '"></i>' + v + '</dd>'; }
+    document.getElementById('brand-facts').innerHTML =
+      row('Solid (both themes)', css(lt[8])) +
+      row('Text on light', css(lt[10])) +
+      row('Text on dark', css(dk[10])) +
+      row('Subtle bg, light', css(lt[2])) +
+      row('Subtle bg, dark', css(dk[2])) +
+      '<dt>Text on solid</dt><dd>' + (state.l >= 0.7 ? 'near-black' : 'white') + '</dd>';
+    var danger = STATUS[2], d = hueDist(state.h, danger.h), succ = hueDist(state.h, STATUS[0].h), warn = hueDist(state.h, STATUS[1].h), info = hueDist(state.h, STATUS[3].h);
+    var note;
+    if (d < 30) note = '<b>Close to the error red</b> (' + Math.round(d) + '° apart). Errors would use a deeper red and always carry an icon, so they never read as brand.';
+    else if (warn < 25) note = '<b>Close to the warning amber.</b> Warnings would shift toward orange so the two stay distinct.';
+    else if (succ < 25) note = '<b>Close to the success green.</b> Success would shift toward teal so the two stay distinct.';
+    else if (info < 25) note = '<b>Close to the info blue.</b> Info would use the neutral scale instead so the two stay distinct.';
+    else note = '<b>No clash</b> with the status colours.';
+    document.getElementById('clash-note').innerHTML = note;
+    renderTokens(lt, dk);
+    renderSpecs();
+  }
+
+  function renderTokens(lt, dk) {
+    var gl = grayScale('light'), gd = grayScale('dark');
+    var dl = hueScale(STATUS[2].h, STATUS[2].c, STATUS[2].l, 'light'), dd = hueScale(STATUS[2].h, STATUS[2].c, STATUS[2].l, 'dark');
+    var white = { l: 1, c: 0, h: 0 };
+    var rows = [
+      ['Surfaces'],
+      ['--background', gl[0], gd[0], 'Page background'],
+      ['--foreground', gl[11], gd[11], 'Main text'],
+      ['--card', white, gd[1], 'Cards, popovers'],
+      ['--muted', gl[2], gd[2], 'Quiet fills, code blocks'],
+      ['--muted-foreground', gl[10], gd[10], 'Secondary text, captions'],
+      ['--accent', gl[3], gd[3], 'Hover surface (shadcn name, not the brand)'],
+      ['Lines'],
+      ['--border', gl[5], gd[5], 'Dividers, card edges'],
+      ['--input', gl[6], gd[6], 'Input borders'],
+      ['--ring', gl[7], gd[7], 'Focus ring, neutral'],
+      ['Actions'],
+      ['--primary', gl[11], gd[11], 'Main buttons: black on light, white on dark'],
+      ['--primary-foreground', gl[0], gd[0], 'Text on main buttons'],
+      ['--secondary', gl[2], gd[2], 'Secondary buttons'],
+      ['--destructive', dl[8], dd[8], 'Delete, error actions'],
+      ['Brand'],
+      ['--brand', lt[8], dk[8], 'Footer, Pro card fill'],
+      ['--brand-foreground', null, null, 'Text on brand: ' + (state.l >= 0.7 ? 'near-black' : 'white')],
+      ['--brand-subtle', lt[2], dk[2], '"New" badge background'],
+      ['--brand-border', lt[6], dk[6], 'Pro outline, badge edges'],
+      ['--brand-text', lt[10], dk[10], 'Brand-coloured text, "New" label'],
+      ['--brand-gradient', null, null, 'linear-gradient(180deg, L ' + r3(state.l + DEPTH / 2) + ' → ' + r3(state.l - DEPTH / 2) + ')']
+    ];
+    document.getElementById('tok-body').innerHTML = rows.map(function (r) {
+      if (r.length === 1) return '<tr class="grp-row"><td colspan="4">' + r[0] + '</td></tr>';
+      function cell(v) { return v ? '<td class="val"><i style="background:' + css(v) + '"></i>' + css(v) + '</td>' : '<td class="val">—</td>'; }
+      return '<tr><td class="tok">' + r[0] + '</td>' + cell(r[1]) + cell(r[2]) + '<td class="use">' + r[3] + '</td></tr>';
+    }).join('');
+  }
+
+  // Typography systems
+  // Typography: decided (Geist + Geist Mono). k scales negative tracking to match Vercel's Geist scale.
+  var TYPES = [
+    { id: 'geist', kind: 'Decided · one family', name: 'Geist + Geist Mono',
+      sans: '"Geist", system-ui, sans-serif', display: '"Geist", system-ui, sans-serif', accent: '"Geist", system-ui, sans-serif', mono: '"Geist Mono", ui-monospace, monospace',
+      dw: 600, dtrack: '-0.055em', k: 1.8, desc: 'Headings at 600, body at 400, labels and buttons at 500. Geist Mono for code, commands and eyebrow labels.',
+      why: 'Crisp and Swiss, designed as one system with its mono, and native to Next.js.',
+      cost: 'It is also Vercel’s typeface, so the brand colour, the footer and the motion carry the identity.' }
+  ];
+  var CONSIDERED = 'Also considered: Inter with JetBrains Mono, Instrument Sans with Instrument Serif, and Inter with Newsreader.';
+
+  var host = document.getElementById('type-opts');
+  host.innerHTML = TYPES.map(function (t) {
+    return '<div class="topt" aria-current="true" style="border-color:var(--ink);cursor:default">' +
+      '<span class="kind">' + t.kind + '</span><span class="tname">' + t.name + '</span>' +
+      '<span class="tsample" style="font-family:' + t.display.replace(/"/g, '&quot;') + ';font-weight:' + t.dw + ';letter-spacing:' + t.dtrack + '">Motion-ready</span>' +
+      '<p>' + t.desc + '</p></div>' +
+      '<div class="topt" style="cursor:default"><span class="kind">Weights</span>' +
+      '<span class="tsample" style="font-family:' + t.sans.replace(/"/g, '&quot;') + ';display:flex;gap:14px;flex-wrap:wrap;letter-spacing:-0.03em"><span style="font-weight:400">Aa</span><span style="font-weight:500">Aa</span><span style="font-weight:600">Aa</span><span style="font-weight:700">Aa</span></span>' +
+      '<p>400 body · 500 labels and buttons · 600 headings · 700 rare emphasis</p></div>' +
+      '<div class="topt" style="cursor:default"><span class="kind">Mono</span>' +
+      '<span class="tsample" style="font-family:' + t.mono.replace(/"/g, '&quot;') + ';font-size:1.25rem;letter-spacing:0">npx shadcn add</span>' +
+      '<p>Code blocks, install commands, keyboard shortcuts and uppercase eyebrow labels.</p></div>';
+  }).join('');
+
+  function specHTML(t) {
+    var serif = t.kind !== 'One family';
+    return '<div style="display:grid;gap:18px">' +
+      '<span class="t-over">Components / Toggle</span>' +
+      '<h3 class="t-display">' + (serif ? 'Motion-ready components, <em>made to be owned</em>' : 'Motion-ready components for Next.js') + '</h3>' +
+      '<p class="t-body">Accessible React components with considered motion. <b>Copy the source</b>, keep the polish, and change anything. Built on Radix, Tailwind and Motion.</p>' +
+      '<div class="t-ui"><span class="t-btn">Browse components</span><span class="t-btn o">Read the docs</span><span class="t-tabs"><span class="on">Preview</span><span>Code</span><span>Props</span></span></div>' +
+      '<h4 class="t-h2">Install in one command</h4>' +
+      '<pre class="t-code"><span class="k">npx shadcn add @untitled/toggle</span>\n\nimport { Toggle } from "@/components/ui/toggle"\n&lt;Toggle defaultChecked spring="snappy" /&gt;</pre>' +
+      '<h5 class="t-h3">Numbers stay aligned while they animate</h5>' +
+      '<div class="t-nums"><b>1,284,096</b><span>installs</span><b>60</b><span>components</span><b>v1.4.2</b><span>latest</span></div>' +
+      '<div class="t-foot"><span class="t-word">untitled/ui</span><span>Footer wordmark</span></div>' +
+    '</div>';
+  }
+
+  var SCALE = [
+    { tok: 'display', size: 'clamp 44 → 72px', lh: '1.0', tr: -0.032, w: 'dw', fam: 'display', fs: '2.75rem', sample: 'Motion-ready components' },
+    { tok: 'h1', size: 'clamp 36 → 48px', lh: '1.05', tr: -0.028, w: 600, fam: 'sans', fs: '2.25rem', sample: 'Getting started' },
+    { tok: 'h2', size: '32px', lh: '1.15', tr: -0.022, w: 600, fam: 'sans', fs: '2rem', sample: 'Install in one command' },
+    { tok: 'h3', size: '24px', lh: '1.3', tr: -0.016, w: 600, fam: 'sans', fs: '1.5rem', sample: 'Props and variants' },
+    { tok: 'h4', size: '20px', lh: '1.4', tr: -0.01, w: 600, fam: 'sans', fs: '1.25rem', sample: 'Keyboard interactions' },
+    { tok: 'body-lg', size: '18px', lh: '1.6', tr: -0.005, w: 400, fam: 'sans', fs: '1.125rem', sample: 'Accessible React components with considered motion.' },
+    { tok: 'body', size: '16px', lh: '1.65', tr: 0, w: 400, fam: 'sans', fs: '1rem', sample: 'Copy the source, keep the polish, and change anything you need.' },
+    { tok: 'body-sm', size: '14px', lh: '1.55', tr: 0, w: 400, fam: 'sans', fs: '0.875rem', sample: 'Toggle supports controlled and uncontrolled use.' },
+    { tok: 'label', size: '13px', lh: '1.4', tr: 0, w: 500, fam: 'sans', fs: '0.8125rem', sample: 'Browse components · Read the docs' },
+    { tok: 'caption', size: '12px', lh: '1.35', tr: 0.01, w: 500, fam: 'sans', fs: '0.75rem', sample: 'Updated 2 days ago · 4 variants' },
+    { tok: 'overline', size: '12px mono', lh: '1.3', tr: 0.06, w: 500, fam: 'mono', fs: '0.75rem', sample: 'COMPONENTS / TOGGLE', fixed: true },
+    { tok: 'code', size: '14px mono', lh: '1.6', tr: 0, w: 400, fam: 'mono', fs: '0.875rem', sample: 'npx shadcn add @untitled/toggle', fixed: true }
+  ];
+
+  function renderSpecs() {
+    var t = TYPES.filter(function (x) { return x.id === state.type; })[0];
+    document.querySelectorAll('[data-spec]').forEach(function (s) {
+      s.style.setProperty('--t-sans', t.sans);
+      s.style.setProperty('--t-display', t.display);
+      s.style.setProperty('--t-accent', t.accent);
+      s.style.setProperty('--t-mono', t.mono);
+      s.style.setProperty('--t-dw', t.dw);
+      s.style.setProperty('--t-dtrack', t.dtrack);
+      s.style.setProperty('--t-k', t.k);
+      s.innerHTML = specHTML(t);
+    });
+    document.getElementById('t-meta').innerHTML =
+      '<p><b>' + t.name + '.</b> ' + t.why + '</p><p><b>Trade-off:</b> ' + t.cost + '</p>' +
+      '<p><b>Licence:</b> SIL Open Font License. Production self-hosts the files from the <code>geist</code> npm package with <code>next/font/local</code>, because the Google Fonts build drops the stylistic alternates.</p>' +
+      '<p>' + CONSIDERED + '</p>';
+    var tbl = document.querySelector('.scale-table');
+    tbl.style.setProperty('--t-sans', t.sans);
+    document.getElementById('scale-body').innerHTML = SCALE.map(function (r) {
+      var fam = r.fam === 'display' ? t.display : r.fam === 'mono' ? t.mono : t.sans;
+      var w = r.w === 'dw' ? t.dw : r.w;
+      var tr = r.tok === 'display' ? parseFloat(t.dtrack) : (r.fixed ? r.tr : r.tr * (r.tr < 0 ? t.k : 1));
+      var trTxt = (tr > 0 ? '+' : '') + (Math.round(tr * 1000) / 1000) + 'em';
+      return '<tr><td class="tok">' + r.tok + '</td><td class="val">' + r.size + ' / ' + r.lh + '</td><td class="val">' + trTxt + '</td><td class="val">' + w + '</td>' +
+        '<td class="sample" style="font-family:' + fam.replace(/"/g, '&quot;') + ';font-size:' + r.fs + ';font-weight:' + w + ';letter-spacing:' + tr + 'em;line-height:1.2' + (r.tok === 'overline' ? ';text-transform:uppercase;color:var(--muted)' : '') + '">' + r.sample + '</td></tr>';
+    }).join('');
+  }
+
+  // Brand controls
+  function swatch(a) {
+    return '<button class="sw-btn" type="button" data-preset="' + a.id + '" aria-pressed="' + (a.id === state.preset) + '" aria-label="' + a.name + '" title="' + a.name + '" style="background:oklch(' + a.l + ' ' + a.c + ' ' + a.h + ')"></button>';
+  }
+  document.getElementById('sw-blue').innerHTML = ACCENTS.filter(function (a) { return a.group === 'midnight'; }).map(swatch).join('');
+  document.getElementById('sw-beyond').innerHTML = ACCENTS.filter(function (a) { return a.group === 'clay'; }).map(swatch).join('');
+
+  function pick(id) {
+    var a = ACCENTS.filter(function (x) { return x.id === id; })[0];
+    if (!a) return;
+    state.h = a.h; state.c = a.c; state.l = a.l; state.preset = a.id;
+    if (a.group === 'midnight') state.lastMid = a.id; else state.lastClay = a.id;
+    syncControls(); renderBrand(); renderPairs();
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-preset]');
+    if (b) pick(b.getAttribute('data-preset'));
+  });
+  document.getElementById('hue').addEventListener('input', function (e) {
+    state.h = parseInt(e.target.value, 10); state.c = 0.12; state.l = 0.55; state.preset = '';
+    syncControls(); renderBrand();
+  });
+  function syncControls() {
+    document.getElementById('hue').value = state.h;
+    document.getElementById('hue-val').textContent = state.h;
+    document.querySelectorAll('[data-preset]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-preset') === state.preset ? 'true' : 'false'); });
+  }
+
+  // Side-by-side comparison of every accent
+  function miniHTML(mode) {
+    return '<div class="frame ' + mode + ' cmp-frame">' +
+      '<div class="use-row"><span class="badge">New</span><span class="pro-link"><i></i>Pro</span></div>' +
+      '<div class="use-cards"><div class="pro-mini"><b>Pro</b><span>Blocks</span></div><div class="foot-mini"><b>untitled</b><span>' + (mode === 'dark' ? 'Dark' : 'Light') + '</span></div></div>' +
+    '</div>';
+  }
+  var cmp = document.getElementById('cmp');
+  var groupLabel = { midnight: 'Midnight family · deep navy', clay: 'Clay family · muted terracotta' };
+  var lastGroup = '';
+  cmp.innerHTML = ACCENTS.map(function (a) {
+    var head = a.group !== lastGroup ? '<div class="cmp-group label">' + groupLabel[a.group] + '</div>' : '';
+    lastGroup = a.group;
+    return head + '<div class="cmp-row" data-acc="' + a.id + '">' +
+      '<button class="cmp-name" type="button" data-preset="' + a.id + '" aria-pressed="' + (a.id === state.preset) + '">' +
+        '<b><i style="background:oklch(' + a.l + ' ' + a.c + ' ' + a.h + ')"></i>' + a.name + '</b><span>' + a.desc + '</span>' +
+        '<span class="cmp-vals">hue ' + a.h + ' · C ' + a.c + ' · L ' + a.l + '</span></button>' +
+      miniHTML('dark') + miniHTML('light') +
+    '</div>';
+  }).join('');
+  cmp.querySelectorAll('.cmp-row').forEach(function (row) {
+    var a = ACCENTS.filter(function (x) { return x.id === row.getAttribute('data-acc'); })[0];
+    row.querySelectorAll('.cmp-frame').forEach(function (fr) { brandVars(fr, fr.classList.contains('dark') ? 'dark' : 'light', a); });
+  });
+
+  // Two-colour pairings, using the last pick from each family
+  var PAIRS = [
+    { name: 'Midnight leads, Clay sparks', desc: 'Navy for the footer and Pro. Clay only on "New" badges, the announcement dot and text selection.', foot: 'm', pro: 'm', spark: 'c' },
+    { name: 'Clay leads, Midnight grounds', desc: 'Terracotta for the footer and Pro. Navy for badges and selection.', foot: 'c', pro: 'c', spark: 'm' },
+    { name: 'Split by meaning', desc: 'Navy is the brand home in the footer. Clay marks premium and new things: the Pro card and badges.', foot: 'm', pro: 'c', spark: 'c' }
+  ];
+  function byId(id) { return ACCENTS.filter(function (x) { return x.id === id; })[0]; }
+  function pairFrame(mode) {
+    return '<div class="frame ' + mode + ' cmp-frame">' +
+      '<div class="use-row"><span class="ann-pill" data-r="spark"><i></i><b>New</b> Sidebar v2</span><span class="badge" data-r="spark">New</span><span class="pro-link" data-r="pro"><i></i>Pro</span></div>' +
+      '<div class="use-row"><span>Selected <span class="sel" data-r="spark">text looks like this</span>.</span></div>' +
+      '<div class="use-cards"><div class="pro-mini" data-r="pro"><b>Pro</b><span>Blocks</span></div><div class="foot-mini" data-r="foot"><b>untitled</b><span>' + (mode === 'dark' ? 'Dark' : 'Light') + '</span></div></div>' +
+    '</div>';
+  }
+  function renderPairs() {
+    var M = byId(state.lastMid), C = byId(state.lastClay);
+    document.getElementById('pair-sub').textContent = 'Using ' + M.name + ' and ' + C.name + '. Pick other variations above to update.';
+    var host = document.getElementById('pairs');
+    host.innerHTML = PAIRS.map(function (p, i) {
+      return '<div class="cmp-row" data-pair="' + i + '"><div class="cmp-name static"><b>' + p.name + '</b><span>' + p.desc + '</span></div>' + pairFrame('dark') + pairFrame('light') + '</div>';
+    }).join('');
+    host.querySelectorAll('.cmp-row').forEach(function (row) {
+      var p = PAIRS[+row.getAttribute('data-pair')];
+      row.querySelectorAll('.cmp-frame').forEach(function (fr) {
+        var mode = fr.classList.contains('dark') ? 'dark' : 'light';
+        brandVars(fr, mode, M);
+        fr.querySelectorAll('[data-r]').forEach(function (el) {
+          brandVars(el, mode, p[el.getAttribute('data-r')] === 'm' ? M : C);
+        });
+      });
+    });
+  }
+
+  syncControls();
+  renderBrand();
+  renderPairs();
+})();
+</script>

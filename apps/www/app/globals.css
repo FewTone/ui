@@ -1,0 +1,2 @@
+/* The whole design system lives in packages/ui. Do not add tokens or raw values here. */
+@import "@workspace/ui/globals.css";

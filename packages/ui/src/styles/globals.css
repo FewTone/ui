@@ -1,0 +1,215 @@
+/*
+ * Design system entry point. Apps import this one file: `@import "@workspace/ui/globals.css";`
+ *
+ * Layers:
+ *   palette.css  primitive colour scales (generated, never used by components directly)
+ *   theme.css    semantic colour, shadow and gradient tokens for light and dark
+ *   tokens.css   type, spacing, radius, layout, motion and layering tokens
+ *   this file    Tailwind bridge, base styles and brand utilities
+ *
+ * Tailwind's default colour palette is removed, so only the tokens below can be used.
+ */
+
+@import "tailwindcss";
+@import "./palette.css";
+@import "./theme.css";
+@import "./tokens.css";
+
+/* Scan the design system package and every app for class names */
+@source "../";
+@source "../../../../apps/*/app";
+@source "../../../../apps/*/components";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* Remove Tailwind's default colours and shadows: only semantic tokens remain */
+  --color-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-overlay: var(--overlay);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-border: var(--brand-border);
+  --color-brand-text: var(--brand-text);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-border: var(--success-border);
+  --color-success-text: var(--success-text);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-border: var(--warning-border);
+  --color-warning-text: var(--warning-text);
+
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-danger-border: var(--danger-border);
+  --color-danger-text: var(--danger-text);
+
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-border: var(--info-border);
+  --color-info-text: var(--info-text);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-xs: var(--elevation-xs);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+  --shadow-xl: var(--elevation-xl);
+  --shadow-card: var(--elevation-card);
+  --shadow-brand: var(--elevation-brand);
+  --shadow-highlight: var(--elevation-highlight);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: var(--selection);
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+/* ---------- Brand and finish utilities ---------- */
+
+/* Pro card and other premium surfaces: one-tone gradient, lighter pool at the top, top highlight */
+@utility surface-brand {
+  background: var(--gradient-brand-surface);
+  color: var(--brand-foreground);
+  box-shadow: var(--elevation-highlight), var(--elevation-brand);
+}
+
+/* Footer: the one large brand moment on every page */
+@utility surface-brand-footer {
+  background: var(--gradient-brand-footer);
+  color: var(--brand-foreground);
+  box-shadow: var(--elevation-highlight);
+}
+
+/* Headline shading: full ink at the top, softer toward the bottom */
+@utility text-gradient-heading {
+  background: var(--gradient-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Wordmark on a brand surface */
+@utility text-gradient-on-brand {
+  background: var(--gradient-on-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Neutral main button with a soft vertical shade */
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+/* Badge or pill whose border fades from the brand colour into the normal border */
+@utility edge-brand {
+  border: var(--border-width) solid transparent;
+  background:
+    linear-gradient(var(--edge-fill, var(--background)), var(--edge-fill, var(--background))) padding-box,
+    var(--gradient-edge-brand) border-box;
+}
+
+/* Horizontal divider that fades out at both ends */
+@utility divider-fade {
+  height: var(--border-width);
+  background: var(--gradient-divider);
+}
+
+/* Standard focus ring for custom interactive elements */
+@utility focus-ring {
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}

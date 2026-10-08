@@ -1,0 +1,163 @@
+/*
+ * Semantic tokens: what components use. They map the primitive scales in palette.css
+ * to roles, separately for light and dark. Names match shadcn/ui so registry components drop in.
+ * Our accent is called `brand`, because shadcn uses `accent` for hover surfaces.
+ * Documented in docs-internal/01-brand/design-system.md.
+ */
+
+/* Declared on .light and .dark too, so a theme can be scoped to any element (e.g. docs previews). */
+:root,
+.light,
+.dark {
+  color-scheme: light;
+
+  /* Surfaces and text */
+  --background: var(--gray-1);
+  --foreground: var(--gray-12);
+  --card: var(--white);
+  --card-foreground: var(--gray-12);
+  --popover: var(--white);
+  --popover-foreground: var(--gray-12);
+  --muted: var(--gray-3);
+  --muted-foreground: var(--gray-11);
+  --accent: var(--gray-4);
+  --accent-foreground: var(--gray-12);
+  --overlay: color-mix(in oklch, var(--black) 40%, transparent);
+
+  /* Lines */
+  --border: var(--gray-6);
+  --input: var(--gray-7);
+  --ring: var(--gray-8);
+
+  /* Actions: main buttons are neutral, never brand */
+  --primary: var(--gray-12);
+  --primary-foreground: var(--gray-1);
+  --secondary: var(--gray-3);
+  --secondary-foreground: var(--gray-12);
+
+  /* Brand: footer, Pro, "New" signals, selection. Nowhere else. */
+  --brand: var(--navy-9);
+  --brand-foreground: var(--white);
+  --brand-subtle: var(--navy-3);
+  --brand-border: var(--navy-7);
+  --brand-text: var(--navy-11);
+
+  /* Status: deep, muted, same tone as Navy. Info uses the brand scale. */
+  --success: var(--success-9);
+  --success-foreground: var(--white);
+  --success-subtle: var(--success-3);
+  --success-border: var(--success-6);
+  --success-text: var(--success-11);
+
+  --warning: var(--warning-9);
+  --warning-foreground: var(--gray-12);
+  --warning-subtle: var(--warning-3);
+  --warning-border: var(--warning-6);
+  --warning-text: var(--warning-11);
+
+  --danger: var(--danger-9);
+  --danger-foreground: var(--white);
+  --danger-subtle: var(--danger-3);
+  --danger-border: var(--danger-6);
+  --danger-text: var(--danger-11);
+
+  --info: var(--navy-9);
+  --info-foreground: var(--white);
+  --info-subtle: var(--navy-3);
+  --info-border: var(--navy-6);
+  --info-text: var(--navy-11);
+
+  /* shadcn/ui aliases */
+  --destructive: var(--danger);
+  --destructive-foreground: var(--danger-foreground);
+
+  /* Charts */
+  --chart-1: var(--navy-9);
+  --chart-2: var(--navy-7);
+  --chart-3: var(--success-9);
+  --chart-4: var(--warning-9);
+  --chart-5: var(--gray-9);
+
+  /* Sidebar (shadcn/ui names) */
+  --sidebar: var(--gray-2);
+  --sidebar-foreground: var(--gray-12);
+  --sidebar-primary: var(--gray-12);
+  --sidebar-primary-foreground: var(--gray-1);
+  --sidebar-accent: var(--gray-4);
+  --sidebar-accent-foreground: var(--gray-12);
+  --sidebar-border: var(--gray-6);
+  --sidebar-ring: var(--gray-8);
+
+  /* Text selection */
+  --selection: color-mix(in oklch, var(--brand) 30%, transparent);
+
+  /* Shadows */
+  --elevation-xs: 0 1px 2px oklch(0 0 0 / 0.05);
+  --elevation-sm: 0 1px 2px oklch(0 0 0 / 0.06), 0 1px 3px oklch(0 0 0 / 0.08);
+  --elevation-md: 0 2px 4px oklch(0 0 0 / 0.05), 0 6px 16px -4px oklch(0 0 0 / 0.1);
+  --elevation-lg: 0 4px 8px oklch(0 0 0 / 0.05), 0 16px 32px -8px oklch(0 0 0 / 0.14);
+  --elevation-xl: 0 8px 16px oklch(0 0 0 / 0.06), 0 32px 64px -16px oklch(0 0 0 / 0.2);
+  /* Card: border plus a soft lift ("lit edge" in dark) */
+  --elevation-card:
+    inset 0 0 0 1px var(--border), 0 1px 2px oklch(0 0 0 / 0.04), 0 10px 28px -18px oklch(0 0 0 / 0.14);
+  /* Brand surfaces: top highlight and depth. No glow. */
+  --elevation-highlight: inset 0 1px 0 oklch(1 0 0 / 0.28);
+  --elevation-brand: 0 1px 2px oklch(0 0 0 / 0.08), 0 18px 36px -22px oklch(0 0 0 / 0.22);
+
+  /* Gradients: one tone, lightness only */
+  --gradient-brand: linear-gradient(180deg, var(--navy-gradient-top), var(--navy-gradient-bottom));
+  --gradient-brand-surface:
+    radial-gradient(90% 70% at 25% 0%, var(--navy-pool), transparent 70%), var(--gradient-brand);
+  --gradient-brand-footer:
+    radial-gradient(70% 60% at 50% 0%, var(--navy-pool), transparent 72%),
+    radial-gradient(140% 120% at 50% 0%, var(--navy-gradient-top), var(--navy-gradient-bottom));
+  --gradient-heading: linear-gradient(
+    180deg,
+    var(--foreground) 35%,
+    color-mix(in oklch, var(--foreground) 58%, var(--background))
+  );
+  --gradient-on-brand: linear-gradient(
+    180deg,
+    var(--brand-foreground) 40%,
+    color-mix(in oklch, var(--brand-foreground) 55%, transparent)
+  );
+  --gradient-primary: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 80%, var(--gray-9)),
+    var(--primary)
+  );
+  --gradient-edge-brand: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--brand) 75%, transparent),
+    var(--border) 45%,
+    var(--border)
+  );
+  --gradient-divider: linear-gradient(90deg, transparent, var(--border) 18%, var(--border) 82%, transparent);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --card: var(--gray-2);
+  --popover: var(--gray-2);
+  --overlay: color-mix(in oklch, var(--black) 60%, transparent);
+  --primary-foreground: var(--gray-1);
+  --sidebar: var(--gray-1);
+  --selection: color-mix(in oklch, var(--brand) 45%, transparent);
+
+  --elevation-xs: 0 1px 2px oklch(0 0 0 / 0.4);
+  --elevation-sm: 0 1px 2px oklch(0 0 0 / 0.4), 0 1px 3px oklch(0 0 0 / 0.3);
+  --elevation-md: 0 2px 4px oklch(0 0 0 / 0.35), 0 8px 20px -6px oklch(0 0 0 / 0.5);
+  --elevation-lg: 0 4px 8px oklch(0 0 0 / 0.35), 0 18px 40px -10px oklch(0 0 0 / 0.6);
+  --elevation-xl: 0 8px 16px oklch(0 0 0 / 0.4), 0 36px 72px -18px oklch(0 0 0 / 0.7);
+  --elevation-card: inset 0 1px 0 oklch(1 0 0 / 0.07), inset 0 0 0 1px var(--border);
+  --elevation-brand:
+    0 0 0 1px color-mix(in oklch, var(--brand) 50%, transparent), 0 1px 2px oklch(0 0 0 / 0.4),
+    0 18px 40px -22px oklch(0 0 0 / 0.7);
+
+  --gradient-primary: linear-gradient(
+    180deg,
+    var(--primary),
+    color-mix(in oklch, var(--primary) 85%, var(--gray-9))
+  );
+}

@@ -1,0 +1,717 @@
+<title>Single Hue Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: dark-first specimen book. Quiet chrome; each option = one large dark frame + its light counterpart, ramp and gradient strips. Lab at the end. */
+:root {
+  color-scheme: dark;
+  --bg: oklch(0.155 0.004 270);
+  --surface: oklch(0.19 0.005 270);
+  --surface-2: oklch(0.225 0.006 270);
+  --ink: oklch(0.95 0.003 270);
+  --muted: oklch(0.7 0.008 270);
+  --line: oklch(0.285 0.007 270);
+  --focus: oklch(0.85 0.05 270);
+
+  --font-ui: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "Cascadia Mono", monospace;
+  --font-brand: "Geist", "Segoe UI", system-ui, sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.5rem;
+  --fs-xl: 2rem;
+  --fs-hero: clamp(2.25rem, 5vw, 3.6rem);
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='2.4' intercept='-.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: oklch(0.975 0.002 270);
+    --surface: oklch(0.995 0.001 270);
+    --surface-2: oklch(0.95 0.004 270);
+    --ink: oklch(0.2 0.006 270);
+    --muted: oklch(0.48 0.008 270);
+    --line: oklch(0.89 0.005 270);
+    --focus: oklch(0.35 0.05 270);
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: oklch(0.975 0.002 270);
+  --surface: oklch(0.995 0.001 270);
+  --surface-2: oklch(0.95 0.004 270);
+  --ink: oklch(0.2 0.006 270);
+  --muted: oklch(0.48 0.008 270);
+  --line: oklch(0.89 0.005 270);
+  --focus: oklch(0.35 0.05 270);
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  padding-inline: clamp(16px, 4vw, 40px);
+  padding-block: 0 80px;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1240px; margin-inline: auto; display: grid; gap: 96px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-color: color-mix(in oklch, var(--ink) 35%, transparent); }
+a:hover { text-decoration-color: var(--ink); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.875em; }
+.label { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.prose { max-width: 66ch; color: var(--muted); }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Header ---------- */
+.top { padding-block: 64px 0; display: grid; gap: 20px; }
+.top h1 { font-size: var(--fs-hero); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 15ch; }
+.top .prose { font-size: var(--fs-md); }
+.changed { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 6px; }
+.changed span { font-size: var(--fs-sm); border: 1px solid var(--line); border-radius: 99px; padding: 5px 12px; color: var(--muted); }
+.changed b { color: var(--ink); font-weight: 600; }
+
+.sec-head { display: grid; gap: 10px; margin-bottom: 32px; }
+.sec-head h2 { font-size: var(--fs-xl); line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; }
+
+/* ---------- References ---------- */
+.refs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 16px; }
+.ref { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 12px; display: grid; gap: 14px; align-content: start; }
+.ref .spec { padding: 0; border: 0; border-radius: 10px; }
+.ref .hero { min-height: 130px; border-radius: 10px; padding: 0; }
+.ref-body { display: grid; gap: 10px; padding: 0 4px 6px; }
+.ref h3 { font-size: var(--fs-md); letter-spacing: -0.01em; }
+.ref p { color: var(--muted); font-size: var(--fs-sm); }
+.ref ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: var(--fs-sm); }
+.ref li { display: grid; gap: 1px; }
+.ref li a { font-weight: 600; }
+.ref li span { color: var(--muted); }
+
+/* ---------- Rules ---------- */
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0 40px; border-top: 1px solid var(--line); }
+.rule { display: grid; gap: 4px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.rule h3 { font-size: var(--fs-base); font-weight: 600; }
+.rule p { color: var(--muted); font-size: var(--fs-sm); }
+
+/* ---------- Options ---------- */
+.opts { display: grid; gap: 88px; }
+.opt { display: grid; gap: 24px; }
+.opt-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 24px; align-items: end; border-top: 1px solid var(--line); padding-top: 26px; }
+.opt-head h3 { font-size: var(--fs-xl); letter-spacing: -0.025em; line-height: 1.1; display: flex; align-items: center; gap: 14px; }
+.opt-head h3 i { width: 22px; height: 22px; border-radius: 6px; display: inline-block; flex: none; box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--ink) 18%, transparent); }
+.opt-head .vals { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.opt-head .mood { grid-column: 1 / -1; color: var(--muted); max-width: 76ch; }
+.opt-head .based { grid-column: 1 / -1; font-size: var(--fs-sm); color: var(--muted); }
+.opt-head .based b { color: var(--ink); font-weight: 600; }
+@media (max-width: 640px) { .opt-head { grid-template-columns: 1fr; } .opt-head .vals { text-align: left; } }
+.opt-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 1020px) { .opt-body { grid-template-columns: 1fr; } }
+.opt-side { display: grid; gap: 16px; }
+.ramp-block { display: grid; gap: 8px; }
+.ramp { display: grid; grid-template-columns: repeat(11, 1fr); gap: 3px; }
+.ramp i { height: 30px; border-radius: 4px; display: block; }
+.ramp-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); }
+.strips { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.strip { display: grid; gap: 6px; }
+.strip .s { position: relative; isolation: isolate; overflow: hidden; height: 76px; border-radius: 10px; }
+
+/* ---------- Specimen frame: tokens derive from --h (hue), --c (peak chroma), --l9 (solid lightness) ---------- */
+.spec {
+  --brand: oklch(var(--l9) var(--c) var(--h));
+  --brand-hi: oklch(min(0.96, calc(var(--l9) + 0.15)) calc(var(--c) * 0.6) var(--h));
+  --brand-lo: oklch(max(0.22, calc(var(--l9) - 0.28)) calc(var(--c) * 0.78) var(--h));
+  --brand-deep: oklch(0.19 calc(var(--c) * 0.45) var(--h));
+  --on-brand: var(--on);
+  --hero-ink: var(--ink);
+  --hero-muted: var(--muted);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-brand);
+  border-radius: 18px;
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.spec.dark {
+  color-scheme: dark;
+  --bg: oklch(0.15 calc(var(--c) * 0.1) var(--h));
+  --bg-2: oklch(0.18 calc(var(--c) * 0.12) var(--h));
+  --surface: oklch(0.205 calc(var(--c) * 0.13) var(--h));
+  --line: oklch(0.29 calc(var(--c) * 0.16) var(--h));
+  --ink: oklch(0.97 calc(var(--c) * 0.04) var(--h));
+  --muted: oklch(0.72 calc(var(--c) * 0.12) var(--h));
+  --fx-core: oklch(0.97 calc(var(--c) * 0.25) var(--h) / 0.95);
+  --fx-mid: oklch(0.8 calc(var(--c) * 0.75) var(--h) / 0.55);
+  --fx-outer: oklch(var(--l9) var(--c) var(--h) / 0.3);
+  --rim: oklch(0.93 calc(var(--c) * 0.5) var(--h));
+  --soft: oklch(0.27 calc(var(--c) * 0.35) var(--h));
+  --soft-ink: oklch(0.87 calc(var(--c) * 0.6) var(--h));
+  --grain-ink: oklch(1 0 0);
+  --grain-o: var(--grain-dark, 0.09);
+  --lift: 0 0 0 1px oklch(var(--l9) var(--c) var(--h) / 0.55), 0 0 22px -4px oklch(var(--l9) var(--c) var(--h) / 0.6);
+  --hero-glow: 0 0 48px -12px oklch(var(--l9) var(--c) var(--h) / 0.45);
+}
+.spec.light {
+  color-scheme: light;
+  --brand: oklch(calc(var(--l9) - 0.08) var(--c) var(--h));
+  --bg: oklch(0.985 calc(var(--c) * 0.035) var(--h));
+  --bg-2: oklch(0.965 calc(var(--c) * 0.06) var(--h));
+  --surface: oklch(0.996 calc(var(--c) * 0.015) var(--h));
+  --line: oklch(0.9 calc(var(--c) * 0.1) var(--h));
+  --ink: oklch(0.2 calc(var(--c) * 0.15) var(--h));
+  --muted: oklch(0.48 calc(var(--c) * 0.2) var(--h));
+  --fx-core: oklch(0.99 calc(var(--c) * 0.08) var(--h) / 0.9);
+  --fx-mid: oklch(0.9 calc(var(--c) * 0.45) var(--h) / 0.75);
+  --fx-outer: oklch(0.82 calc(var(--c) * 0.6) var(--h) / 0.3);
+  --rim: oklch(calc(var(--l9) - 0.1) var(--c) var(--h) / 0.55);
+  --soft: oklch(0.94 calc(var(--c) * 0.25) var(--h));
+  --soft-ink: oklch(calc(var(--l9) - 0.27) var(--c) var(--h));
+  --grain-ink: oklch(0.15 0 0);
+  --grain-o: var(--grain-light, 0.08);
+  --lift: 0 1px 2px oklch(0.3 calc(var(--c) * 0.4) var(--h) / 0.25), 0 8px 20px -8px oklch(var(--l9) var(--c) var(--h) / 0.6);
+  --hero-glow: 0 18px 40px -24px oklch(var(--l9) var(--c) var(--h) / 0.55);
+}
+/* Graphite has no hue: white solid in dark, near-black solid in light */
+.spec.light.o-graphite {
+  --brand: oklch(0.24 0 0); --brand-hi: oklch(0.42 0 0); --brand-lo: oklch(0.14 0 0);
+  --on-brand: oklch(0.98 0 0); --soft-ink: oklch(0.3 0 0); --rim: oklch(0.35 0 0 / 0.45);
+  --lift: 0 1px 2px oklch(0 0 0 / .2), 0 8px 20px -8px oklch(0 0 0 / .35);
+}
+
+/* Grain: noise used as a mask over a theme-aware colour, so it stays neutral in both themes */
+.grain { position: relative; isolation: isolate; overflow: hidden; }
+.grain::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  pointer-events: none;
+  background: var(--grain-ink);
+  opacity: var(--grain-o);
+  -webkit-mask-image: var(--noise); mask-image: var(--noise);
+  -webkit-mask-size: 200px; mask-size: 200px;
+}
+
+.nav { display: flex; align-items: center; gap: 10px; padding: 4px 6px; font-size: 0.8125rem; }
+.mark { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(160deg, var(--brand-hi), var(--brand) 50%, var(--brand-lo)); flex: none; }
+.wm { font-weight: 600; letter-spacing: -0.02em; }
+.wm span { color: var(--muted); font-weight: 500; }
+.nav-links { color: var(--muted); margin-left: auto; display: flex; gap: 14px; }
+.nav .tag { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; }
+@media (max-width: 520px) { .nav-links { display: none; } .nav .tag { margin-left: auto; } }
+
+.hero {
+  border-radius: 14px;
+  padding: 44px 24px 30px;
+  min-height: 330px;
+  display: grid; gap: 14px;
+  justify-items: center; text-align: center; align-content: start;
+  color: var(--hero-ink);
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.hero h3 { font-size: clamp(1.6rem, 3.4vw, 2.35rem); line-height: 1.04; letter-spacing: -0.04em; font-weight: 600; max-width: 17ch; }
+.hero p { color: var(--hero-muted); font-size: 0.9375rem; max-width: 40ch; }
+.pill { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; padding: 4px 10px 4px 6px; border-radius: 99px; background: var(--soft); color: var(--soft-ink); }
+.pill b { font-weight: 600; }
+.pill i { width: 6px; height: 6px; border-radius: 99px; background: var(--brand); box-shadow: 0 0 8px var(--brand); margin-left: 4px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; padding-top: 6px; }
+.btn {
+  appearance: none; border: 0; cursor: pointer;
+  font: 600 0.8125rem/1 var(--font-brand);
+  padding: 11px 16px; border-radius: 9px;
+  transition: transform .18s cubic-bezier(.3,1.4,.5,1);
+}
+.btn:active { transform: scale(.965); }
+.btn:focus-visible { outline: 2px solid var(--brand-hi); outline-offset: 2px; }
+.btn-primary {
+  color: var(--on-brand);
+  background: linear-gradient(180deg, color-mix(in oklch, var(--brand) 65%, var(--brand-hi)), var(--brand) 55%, color-mix(in oklch, var(--brand) 80%, var(--brand-lo)));
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .3), var(--lift);
+}
+.btn-primary::after { opacity: calc(var(--grain-o) * 1.4); }
+.cmd {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--hero-muted);
+  padding: 10px 12px; border-radius: 9px;
+  background: color-mix(in oklch, var(--hero-ink) 6%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--hero-ink) 14%, transparent);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+
+/* Kit row */
+.kit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.kcard { background: var(--surface); border-radius: 12px; padding: 14px; display: grid; gap: 12px; align-content: start; box-shadow: inset 0 0 0 1px var(--line); }
+.krow { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 0.8125rem; }
+.ktitle { font-size: 0.75rem; color: var(--muted); }
+.field {
+  font-size: 0.8125rem; padding: 9px 11px; border-radius: 8px; background: var(--bg-2);
+  box-shadow: inset 0 0 0 1px var(--brand), 0 0 0 3px color-mix(in oklch, var(--brand) 22%, transparent);
+  display: flex; align-items: center; gap: 1px;
+}
+.caret { width: 1px; height: 14px; background: var(--brand); animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.segm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border-radius: 9px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); font-size: 0.75rem; text-align: center; }
+.segm span { padding: 6px 4px; border-radius: 6px; color: var(--muted); }
+.segm .on { background: var(--soft); color: var(--soft-ink); font-weight: 600; }
+.tog {
+  --w: 38px; --hgt: 22px; --p: 3px;
+  appearance: none; border: 0; padding: 0; cursor: pointer; flex: none;
+  width: var(--w); height: var(--hgt); border-radius: 99px;
+  background: var(--line);
+  position: relative;
+  transition: box-shadow .2s;
+}
+.tog::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(180deg, var(--brand-hi), var(--brand) 60%, var(--brand-lo));
+  opacity: 0; transition: opacity .2s;
+}
+.tog[aria-checked="true"]::before { opacity: 1; }
+.tog[aria-checked="true"] { box-shadow: var(--lift); }
+.tog .knob {
+  position: absolute; top: var(--p); left: var(--p); z-index: 1;
+  width: calc(var(--hgt) - var(--p) * 2); height: calc(var(--hgt) - var(--p) * 2);
+  border-radius: 99px; background: oklch(0.99 0 0);
+  box-shadow: 0 1px 2px oklch(0 0 0 / .35);
+  transition: transform .42s linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);
+}
+.tog[aria-checked="true"] .knob { transform: translateX(calc(var(--w) - var(--hgt))); }
+.tog:focus-visible { outline: 2px solid var(--brand-hi); outline-offset: 2px; }
+
+/* ---------- Treatments ---------- */
+/* Horizon glow: light rises from below, white-hot core into hue */
+.t-horizon .hero {
+  background:
+    linear-gradient(90deg, transparent 6%, var(--fx-mid) 50%, transparent 94%) 50% 100% / 100% 1px no-repeat,
+    radial-gradient(58% 58% at 50% 100%, var(--fx-core) 0%, var(--fx-mid) 20%, var(--fx-outer) 48%, transparent 78%),
+    var(--bg);
+}
+/* Light into glow: one orb, white core > light hue > brand > transparent */
+.t-orb .hero {
+  justify-items: start; text-align: left; align-content: end;
+  background:
+    radial-gradient(circle at 80% 20%, var(--fx-core) 0%, var(--fx-mid) 7%, var(--fx-outer) 20%, transparent 44%),
+    var(--bg);
+}
+.t-orb .actions { justify-content: flex-start; }
+/* Tonal field: the whole panel is the hue, light to dark */
+.t-tonal .hero {
+  --hero-ink: oklch(0.985 0.01 var(--h));
+  --hero-muted: oklch(0.9 calc(var(--c) * 0.25) var(--h));
+  justify-items: start; text-align: left; align-content: end;
+  background:
+    radial-gradient(90% 70% at 12% 0%, oklch(min(0.95, calc(var(--l9) + 0.2)) calc(var(--c) * 0.55) var(--h) / .85), transparent 62%),
+    linear-gradient(180deg, var(--brand) 0%, var(--brand-lo) 62%, var(--brand-deep) 100%);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .25), inset 0 0 0 1px oklch(1 0 0 / .06), var(--hero-glow);
+}
+.t-tonal .hero::after { opacity: calc(var(--grain-o) * 1.6); background: oklch(1 0 0); }
+.t-tonal .actions { justify-content: flex-start; }
+.t-tonal .hero .pill { background: oklch(1 0 0 / .14); color: var(--hero-ink); }
+.t-tonal .hero .pill i { background: var(--hero-ink); box-shadow: none; }
+.t-tonal .hero .btn-primary { background: oklch(0.985 0.01 var(--h)); color: var(--brand-lo); box-shadow: 0 1px 2px oklch(0 0 0 / .2); }
+/* Spotlight: a cone of hue from the top edge */
+.t-spot .hero {
+  align-content: end; padding-top: 80px;
+  background:
+    radial-gradient(14% 22% at 50% 0%, var(--fx-core), transparent 75%),
+    radial-gradient(42% 72% at 50% 0%, var(--fx-mid), transparent 72%),
+    radial-gradient(85% 100% at 50% 0%, var(--fx-outer), transparent 78%),
+    var(--bg);
+}
+/* Edge light: the hue lives on edges, not in the field */
+.t-edge .hero {
+  border: 1px solid transparent;
+  background:
+    radial-gradient(70% 55% at 50% 0%, var(--fx-outer), transparent 72%) padding-box,
+    linear-gradient(var(--bg-2), var(--bg-2)) padding-box,
+    conic-gradient(from 200deg, var(--line) 0deg, var(--brand-hi) 50deg, var(--brand) 80deg, var(--line) 130deg, var(--line) 230deg, var(--brand-hi) 300deg, var(--line) 345deg) border-box;
+  box-shadow: var(--hero-glow);
+}
+/* Rim light: an eclipse, the hue only on the rim */
+.t-rim .hero {
+  background:
+    radial-gradient(80% 105% at 50% 150%, var(--bg) 0%, var(--bg) 72%, var(--rim) 72.7%, var(--fx-mid) 74%, var(--fx-outer) 80%, transparent 96%),
+    var(--bg);
+}
+
+/* ---------- Lab ---------- */
+.lab { display: grid; grid-template-columns: minmax(250px, 320px) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 900px) { .lab { grid-template-columns: 1fr; } }
+.controls { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 18px; display: grid; gap: 18px; }
+.ctl { display: grid; gap: 6px; }
+.ctl-top { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--fs-sm); }
+.ctl-top label, .ctl-top span:first-child { font-weight: 600; }
+.ctl-top output { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; }
+.ctl input[type="range"] { width: 100%; accent-color: var(--ink); }
+#lab-h { -webkit-appearance: none; appearance: none; height: 10px; border-radius: 99px; background: linear-gradient(90deg, oklch(.7 .15 0), oklch(.7 .15 60), oklch(.7 .15 120), oklch(.7 .15 180), oklch(.7 .15 240), oklch(.7 .15 300), oklch(.7 .15 360)); }
+#lab-h::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 99px; background: oklch(0.98 0 0); border: 2px solid oklch(0.2 0 0); }
+#lab-h::-moz-range-thumb { width: 14px; height: 14px; border-radius: 99px; background: oklch(0.98 0 0); border: 2px solid oklch(0.2 0 0); }
+.ctl select { font: 500 var(--fs-sm)/1.2 var(--font-ui); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-btn { appearance: none; cursor: pointer; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); font: 500 var(--fs-xs)/1 var(--font-ui); padding: 7px 10px; border-radius: 99px; }
+.chip-btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.lab-out { display: grid; gap: 14px; }
+.tokens { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.6; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; overflow-x: auto; white-space: pre; }
+
+/* ---------- Your call ---------- */
+.asks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.ask { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.ask h3 { font-size: var(--fs-md); }
+.ask p { color: var(--muted); font-size: var(--fs-sm); }
+.ask code { color: var(--ink); background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+.lean { border-left: 2px solid var(--ink); padding: 2px 0 2px 16px; max-width: 74ch; margin-top: 28px; color: var(--muted); }
+.lean b { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tog .knob, .btn, .tog::before { transition-duration: 1ms !important; }
+  .caret { animation: none; }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Brand study · Round 2 · 8 Oct 2026</span>
+    <h1>One hue, lit from within</h1>
+    <p class="prose">Round one mixed three to five colours per direction. This round follows your brief: <strong>one hue per option</strong>, gradients that only move <strong>light to dark</strong> or <strong>light into glow</strong>, and fine <strong>grain</strong> as the matte finish. Each option leads in dark mode and shows its light-mode version beside it.</p>
+    <div class="changed" aria-label="Rules for this round">
+      <span><b>1</b> hue per option</span>
+      <span>Gradients change <b>lightness only</b></span>
+      <span>Glow in dark, <b>tinted wash</b> in light</span>
+      <span>Grain <b>under</b> content, never over text</span>
+    </div>
+  </header>
+
+  <!-- REFERENCES -->
+  <section aria-labelledby="refs-h">
+    <div class="sec-head">
+      <span class="label">Reference board · live sites checked 8 Oct 2026</span>
+      <h2 id="refs-h">How the best dark-first brands use one colour</h2>
+      <p class="prose">I pulled the live CSS from about 38 product sites. The ones below get one hue, glow and grain right. Each tile is a small rebuild of the technique, not a screenshot.</p>
+    </div>
+    <div class="refs">
+      <article class="ref">
+        <div class="spec dark t-rim" style="--h:270;--c:0;--l9:.95"><div class="hero grain"></div></div>
+        <div class="ref-body">
+          <h3>Rim light</h3>
+          <p>Near-black with one light source behind an object. Grain only shows where there is light.</p>
+          <ul>
+            <li><a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a><span>White rim glow on black, 70px noise tile in multiply at 0.42.</span></li>
+            <li><a href="https://linear.app" target="_blank" rel="noopener">Linear</a><span>Glow at only 4% white, eased stops, grain per card.</span></li>
+            <li><a href="https://resend.com" target="_blank" rel="noopener">Resend</a><span>Satin light streaks; a separate hero image per theme.</span></li>
+          </ul>
+        </div>
+      </article>
+      <article class="ref">
+        <div class="spec dark t-orb" style="--h:288;--c:.19;--l9:.6"><div class="hero grain"></div></div>
+        <div class="ref-body">
+          <h3>Accent glow</h3>
+          <p>The brand colour appears as light: a white-hot core, then light hue, then the brand, then nothing.</p>
+          <ul>
+            <li><a href="https://clerk.com" target="_blank" rel="noopener">Clerk</a><span>White 10% → light violet 30% → brand 50% → transparent.</span></li>
+            <li><a href="https://www.raycast.com" target="_blank" rel="noopener">Raycast</a><span>Red glow keycaps; pill border runs light pink to dark maroon.</span></li>
+            <li><a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a><span>Green spotlight from the top edge at 15%.</span></li>
+          </ul>
+        </div>
+      </article>
+      <article class="ref">
+        <div class="spec dark t-tonal" style="--h:258;--c:.17;--l9:.57"><div class="hero grain"></div></div>
+        <div class="ref-body">
+          <h3>Tonal field</h3>
+          <p>The whole surface is the hue, running light to dark of itself, with visible grain on top.</p>
+          <ul>
+            <li><a href="https://mercury.com" target="_blank" rel="noopener">Mercury</a><span>SVG fractal noise (0.65, 3 octaves) at 0.2, faded out by a gradient.</span></li>
+            <li><a href="https://arc.net" target="_blank" rel="noopener">Arc</a><span>Flat slate and deep blue with a noise tile. Matte with no gradient.</span></li>
+            <li><a href="https://zed.dev" target="_blank" rel="noopener">Zed</a><span>Noise at 3% in light and 1.2% in dark; dithering against banding.</span></li>
+          </ul>
+        </div>
+      </article>
+      <article class="ref">
+        <div class="spec dark t-spot" style="--h:162;--c:.14;--l9:.74"><div class="hero grain"></div></div>
+        <div class="ref-body">
+          <h3>Theme-aware grain</h3>
+          <p>Noise used as a mask over a colour that flips with the theme, so grain never turns muddy in either mode.</p>
+          <ul>
+            <li><a href="https://neon.com" target="_blank" rel="noopener">Neon</a><span>Noise mask over black in light and white in dark, at 7.5%.</span></li>
+            <li><a href="https://www.mintlify.com" target="_blank" rel="noopener">Mintlify</a><span>One green, two lightness values: darker in light mode, brighter in dark.</span></li>
+            <li><a href="https://paco.me" target="_blank" rel="noopener">Paco Coursey</a><span>Fixed craft-grain overlay from SVG fractal noise.</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section aria-labelledby="rules-h">
+    <div class="sec-head">
+      <span class="label">What we take from the research</span>
+      <h2 id="rules-h">Rules every option follows</h2>
+    </div>
+    <div class="rules">
+      <div class="rule"><h3>One number drives the palette</h3><p>A hue angle in OKLCH. Neutrals carry the same hue at almost no chroma, so greys feel related to the brand.</p></div>
+      <div class="rule"><h3>Gradients change lightness, not hue</h3><p>Light, solid and dark stops of one hue. Chroma peaks at the solid step, so midpoints never turn grey.</p></div>
+      <div class="rule"><h3>Glow belongs to dark mode</h3><p>In light mode, glow becomes a pale wash of the hue plus tinted shadows. Additive light on white reads as a smudge.</p></div>
+      <div class="rule"><h3>Brand shifts per theme</h3><p>The solid colour is a little darker in light mode and a little brighter in dark, like Mintlify.</p></div>
+      <div class="rule"><h3>Grain is a mask, not a filter</h3><p>A 200px static noise tile masks a white layer in dark and a black layer in light. About 4–6% visible. Never animated.</p></div>
+      <div class="rule"><h3>Near-blacks are tinted</h3><p>The darkest background carries the hue at very low chroma instead of pure black, like Linear and Cursor.</p></div>
+    </div>
+  </section>
+
+  <!-- OPTIONS -->
+  <section aria-labelledby="opts-h">
+    <div class="sec-head">
+      <span class="label">Six options</span>
+      <h2 id="opts-h">Pick a hue and a way of lighting it</h2>
+      <p class="prose">Each option pairs one hue with one lighting treatment taken from the references. The hue and the treatment are separate choices, so you can mix them. The lab at the bottom lets you try any combination.</p>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <!-- LAB -->
+  <section aria-labelledby="lab-h-title">
+    <div class="sec-head">
+      <span class="label">Lab</span>
+      <h2 id="lab-h-title">Try any hue with any lighting</h2>
+      <p class="prose">Drag the hue, choose a treatment and set the grain. Everything in the frame comes from these few numbers. If you land on something you like, send me the values from the token box.</p>
+    </div>
+    <div class="lab">
+      <div class="controls">
+        <div class="ctl">
+          <div class="ctl-top"><label for="lab-h">Hue</label><output id="o-h"></output></div>
+          <input type="range" id="lab-h" min="0" max="360" step="1" value="38">
+        </div>
+        <div class="ctl">
+          <div class="ctl-top"><label for="lab-c">Chroma</label><output id="o-c"></output></div>
+          <input type="range" id="lab-c" min="0" max="0.24" step="0.005" value="0.19">
+        </div>
+        <div class="ctl">
+          <div class="ctl-top"><label for="lab-l">Solid lightness</label><output id="o-l"></output></div>
+          <input type="range" id="lab-l" min="0.5" max="0.85" step="0.01" value="0.68">
+        </div>
+        <div class="ctl">
+          <div class="ctl-top"><label for="lab-t">Lighting</label></div>
+          <select id="lab-t">
+            <option value="horizon">Horizon glow</option>
+            <option value="orb">Light into glow</option>
+            <option value="tonal">Tonal field</option>
+            <option value="spot">Spotlight</option>
+            <option value="edge">Edge light</option>
+            <option value="rim">Rim light</option>
+          </select>
+        </div>
+        <div class="ctl">
+          <div class="ctl-top"><label for="lab-g">Grain</label><output id="o-g"></output></div>
+          <input type="range" id="lab-g" min="0" max="0.3" step="0.01" value="0.09">
+        </div>
+        <div class="ctl">
+          <div class="ctl-top"><span>Theme</span></div>
+          <div class="chips" role="group" aria-label="Lab theme">
+            <button class="chip-btn" type="button" data-theme-set="dark" aria-pressed="true">Dark</button>
+            <button class="chip-btn" type="button" data-theme-set="light" aria-pressed="false">Light</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="ctl-top"><span>Start from</span></div>
+          <div class="chips" id="lab-presets"></div>
+        </div>
+      </div>
+      <div class="lab-out">
+        <div id="lab-frame"></div>
+        <pre class="tokens" id="lab-tokens"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUR CALL -->
+  <section aria-labelledby="call-h">
+    <div class="sec-head">
+      <span class="label">Your call</span>
+      <h2 id="call-h">What I need from you</h2>
+    </div>
+    <div class="asks">
+      <div class="ask"><h3>A hue</h3><p>Pick one of the six, or a hue number from the lab, for example <code>hue 22</code>.</p></div>
+      <div class="ask"><h3>A lighting treatment</h3><p>Which one feels like the brand: horizon, light into glow, tonal field, spotlight, edge light or rim light. Two can work together, for example tonal field for surfaces and edge light for components.</p></div>
+      <div class="ask"><h3>Grain amount</h3><p>Tell me if the grain should be stronger or softer than shown. The lab shows the range.</p></div>
+    </div>
+    <p class="lean"><b>My lean: Ember with Horizon glow.</b> Warm orange is less common among component libraries than violet, blue or green, it glows well on near-black, and it stays strong as a solid in light mode. Iris is the safer alternative if you prefer a cool brand.</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var TREATMENTS = {
+    horizon: 'Horizon glow',
+    orb: 'Light into glow',
+    tonal: 'Tonal field',
+    spot: 'Spotlight',
+    edge: 'Edge light',
+    rim: 'Rim light'
+  };
+
+  var OPTIONS = [
+    { id: 'ember', name: 'Ember', h: 38, c: 0.19, l: 0.68, t: 'horizon',
+      mood: 'Warm red-orange, like a coal that is still lit. Light rises from below the hero with a white-hot core, and a thin horizon line marks the edge.',
+      based: 'Raycast’s red keycap glow and Clerk’s white-hot core.' },
+    { id: 'iris', name: 'Iris', h: 288, c: 0.19, l: 0.6, t: 'orb',
+      mood: 'Cool violet. A single orb of light sits behind the content and falls off from white through light violet into the near-black.',
+      based: 'Clerk’s glow recipe and Linear’s restraint.' },
+    { id: 'cobalt', name: 'Cobalt', h: 258, c: 0.17, l: 0.57, t: 'tonal',
+      mood: 'Deep blue used as a surface, not just an accent. Panels run from bright cobalt at the top to near-black blue at the bottom, with visible grain.',
+      based: 'Mercury’s grain fields and Arc’s matte colour blocks.' },
+    { id: 'jade', name: 'Jade', h: 162, c: 0.14, l: 0.74, t: 'spot',
+      mood: 'Calm green. A cone of light falls from the top edge, and grain sits over a colour that flips with the theme.',
+      based: 'Supabase’s spotlight and Neon’s theme-aware grain.' },
+    { id: 'amber', name: 'Amber', h: 72, c: 0.15, l: 0.8, t: 'edge',
+      mood: 'Golden amber that lives on edges. Surfaces stay dark, and the hue runs around borders like light catching a bevel.',
+      based: 'Raycast’s conic pill border.' },
+    { id: 'graphite', name: 'Graphite', h: 270, c: 0, l: 0.95, t: 'rim',
+      mood: 'No hue at all, only light. An eclipse with a white rim. The most restrained option, and a base that could take an accent later.',
+      based: 'Vercel’s rim light and Linear’s 4% glow.' }
+  ];
+
+  function onBrand(l, c) { return l >= 0.66 || c === 0 ? 'oklch(0.18 0.02 var(--h))' : 'oklch(0.99 0.005 var(--h))'; }
+  function styleFor(o) { return '--h:' + o.h + ';--c:' + o.c + ';--l9:' + o.l + ';--on:' + onBrand(o.l, o.c); }
+
+  function specHTML(o, theme, uid) {
+    return '' +
+      '<div class="spec ' + theme + ' t-' + o.t + ' o-' + o.id + '" style="' + styleFor(o) + '">' +
+        '<div class="nav"><span class="mark grain"></span><span class="wm">untitled<span>/ui</span></span>' +
+          '<span class="nav-links"><span>Components</span><span>Docs</span><span>Blocks</span></span>' +
+          '<span class="tag">' + (theme === 'dark' ? 'Dark' : 'Light') + '</span></div>' +
+        '<div class="hero grain">' +
+          '<span class="pill"><i></i>New <b>Sidebar v2</b></span>' +
+          '<h3>Motion-ready components for Next.js</h3>' +
+          '<p>Copy the source and keep the polish. Built on Radix, Tailwind and Motion.</p>' +
+          '<div class="actions"><button class="btn btn-primary grain" type="button">Browse components</button>' +
+          '<span class="cmd">npx shadcn add @untitled/button</span></div>' +
+        '</div>' +
+        '<div class="kit">' +
+          '<div class="kcard">' +
+            '<div class="krow"><span>Animate sidebar</span><button class="tog" type="button" role="switch" aria-checked="true" aria-label="Animate sidebar (' + uid + ')"><span class="knob"></span></button></div>' +
+            '<div class="krow"><span>Reduce motion</span><button class="tog" type="button" role="switch" aria-checked="false" aria-label="Reduce motion (' + uid + ')"><span class="knob"></span></button></div>' +
+          '</div>' +
+          '<div class="kcard">' +
+            '<span class="ktitle">Search components</span>' +
+            '<div class="field">Toggle<span class="caret"></span></div>' +
+            '<div class="segm"><span class="on">Preview</span><span>Code</span><span>Props</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  // Brand ramp: 11 steps, lightness falls, chroma peaks around the solid step
+  var RAMP_L = [0.97, 0.93, 0.87, 0.8, 0.73, 0.66, 0.58, 0.5, 0.42, 0.33, 0.25];
+  var RAMP_C = [0.12, 0.25, 0.42, 0.62, 0.82, 0.97, 1, 0.92, 0.8, 0.64, 0.48];
+  function rampHTML(o) {
+    var s = '';
+    for (var i = 0; i < RAMP_L.length; i++) {
+      s += '<i style="background:oklch(' + RAMP_L[i] + ' ' + (o.c * RAMP_C[i]).toFixed(3) + ' ' + o.h + ')"></i>';
+    }
+    return s;
+  }
+
+  function stripsHTML(o) {
+    var st = styleFor(o);
+    return '' +
+      '<div class="strip"><span class="label">Light → dark</span>' +
+        '<div class="spec dark s grain" style="' + st + ';padding:0;border-radius:10px;background:linear-gradient(90deg, var(--brand-hi), var(--brand) 45%, var(--brand-lo) 78%, var(--brand-deep))"></div></div>' +
+      '<div class="strip"><span class="label">Light → glow</span>' +
+        '<div class="spec dark s grain" style="' + st + ';padding:0;border-radius:10px;background:radial-gradient(70% 140% at 50% 100%, var(--fx-core) 0%, var(--fx-mid) 22%, var(--fx-outer) 50%, transparent 80%), var(--bg)"></div></div>';
+  }
+
+  var host = document.getElementById('opts');
+  host.innerHTML = OPTIONS.map(function (o) {
+    return '' +
+      '<article class="opt" aria-labelledby="opt-' + o.id + '">' +
+        '<header class="opt-head">' +
+          '<h3 id="opt-' + o.id + '"><i style="background:oklch(' + o.l + ' ' + o.c + ' ' + o.h + ')"></i>' + o.name + '</h3>' +
+          '<span class="vals">' + (o.c === 0 ? 'no hue' : 'hue ' + o.h) + ' · chroma ' + o.c.toFixed(2) + ' · solid L ' + o.l.toFixed(2) + '<br>' + TREATMENTS[o.t] + '</span>' +
+          '<p class="mood">' + o.mood + '</p>' +
+          '<p class="based"><b>Based on</b> ' + o.based + '</p>' +
+        '</header>' +
+        '<div class="opt-body">' +
+          specHTML(o, 'dark', o.name + ' dark') +
+          '<div class="opt-side">' +
+            specHTML(o, 'light', o.name + ' light') +
+            '<div class="ramp-block"><span class="label">Brand ramp</span><div class="ramp">' + rampHTML(o) + '</div>' +
+              '<div class="ramp-labels"><span>L 0.97</span><span>solid</span><span>L 0.25</span></div></div>' +
+            '<div class="strips">' + stripsHTML(o) + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+  }).join('');
+
+  // Toggles
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('.tog');
+    if (!t) return;
+    t.setAttribute('aria-checked', t.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+  });
+
+  // Lab
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { h: 38, c: 0.19, l: 0.68, t: 'horizon', g: 0.09, theme: 'dark' };
+  var frame = $('lab-frame');
+
+  function renderLab() {
+    var o = { id: 'lab', name: 'Lab', h: state.h, c: state.c, l: state.l, t: state.t };
+    frame.innerHTML = specHTML(o, state.theme, 'lab');
+    var spec = frame.firstChild;
+    spec.style.setProperty('--grain-dark', state.g);
+    spec.style.setProperty('--grain-light', state.g);
+    if (state.c === 0) spec.classList.add('o-graphite');
+    $('o-h').textContent = state.h;
+    $('o-c').textContent = state.c.toFixed(3);
+    $('o-l').textContent = state.l.toFixed(2);
+    $('o-g').textContent = Math.round(state.g * 100) + '%';
+    var hi = Math.min(0.96, state.l + 0.15).toFixed(2), lo = Math.max(0.22, state.l - 0.28).toFixed(2);
+    $('lab-tokens').textContent =
+      '/* ' + TREATMENTS[state.t] + ' · ' + state.theme + ' */\n' +
+      '--brand-hue:   ' + state.h + ';\n' +
+      '--brand:       oklch(' + state.l.toFixed(2) + ' ' + state.c.toFixed(3) + ' ' + state.h + ');   /* dark mode solid */\n' +
+      '--brand-light: oklch(' + (state.l - 0.08).toFixed(2) + ' ' + state.c.toFixed(3) + ' ' + state.h + ');   /* light mode solid */\n' +
+      '--brand-hi:    oklch(' + hi + ' ' + (state.c * 0.6).toFixed(3) + ' ' + state.h + ');\n' +
+      '--brand-lo:    oklch(' + lo + ' ' + (state.c * 0.78).toFixed(3) + ' ' + state.h + ');\n' +
+      '--bg-dark:     oklch(0.15 ' + (state.c * 0.1).toFixed(3) + ' ' + state.h + ');\n' +
+      '--bg-light:    oklch(0.985 ' + (state.c * 0.035).toFixed(3) + ' ' + state.h + ');\n' +
+      '--grain:       ' + Math.round(state.g * 100) + '% (noise mask, 200px tile)';
+  }
+
+  [['lab-h', 'h', parseInt], ['lab-c', 'c', parseFloat], ['lab-l', 'l', parseFloat], ['lab-g', 'g', parseFloat]].forEach(function (b) {
+    $(b[0]).addEventListener('input', function (e) { state[b[1]] = b[2](e.target.value, 10); renderLab(); });
+  });
+  $('lab-t').addEventListener('change', function (e) { state.t = e.target.value; renderLab(); });
+  document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.theme = btn.getAttribute('data-theme-set');
+      document.querySelectorAll('[data-theme-set]').forEach(function (o) { o.setAttribute('aria-pressed', o === btn ? 'true' : 'false'); });
+      renderLab();
+    });
+  });
+  var presets = $('lab-presets');
+  presets.innerHTML = OPTIONS.map(function (o) { return '<button class="chip-btn" type="button" data-preset="' + o.id + '" aria-pressed="false">' + o.name + '</button>'; }).join('');
+  presets.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-preset]');
+    if (!b) return;
+    var o = OPTIONS.filter(function (x) { return x.id === b.getAttribute('data-preset'); })[0];
+    state.h = o.h; state.c = o.c; state.l = o.l; state.t = o.t;
+    $('lab-h').value = o.h; $('lab-c').value = o.c; $('lab-l').value = o.l; $('lab-t').value = o.t;
+    presets.querySelectorAll('[data-preset]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    renderLab();
+  });
+  renderLab();
+})();
+</script>

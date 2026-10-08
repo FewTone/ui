@@ -1,0 +1,24 @@
+{
+  "name": "ui-library",
+  "private": true,
+  "description": "Animated, accessible React components for Next.js. Name to be decided.",
+  "license": "MIT",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "tokens": "node scripts/tokens/generate-palette.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm check:tokens"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "turbo": "^2.11.7"
+  }
+}

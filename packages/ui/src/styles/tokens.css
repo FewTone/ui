@@ -1,0 +1,230 @@
+/*
+ * Non-colour design tokens: type, spacing, radius, layout, motion, layering.
+ * Values inside @theme become Tailwind utilities (text-h2, rounded-xl, ease-out, max-w-content...).
+ * Values in :root have no Tailwind namespace; use them with the (--token) shorthand,
+ * for example `duration-(--duration-fast)` or `z-(--z-modal)`.
+ * Documented in docs-internal/01-brand/design-system.md.
+ */
+
+@theme static {
+  /* Reset Tailwind's defaults so only these tokens exist */
+  --font-*: initial;
+  --font-weight-*: initial;
+  --text-*: initial;
+  --tracking-*: initial;
+  --leading-*: initial;
+  --radius-*: initial;
+  --ease-*: initial;
+  --animate-*: initial;
+  --container-*: initial;
+
+  /* Font families: Geist and Geist Mono, self-hosted via the `geist` package (variables set in the app layout) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "Cascadia Mono", monospace;
+
+  /* Spacing: a 4px grid. p-1 = 4px, p-4 = 16px, p-6 = 24px. Use only the steps listed in the design system doc. */
+  --spacing: 0.25rem;
+
+  /* Type scale (Geist). Each size carries its line height, tracking and weight. */
+  --text-display: clamp(2.75rem, 1.95rem + 3.4vw, 4.5rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.055em;
+  --text-display--font-weight: 600;
+
+  --text-h1: clamp(2.25rem, 1.85rem + 1.7vw, 3rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.05em;
+  --text-h1--font-weight: 600;
+
+  --text-h2: 2rem;
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.04em;
+  --text-h2--font-weight: 600;
+
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.03em;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.4;
+  --text-h4--letter-spacing: -0.02em;
+  --text-h4--font-weight: 600;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--letter-spacing: -0.01em;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.55;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+  --text-label--font-weight: 500;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.35;
+  --text-caption--letter-spacing: 0.005em;
+  --text-caption--font-weight: 500;
+
+  --text-overline: 0.75rem;
+  --text-overline--line-height: 1.3;
+  --text-overline--letter-spacing: 0.06em;
+  --text-overline--font-weight: 500;
+
+  --text-code: 0.875rem;
+  --text-code--line-height: 1.6;
+
+  /* Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Tracking and leading, for the rare case a size token's defaults need overriding */
+  --tracking-display: -0.055em;
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.01em;
+  --tracking-caps: 0.06em;
+
+  --leading-none: 1;
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Radius */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Layout widths (max-w-*) */
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+  --container-xl: 36rem;
+  --container-heading: 15ch;
+  --container-prose: 42rem;
+  --container-content: 72rem;
+  --container-wide: 80rem;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);
+
+  /* Keyframe animations */
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-out) both;
+  --animate-fade-out: fade-out var(--duration-fast) var(--ease-in) both;
+  --animate-rise-in: rise-in var(--duration-slow) var(--ease-out) both;
+  --animate-scale-in: scale-in var(--duration-base) var(--ease-out) both;
+  --animate-caret-blink: caret-blink 1.1s steps(1) infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes caret-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+:root {
+  /* Motion durations. Mirrored in packages/ui/src/lib/motion.ts (checked by `pnpm check:tokens`). */
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+
+  /* Layering */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-popover: 1400;
+  --z-toast: 1500;
+  --z-tooltip: 1600;
+
+  /* Component sizes */
+  --size-control-sm: 2rem;
+  --size-control-md: 2.25rem;
+  --size-control-lg: 2.5rem;
+  --size-icon-sm: 0.875rem;
+  --size-icon-md: 1rem;
+  --size-icon-lg: 1.25rem;
+
+  /* Page rhythm */
+  --space-gutter: clamp(1rem, 4vw, 2.5rem);
+  --space-section: clamp(4rem, 8vw, 8rem);
+
+  /* Lines and focus */
+  --border-width: 1px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* States */
+  --opacity-disabled: 0.5;
+  --scale-press: 0.97;
+
+  /* shadcn/ui compatibility: components derive radii from --radius */
+  --radius: var(--radius-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-slow: 1ms;
+    --duration-slower: 1ms;
+  }
+}
