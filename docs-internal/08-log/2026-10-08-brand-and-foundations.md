@@ -1,7 +1,7 @@
 # 2026-10-08 · Brand, design system and project setup
 
 ## What happened
-- **Brand exploration:** three rounds, recorded in `01-brand/explorations/README.md`.
+- **Brand exploration:** three rounds, summarised in ADR 0003. The exploration files were removed after the decision and are recoverable from commit `09b14fc`.
   - Multi-colour mesh gradients were rejected.
   - Single-hue gradients with glow and grain were good, but too much.
   - Accepted: a neutral near-black and white site, with one accent used sparingly, one-tone gradients, no glow and no grain.

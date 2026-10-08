@@ -1,7 +1,7 @@
 # 0002 · Brand colour: Navy, used sparingly
 
 - **Status:** Accepted (2026-10-08, by the owner)
-- **Context:** brand rounds 1–3 (`01-brand/explorations/`) and foundations drafts 1–3 (`01-brand/foundations.html`)
+- **Builds on:** ADR 0003 (neutral-first brand direction)
 
 ## Context
 - The owner wants a very minimal product: a plain near-black or white interface, with one colour reserved for meaningful places.

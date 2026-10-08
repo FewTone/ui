@@ -1,10 +1,21 @@
 # 0001 · Typography: Geist + Geist Mono
 
 - **Status:** Accepted (2026-10-08, by the owner)
-- **Context file:** `01-brand/foundations.html` (section 5 and 6), research in `06-research/typography-2026-10.md`
-
 ## Context
-The library and docs need one type system that is free to ship in an MIT repo (SIL OFL), works well for UI and display sizes, and has a matching mono for code and install commands. Four OFL options were shown side by side: Inter + JetBrains Mono, Geist + Geist Mono, Instrument Sans + Instrument Serif, and Inter + Newsreader.
+The library and docs need one type system that:
+- is free to ship in an MIT repo
+- works well for UI and display sizes
+- has a matching mono for code and install commands
+
+Four options were shown side by side:
+- Inter + JetBrains Mono
+- Geist + Geist Mono
+- Instrument Sans + Instrument Serif
+- Inter + Newsreader
+
+**Licence rule:** only SIL OFL (or equivalent) fonts can ship in this repo.
+- **Fontshare families** (Satoshi, General Sans, Switzer) are excluded. Their ITF Free Font License forbids modification, including subsetting, and forbids distribution from public repositories.
+- **Berkeley Mono** is excluded because it is commercial.
 
 ## Decision
 Use **Geist** for all text and **Geist Mono** for code, commands, keyboard shortcuts and uppercase eyebrow labels. No separate display face.

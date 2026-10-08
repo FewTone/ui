@@ -4,8 +4,10 @@ The single reference for every visual value in the library and its website. The 
 
 - **Status:** v1, adopted 2026-10-08
 - **Live view:** run `pnpm dev`, then open `/lab/tokens` (development only)
-- **Decisions:** `03-decisions/0001-typography-geist.md`, `03-decisions/0002-brand-colour-navy.md`
-- **History:** `01-brand/explorations/README.md` (brand rounds 1–3) and `01-brand/foundations.html` (colour and type exploration)
+- **Decisions:**
+  - `03-decisions/0001-typography-geist.md`
+  - `03-decisions/0002-brand-colour-navy.md`
+  - `03-decisions/0003-brand-direction-neutral-first.md` (what was tried, what was rejected and why)
 
 ---
 

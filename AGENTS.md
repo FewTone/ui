@@ -65,12 +65,13 @@ docs-internal/             long-term project memory (see map below)
 ## docs-internal map
 | Folder | Contents |
 |---|---|
-| `01-brand/` | `design-system.md` (the spec), `foundations.html`, `explorations/` (brand rounds 1–3 and why each was accepted or rejected) |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy) |
-| `06-research/` | Typography, colour and surface research |
+| `01-brand/` | `design-system.md`, the spec for every visual value |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes) |
 | `08-log/` | Dated session notes |
 
-Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `07-roadmap`, and `.agents/` for internal skills and rules.
+Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `06-research`, `07-roadmap`, and `.agents/` for internal skills and rules.
+
+Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
 ## Status (2026-10-08)
 **Done:**
