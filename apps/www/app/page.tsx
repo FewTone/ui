@@ -18,7 +18,7 @@ export default function Home() {
             className="focus-ring flex items-center gap-2 rounded-sm font-semibold tracking-tight"
           >
             <span className="size-4 rounded-xs bg-foreground" aria-hidden />
-            untitled<span className="font-medium text-muted-foreground">/ui</span>
+            fewtone<span className="font-medium text-muted-foreground">/ui</span>
           </Link>
           <div className="hidden items-center gap-5 text-muted-foreground sm:flex">
             <span className="text-foreground">Components</span>
@@ -57,7 +57,7 @@ export default function Home() {
               <ArrowRightIcon className="size-(--size-icon-md)" aria-hidden />
             </Link>
             <span className="inline-flex h-(--size-control-lg) items-center rounded-lg bg-muted px-4 font-mono text-code text-muted-foreground shadow-card">
-              npx shadcn add @untitled/button
+              npx shadcn add @fewtone/button
             </span>
           </div>
         </section>
@@ -66,7 +66,7 @@ export default function Home() {
       <footer className="surface-brand-footer m-2 grid gap-10 rounded-xl px-8 pt-12 pb-6">
         <div className="mx-auto grid w-full max-w-content gap-8 md:grid-cols-2">
           <div>
-            <p className="text-display text-gradient-on-brand">untitled/ui</p>
+            <p className="text-display text-gradient-on-brand">fewtone/ui</p>
             <p className="mt-3 max-w-xs text-body-sm opacity-80">
               Motion-ready components for Next.js. Free and open source.
             </p>
@@ -85,7 +85,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto flex w-full max-w-content flex-wrap justify-between gap-2 border-t border-brand-foreground/20 pt-4 text-caption opacity-80">
-          <span>© 2026 untitled/ui · MIT licence</span>
+          <span>© 2026 FewTone · MIT licence</span>
           <span>Built with Radix, Tailwind and Motion</span>
         </div>
       </footer>

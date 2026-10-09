@@ -17,7 +17,7 @@ importers:
 
   apps/www:
     dependencies:
-      '@workspace/ui':
+      '@fewtone/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       geist:

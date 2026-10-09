@@ -1,6 +1,15 @@
-# UI Library (name to be decided)
+# FewTone UI
 
-These are animated, accessible React components for Next.js. It is a personal library for now and will be open-sourced (MIT) later. Components are distributed as a shadcn-compatible registry (`npx shadcn add @<lib>/<name>`) and as an npm package.
+These are animated, accessible React components for Next.js, made by FewTone. It is a personal library for now and will be open-sourced (MIT) later. Components are distributed as a shadcn-compatible registry (`npx shadcn add @fewtone/<name>`) and as an npm package.
+
+## Name and handles
+- **Brand:** FewTone UI. The code-style mark is `fewtone/ui`.
+- **Site, registry, llms.txt and MCP:** `ui.fewtone.com`, hosted on Vercel through one CNAME at Hostinger (ADR 0005).
+- **Packages:**
+  - shadcn namespace: `@fewtone`
+  - npm: `@fewtone/ui` (this is also the workspace package name)
+  - CLI: `npx fewtone`
+- **GitHub:** `FewTone/ui`
 
 This file is the entry point for every AI agent (Claude, Codex, Cursor, Gemini, Copilot). It is a map: read the linked docs for details.
 
@@ -53,7 +62,7 @@ docs-internal/             long-term project memory (see map below)
    - Radix for behaviour
    - keyboard support and a visible focus ring
    - `prefers-reduced-motion` respected (CSS is automatic; in JavaScript use `useReducedMotion()`)
-4. **Motion** uses the presets in `@workspace/ui/lib/motion` (`spring.snappy`, `spring.smooth`, `spring.bouncy`). Animate only `transform` and `opacity`.
+4. **Motion** uses the presets in `@fewtone/ui/lib/motion` (`spring.snappy`, `spring.smooth`, `spring.bouncy`). Animate only `transform` and `opacity`.
 5. **`packages/ui` is the source of truth.** Registry JSON, docs, the npm build and AI files are generated from it, never hand-copied.
 6. **The Lab (`/lab`) is internal and dev-only.** Users customise the copied source in their own projects. There is no public customiser.
 7. **Version-specific docs:** read `apps/www/AGENTS.md` (Next.js) and the Turborepo block below before changing framework or build config.
@@ -66,30 +75,33 @@ docs-internal/             long-term project memory (see map below)
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com) |
 | `08-log/` | Dated session notes |
 
 Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `06-research`, `07-roadmap`, and `.agents/` for internal skills and rules.
 
 Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
-## Status (2026-10-08)
+## Status (2026-10-09)
 **Done:**
 - brand (Navy, neutral first)
 - typography (Geist)
 - design-system tokens and their enforcement
 - monorepo + Next.js scaffold
+- name (FewTone UI) and hosting decision (Vercel)
 
 **Next** (from the approved plan):
+- logo (symbol + wordmark, and wordmark only)
 - docs site shell
 - component pipeline and the Lab
 - Button as the first end-to-end component
 - AI layer (llms.txt, MCP, skills)
 - npm package and CLI
-- deploy to Cloudflare
+- deploy to Vercel on `ui.fewtone.com`
 
 **Open:**
-- the library name. `untitled/ui` and `@workspace/*` are placeholders.
+- the logo
+- claiming the npm org `@fewtone` (owner action)
 
 <!-- BEGIN:turborepo-agent-rules -->
 

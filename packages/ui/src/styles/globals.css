@@ -1,5 +1,5 @@
 /*
- * Design system entry point. Apps import this one file: `@import "@workspace/ui/globals.css";`
+ * Design system entry point. Apps import this one file: `@import "@fewtone/ui/globals.css";`
  *
  * Layers:
  *   palette.css  primitive colour scales (generated, never used by components directly)

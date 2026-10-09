@@ -1,5 +1,5 @@
-import { duration, ease, spring } from "@workspace/ui/lib/motion";
-import { cn } from "@workspace/ui/lib/utils";
+import { duration, ease, spring } from "@fewtone/ui/lib/motion";
+import { cn } from "@fewtone/ui/lib/utils";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -65,7 +65,7 @@ const typeScale = [
   { token: "label", cls: "text-label", sample: "Browse components" },
   { token: "caption", cls: "text-caption", sample: "Updated 2 days ago" },
   { token: "overline", cls: "text-overline font-mono uppercase", sample: "Components / Toggle" },
-  { token: "code", cls: "text-code font-mono", sample: "npx shadcn add @untitled/toggle" },
+  { token: "code", cls: "text-code font-mono", sample: "npx shadcn add @fewtone/toggle" },
 ];
 
 const spacingSteps = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32];
@@ -230,7 +230,7 @@ export default function TokensPage() {
             <p className="text-body-sm opacity-80">surface-brand</p>
           </div>
           <div className="surface-brand-footer grid content-end gap-1 rounded-xl p-6">
-            <p className="text-h2 text-gradient-on-brand">untitled/ui</p>
+            <p className="text-h2 text-gradient-on-brand">fewtone/ui</p>
             <p className="text-body-sm opacity-80">surface-brand-footer + text-gradient-on-brand</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -248,7 +248,7 @@ export default function TokensPage() {
 
       <Section
         title="Motion"
-        note="CSS durations and easings, mirrored in @workspace/ui/lib/motion for motion/react."
+        note="CSS durations and easings, mirrored in @fewtone/ui/lib/motion for motion/react."
       >
         <div className="grid gap-6 md:grid-cols-3">
           <div className="grid content-start gap-2">

@@ -10,7 +10,7 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@workspace/ui": "workspace:*",
+    "@fewtone/ui": "workspace:*",
     "geist": "^1.7.2",
     "lucide-react": "^1.52.0",
     "motion": "^14.0.0",

@@ -1,7 +1,7 @@
 {
-  "name": "ui-library",
+  "name": "fewtone-ui",
   "private": true,
-  "description": "Animated, accessible React components for Next.js. Name to be decided.",
+  "description": "FewTone UI: animated, accessible React components for Next.js.",
   "license": "MIT",
   "packageManager": "pnpm@11.7.0",
   "engines": {

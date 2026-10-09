@@ -38,7 +38,7 @@ scripts/tokens/generate-palette.mjs   colour generator (edit hues here)
 scripts/check-tokens.mjs             enforcement
 ```
 
-Apps import the whole system with one line: `@import "@workspace/ui/globals.css";`.
+Apps import the whole system with one line: `@import "@fewtone/ui/globals.css";`.
 
 **Changing colours:**
 1. Edit the hue numbers in `scripts/tokens/generate-palette.mjs`.
@@ -267,7 +267,7 @@ The shadows are neutral. Dark mode uses deeper shadows plus a lit top edge on ca
 
 ## 9. Motion
 
-**Durations.** CSS uses `duration-(--duration-*)`. JavaScript uses `duration.*` from `@workspace/ui/lib/motion`.
+**Durations.** CSS uses `duration-(--duration-*)`. JavaScript uses `duration.*` from `@fewtone/ui/lib/motion`.
 
 | Token | Value | Use |
 |---|---|---|

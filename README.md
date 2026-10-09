@@ -1,6 +1,10 @@
-# untitled/ui
+# FewTone UI
 
-Motion-ready, accessible React components for Next.js. Work in progress; the name is a placeholder.
+Motion-ready, accessible React components for Next.js, by [FewTone](https://fewtone.com). Work in progress.
+
+- **Docs (coming soon):** ui.fewtone.com
+- **Install a component (soon):** `npx shadcn add @fewtone/button`
+- **npm (soon):** `@fewtone/ui`
 
 ## Develop
 

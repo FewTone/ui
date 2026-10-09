@@ -14,7 +14,7 @@
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
-      "@workspace/ui/*": ["./src/*"]
+      "@fewtone/ui/*": ["./src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

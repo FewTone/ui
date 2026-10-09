@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "untitled/ui",
+  title: "FewTone UI",
   description: "Motion-ready, accessible React components for Next.js.",
 };
 
