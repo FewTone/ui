@@ -1,0 +1,4 @@
+# Files `pnpm deploy:*` does not upload to Vercel because the build doesn't need them.
+# The CLI already skips .git, .vercel, node_modules, .next and .env.*.local on its own.
+.turbo
+docs-internal

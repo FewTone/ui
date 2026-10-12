@@ -32,3 +32,23 @@ Nothing else on `fewtone.com` changes. No paid tier is planned, which fits Hobby
 - We get Next 16 support out of the box and preview deployments for every PR.
 - **Keep the code host-agnostic.** Use no Vercel-only APIs. To move hosts later, change the CNAME target in one place.
 - **Revisit this decision if** a paid tier is added or the site starts selling FewTone services. Hobby is non-commercial, so at that point either upgrade to Vercel Pro ($20/mo) or switch to option B.
+
+## Update (2026-10-12): how we deploy
+The owner's personal Vercel account is busy with other projects and holds their GitHub login (Vercel links a GitHub account to only one Vercel account). So the site deploys to a **separate FewTone Vercel account (Hobby)**, from the owner's machine with the Vercel CLI, not through Vercel's Git integration.
+
+- **Commands:** `pnpm deploy:preview` and `pnpm deploy:prod` run `scripts/deploy.mjs`.
+- **Bounded to this repo:**
+  - the token lives in `.env.deploy.local`
+  - the project link and the CLI's own config folder live in `.vercel/`
+
+  Both are gitignored and never uploaded. The script never reads or changes the global Vercel login, and it ignores any `VERCEL_ORG_ID` or `VERCEL_PROJECT_ID` left in the shell, so other projects on the machine are untouched.
+- **Build settings kept in the repo:**
+  - Root Directory `apps/www`, chosen when linking
+  - Node 24.x through `engines` in `apps/www/package.json`
+  - pnpm 11 through Corepack (`--build-env ENABLE_EXPERIMENTAL_COREPACK=1`)
+
+  `.vercelignore` skips `docs-internal` and `.turbo`.
+- **Repo location:** Vercel's free plan refuses private repos owned by a GitHub organization, and checks commit authors on them. So the repo either stays private on the owner's personal account until launch, or becomes public as `FewTone/ui`.
+- **Rejected:**
+  - Git integration on the personal account: it is over its usage.
+  - Several free accounts to spread usage, and hiding `.git/HEAD` so Vercel can't read the commit author. Vercel's fair-use rules forbid getting around its limits, and a suspension would take ui.fewtone.com down with it.

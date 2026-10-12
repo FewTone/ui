@@ -61,6 +61,7 @@ docs-internal/             long-term project memory (see map below)
 | `pnpm check` | Lint + item index freshness + typecheck + token check. **Run this before saying work is done.** |
 | `pnpm lint` / `pnpm format` | Biome |
 | `pnpm tokens` | Regenerate `palette.css` after changing hues in `scripts/tokens/generate-palette.mjs` |
+| `pnpm deploy:preview` / `pnpm deploy:prod` | Deploy the site from this machine to the FewTone Vercel account. Needs a token in `.env.deploy.local` (see `scripts/deploy.mjs` and ADR 0005). The owner runs deploys, commits and pushes; agents don't. |
 
 ## Golden rules
 1. **Nothing hardcoded.** Every colour, size, space, radius, shadow, duration and easing comes from a token. Read `docs-internal/01-brand/design-system.md` before writing UI. `pnpm check:tokens` fails on:

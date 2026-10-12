@@ -17,7 +17,9 @@
     "check:index": "node scripts/build-index.mjs --check",
     "tokens": "node scripts/tokens/generate-palette.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
-    "check": "pnpm lint && pnpm check:index && pnpm typecheck && pnpm check:tokens"
+    "check": "pnpm lint && pnpm check:index && pnpm typecheck && pnpm check:tokens",
+    "deploy:preview": "node scripts/deploy.mjs",
+    "deploy:prod": "node scripts/deploy.mjs --prod"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
