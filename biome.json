@@ -16,6 +16,7 @@
       "!**/build",
       "!**/next-env.d.ts",
       "!docs-internal/**/*.html",
+      "!**/*.svg",
       "!packages/ui/src/styles/palette.css"
     ]
   },

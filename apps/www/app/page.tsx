@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
+import { Logo, LogoMark } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const footerLinks = [
@@ -13,12 +14,8 @@ export default function Home() {
     <>
       <header className="border-b">
         <nav className="mx-auto flex max-w-content items-center gap-6 px-(--space-gutter) py-3 text-body-sm">
-          <Link
-            href="/"
-            className="focus-ring flex items-center gap-2 rounded-sm font-semibold tracking-tight"
-          >
-            <span className="size-4 rounded-xs bg-foreground" aria-hidden />
-            fewtone<span className="font-medium text-muted-foreground">/ui</span>
+          <Link href="/" className="focus-ring flex items-center rounded-sm">
+            <Logo />
           </Link>
           <div className="hidden items-center gap-5 text-muted-foreground sm:flex">
             <span className="text-foreground">Components</span>
@@ -66,7 +63,8 @@ export default function Home() {
       <footer className="surface-brand-footer m-2 grid gap-10 rounded-xl px-8 pt-12 pb-6">
         <div className="mx-auto grid w-full max-w-content gap-8 md:grid-cols-2">
           <div>
-            <p className="text-display text-gradient-on-brand">fewtone/ui</p>
+            <LogoMark className="mb-3 h-(--size-logo-lg) w-auto" />
+            <p className="text-display text-gradient-on-brand">FewTone UI</p>
             <p className="mt-3 max-w-xs text-body-sm opacity-80">
               Motion-ready components for Next.js. Free and open source.
             </p>

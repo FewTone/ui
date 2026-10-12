@@ -2,6 +2,7 @@ import { duration, ease, spring } from "@fewtone/ui/lib/motion";
 import { cn } from "@fewtone/ui/lib/utils";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Logo, LogoMark } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const colorGroups = [
@@ -230,7 +231,7 @@ export default function TokensPage() {
             <p className="text-body-sm opacity-80">surface-brand</p>
           </div>
           <div className="surface-brand-footer grid content-end gap-1 rounded-xl p-6">
-            <p className="text-h2 text-gradient-on-brand">fewtone/ui</p>
+            <p className="text-h2 text-gradient-on-brand">FewTone UI</p>
             <p className="text-body-sm opacity-80">surface-brand-footer + text-gradient-on-brand</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -242,6 +243,43 @@ export default function TokensPage() {
             <span className="text-body-sm">
               Selected <span className="bg-(--selection)">text looks like this</span>.
             </span>
+          </div>
+        </div>
+      </Section>
+
+      <Section
+        title="Logo"
+        note="The FewTone mark, unchanged and static (ADR 0006). One colour, always currentColor: it takes the text colour of wherever it sits. Three variations: horizontal, stacked, and the mark alone."
+      >
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="light grid place-items-center gap-4 rounded-xl border bg-background p-8 text-foreground">
+            <LogoMark className="h-(--size-logo-lg) w-auto" />
+            <Name>light · foreground</Name>
+          </div>
+          <div className="dark grid place-items-center gap-4 rounded-xl border bg-background p-8 text-foreground">
+            <LogoMark className="h-(--size-logo-lg) w-auto" />
+            <Name>dark · foreground</Name>
+          </div>
+          <div className="surface-brand-footer grid place-items-center gap-4 rounded-xl p-8">
+            <LogoMark className="h-(--size-logo-lg) w-auto" />
+            <span className="font-mono text-caption opacity-80">footer · brand-foreground</span>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-end gap-12">
+          <div className="grid gap-3">
+            <Logo className="text-body-sm" />
+            <Name>Horizontal · header · size-logo-sm</Name>
+          </div>
+          <div className="grid gap-3">
+            <div className="grid justify-items-start gap-3">
+              <LogoMark className="h-(--size-logo-lg) w-auto" />
+              <p className="text-h2">FewTone UI</p>
+            </div>
+            <Name>Stacked · footer · size-logo-lg</Name>
+          </div>
+          <div className="grid gap-3">
+            <LogoMark className="h-(--size-logo-lg) w-auto" />
+            <Name>Mark only · favicon, app icon</Name>
           </div>
         </div>
       </Section>

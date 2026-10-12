@@ -27,6 +27,8 @@ The name had to be a real word or a short invented one that sounds cool and prem
 ## Decision
 Use the owner's studio brand: **FewTone UI**. The code-style mark is `fewtone/ui`.
 
+> **Update (2026-10-12):** the code-style mark is retired. The name is written "FewTone UI" everywhere, including the logo (ADR 0006). Lowercase stays only in what people type: `@fewtone/ui`, `npx fewtone`, `ui.fewtone.com`.
+
 | Channel | Handle | Checked 2026-10-08 |
 |---|---|---|
 | Install | `npx shadcn add @fewtone/<name>` | `@fewtone` is not among the shadcn directory's 430 registries |

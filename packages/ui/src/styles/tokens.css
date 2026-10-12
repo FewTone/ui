@@ -201,6 +201,9 @@
   --size-icon-sm: 0.875rem;
   --size-icon-md: 1rem;
   --size-icon-lg: 1.25rem;
+  /* Logo mark heights; the width follows the mark (ADR 0006) */
+  --size-logo-sm: 1rem;
+  --size-logo-lg: 2.5rem;
 
   /* Page rhythm */
   --space-gutter: clamp(1rem, 4vw, 2.5rem);

@@ -229,6 +229,7 @@ Each status colour has five tokens: `<status>`, `<status>-foreground`, `<status>
 |---|---|---|
 | `--size-control-sm` / `-md` / `-lg` | 32px / 36px / 40px | Button and input heights, e.g. `h-(--size-control-md)` |
 | `--size-icon-sm` / `-md` / `-lg` | 14px / 16px / 20px | Icon sizes, e.g. `size-(--size-icon-md)` |
+| `--size-logo-sm` / `-lg` | 16px / 40px | Logo mark height (header / footer), e.g. `h-(--size-logo-sm) w-auto`. The mark is the FewTone mark in `currentColor` (ADR 0006). |
 
 **Breakpoints** are Tailwind's defaults: `sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem.
 

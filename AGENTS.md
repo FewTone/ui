@@ -3,7 +3,13 @@
 These are animated, accessible React components for Next.js, made by FewTone. It is a personal library for now and will be open-sourced (MIT) later. Components are distributed as a shadcn-compatible registry (`npx shadcn add @fewtone/<name>`) and as an npm package.
 
 ## Name and handles
-- **Brand:** FewTone UI. The code-style mark is `fewtone/ui`.
+- **Brand:** FewTone UI, always written that way in text and in the logo. Lowercase only where people type it: `@fewtone/ui`, `npx fewtone`, `ui.fewtone.com`.
+- **Logo:** the FewTone mark, unchanged, static and in one colour (`currentColor`). Three versions:
+  - horizontal: `Logo`
+  - stacked: the footer
+  - the mark alone: `LogoMark`
+
+  Both components are in `apps/www/components/logo.tsx` (ADR 0006).
 - **Site, registry, llms.txt and MCP:** `ui.fewtone.com`, hosted on Vercel through one CNAME at Hostinger (ADR 0005).
 - **Packages:**
   - shadcn namespace: `@fewtone`
@@ -75,24 +81,24 @@ docs-internal/             long-term project memory (see map below)
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction) |
 | `08-log/` | Dated session notes |
 
 Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `06-research`, `07-roadmap`, and `.agents/` for internal skills and rules.
 
 Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
-## Status (2026-10-09)
+## Status (2026-10-12)
 **Done:**
 - brand (Navy, neutral first)
 - typography (Geist)
 - design-system tokens and their enforcement
 - monorepo + Next.js scaffold
 - name (FewTone UI) and hosting decision (Vercel)
+- logo (the FewTone mark) in the header, footer, favicons and the Lab
 
 **Next** (from the approved plan):
-- logo (symbol + wordmark, and wordmark only)
-- docs site shell
+- docs site shell (including the Open Graph image)
 - component pipeline and the Lab
 - Button as the first end-to-end component
 - AI layer (llms.txt, MCP, skills)
@@ -100,7 +106,6 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - deploy to Vercel on `ui.fewtone.com`
 
 **Open:**
-- the logo
 - claiming the npm org `@fewtone` (owner action)
 
 <!-- BEGIN:turborepo-agent-rules -->
