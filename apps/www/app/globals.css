@@ -1,2 +1,20 @@
-/* The whole design system lives in packages/ui. Do not add tokens or raw values here. */
+/* The whole design system lives in packages/ui. Do not add tokens or raw values here; site-only rules use tokens. */
 @import "@fewtone/ui/globals.css";
+
+/* Code highlighted by Shiki at build time: each token carries light and dark colours as CSS variables */
+.shiki {
+  margin: 0;
+  background: transparent;
+  font-size: var(--text-code);
+  line-height: var(--text-code--line-height);
+}
+
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+}

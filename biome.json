@@ -17,7 +17,8 @@
       "!**/next-env.d.ts",
       "!docs-internal/**/*.html",
       "!**/*.svg",
-      "!packages/ui/src/styles/palette.css"
+      "!packages/ui/src/styles/palette.css",
+      "!**/*.generated.*"
     ]
   },
   "formatter": {

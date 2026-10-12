@@ -1,7 +1,7 @@
 {
   "name": "fewtone-ui",
   "private": true,
-  "description": "FewTone UI: animated, accessible React components for Next.js.",
+  "description": "FewTone UI: accessible, customizable React components for Next.js and Tailwind CSS.",
   "license": "MIT",
   "packageManager": "pnpm@11.7.0",
   "engines": {
@@ -13,9 +13,11 @@
     "typecheck": "turbo run typecheck",
     "lint": "biome check .",
     "format": "biome format --write .",
+    "index": "node scripts/build-index.mjs",
+    "check:index": "node scripts/build-index.mjs --check",
     "tokens": "node scripts/tokens/generate-palette.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
-    "check": "pnpm lint && pnpm typecheck && pnpm check:tokens"
+    "check": "pnpm lint && pnpm check:index && pnpm typecheck && pnpm check:tokens"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",

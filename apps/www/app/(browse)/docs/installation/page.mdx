@@ -1,0 +1,47 @@
+export const metadata = {
+  title: "Installation",
+  description: "Add FewTone UI components to a Next.js project with the shadcn CLI, or copy the source by hand.",
+  alternates: { canonical: "/docs/installation" },
+}
+
+# Installation
+
+Add FewTone UI components to a Next.js project with the shadcn CLI, or copy them by hand. Either way, the source ends up in your project.
+
+## Requirements
+
+- Next.js with the App Router
+- React 19
+- Tailwind CSS v4
+
+## 1. Set up shadcn
+
+If your project does not use shadcn yet, run its init command. It creates `components.json` and the `cn` helper.
+
+```bash
+npx shadcn@latest init
+```
+
+## 2. Add the FewTone registry
+
+Add the `@fewtone` namespace to the `registries` field in `components.json`:
+
+```json
+{
+  "registries": {
+    "@fewtone": "https://ui.fewtone.com/r/{name}.json"
+  }
+}
+```
+
+## 3. Add a component
+
+```bash
+npx shadcn@latest add @fewtone/button
+```
+
+The component is written to `components/ui`, with its dependencies installed. Import it like any other file in your project.
+
+## Manual installation
+
+Every component page has a **Manual** tab with the dependencies to install and the full source to copy. Paste it into your project and update the import paths.

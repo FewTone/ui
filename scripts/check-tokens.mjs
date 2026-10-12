@@ -6,6 +6,8 @@
 //   3. No Tailwind default palette classes like `bg-zinc-500` (they no longer exist and render nothing).
 //   4. Padding, margin and gap use only the approved 4px-grid steps.
 //   5. Motion values in lib/motion.ts match the CSS tokens.
+//
+// Fenced code blocks in .mdx guides are skipped: they are samples for readers, not UI code.
 
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, relative, resolve } from "node:path";
@@ -68,10 +70,18 @@ function check(file) {
   const rel = relative(ROOT, file);
   const isTokenFile = TOKEN_FILES.has(rel);
   const isCode = file.endsWith(".ts") || file.endsWith(".tsx") || file.endsWith(".mdx");
+  const isMdx = file.endsWith(".mdx");
   const lines = readFileSync(file, "utf8").split("\n");
+  // Fenced code blocks in MDX are documentation samples shown to readers, not UI code
+  let inFence = false;
 
   lines.forEach((line, i) => {
     const n = i + 1;
+    if (isMdx && line.trimStart().startsWith("```")) {
+      inFence = !inFence;
+      return;
+    }
+    if (inFence) return;
     if (line.includes("check-tokens-ignore")) return;
 
     if (!isTokenFile) {

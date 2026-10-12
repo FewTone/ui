@@ -1,6 +1,6 @@
 # FewTone UI
 
-These are animated, accessible React components for Next.js, made by FewTone. It is a personal library for now and will be open-sourced (MIT) later. Components are distributed as a shadcn-compatible registry (`npx shadcn add @fewtone/<name>`) and as an npm package.
+These are accessible, customizable React components for Next.js and Tailwind CSS, made by FewTone. Smooth motion is one quality among others, not the headline: describe the library in the plain words people search for (React components, Next.js, Tailwind, accessible, copy-paste). It is a personal library for now and will be open-sourced (MIT) later. Components are distributed as a shadcn-compatible registry (`npx shadcn add @fewtone/<name>`) and as an npm package.
 
 ## Name and handles
 - **Brand:** FewTone UI, always written that way in text and in the logo. Lowercase only where people type it: `@fewtone/ui`, `npx fewtone`, `ui.fewtone.com`.
@@ -31,22 +31,34 @@ This file is the entry point for every AI agent (Claude, Codex, Cursor, Gemini, 
 
 ## Layout
 ```
-apps/www/                  website: docs, dev-only Lab (/lab), registry host (later)
-packages/ui/               SOURCE OF TRUTH: design system + components
+apps/www/                  website (ADR 0007)
+  app/(site)/              landing page: header, hero, Navy footer
+  app/(browse)/[kind]/     every kind's index (/components) and item pages (/components/button)
+  app/(browse)/docs/       guides as page.mdx files (/docs, /docs/installation, /docs/theming)
+  app/lab/                 dev-only Lab
+  app/sitemap.ts · robots.ts · opengraph-image.tsx   SEO, all from metadata
+  components/docs/         preview tabs, install, code blocks, props table, cards, sidebar
+  lib/                     content index helpers, nav, guides list, Shiki, install commands
+packages/ui/               SOURCE OF TRUTH: design system, components and their metadata
   src/styles/              palette.css (generated) · theme.css · tokens.css · globals.css
   src/lib/                 utils.ts (cn) · motion.ts (durations, easings, springs)
-  src/components/          components (one folder each, added from Phase 3)
+  src/registry/            kinds.ts · schema.ts · *.generated.* (ADR 0008)
+  src/components/<name>/   <name>.tsx · <name>.meta.ts · demos/*.tsx
+scripts/build-index.mjs    validates every *.meta.ts and writes the item index (pnpm index)
 scripts/tokens/            colour generator (pnpm tokens)
 scripts/check-tokens.mjs   design-system enforcement (pnpm check:tokens)
 docs-internal/             long-term project memory (see map below)
 ```
 
+**Adding an item:** create `packages/ui/src/<folder>/<name>/` with the source, `<name>.meta.ts` and `demos/`, then run `pnpm index`. Its page, sidebar entry, search entry, social image and sitemap entry follow automatically. A new kind (backgrounds, blocks…) is one entry in `registry/kinds.ts`.
+
 ## Commands
 | Command | What it does |
 |---|---|
-| `pnpm dev` | Run the site. The token reference is at `/lab/tokens`. |
+| `pnpm dev` | Run the site (rebuilds the item index first). The token reference is at `/lab/tokens`. |
 | `pnpm build` | Production build |
-| `pnpm check` | Lint + typecheck + token check. **Run this before saying work is done.** |
+| `pnpm index` | Rebuild the item index after editing any `*.meta.ts` |
+| `pnpm check` | Lint + item index freshness + typecheck + token check. **Run this before saying work is done.** |
 | `pnpm lint` / `pnpm format` | Biome |
 | `pnpm tokens` | Regenerate `palette.css` after changing hues in `scripts/tokens/generate-palette.mjs` |
 
@@ -81,10 +93,11 @@ docs-internal/             long-term project memory (see map below)
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline |
+| `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
 
-Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `06-research`, `07-roadmap`, and `.agents/` for internal skills and rules.
+Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `07-roadmap`, and `.agents/` for internal skills and rules.
 
 Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
@@ -96,10 +109,13 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - monorepo + Next.js scaffold
 - name (FewTone UI) and hosting decision (Vercel)
 - logo (the FewTone mark) in the header, footer, favicons and the Lab
+- website shell (Phase 2):
+  - landing page, components index, item pages and guides
+  - ⌘K search, mobile drawer
+  - the metadata-driven content model and full SEO baseline (ADRs 0007 and 0008)
 
 **Next** (from the approved plan):
-- docs site shell (including the Open Graph image)
-- component pipeline and the Lab
+- component pipeline and the Lab (registry JSON from the same index), with Vitest and CI
 - Button as the first end-to-end component
 - AI layer (llms.txt, MCP, skills)
 - npm package and CLI

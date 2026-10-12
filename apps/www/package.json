@@ -2,25 +2,33 @@
   "name": "www",
   "version": "0.1.0",
   "private": true,
-  "description": "Docs site, internal Lab and registry host.",
+  "description": "FewTone UI website: landing page, component pages, guides, internal Lab and registry host.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node ../../scripts/build-index.mjs && next dev",
+    "build": "node ../../scripts/build-index.mjs && next build",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@fewtone/ui": "workspace:*",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.4.0",
     "geist": "^1.7.2",
     "lucide-react": "^1.52.0",
     "motion": "^14.0.0",
     "next": "16.4.0",
     "next-themes": "^0.4.6",
+    "radix-ui": "^1.7.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^4.5.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4.3.3",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

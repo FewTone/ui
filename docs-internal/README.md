@@ -12,7 +12,7 @@ Start with the root `AGENTS.md` for the project overview and rules.
 | `03-decisions/` | ADRs: one file per significant decision (context, decision, consequences) | active |
 | `04-components/<name>/` | Per component: decisions, accessibility, motion, changelog, ideas | from Phase 3 |
 | `05-workflows/` | How to add or edit components, test, release, deploy | planned |
-| `06-research/` | Competitor and technique research with sources | empty, use when needed |
+| `06-research/` | Competitor and technique research with sources | active |
 | `07-roadmap/` | Now / next / later, component backlog, Pro ideas | planned |
 | `08-log/` | Dated session notes (`YYYY-MM-DD-topic.md`) | active |
 

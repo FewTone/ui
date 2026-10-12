@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "Theming",
+  description: "Change the colours, radius and fonts of FewTone UI components with CSS variables, in light and dark mode.",
+  alternates: { canonical: "/docs/theming" },
+}
+
+# Theming
+
+FewTone UI components take their colours, radius and fonts from CSS variables. Change the variables and every component follows, in light and dark mode.
+
+## Colours
+
+Components use semantic names such as `background`, `foreground`, `primary`, `muted` and `border`. They are the same names shadcn/ui uses, so FewTone UI components sit naturally next to shadcn ones.
+
+```css
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0 0);
+  --primary: oklch(0.17 0 0);
+  --primary-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.97 0 0);
+}
+```
+
+## Dark mode
+
+Dark mode follows the `dark` class on the `html` element, which is how `next-themes` works. Set different values for each variable under `.dark`.
+
+## Radius
+
+Corners come from `--radius`. Set it once to make every component rounder or sharper.
+
+```css
+:root {
+  --radius: 0.625rem;
+}
+```
+
+## Fonts
+
+Components inherit the page font. Set `--font-sans` and `--font-mono` to use your own.

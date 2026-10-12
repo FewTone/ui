@@ -19,6 +19,7 @@
 @source "../";
 @source "../../../../apps/*/app";
 @source "../../../../apps/*/components";
+@source "../../../../apps/*/mdx-components.tsx";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

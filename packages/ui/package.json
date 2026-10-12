@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "FewTone UI: source of truth for the design system and components.",
+  "description": "FewTone UI: source of truth for the design system, components and their metadata.",
   "exports": {
     "./globals.css": "./src/styles/globals.css",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
-    "./hooks/*": "./src/hooks/*.ts"
+    "./hooks/*": "./src/hooks/*.ts",
+    "./registry/demos": "./src/registry/demos.generated.tsx",
+    "./registry/*": "./src/registry/*.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
@@ -19,7 +21,8 @@
     "lucide-react": "^1.52.0",
     "motion": "^14.0.0",
     "radix-ui": "^1.7.0",
-    "tailwind-merge": "^3.7.0"
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/react": "^19",

@@ -221,7 +221,8 @@ Each status colour has five tokens: `<status>`, `<status>-foreground`, `<status>
 | `heading` | 15ch | Headline line length |
 | `prose` | 42rem | Reading width |
 | `content` | 72rem | Page content |
-| `wide` | 80rem | Full-bleed sections |
+| `docs` | 56rem | Docs content column, next to the sidebar |
+| `wide` | 80rem | Full-bleed sections, header and docs shell |
 
 **Component sizes**
 
@@ -230,6 +231,11 @@ Each status colour has five tokens: `<status>`, `<status>-foreground`, `<status>
 | `--size-control-sm` / `-md` / `-lg` | 32px / 36px / 40px | Button and input heights, e.g. `h-(--size-control-md)` |
 | `--size-icon-sm` / `-md` / `-lg` | 14px / 16px / 20px | Icon sizes, e.g. `size-(--size-icon-md)` |
 | `--size-logo-sm` / `-lg` | 16px / 40px | Logo mark height (header / footer), e.g. `h-(--size-logo-sm) w-auto`. The mark is the FewTone mark in `currentColor` (ADR 0006). |
+| `--size-header` | 56px | Sticky site header height; also the sidebar's `top-(--size-header)` |
+| `--size-sidebar` | 240px | Docs sidebar width |
+| `--size-below-header` | `100dvh − header` | Height of the sticky docs sidebar |
+
+**Merging classes:** `cn()` in `lib/utils.ts` uses tailwind-merge, extended with our type tokens (`text-label`, `text-caption`…) and shadow tokens. Without that extension, tailwind-merge reads `text-label` as a colour and drops it next to `text-muted-foreground`. When you add a type or shadow token, add it there too.
 
 **Breakpoints** are Tailwind's defaults: `sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem.
 
