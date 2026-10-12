@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { LogoMark } from "./logo";
+import { Logo } from "./logo";
 
 const columns = [
   {
@@ -32,9 +32,8 @@ export function SiteFooter() {
     <footer className="surface-brand-footer m-2 grid gap-10 rounded-xl px-8 pt-12 pb-6">
       <div className="mx-auto grid w-full max-w-content gap-8 md:grid-cols-2">
         <div>
-          <LogoMark className="mb-3 h-(--size-logo-lg) w-auto" />
-          <p className="text-display text-gradient-on-brand">FewTone UI</p>
-          <p className="mt-3 max-w-xs text-body-sm opacity-80">
+          <Logo tone="brand" className="text-h1 tracking-tighter" />
+          <p className="mt-4 max-w-xs text-body-sm opacity-80">
             Accessible React components for Next.js. Free and open source.
           </p>
         </div>

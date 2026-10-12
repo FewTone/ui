@@ -205,6 +205,9 @@
   /* Logo mark heights; the width follows the mark (ADR 0006) */
   --size-logo-sm: 1rem;
   --size-logo-lg: 2.5rem;
+  /* Horizontal logo: the mark and the gap follow the name's font size, so one lockup works at any size */
+  --size-logo-inline: 0.9em;
+  --space-logo-gap: 0.4em;
 
   /* Site shell: sticky header, docs sidebar and the height left under the header */
   --size-header: 3.5rem;

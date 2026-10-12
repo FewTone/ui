@@ -6,15 +6,16 @@ import { GithubIcon } from "./github-icon";
 import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { NavLink } from "./nav-link";
-import { ThemeSwitch } from "./theme-switch";
+import { ThemeToggle } from "./theme-toggle";
 
+/** Full width, so the logo lines up with the sidebar on component pages */
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-(--z-sticky) h-(--size-header) border-b bg-background/85 backdrop-blur">
-      <div className="mx-auto flex h-full max-w-wide items-center gap-4 px-(--space-gutter)">
+      <div className="flex h-full items-center gap-4 px-(--space-gutter)">
         <MobileNav sections={getNavSections()} />
-        <Link href="/" aria-label="FewTone UI home" className="focus-ring rounded-sm text-body-sm">
-          <Logo />
+        <Link href="/" aria-label="FewTone UI home" className="focus-ring flex rounded-sm">
+          <Logo className="text-body-lg" />
         </Link>
         <nav
           aria-label="Main"
@@ -25,7 +26,7 @@ export function SiteHeader() {
         </nav>
         <div className="ml-auto flex items-center gap-2">
           <CommandMenu entries={getSearchEntries()} />
-          <ThemeSwitch />
+          <ThemeToggle />
           <a
             href={site.github}
             target="_blank"

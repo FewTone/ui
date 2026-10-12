@@ -32,8 +32,8 @@ export function MobileNav({ sections }: { sections: NavSection[] }) {
         >
           <div className="flex items-center justify-between">
             <Dialog.Title asChild>
-              <Link href="/" onClick={close} className="focus-ring rounded-sm text-body-sm">
-                <Logo />
+              <Link href="/" onClick={close} className="focus-ring flex rounded-sm">
+                <Logo className="text-body-lg" />
               </Link>
             </Dialog.Title>
             <Dialog.Close

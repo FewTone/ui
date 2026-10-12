@@ -5,7 +5,8 @@ import { CodeBlock } from "@/components/docs/code-block";
 
 /** How guide pages (app/(browse)/docs/**\/page.mdx) render: tokens only, code highlighted on the server */
 const components: MDXComponents = {
-  wrapper: ({ children }) => <article className="grid gap-5">{children}</article>,
+  // The page area is full width; guides keep a readable line length
+  wrapper: ({ children }) => <article className="grid max-w-docs gap-5">{children}</article>,
   h1: (props) => <h1 className="text-h1" {...props} />,
   h2: (props) => <h2 className="mt-6 scroll-mt-24 text-h3" {...props} />,
   h3: (props) => <h3 className="mt-2 scroll-mt-24 text-h4" {...props} />,

@@ -34,19 +34,33 @@ export function LogoMark({ className, ...props }: ComponentProps<"svg">) {
 }
 
 /**
- * The horizontal logo: the mark and the name, "FewTone" in full ink and "UI" softer.
- * For headers and navigation. The stacked logo (mark above the name) lives in the footer.
+ * The horizontal logo: the mark beside the name. Used in the header and, larger, in the footer.
+ * Size it with a text class (`text-body-lg`, `text-h1`): the mark and the gap follow the font size,
+ * and the name sits on one line box exactly 1em tall, so it stays centred on the mark at every size.
+ * `tone="brand"` is for the Navy footer: the name takes the on-brand gradient instead of ink and muted "UI".
  */
-export function Logo({ className, ...props }: ComponentProps<"span">) {
+export function Logo({
+  tone = "default",
+  className,
+  ...props
+}: ComponentProps<"span"> & { tone?: "default" | "brand" }) {
   return (
     <span
-      className={cn("inline-flex items-center gap-1.5 font-semibold tracking-tight", className)}
+      className={cn(
+        "inline-flex items-center gap-(--space-logo-gap) font-semibold tracking-tight",
+        className,
+      )}
       {...props}
     >
-      <LogoMark className="h-(--size-logo-sm) w-auto" />
-      <span>
-        FewTone <span className="font-medium text-muted-foreground">UI</span>
-      </span>
+      <LogoMark className="h-(--size-logo-inline) w-auto shrink-0" />
+      {/* leading-none sits here, not on the root, so a text-size class on the root can't override it */}
+      {tone === "brand" ? (
+        <span className="text-gradient-on-brand leading-none whitespace-nowrap">FewTone UI</span>
+      ) : (
+        <span className="leading-none whitespace-nowrap">
+          FewTone <span className="font-medium text-muted-foreground">UI</span>
+        </span>
+      )}
     </span>
   );
 }

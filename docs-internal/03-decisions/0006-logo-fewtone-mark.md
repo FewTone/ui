@@ -27,12 +27,11 @@ Two further questions came up once the mark was chosen:
 ## Decision
 **FewTone UI uses the FewTone mark exactly as it is, static, with the name written "FewTone UI" in Geist** ("FewTone" in full ink, "UI" softer).
 
-There are three versions:
+There are two versions (the stacked one was retired on 2026-10-12, see the update below):
 
 | Version | Where | In code |
 |---|---|---|
-| Horizontal: mark and name side by side | Header, navigation, docs | `Logo` |
-| Stacked: mark above the name | Footer, large moments | `LogoMark` above the name (see the footer in `app/page.tsx`) |
+| Horizontal: mark and name side by side | Header (`text-body-lg`), footer (`text-h1`, `tone="brand"`), mobile menu | `Logo` |
 | Mark only | Small, square places: favicon, app icon, avatars | `LogoMark` |
 
 - **Source files:** `apps/www/public/Logo/`
@@ -40,12 +39,15 @@ There are three versions:
   - `Logo_black.svg`: the FewTone studio lockup (mark and "FewTone"), kept for the studio, not used by FewTone UI
   - `favicon.ico`: 32 px
 - **In code:** `Logo` and `LogoMark` are in `apps/www/components/logo.tsx`. The mark is an inline SVG in `currentColor`, so it takes the text colour of wherever it sits.
-- **Spacing:** the mark sits close to the name, about 0.3 × the text size (`gap-1.5` in the header, `mb-3` in the footer).
+- **Spacing:** the gap is 0.4 × the text size (`--space-logo-gap`).
 - **Colour:** one colour only, never a gradient, never Navy:
   - near-black (`--foreground`) on light
   - near-white (`--foreground`) on dark
   - white (`--brand-foreground`) on the Navy footer
-- **Size:** set by height, using `--size-logo-sm` (1rem, header) and `--size-logo-lg` (2.5rem, footer). The width follows the mark's 42:30 shape.
+- **Size:**
+  - **In the horizontal logo:** the mark is 0.9 × the text size (`--size-logo-inline`). Set the size with a text class on `Logo`, and the mark and the gap follow. The name sits on a line box exactly 1em tall (`leading-none`), so its capitals stay centred on the mark.
+  - **On its own:** `LogoMark` is sized by height with `--size-logo-sm` (1rem) or `--size-logo-lg` (2.5rem).
+  - The width always follows the mark's 42:30 shape.
 - **Icons:** in `apps/www/app/`, which Next.js links automatically:
   - `favicon.ico`: the studio favicon
   - `icon.svg`: switches between black and white with the browser's colour scheme
@@ -57,3 +59,11 @@ There are three versions:
 - The mark is not a `packages/ui` component. It belongs to the site, not to what users install.
 - Don't propose a new FewTone UI symbol, another spelling or logo motion again unless FewTone itself rebrands. The tables above record what was tried.
 - **Still to do:** a social (Open Graph) image when the docs site shell lands.
+
+## Update (2026-10-12): bigger header logo, horizontal footer
+The owner asked for three changes after seeing the live site:
+- **Header name:** "FewTone UI" was too small at 14 px. It is now 18 px (`text-body-lg`).
+- **Centring:** the name didn't sit centred on the mark. It is now centred (`leading-none` on the name).
+- **Footer:** it uses the horizontal logo, side by side, instead of the stacked one.
+
+To support these, the horizontal logo became one component that scales with its text class (the em-based tokens above). The stacked version is retired.

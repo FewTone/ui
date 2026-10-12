@@ -23,7 +23,7 @@ export function ItemCard({ item }: { item: Item }) {
 
 export function ItemGrid({ items }: { items: Item[] }) {
   return (
-    <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {items.map((item) => (
         <li key={item.name} className="grid">
           <ItemCard item={item} />

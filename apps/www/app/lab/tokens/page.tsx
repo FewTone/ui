@@ -249,7 +249,7 @@ export default function TokensPage() {
 
       <Section
         title="Logo"
-        note="The FewTone mark, unchanged and static (ADR 0006). One colour, always currentColor: it takes the text colour of wherever it sits. Three variations: horizontal, stacked, and the mark alone."
+        note="The FewTone mark, unchanged and static (ADR 0006). One colour, always currentColor: it takes the text colour of wherever it sits. Two variations: horizontal (header and footer, sized by its text class) and the mark alone."
       >
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="light grid place-items-center gap-4 rounded-xl border bg-background p-8 text-foreground">
@@ -267,15 +267,14 @@ export default function TokensPage() {
         </div>
         <div className="flex flex-wrap items-end gap-12">
           <div className="grid gap-3">
-            <Logo className="text-body-sm" />
-            <Name>Horizontal · header · size-logo-sm</Name>
+            <Logo className="text-body-lg" />
+            <Name>Horizontal · header · text-body-lg</Name>
           </div>
           <div className="grid gap-3">
-            <div className="grid justify-items-start gap-3">
-              <LogoMark className="h-(--size-logo-lg) w-auto" />
-              <p className="text-h2">FewTone UI</p>
+            <div className="surface-brand-footer rounded-xl p-6">
+              <Logo tone="brand" className="text-h1 tracking-tighter" />
             </div>
-            <Name>Stacked · footer · size-logo-lg</Name>
+            <Name>Horizontal · footer · text-h1, tone brand</Name>
           </div>
           <div className="grid gap-3">
             <LogoMark className="h-(--size-logo-lg) w-auto" />

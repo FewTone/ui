@@ -4,9 +4,8 @@ These are accessible, customizable React components for Next.js and Tailwind CSS
 
 ## Name and handles
 - **Brand:** FewTone UI, always written that way in text and in the logo. Lowercase only where people type it: `@fewtone/ui`, `npx fewtone`, `ui.fewtone.com`.
-- **Logo:** the FewTone mark, unchanged, static and in one colour (`currentColor`). Three versions:
-  - horizontal: `Logo`
-  - stacked: the footer
+- **Logo:** the FewTone mark, unchanged, static and in one colour (`currentColor`). Two versions:
+  - horizontal: `Logo`, used in the header and the footer and sized with a text class
   - the mark alone: `LogoMark`
 
   Both components are in `apps/www/components/logo.tsx` (ADR 0006).

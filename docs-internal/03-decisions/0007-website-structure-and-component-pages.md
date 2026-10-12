@@ -7,6 +7,8 @@
 Before building the docs site, we studied how 12 popular UI libraries, plus beUI, lay out their component pages. Developers expect one familiar page. The owner's choices on top of that:
 - **Layout reference:** beUI's layout (beui.dev/components), with FewTone UI's own visual identity. We don't copy beUI's cards or styling.
 - **Component pages:** two columns, with no "On this page" list. **Related components** replace prev/next at the bottom.
+- **Full width** (owner, 2026-10-12): the header and the sidebar layout span the whole screen, with no `max-w-wide` box. The sidebar sits against the left edge, and component pages use all the width that's left. Guides keep a readable line length through the MDX wrapper (`max-w-docs`). The card grid goes up to four columns at `2xl`.
+- **Theme switch** (owner, 2026-10-12): one button with a tooltip ("Switch to dark theme" or "Switch to light theme") that flips between light and dark. It replaces the three-way light / dark / system switch. Until someone clicks it, the site follows the default theme. The icon turns in on `spring.snappy`; with reduced motion it only fades.
 - **No Accessibility section** on component pages. Components stay accessible by default; it just isn't a docs section.
 - **Wording:** generic and search-friendly ("Accessible React components for Next.js"), not centred on motion.
 - **One component per page.** Variations are Examples on that page. A truly different component (for example a Loading Button) gets its own page and address.

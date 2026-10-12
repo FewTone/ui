@@ -48,7 +48,13 @@ The owner's personal Vercel account is busy with other projects and holds their 
   - pnpm 11 through Corepack (`--build-env ENABLE_EXPERIMENTAL_COREPACK=1`)
 
   `.vercelignore` skips `docs-internal` and `.turbo`.
-- **Repo location:** Vercel's free plan refuses private repos owned by a GitHub organization, and checks commit authors on them. So the repo either stays private on the owner's personal account until launch, or becomes public as `FewTone/ui`.
+- **Repo location:** the repo is private at `FewTone/ui`. Vercel's free plan refuses private org repos through its *Git integration*, but deploying from the CLI worked (first deploy, 2026-10-12). If Vercel starts refusing CLI deploys too, make the repo public. Don't hide the git metadata.
+- **Where it lives:**
+  - Vercel team `few-tone`, project `fewtone-ui`
+  - production at `fewtone-ui.vercel.app`, behind Vercel's login protection; custom domains are public
+  - `ui.fewtone.com` needs two Hostinger records:
+    - a CNAME `ui` to the value Vercel shows under Settings → Domains
+    - a TXT `_vercel` to prove we own `fewtone.com`
 - **Rejected:**
   - Git integration on the personal account: it is over its usage.
   - Several free accounts to spread usage, and hiding `.git/HEAD` so Vercel can't read the commit author. Vercel's fair-use rules forbid getting around its limits, and a suspension would take ui.fewtone.com down with it.

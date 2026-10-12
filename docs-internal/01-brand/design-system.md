@@ -230,7 +230,8 @@ Each status colour has five tokens: `<status>`, `<status>-foreground`, `<status>
 |---|---|---|
 | `--size-control-sm` / `-md` / `-lg` | 32px / 36px / 40px | Button and input heights, e.g. `h-(--size-control-md)` |
 | `--size-icon-sm` / `-md` / `-lg` | 14px / 16px / 20px | Icon sizes, e.g. `size-(--size-icon-md)` |
-| `--size-logo-sm` / `-lg` | 16px / 40px | Logo mark height (header / footer), e.g. `h-(--size-logo-sm) w-auto`. The mark is the FewTone mark in `currentColor` (ADR 0006). |
+| `--size-logo-sm` / `-lg` | 16px / 40px | Height of `LogoMark` on its own, e.g. `h-(--size-logo-sm) w-auto`. The mark is the FewTone mark in `currentColor` (ADR 0006). |
+| `--size-logo-inline` / `--space-logo-gap` | 0.9em / 0.4em | Mark height and gap inside the horizontal `Logo`. Both follow the name's font size, so `Logo` is sized with a text class (`text-body-lg` header, `text-h1` footer). |
 | `--size-header` | 56px | Sticky site header height; also the sidebar's `top-(--size-header)` |
 | `--size-sidebar` | 240px | Docs sidebar width |
 | `--size-below-header` | `100dvh − header` | Height of the sticky docs sidebar |
