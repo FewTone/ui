@@ -1,20 +1,34 @@
 "use client";
 
-import { CheckIcon, ChevronDownIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, EllipsisIcon, ExternalLinkIcon } from "lucide-react";
 import { DropdownMenu } from "radix-ui";
 import { useState } from "react";
+import { CopyPromptButton } from "./copy-prompt-button";
 
 const itemClass =
   "flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-body-sm outline-none data-[highlighted]:bg-accent";
 
-/** "Copy page" as Markdown, plus links that open the page in an AI assistant */
-export function PageActions({ markdown, url, title }: { markdown: string; url: string; title: string }) {
+/**
+ * The page's actions: "Copy prompt" for the user's AI assistant, plus a menu to copy the page as
+ * Markdown or open it in ChatGPT or Claude.
+ */
+export function PageActions({
+  markdown,
+  prompt,
+  url,
+  title,
+}: {
+  markdown: string;
+  prompt: string;
+  url: string;
+  title: string;
+}) {
   const [copied, setCopied] = useState(false);
-  const prompt = encodeURIComponent(
+  const question = encodeURIComponent(
     `I'm reading the ${title} page of FewTone UI (${url}). Help me add it to my Next.js project and use it.`,
   );
 
-  async function copy() {
+  async function copyPage() {
     try {
       await navigator.clipboard.writeText(markdown);
       setCopied(true);
@@ -25,25 +39,14 @@ export function PageActions({ markdown, url, title }: { markdown: string; url: s
   }
 
   return (
-    <div className="inline-flex h-(--size-control-sm) shrink-0 items-stretch overflow-hidden rounded-lg bg-muted text-label">
-      <button
-        type="button"
-        onClick={copy}
-        className="focus-ring inline-flex items-center gap-1.5 px-(--space-nav-item-x) transition-colors duration-(--duration-fast) ease-out hover:bg-accent"
-      >
-        {copied ? (
-          <CheckIcon className="size-(--size-icon-sm)" aria-hidden />
-        ) : (
-          <CopyIcon className="size-(--size-icon-sm)" aria-hidden />
-        )}
-        {copied ? "Copied" : "Copy page"}
-      </button>
+    <div className="flex shrink-0 items-center gap-2">
+      <CopyPromptButton prompt={prompt} />
       <DropdownMenu.Root>
         <DropdownMenu.Trigger
           aria-label="More page actions"
-          className="focus-ring inline-flex items-center border-l border-background px-2 transition-colors duration-(--duration-fast) ease-out hover:bg-accent"
+          className="focus-ring inline-flex size-(--size-control-sm) items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
         >
-          <ChevronDownIcon className="size-(--size-icon-sm)" aria-hidden />
+          <EllipsisIcon className="size-(--size-icon-md)" aria-hidden />
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
@@ -51,18 +54,22 @@ export function PageActions({ markdown, url, title }: { markdown: string; url: s
             sideOffset={6}
             className="z-(--z-dropdown) grid min-w-52 gap-0.5 rounded-xl border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-scale-in"
           >
-            <DropdownMenu.Item className={itemClass} onSelect={copy}>
-              <CopyIcon className="size-(--size-icon-sm)" aria-hidden />
-              Copy page as Markdown
+            <DropdownMenu.Item className={itemClass} onSelect={copyPage}>
+              {copied ? (
+                <CheckIcon className="size-(--size-icon-sm)" aria-hidden />
+              ) : (
+                <CopyIcon className="size-(--size-icon-sm)" aria-hidden />
+              )}
+              {copied ? "Copied" : "Copy page as Markdown"}
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild className={itemClass}>
-              <a href={`https://chatgpt.com/?q=${prompt}`} target="_blank" rel="noreferrer">
+              <a href={`https://chatgpt.com/?q=${question}`} target="_blank" rel="noreferrer">
                 <ExternalLinkIcon className="size-(--size-icon-sm)" aria-hidden />
                 Open in ChatGPT
               </a>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild className={itemClass}>
-              <a href={`https://claude.ai/new?q=${prompt}`} target="_blank" rel="noreferrer">
+              <a href={`https://claude.ai/new?q=${question}`} target="_blank" rel="noreferrer">
                 <ExternalLinkIcon className="size-(--size-icon-sm)" aria-hidden />
                 Open in Claude
               </a>

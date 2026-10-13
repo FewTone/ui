@@ -4,14 +4,20 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/packages/ui/src/**", "$TURBO_ROOT$/scripts/**"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "public/r/**"],
+      "env": ["REGISTRY_URL"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["REGISTRY_URL"]
     },
     "typecheck": {
       "dependsOn": ["^typecheck"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
     }
   }
 }

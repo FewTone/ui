@@ -1,10 +1,19 @@
 "use client";
 
-import { cn } from "@fewtone/ui/lib/utils";
 import { CornerDownLeftIcon, SearchIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
-import { Fragment, type KeyboardEvent, useEffect, useId, useMemo, useState } from "react";
+import {
+  Fragment,
+  type KeyboardEvent,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { RowIndicator, useRowBox } from "@/components/motion/row-indicator";
 import type { SearchEntry } from "@/lib/nav";
 
 /** ⌘K / Ctrl+K / "/" search over guides and items. The index is small and ships with the page. */
@@ -14,6 +23,12 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
   const [active, setActive] = useState(0);
   const router = useRouter();
   const listId = useId();
+  // The active option has a gliding highlight; it jumps instead while typing changes the results
+  const list = useRef<HTMLDivElement>(null);
+  const options = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeOption, setActiveOption] = useState<HTMLElement | null>(null);
+  const [typing, setTyping] = useState(false);
+  const activeBox = useRowBox(list, activeOption);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -37,6 +52,13 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the active option changes with the index and the results
+  useLayoutEffect(() => {
+    const option = options.current[active] ?? null;
+    setActiveOption(option);
+    option?.scrollIntoView({ block: "nearest" });
+  }, [active, results, open]);
+
   function onOpenChange(next: boolean) {
     setOpen(next);
     if (!next) {
@@ -53,9 +75,11 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
   function onInputKey(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowDown") {
       event.preventDefault();
+      setTyping(false);
       setActive((index) => Math.min(index + 1, results.length - 1));
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
+      setTyping(false);
       setActive((index) => Math.max(index - 1, 0));
     } else if (event.key === "Enter") {
       const entry = results[active];
@@ -98,6 +122,7 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
               aria-label="Search components and guides"
               value={query}
               onChange={(event) => {
+                setTyping(true);
                 setQuery(event.target.value);
                 setActive(0);
               }}
@@ -112,7 +137,14 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
                 No results for “{query.trim()}”
               </p>
             ) : (
-              <div id={listId} role="listbox" aria-label="Results" className="grid gap-0.5">
+              <div
+                ref={list}
+                id={listId}
+                role="listbox"
+                aria-label="Results"
+                className="relative isolate grid gap-0.5"
+              >
+                <RowIndicator box={activeBox} instant={typing} className="rounded-lg bg-accent" />
                 {results.map((entry, index) => {
                   const showGroup = index === 0 || results[index - 1]?.group !== entry.group;
                   return (
@@ -126,17 +158,20 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
                         </p>
                       ) : null}
                       <div
+                        ref={(element) => {
+                          options.current[index] = element;
+                        }}
                         id={optionId(index)}
                         role="option"
                         aria-selected={index === active}
                         tabIndex={-1}
-                        onMouseMove={() => setActive(index)}
+                        onMouseMove={() => {
+                          setTyping(false);
+                          setActive(index);
+                        }}
                         onClick={() => go(entry.href)}
                         onKeyDown={() => {}}
-                        className={cn(
-                          "flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2",
-                          index === active && "bg-accent",
-                        )}
+                        className="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2"
                       >
                         <span className="grid min-w-0 gap-0.5">
                           <span className="truncate text-body-sm font-medium">{entry.title}</span>

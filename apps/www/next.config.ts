@@ -7,6 +7,18 @@ const nextConfig: NextConfig = {
   // Guides are `page.mdx` files inside app/
   pageExtensions: ["ts", "tsx", "mdx"],
   transpilePackages: ["@fewtone/ui"],
+  // The shadcn registry (public/r, generated): readable from anywhere, kept out of search results (ADR 0009)
+  headers() {
+    return [
+      {
+        source: "/r/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "X-Robots-Tag", value: "noindex" },
+        ],
+      },
+    ];
+  },
   turbopack: {
     rules: {
       "*.css": {

@@ -6,14 +6,45 @@
 //   3. No Tailwind default palette classes like `bg-zinc-500` (they no longer exist and render nothing).
 //   4. Padding, margin and gap use only the approved 4px-grid steps.
 //   5. Motion values in lib/motion.ts match the CSS tokens.
+//   6. Library components (packages/ui/src/components, demos included) use the portable vocabulary, so they
+//      work in any shadcn project (ADR 0009): shadcn colours, stock text-xs/sm/base, and only the CSS
+//      variables the tokens item ships. Site code (apps/) uses the named type tokens instead of stock sizes.
 //
 // Fenced code blocks in .mdx guides are skipped: they are samples for readers, not UI code.
 
 import { readdirSync, readFileSync, statSync } from "node:fs";
-import { extname, join, relative, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { extname, join, relative, resolve, sep } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
+const shared = await import(pathToFileURL(join(ROOT, "packages/ui/src/registry/shared.ts")).href);
+
+// Library components: what they may not use, and which CSS variables they may read
+const LIBRARY_DIR = join("packages", "ui", "src", "components") + sep;
+const LIBRARY_BANS = [
+  [
+    /\btext-(?:display|h1|h2|h3|h4|body-lg|body-sm|body|label|caption|overline|code)\b/g,
+    "a site type token. Library components use text-xs, text-sm or text-base.",
+  ],
+  [
+    /\b(?:bg|text|border|ring|outline|fill|stroke|from|via|to|decoration|divide|shadow|caret)-(?:brand|success|warning|danger|info|overlay|sidebar)\b/g,
+    "a site-only colour. Library components use shadcn's semantic colours.",
+  ],
+  [/\bshadow-(?:card|brand|highlight)\b/g, "a site-only shadow."],
+  [
+    /(?<![\w-])focus-ring(?![\w-])/g,
+    "the site's focus-ring utility. Use the outline-(--focus-ring-*) classes.",
+  ],
+  [/\bfont-normal\b/g, "a class the site's tokens don't define. Use font-regular."],
+  [/\banimate-spin\b/g, "an animation the site's tokens don't define. Add it to the tokens item first."],
+];
+const LIBRARY_VARIABLES = new Set([
+  ...shared.shippedVariables,
+  ...shared.shippedEasings,
+  ...shared.shippedColors,
+  ...shared.shadcnVariables,
+]);
+const SITE_STOCK_TEXT = /\btext-(?:xs|sm|base)\b/g;
 const SCAN = ["apps", "packages"];
 const SKIP_DIRS = new Set(["node_modules", ".next", ".turbo", "dist", "build", "public"]);
 const EXTS = new Set([".ts", ".tsx", ".css", ".mdx"]);
@@ -58,7 +89,8 @@ function walk(dir) {
     if (SKIP_DIRS.has(name)) continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) walk(full);
-    else if (EXTS.has(extname(name))) check(full);
+    // Generated files are derived from the token files, which are allowed raw values
+    else if (EXTS.has(extname(name)) && !name.includes(".generated.")) check(full);
   }
 }
 
@@ -71,6 +103,7 @@ function check(file) {
   const isTokenFile = TOKEN_FILES.has(rel);
   const isCode = file.endsWith(".ts") || file.endsWith(".tsx") || file.endsWith(".mdx");
   const isMdx = file.endsWith(".mdx");
+  const isLibrary = rel.startsWith(LIBRARY_DIR);
   const lines = readFileSync(file, "utf8").split("\n");
   // Fenced code blocks in MDX are documentation samples shown to readers, not UI code
   let inFence = false;
@@ -105,6 +138,26 @@ function check(file) {
       const base = prefix.split(":").pop() ?? prefix;
       if (SPACING_PREFIX.test(base) && !SPACING_STEPS.has(step)) {
         report(file, n, `off-grid spacing "${whole}". Allowed steps: ${[...SPACING_STEPS].join(", ")}.`);
+      }
+    }
+
+    if (isLibrary) {
+      for (const [pattern, why] of LIBRARY_BANS) {
+        for (const m of line.matchAll(pattern)) report(file, n, `"${m[0]}" is ${why} (ADR 0009)`);
+      }
+      for (const m of line.matchAll(/[(:]--([\w-]+)/g)) {
+        const name = m[1];
+        if (!LIBRARY_VARIABLES.has(name) && !name.startsWith("radix-")) {
+          report(
+            file,
+            n,
+            `"--${name}" is not shipped to users. Use a token from registry/shared.ts (ADR 0009).`,
+          );
+        }
+      }
+    } else if (rel.startsWith(`apps${sep}`)) {
+      for (const m of line.matchAll(SITE_STOCK_TEXT)) {
+        report(file, n, `"${m[0]}" is a stock size kept for library components. Use a named type token.`);
       }
     }
   });

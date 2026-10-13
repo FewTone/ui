@@ -23,6 +23,9 @@
   --accent: var(--gray-4);
   --accent-foreground: var(--gray-12);
   --overlay: color-mix(in oklch, var(--black) 40%, transparent);
+  /* Item card preview tile: one step past muted, so it stands apart from the card (owner, 2026-10-13) */
+  --preview: var(--gray-4);
+  --preview-hover: var(--gray-5);
 
   /* Lines */
   --border: var(--gray-6);
@@ -41,6 +44,8 @@
   --brand-subtle: var(--navy-3);
   --brand-border: var(--navy-7);
   --brand-text: var(--navy-11);
+  /* The light shine travelling round the New badge's Navy edge (edge-shine) */
+  --shine: color-mix(in oklch, var(--brand), var(--brand-foreground) 65%);
 
   /* Status: deep, muted, same tone as Navy. Info uses the brand scale. */
   --success: var(--success-9);

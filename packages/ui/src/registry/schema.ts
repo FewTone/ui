@@ -84,4 +84,13 @@ export type Item = z.output<typeof itemSchema> & {
   href: string;
   /** Folder relative to packages/ui/src, for example components/button */
   dir: string;
+  /** Derived from the item's imports by the registry generator (ADR 0009) */
+  install: ItemInstall;
+};
+
+export type ItemInstall = {
+  /** npm packages with version ranges, for example "motion@^14.0.0" */
+  dependencies: string[];
+  /** Registry items installed with it, in order: "tokens", "motion", then other FewTone items */
+  registry: string[];
 };

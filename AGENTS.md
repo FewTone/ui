@@ -37,27 +37,33 @@ apps/www/                  website (ADR 0007)
   app/lab/                 dev-only Lab
   app/sitemap.ts · robots.ts · opengraph-image.tsx   SEO, all from metadata
   components/docs/         preview tabs, install, code blocks, props table, cards, sidebar
+  components/motion/       site motion: Pill (sliding tabs) · RowIndicator (sidebar, search)
   lib/                     content index helpers, nav, guides list, Shiki, install commands
+  public/r/                the shadcn registry, GENERATED and gitignored (ADR 0009)
 packages/ui/               SOURCE OF TRUTH: design system, components and their metadata
   src/styles/              palette.css (generated) · theme.css · tokens.css · globals.css
   src/lib/                 utils.ts (cn) · motion.ts (durations, easings, springs)
-  src/registry/            kinds.ts · schema.ts · *.generated.* (ADR 0008)
-  src/components/<name>/   <name>.tsx · <name>.meta.ts · demos/*.tsx
-scripts/build-index.mjs    validates every *.meta.ts and writes the item index (pnpm index)
+  src/registry/            kinds.ts · schema.ts · shared.ts (tokens shipped to users) · imports.ts · *.generated.*
+  src/components/<name>/   <name>.tsx · <name>.meta.ts · <name>.test.tsx · demos/*.tsx
+  src/test/                Vitest setup and the axe helper
+scripts/build-index.mjs    validates every *.meta.ts, writes the item index and the registry (pnpm index)
+scripts/registry/          registry generator: item JSON, tokens item, derived dependencies
 scripts/tokens/            colour generator (pnpm tokens)
 scripts/check-tokens.mjs   design-system enforcement (pnpm check:tokens)
 docs-internal/             long-term project memory (see map below)
 ```
 
-**Adding an item:** create `packages/ui/src/<folder>/<name>/` with the source, `<name>.meta.ts` and `demos/`, then run `pnpm index`. Its page, sidebar entry, search entry, social image and sitemap entry follow automatically. A new kind (backgrounds, blocks…) is one entry in `registry/kinds.ts`.
+**Adding an item:** create `packages/ui/src/<folder>/<name>/` with the source, `<name>.meta.ts`, `<name>.test.tsx` and `demos/`, then run `pnpm index`. Its page, sidebar entry, search entry, social image, sitemap entry and registry JSON (`/r/<name>.json`, with npm and registry dependencies derived from its imports) follow automatically. Write it in the portable vocabulary (design-system §13, ADR 0009) so it works in users' shadcn projects. A new kind (backgrounds, blocks…) is one entry in `registry/kinds.ts`.
 
 ## Commands
 | Command | What it does |
 |---|---|
 | `pnpm dev` | Run the site (rebuilds the item index first). The token reference is at `/lab/tokens`. |
 | `pnpm build` | Production build |
-| `pnpm index` | Rebuild the item index after editing any `*.meta.ts` |
-| `pnpm check` | Lint + item index freshness + typecheck + token check. **Run this before saying work is done.** |
+| `pnpm index` | Rebuild the item index and the registry after editing any `*.meta.ts` or component |
+| `pnpm test` | Vitest + Testing Library + axe for every component (packages/ui) |
+| `pnpm check` | Lint + item index freshness + typecheck + token check + tests. **Run this before saying work is done.** |
+| `REGISTRY_URL=http://localhost:3000 pnpm dev` | Serve the registry with local dependency URLs, to test `npx shadcn add http://localhost:3000/r/<name>.json` in a scratch app |
 | `pnpm lint` / `pnpm format` | Biome |
 | `pnpm tokens` | Regenerate `palette.css` after changing hues in `scripts/tokens/generate-palette.mjs` |
 | `pnpm deploy:preview` / `pnpm deploy:prod` | Deploy the site from this machine to the FewTone Vercel account. Needs a token in `.env.deploy.local` (see `scripts/deploy.mjs` and ADR 0005). The owner runs deploys, commits and pushes; agents don't. |
@@ -96,15 +102,16 @@ docs-internal/             long-term project memory (see map below)
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary) |
+| `04-components/` | One folder per component with `decisions.md`: why it's built the way it is, and what's deliberately not built yet |
 | `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
 
-Planned but not created yet: `00-vision`, `02-architecture`, `04-components`, `05-workflows`, `07-roadmap`, and `.agents/` for internal skills and rules.
+Planned but not created yet: `00-vision`, `02-architecture`, `05-workflows`, `07-roadmap`, and `.agents/` for internal skills and rules.
 
 Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
-## Status (2026-10-12)
+## Status (2026-10-13)
 **Done:**
 - brand (Navy, neutral first)
 - typography (Geist)
@@ -112,20 +119,27 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - monorepo + Next.js scaffold
 - name (FewTone UI) and hosting decision (Vercel)
 - logo (the FewTone mark) in the header, footer, favicons and the Lab
-- website shell (Phase 2):
+- website shell (Phase 2), live on `ui.fewtone.com`:
   - landing page, components index, item pages and guides
   - ⌘K search, mobile drawer
   - the metadata-driven content model and full SEO baseline (ADRs 0007 and 0008)
+  - beUI spacing as `--space-*` tokens, few borders
+- Phase 3a (ADR 0009):
+  - the shadcn registry generated from the same index, with installs verified in a fresh Next app
+  - the first components: Button, Input, Select, Switch (Toggle was built, then removed by the owner)
+  - Vitest with axe
+  - site motion: underline tabs, gliding sidebar and search indicators, drawer slide
+  - FewTone identity over beUI: framed gallery cards with live previews, underline tabs, a New badge with shines travelling round its Navy edge, Copy prompt for AI assistants
 
-**Next** (from the approved plan):
-- component pipeline and the Lab (registry JSON from the same index), with Vitest and CI
-- Button as the first end-to-end component
-- AI layer (llms.txt, MCP, skills)
+**Next:**
+- the internal Lab with knobs (`/lab/<name>`), and CI (GitHub Actions running `pnpm check`)
+- more components (Loading Button, Dropdown Menu, Dialog…)
+- AI layer (llms.txt, `.md` pages, MCP, skills)
 - npm package and CLI
-- deploy to Vercel on `ui.fewtone.com`
 
-**Open:**
-- claiming the npm org `@fewtone` (owner action)
+**Open (owner actions):**
+- claiming the npm org `@fewtone`
+- a PR adding `@fewtone` to shadcn's registry directory, then flip `useNamespace` in `apps/www/lib/install.ts`
 
 <!-- BEGIN:turborepo-agent-rules -->
 

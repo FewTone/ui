@@ -29,10 +29,5 @@ export async function highlight(code: string, lang: string) {
   });
 }
 
-/** Show imports the way they look in a user's project after `shadcn add` */
-export function toProjectImports(source: string) {
-  return source
-    .replace(/@fewtone\/ui\/components\/[a-z0-9-]+\/([a-z0-9-]+)/g, "@/components/ui/$1")
-    .replace(/@fewtone\/ui\/lib\//g, "@/lib/")
-    .replace(/@fewtone\/ui\/hooks\//g, "@/hooks/");
-}
+/** Show imports the way they look in a user's project after `shadcn add` (shared with the registry generator) */
+export { toProjectImports } from "@fewtone/ui/registry/imports";

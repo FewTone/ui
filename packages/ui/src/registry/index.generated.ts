@@ -3,27 +3,34 @@ import type { Item } from "./schema.ts";
 
 export const items: Item[] = [
   {
-    "name": "example",
-    "title": "Example",
-    "description": "A placeholder button that shows how a FewTone UI component page works, from preview to API reference.",
+    "name": "button",
+    "title": "Button",
+    "description": "An accessible React button with six variants, three sizes, icon support and a spring press, built on a native button.",
     "kind": "component",
     "category": "Buttons",
-    "tags": [],
+    "tags": [
+      "button",
+      "action",
+      "link"
+    ],
     "keywords": [
       "react button",
-      "tailwind button"
+      "nextjs button",
+      "tailwind button",
+      "shadcn button",
+      "button component"
     ],
-    "status": "draft",
-    "addedAt": "2026-10-12",
-    "updatedAt": "2026-10-12",
+    "status": "new",
+    "addedAt": "2026-10-13",
+    "updatedAt": "2026-10-13",
     "tier": "free",
     "files": [
-      "example.tsx"
+      "button.tsx"
     ],
     "dependencies": [],
     "registryDependencies": [],
     "usage": {
-      "code": "import { Example } from \"@/components/ui/example\"\n\nexport function Demo() {\n  return <Example variant=\"outline\">Cancel</Example>\n}"
+      "code": "import { Button } from \"@/components/ui/button\"\n\nexport function Actions() {\n  return <Button>Continue</Button>\n}"
     },
     "demos": [
       {
@@ -33,24 +40,169 @@ export const items: Item[] = [
       {
         "name": "variants",
         "title": "Variants",
-        "description": "Solid for the main action, outline for the rest."
+        "description": "Default for the main action, secondary and outline for the rest, destructive for actions that remove things."
+      },
+      {
+        "name": "sizes",
+        "title": "Sizes",
+        "description": "Three heights, plus square icon buttons. Icon-only buttons need an aria-label."
+      },
+      {
+        "name": "with-icon",
+        "title": "With an icon",
+        "description": "Icons sit before or after the label and size themselves."
+      },
+      {
+        "name": "as-link",
+        "title": "As a link",
+        "description": "With asChild, the button styles go onto its child, so a link stays a real link."
       }
     ],
     "api": [
       {
-        "name": "Example",
+        "name": "Button",
+        "description": "Also accepts every native button prop. Exports buttonVariants for styling other elements.",
         "props": [
           {
             "name": "variant",
-            "type": "\"solid\" | \"outline\"",
-            "default": "\"solid\"",
+            "type": "\"default\" | \"secondary\" | \"outline\" | \"ghost\" | \"destructive\" | \"link\"",
+            "default": "\"default\"",
             "description": "The visual style."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\" | \"icon\" | \"icon-sm\" | \"icon-lg\"",
+            "default": "\"md\"",
+            "description": "Height and padding. Icon sizes are square."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a link) with the button styles instead of a button."
+          },
+          {
+            "name": "type",
+            "type": "\"button\" | \"submit\" | \"reset\"",
+            "default": "\"button\"",
+            "description": "The native button type. Defaults to button so it never submits a form by accident."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Slot"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "input",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Button for actions (submit, save, open). Use asChild with a link for navigation. Use Switch for settings that turn on or off."
+    },
+    "controls": {},
+    "href": "/components/button",
+    "dir": "components/button",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens"
+      ]
+    }
+  },
+  {
+    "name": "input",
+    "title": "Input",
+    "description": "An accessible React text input with three sizes and clear invalid, disabled and file states, built on a native input.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "input",
+      "text field",
+      "form"
+    ],
+    "keywords": [
+      "react input",
+      "nextjs input",
+      "tailwind input",
+      "shadcn input",
+      "text field component"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-13",
+    "updatedAt": "2026-10-13",
+    "tier": "free",
+    "files": [
+      "input.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Input } from \"@/components/ui/input\"\n\nexport function EmailField() {\n  return (\n    <>\n      <label htmlFor=\"email\">Email</label>\n      <Input id=\"email\" type=\"email\" placeholder=\"you@example.com\" />\n    </>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Default"
+      },
+      {
+        "name": "invalid",
+        "title": "Invalid",
+        "description": "Set aria-invalid and link the error message with aria-describedby, so screen readers announce it."
+      },
+      {
+        "name": "sizes",
+        "title": "Sizes",
+        "description": "Small, medium and large, matching Button's heights."
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled"
+      },
+      {
+        "name": "file",
+        "title": "File",
+        "description": "The file picker button takes the input's styles."
+      }
+    ],
+    "api": [
+      {
+        "name": "Input",
+        "description": "Also accepts every native input prop except the numeric size attribute. Exports inputVariants.",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "The height."
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "default": "\"text\"",
+            "description": "The native input type."
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "Marks the value as wrong: the border and focus ring turn destructive."
           },
           {
             "name": "disabled",
             "type": "boolean",
             "default": "false",
-            "description": "Prevents interaction."
+            "description": "Prevents editing."
           }
         ]
       }
@@ -62,11 +214,324 @@ export const items: Item[] = [
     "preview": {
       "height": "md"
     },
-    "related": [],
+    "related": [
+      "select",
+      "switch"
+    ],
     "seo": {},
-    "ai": {},
+    "ai": {
+      "whenToUse": "Use Input for single-line text, email, number, password or file fields, always with a visible label. Use Select when the user picks from a fixed list."
+    },
     "controls": {},
-    "href": "/components/example",
-    "dir": "components/example"
+    "href": "/components/input",
+    "dir": "components/input",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registry": [
+        "tokens"
+      ]
+    }
+  },
+  {
+    "name": "select",
+    "title": "Select",
+    "description": "An accessible React select with a gliding highlight, groups, labels and a scrollable list, built on Radix Select.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "select",
+      "dropdown",
+      "listbox",
+      "form"
+    ],
+    "keywords": [
+      "react select",
+      "react dropdown",
+      "nextjs select",
+      "tailwind select",
+      "shadcn select",
+      "animated select"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-13",
+    "updatedAt": "2026-10-13",
+    "tier": "free",
+    "files": [
+      "select.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\n\nexport function PlanPicker() {\n  return (\n    <Select defaultValue=\"pro\">\n      <SelectTrigger aria-label=\"Plan\">\n        <SelectValue placeholder=\"Choose a plan\" />\n      </SelectTrigger>\n      <SelectContent>\n        <SelectItem value=\"free\">Free</SelectItem>\n        <SelectItem value=\"pro\">Pro</SelectItem>\n      </SelectContent>\n    </Select>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Default"
+      },
+      {
+        "name": "groups",
+        "title": "Groups",
+        "description": "Group related options under a label, with a separator between groups. Options can be disabled."
+      },
+      {
+        "name": "scrollable",
+        "title": "Long lists",
+        "description": "Long lists scroll, with arrows at the ends. Type a few letters to jump to an option."
+      },
+      {
+        "name": "sizes",
+        "title": "Sizes",
+        "description": "The trigger comes in Button's small and medium heights."
+      }
+    ],
+    "api": [
+      {
+        "name": "Select",
+        "description": "The root. Also accepts every Radix Select Root prop.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The selected value, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "description": "The initially selected value."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called when the user picks an option."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the value with a form."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents opening."
+          }
+        ]
+      },
+      {
+        "name": "SelectTrigger",
+        "description": "The button that opens the list. Give it a label with aria-label or a <label htmlFor>.",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "The height."
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "Marks the value as wrong."
+          }
+        ]
+      },
+      {
+        "name": "SelectContent",
+        "description": "The list. Opens below the trigger and flips when there is no room.",
+        "props": [
+          {
+            "name": "position",
+            "type": "\"popper\" | \"item-aligned\"",
+            "default": "\"popper\"",
+            "description": "Popper sits below the trigger; item-aligned puts the selected option over it, like a native select."
+          },
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the trigger and the list, in px."
+          }
+        ]
+      },
+      {
+        "name": "SelectItem",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The value this option selects."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the option."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Select"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "input",
+      "switch"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Select to pick one value from a fixed list of about 5 to 30 options. Use radio buttons for 2 to 4 visible options, and a combobox with search for very long lists."
+    },
+    "controls": {},
+    "href": "/components/select",
+    "dir": "components/select",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "switch",
+    "title": "Switch",
+    "description": "An accessible React switch for on/off settings, with a spring-animated thumb, built on Radix Switch.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "switch",
+      "toggle",
+      "on off",
+      "setting"
+    ],
+    "keywords": [
+      "react switch",
+      "react toggle switch",
+      "nextjs switch",
+      "tailwind switch",
+      "shadcn switch",
+      "animated switch"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-13",
+    "updatedAt": "2026-10-13",
+    "tier": "free",
+    "files": [
+      "switch.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Switch } from \"@/components/ui/switch\"\n\nexport function AirplaneMode() {\n  return (\n    <>\n      <Switch id=\"airplane-mode\" />\n      <label htmlFor=\"airplane-mode\">Airplane mode</label>\n    </>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Default"
+      },
+      {
+        "name": "settings",
+        "title": "Settings list",
+        "description": "Each switch has a label and a hint linked with aria-describedby, grouped in a fieldset."
+      },
+      {
+        "name": "sizes",
+        "title": "Sizes"
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled"
+      }
+    ],
+    "api": [
+      {
+        "name": "Switch",
+        "description": "Also accepts every Radix Switch prop. The thumb glides on a spring and stretches while pressed.",
+        "props": [
+          {
+            "name": "checked",
+            "type": "boolean",
+            "description": "The on state, when you control it."
+          },
+          {
+            "name": "defaultChecked",
+            "type": "boolean",
+            "default": "false",
+            "description": "The initial state."
+          },
+          {
+            "name": "onCheckedChange",
+            "type": "(checked: boolean) => void",
+            "description": "Called when the user turns it on or off."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "Track and thumb size."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents interaction."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the value with a form, through a hidden checkbox."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Switch"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/switch/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "input",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Switch for settings that take effect immediately (notifications on/off). Use a checkbox for choices submitted with a form."
+    },
+    "controls": {},
+    "href": "/components/switch",
+    "dir": "components/switch",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
   }
 ];
+
+/** The tokens item as CSS to paste, for the Manual install route (generated from tokens.css and theme.css) */
+export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-popover: 1400;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --scale-press: 0.97;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";

@@ -13,6 +13,21 @@ Before building the docs site, we studied how 12 popular UI libraries, plus beUI
   - **Borders:** see §6 for where they appear. The header shows its bottom border only after scrolling.
   - **Page titles and headings:** to match beUI's rhythm, page titles use `text-h2` and section headings are small (14px semibold), with each section opening on a thin rule.
   - **Kept our own:** colours, radius and the type tokens.
+- **Our own identity, not beUI's** (owner, 2026-10-13: the cards, switchers and New badge looked "exact same to same" as beUI). Spacing still follows beUI; these pieces are FewTone's own:
+  - **Item cards are a gallery.** A live preview tile shows the item's first demo, made `inert` so it can't be focused, clicked or read by screen readers. The title link stretches over the card, so the demo's controls never nest inside an anchor. Demos use `useId`, since a demo can now appear more than once on a page. The "New" row on an index only shows when part of the list is new.
+  - **The card's look** (owner, 2026-10-13, picked in a Lab exploration):
+    - **Framed:** one outer card (white with a hairline in light, raised grey in dark) holds the preview tile with a 12px frame round it. The corners stay concentric (`--radius-card`).
+    - **The tile** is the `preview` colour, one gray step past muted, because muted was too close to the card to tell apart.
+    - **The text** sits 32px in from the card's sides, with 24px under the description, measured to the letters (`trim-leading-end`).
+    - **A 20px title** (`text-h4`), with no arrow.
+    - **Rejected:** the card without an outer frame, a single surface with no tile, a flush tile and 4px and 8px frames, a sunken tile, and even 12px spacing all round, which looked cramped.
+  - **Switchers are underline tabs:** Preview/Usage/Code, CLI/Manual/AI prompt and the package manager are plain labels on a bottom rule, with a 2px bar that slides under the active one. They replace beUI-style pill tabs.
+  - **The New badge** (owner, 2026-10-13) is the word alone, with no dot, in a pill with a solid Navy edge. Two light shines travel round the edge on opposite sides (the `edge-shine` utility: 15% wide each side, 65% towards white, one lap in 3s). It's a thin line with no glow. The full badge also shows in the sidebar. It's transparent inside, so it sits cleanly on cards and the sidebar's highlighted row. With reduced motion, the shines rest on the left and right.
+    - **Rejected:** a static Navy-fade edge, a soft Navy ring with one streak, comet, single-orbit, lap-and-rest and sweep shines, the Navy dot, and a dot-only sidebar.
+  - **The page actions** are a filled "Copy prompt" button and a ⋯ menu (copy the page as Markdown, open in ChatGPT or Claude). They replace the "Copy page" split button.
+  - **Gone:** the Source / ARIA pattern / Built on row under the description. The metadata stays and feeds the prompt.
+- **Copy prompt** (owner, 2026-10-13): every item page has a prompt for the user's AI assistant, from the header button and the "AI prompt" install tab. `apps/www/lib/prompt.ts` generates it from the same derived install data as the registry. Its order is: inspect the project (package manager, Tailwind v4, aliases, conflicts), install with the CLI (never `shadcn init`), install by hand with the exact source, tokens and motion file, typecheck, then report the files touched. Its rule is to change nothing else: no overwrites, no theme changes, only missing variables.
+- **Sliding indicators and stacking:** the items in a set must not be stacking contexts. Only the set is `isolate`, so the indicator passes behind every label in both directions. With isolated items, an indicator moving right or down painted over the items it passed (fixed 2026-10-13, Select included).
 - **Theme switch** (owner, 2026-10-12): one button with a tooltip ("Switch to dark theme" or "Switch to light theme") that flips between light and dark. It replaces the three-way light / dark / system switch. Until someone clicks it, the site follows the default theme. The icon turns in on `spring.snappy`; with reduced motion it only fades.
 - **No Accessibility section** on component pages. Components stay accessible by default; it just isn't a docs section.
 - **Wording:** generic and search-friendly ("Accessible React components for Next.js"), not centred on motion.

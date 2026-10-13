@@ -20,6 +20,7 @@ import {
   itemTitle,
 } from "@/lib/content";
 import { itemMarkdown } from "@/lib/markdown";
+import { itemPrompt } from "@/lib/prompt";
 import { absoluteUrl, site } from "@/lib/site";
 
 export async function generateStaticParams() {
@@ -83,6 +84,7 @@ async function ItemContent({ params }: Pick<PageProps<"/[kind]/[slug]">, "params
   ];
   const source = `${site.github}/tree/main/packages/ui/src/${item.dir}`;
   const updated = dateFormat.format(new Date(`${item.updatedAt}T00:00:00Z`));
+  const prompt = await itemPrompt(item);
 
   return (
     <article>
@@ -91,37 +93,12 @@ async function ItemContent({ params }: Pick<PageProps<"/[kind]/[slug]">, "params
         <div className="mt-(--space-title) flex flex-wrap items-start justify-between gap-(--space-stack)">
           <h1 className="flex items-center gap-3 text-h2">
             {item.title}
-            {isNew(item) ? <StatusBadge>New</StatusBadge> : null}
-            {item.status === "draft" ? <StatusBadge>Draft</StatusBadge> : null}
+            {isNew(item) ? <StatusBadge status="New" /> : null}
+            {item.status === "draft" ? <StatusBadge status="Draft" /> : null}
           </h1>
-          <PageActions markdown={itemMarkdown(item)} url={url} title={item.title} />
+          <PageActions markdown={itemMarkdown(item)} prompt={prompt} url={url} title={item.title} />
         </div>
         <p className="mt-(--space-intro) max-w-prose text-body text-muted-foreground">{item.description}</p>
-        <ul className="mt-(--space-stack) flex flex-wrap gap-x-5 gap-y-2 text-label text-muted-foreground">
-          <li>
-            <a
-              href={source}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring rounded-sm hover:text-foreground"
-            >
-              Source ↗
-            </a>
-          </li>
-          {item.ariaPattern ? (
-            <li>
-              <a
-                href={item.ariaPattern}
-                target="_blank"
-                rel="noreferrer"
-                className="focus-ring rounded-sm hover:text-foreground"
-              >
-                ARIA pattern ↗
-              </a>
-            </li>
-          ) : null}
-          {item.primitives.length > 0 ? <li>Built on {item.primitives.join(", ")}</li> : null}
-        </ul>
       </header>
 
       {hero ? (
@@ -135,7 +112,7 @@ async function ItemContent({ params }: Pick<PageProps<"/[kind]/[slug]">, "params
           Installation
         </h2>
         <div className="mt-(--space-heading)">
-          <InstallSection item={item} />
+          <InstallSection item={item} prompt={prompt} />
         </div>
       </section>
 

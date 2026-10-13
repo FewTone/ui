@@ -10,7 +10,7 @@ FewTone UI components take their colours, radius and fonts from CSS variables. C
 
 ## Colours
 
-Components use semantic names such as `background`, `foreground`, `primary`, `muted` and `border`. They are the same names shadcn/ui uses, so FewTone UI components sit naturally next to shadcn ones.
+Components use semantic names such as `background`, `foreground`, `primary`, `muted` and `border`. They are the same names shadcn/ui uses, so FewTone UI components take your project's colours and sit naturally next to shadcn ones. Change them and every component follows.
 
 ```css
 :root {
@@ -43,3 +43,17 @@ Corners come from `--radius`. Set it once to make every component rounder or sha
 ## Fonts
 
 Components inherit the page font. Set `--font-sans` and `--font-mono` to use your own.
+
+## Sizes and motion
+
+The FewTone UI tokens, added to your CSS on the first install, set the rest. Change them to tune every component at once.
+
+```css
+:root {
+  --size-control-md: 2.25rem; /* default height of buttons, inputs and selects */
+  --duration-fast: 150ms;     /* hover and press transitions */
+  --scale-press: 0.97;        /* how far buttons sink when pressed */
+}
+```
+
+With reduced motion turned on in the operating system, the durations drop to almost nothing and the spring animations become instant.

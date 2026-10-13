@@ -16,15 +16,27 @@ Add FewTone UI components to a Next.js project with the shadcn CLI, or copy them
 
 ## 1. Set up shadcn
 
-If your project does not use shadcn yet, run its init command. It creates `components.json` and the `cn` helper.
+If your project does not use shadcn yet, run its init command. It creates `components.json` and the `cn` helper that every component imports.
 
 ```bash
 npx shadcn@latest init
 ```
 
-## 2. Add the FewTone registry
+## 2. Add a component
 
-Add the `@fewtone` namespace to the `registries` field in `components.json`:
+Copy the command from any component page. It points the CLI at the component's address, so no other setup is needed.
+
+```bash
+npx shadcn@latest add https://ui.fewtone.com/r/button.json
+```
+
+The component is written to `components/ui`, and its npm dependencies are installed. The first time, the CLI also adds the FewTone UI tokens to your global CSS file: control sizes, motion durations, the focus ring and the popover animations. It only adds variables your project doesn't define yet, so your theme stays as it is.
+
+Components that animate with JavaScript, such as Select and Switch, also bring `lib/motion.ts`, the spring presets they share.
+
+## Shorter commands (optional)
+
+To write `@fewtone/button` instead of the full address, add the FewTone UI registry to `components.json`:
 
 ```json
 {
@@ -34,14 +46,10 @@ Add the `@fewtone` namespace to the `registries` field in `components.json`:
 }
 ```
 
-## 3. Add a component
-
 ```bash
-npx shadcn@latest add @fewtone/button
+npx shadcn@latest add @fewtone/button @fewtone/select
 ```
-
-The component is written to `components/ui`, with its dependencies installed. Import it like any other file in your project.
 
 ## Manual installation
 
-Every component page has a **Manual** tab with the dependencies to install and the full source to copy. Paste it into your project and update the import paths.
+Every component page has a **Manual** tab with the steps in order: the npm dependencies to install, the tokens to paste into your global CSS file, `lib/motion.ts` when the component needs it, and the full source. Paste the source into your project and update the import paths.

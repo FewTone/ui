@@ -41,6 +41,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-preview: var(--preview);
+  --color-preview-hover: var(--preview-hover);
   --color-overlay: var(--overlay);
 
   --color-border: var(--border);
@@ -199,6 +201,68 @@
   background:
     linear-gradient(var(--edge-fill, var(--background)), var(--edge-fill, var(--background))) padding-box,
     var(--gradient-edge-brand) border-box;
+}
+
+/*
+ * The New badge's edge: solid Navy, with two light shines travelling round it on opposite sides
+ * (owner, 2026-10-13). Drawn on a masked ::before layer, so the badge stays transparent inside on any
+ * surface. A thin line only, no glow. With reduced motion the shines rest on the left and right.
+ */
+@property --shine-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 180deg;
+}
+
+@keyframes shine-orbit {
+  from {
+    --shine-angle: 180deg;
+  }
+  to {
+    --shine-angle: 540deg;
+  }
+}
+
+@utility edge-shine {
+  position: relative;
+  border: var(--border-width) solid transparent;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: calc(var(--border-width) * -1);
+    padding: var(--border-width);
+    border-radius: inherit;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--shine-angle),
+      var(--brand) calc(25% - var(--shine-width)),
+      var(--shine) 25%,
+      var(--brand) calc(25% + var(--shine-width)),
+      var(--brand) calc(75% - var(--shine-width)),
+      var(--shine) 75%,
+      var(--brand) calc(75% + var(--shine-width))
+    );
+    -webkit-mask:
+      linear-gradient(black 0 0) content-box,
+      linear-gradient(black 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(black 0 0) content-box exclude,
+      linear-gradient(black 0 0);
+    animation: shine-orbit var(--shine-lap) linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      animation: none;
+    }
+  }
+}
+
+/* Pulls back the empty half-line below the last line of text, so the space under it is measured to the letters */
+@utility trim-leading-end {
+  margin-block-end: calc((1em - 1lh) / 2);
 }
 
 /* Horizontal divider that fades out at both ends */

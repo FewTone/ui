@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@fewtone/ui/lib/utils";
-import { useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore } from "react";
+import { PillGroup, Underline } from "@/components/motion/pill";
 import { type PackageManager, packageManagers } from "@/lib/install";
 import { CopyButton } from "./copy-button";
 
@@ -45,28 +46,37 @@ function choose(manager: PackageManager) {
 export function Command({ commands }: { commands: Record<PackageManager, string> }) {
   const manager = usePackageManager();
   const command = commands[manager];
+  // The stored choice arrives after hydration; the pill only glides once the user has picked
+  const [picked, setPicked] = useState(false);
 
   return (
     <div className="overflow-hidden rounded-xl border bg-muted">
-      <div className="flex items-center justify-between gap-2 border-b px-(--space-bar-x) py-(--space-bar-y)">
-        <fieldset className="flex gap-(--space-tabs)">
-          <legend className="sr-only">Package manager</legend>
-          {packageManagers.map((option) => (
-            <button
-              key={option}
-              type="button"
-              aria-pressed={manager === option}
-              onClick={() => choose(option)}
-              className={cn(
-                "focus-ring rounded-md border border-transparent px-(--space-nav-item-x) py-(--space-nav-item-y) font-mono text-caption text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:text-foreground",
-                manager === option && "border-border bg-background text-foreground",
-              )}
-            >
-              {option}
-            </button>
-          ))}
-        </fieldset>
-        <CopyButton value={command} label="Copy command" />
+      {/* The same underline tabs as Preview / Code, sitting on the block's header rule */}
+      <div className="flex items-end justify-between gap-2 border-b px-(--space-code-x)">
+        <PillGroup>
+          <fieldset className="relative isolate flex items-end gap-(--space-tab-gap)">
+            <legend className="sr-only">Package manager</legend>
+            {packageManagers.map((option) => (
+              <button
+                key={option}
+                type="button"
+                aria-pressed={manager === option}
+                onClick={() => {
+                  setPicked(true);
+                  choose(option);
+                }}
+                className={cn(
+                  "focus-ring relative py-(--space-tab-pad) font-mono text-caption text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:text-foreground",
+                  manager === option && "text-foreground",
+                )}
+              >
+                {option}
+                {manager === option ? <Underline instant={!picked} /> : null}
+              </button>
+            ))}
+          </fieldset>
+        </PillGroup>
+        <CopyButton value={command} label="Copy command" className="mb-1.5 self-center" />
       </div>
       <pre className="overflow-x-auto px-(--space-code-x) py-(--space-code-y) font-mono text-code">
         <code>

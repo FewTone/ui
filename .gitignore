@@ -27,3 +27,6 @@ npm-debug.log*
 .vercel
 .wrangler/
 .open-next/
+
+# Generated shadcn registry (scripts/registry/build-registry.mjs)
+apps/www/public/r/

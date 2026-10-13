@@ -52,7 +52,9 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
 
   const href = `/${kind.segment}`;
   const trail = [{ name: kind.plural, href }];
+  // The "New" row only adds something when part of the list is new; otherwise it would repeat every card
   const fresh = kind.items.filter(isNew);
+  const showFresh = fresh.length > 0 && fresh.length < kind.items.length;
 
   return (
     <article>
@@ -62,7 +64,7 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
         <p className="mt-(--space-intro) max-w-prose text-body text-muted-foreground">{kind.intro}</p>
       </header>
 
-      {fresh.length > 0 ? (
+      {showFresh ? (
         <section aria-labelledby="new" className="mt-(--space-page)">
           <h2 id="new" className={sectionLabel}>
             New

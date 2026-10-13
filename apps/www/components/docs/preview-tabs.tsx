@@ -5,7 +5,8 @@ import type { PreviewTemplate } from "@fewtone/ui/registry/kinds";
 import { RotateCcwIcon } from "lucide-react";
 import { Tabs } from "radix-ui";
 import { type ReactNode, useState } from "react";
-import { tabList, tabPanel, tabTrigger } from "./tabs-style";
+import { SlidingTabList } from "./sliding-tab-list";
+import { tabPanel } from "./tabs-style";
 
 const heights = { sm: "min-h-48", md: "min-h-72", lg: "min-h-96" } as const;
 
@@ -29,36 +30,34 @@ export function PreviewTabs({
   template: PreviewTemplate;
 }) {
   const [run, setRun] = useState(0);
+  const [tab, setTab] = useState("preview");
+  const tabs = [
+    { value: "preview", label: "Preview" },
+    ...(usage ? [{ value: "usage", label: "Usage" }] : []),
+    { value: "code", label: "Code" },
+  ];
 
   return (
-    <Tabs.Root defaultValue="preview" className="grid grid-cols-1 gap-(--space-heading)">
-      <div className="flex items-center justify-between gap-(--space-heading)">
-        <Tabs.List aria-label="Example view" className={tabList}>
-          <Tabs.Trigger value="preview" className={tabTrigger}>
-            Preview
-          </Tabs.Trigger>
-          {usage ? (
-            <Tabs.Trigger value="usage" className={tabTrigger}>
-              Usage
-            </Tabs.Trigger>
-          ) : null}
-          <Tabs.Trigger value="code" className={tabTrigger}>
-            Code
-          </Tabs.Trigger>
-        </Tabs.List>
-        {replay ? (
-          <button
-            type="button"
-            onClick={() => setRun((value) => value + 1)}
-            className="focus-ring inline-flex items-center gap-1.5 rounded-full px-(--space-tab-x) py-(--space-tab-y) text-body-sm leading-5 text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
-          >
-            <RotateCcwIcon className="size-(--size-icon-sm)" aria-hidden />
-            Replay
-          </button>
-        ) : null}
-      </div>
+    <Tabs.Root value={tab} onValueChange={setTab} className="grid grid-cols-1 gap-(--space-heading)">
+      <SlidingTabList
+        label="Example view"
+        tabs={tabs}
+        value={tab}
+        actions={
+          replay ? (
+            <button
+              type="button"
+              onClick={() => setRun((value) => value + 1)}
+              className="focus-ring inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-label text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
+            >
+              <RotateCcwIcon className="size-(--size-icon-sm)" aria-hidden />
+              Replay
+            </button>
+          ) : null
+        }
+      />
       <Tabs.Content value="preview" forceMount className={tabPanel}>
-        {/* An open canvas: no border or fill, the demo sits on the page (beUI) */}
+        {/* An open canvas: no border or fill, the demo sits on the page */}
         <div
           className={cn(
             "grid place-items-center overflow-hidden rounded-xl",

@@ -64,7 +64,7 @@ Apps import the whole system with one line: `@import "@fewtone/ui/globals.css";`
 |---|---|
 | Footer | `surface-brand-footer`, with the wordmark in `text-gradient-on-brand` |
 | Pro and premium cards | `surface-brand` |
-| "New" signals | `bg-brand-subtle text-brand-text` badge; `bg-brand` dot |
+| "New" signals | `edge-shine` badge: a solid Navy edge with two light shines travelling round it |
 | Announcement pill, Pro link | `edge-brand` (border fades from brand to neutral) |
 | Text selection | automatic (`--selection`) |
 | Info status | `info-*` tokens alias the brand scale |
@@ -119,6 +119,8 @@ Components use only these, as Tailwind utilities (`bg-card`, `text-muted-foregro
 | `muted` | gray-3 | gray-3 | Quiet fills, code blocks |
 | `muted-foreground` | gray-11 | gray-11 | Secondary text |
 | `accent` | gray-4 | gray-4 | Hover surface (shadcn name, not the brand) |
+| `preview` / `preview-hover` | gray-4 / gray-5 | gray-4 / gray-5 | Item card preview tile, one step past muted so it stands apart from the card |
+| `--shine` | Navy 65% towards white | same | The light shines on the New badge's edge (`edge-shine`) |
 | `overlay` | black 40% | black 60% | Behind dialogs |
 | `border` | gray-6 | gray-6 | Dividers, card edges |
 | `input` | gray-7 | gray-7 | Input borders |
@@ -151,6 +153,8 @@ Each status colour has five tokens: `<status>`, `<status>-foreground`, `<status>
 | `text-gradient-on-brand` | Same idea, on a brand surface | Footer wordmark |
 | `bg-gradient-primary` | Neutral main button with a soft vertical shade | Primary buttons |
 | `edge-brand` | 1px border fading from brand to neutral. Set `[--edge-fill:var(--card)]` when it sits on a card. | Announcement pill, Pro link |
+| `edge-shine` | 1px solid Navy edge with two light shines travelling round it (`--shine-width` 15% each side, one lap per `--shine-lap` 3s). Transparent inside; rests with reduced motion. No glow. | New and Beta badges |
+| `trim-leading-end` | Pulls back the empty half-line under the last line of text, so the space below is measured to the letters | Item card description |
 | `divider-fade` | 1px divider that fades out at both ends | Section separators |
 | `focus-ring` | Standard focus outline for custom interactive elements | Any custom control |
 
@@ -244,14 +248,14 @@ There are two layers:
 | Token | Value | Use |
 |---|---|---|
 | `--space-canvas` | 40px | Preview canvas padding |
-| `--space-card-x` / `-y` | 16px / 12px | Card title row |
-| `--space-card-inset` / `--space-panel` | 8px / 16px | Card edge to its inner panel / panel padding |
-| `--space-tabs`, `--space-tab-x` / `-y` | 4px, 14px / 6px | Tab list padding and gap, tab padding |
+| `--size-card-preview` / `--space-card-tile` / `--space-card-text` | 152px / 20px / 12px | Item card: live preview tile height, its padding, tile to title |
+| `--space-card-frame` / `--space-card-x` / `--space-card-bottom` | 12px / 20px / 12px | Item card: frame round the preview tile; text in from the frame (32px from the card's edge); below the description, with `trim-leading-end` (24px to the letters) |
+| `--radius-card` | `--radius-xl` + the frame (26px) | Item card corners, concentric with the tile's |
+| `--space-tab-gap` / `--space-tab-pad` | 20px / 10px | Underline tabs: between tabs, label to its underline. `--space-tabs`, `--space-tab-x` / `-y` (4px, 14px / 6px) remain for pill switches |
 | `--space-bar-x` / `-y` | 12px / 6px | Code block top bar |
 | `--space-code-x` / `-y` | 20px / 16px | Code block body |
 | `--space-cell-x` / `-y` | 16px / 12px | Table cells |
 | `--space-steps` / `--space-step-indent` | 32px / 40px | Manual install steps |
-| `--size-card` | 160px | Item card height |
 
 **Borders (beUI rules, ADR 0007).**
 - **No border on:**
@@ -405,8 +409,24 @@ The shadows are neutral. Dark mode uses deeper shadows plus a lit top edge on ca
 3. No Tailwind default palette classes (`bg-zinc-500`). They no longer exist and render nothing.
 4. Padding, margin and gap use only the allowed spacing steps.
 5. `lib/motion.ts` durations and easings match `tokens.css`.
+6. Library components and their demos (`packages/ui/src/components/**`) use the portable vocabulary (§13), and the site (`apps/`) doesn't use the stock `text-xs`/`text-sm`/`text-base`.
 
 For a genuine exception, add a `check-tokens-ignore` comment on the line and explain why in the component's `docs-internal/04-components/<name>/decisions.md`.
+
+## 13. Library component vocabulary (ADR 0009)
+
+Components are installed into other people's shadcn projects, which have shadcn's colours and their own `cn`, but not our tokens. So components in `packages/ui/src/components` use a smaller, portable vocabulary:
+
+| Use | Not |
+|---|---|
+| shadcn colours: `background`, `foreground`, `primary`, `secondary`, `muted`, `accent`, `border`, `input`, `ring`, `popover`, `destructive` (+ `-foreground`) | `brand`, `success`, `warning`, `danger`, `info`, `overlay`, `sidebar` |
+| stock text sizes `text-xs`, `text-sm`, `text-base` (Tailwind's values, also defined on our site) | `text-label`, `text-body-sm` and the other named sizes |
+| shipped tokens via `(--token)`: `--size-control-*`, `--size-icon-*`, `--duration-*`, `--ease-spring`, `--z-popover`, `--focus-ring-*`, `--opacity-disabled`, `--scale-press` | `--space-*` and other site tokens |
+| focus: `outline-ring focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset)` | the `focus-ring` utility |
+| popovers: `animate-popover-in` / `animate-popover-out` | `animate-scale-in` and the other site animations |
+| radius: `rounded-md` / `rounded-lg` (follows the user's `--radius`) | fixed values |
+
+The shipped list lives in `packages/ui/src/registry/shared.ts`. To ship a new token, add it there, then use it. The registry generator reads its value from the token files.
 
 ## 12. Adding or changing a token
 

@@ -22,7 +22,7 @@ const status = [
     dot: "bg-success",
     text: "text-success-text",
     title: "Component installed",
-    body: "Toggle was added to components/ui.",
+    body: "Switch was added to components/ui.",
   },
   {
     name: "Warning",
@@ -62,11 +62,11 @@ const typeScale = [
     cls: "text-body",
     sample: "Copy the source, keep the polish, and change anything you need.",
   },
-  { token: "body-sm", cls: "text-body-sm", sample: "Toggle supports controlled and uncontrolled use." },
+  { token: "body-sm", cls: "text-body-sm", sample: "Switch supports controlled and uncontrolled use." },
   { token: "label", cls: "text-label", sample: "Browse components" },
   { token: "caption", cls: "text-caption", sample: "Updated 2 days ago" },
-  { token: "overline", cls: "text-overline font-mono uppercase", sample: "Components / Toggle" },
-  { token: "code", cls: "text-code font-mono", sample: "npx shadcn add @fewtone/toggle" },
+  { token: "overline", cls: "text-overline font-mono uppercase", sample: "Components / Switch" },
+  { token: "code", cls: "text-code font-mono", sample: "npx shadcn add ui.fewtone.com/r/toggle.json" },
 ];
 
 const spacingSteps = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32];
