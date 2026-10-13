@@ -236,9 +236,9 @@ There are two layers:
 | `--space-title` | 16px | Breadcrumb to title |
 | `--space-intro` | 8px | Title to description |
 | `--space-page` | 40px | Page header to the first section; between index sections |
+| `--space-hero` | 24px | Item page: the description to the framed hero preview |
+| `--size-collapsed` / `--size-collapsed-fade` | 288px / 96px | A long section's starting height (Installation) and the fade at its foot (`Expandable`) |
 | `--space-block` | 48px | Between examples; before Related |
-| `--space-rule` | 20px | Above and below a section rule (`mt-(--space-rule) border-t pt-(--space-rule)`) |
-| `--space-rule-lg` | 32px | Below the rule before Related |
 | `--space-heading` | 12px | Section heading to its content |
 | `--space-stack` | 16px | Section label to its grid; title row to description |
 | `--space-grid` | 16px | Card grid gap |
@@ -251,7 +251,7 @@ There are two layers:
 | `--size-card-preview` / `--space-card-tile` / `--space-card-text` | 152px / 20px / 12px | Item card: live preview tile height, its padding, tile to title |
 | `--space-card-frame` / `--space-card-x` / `--space-card-bottom` | 12px / 20px / 12px | Item card: frame round the preview tile; text in from the frame (32px from the card's edge); below the description, with `trim-leading-end` (24px to the letters) |
 | `--radius-card` | `--radius-xl` + the frame (26px) | Item card corners, concentric with the tile's |
-| `--space-tab-gap` / `--space-tab-pad` | 20px / 10px | Underline tabs: between tabs, label to its underline. `--space-tabs`, `--space-tab-x` / `-y` (4px, 14px / 6px) remain for pill switches |
+| `--space-tab-x` / `--space-tab-y` | 14px / 6px | Switcher options (the ink pill) and the pill switches. `--space-tabs` (4px) is the sidebar filter's track padding and gap |
 | `--space-bar-x` / `-y` | 12px / 6px | Code block top bar |
 | `--space-code-x` / `-y` | 20px / 16px | Code block body |
 | `--space-cell-x` / `-y` | 16px / 12px | Table cells |
@@ -371,7 +371,11 @@ The shadows are neutral. Dark mode uses deeper shadows plus a lit top edge on ca
 **Press feedback:** `active:scale-(--scale-press)`, which scales to 0.97.
 
 **Rules:**
-- Animate only `transform` and `opacity`.
+- Animate only `transform` and `opacity`. The exception is height: content that changes size glides to it through `AutoHeight` (owner, 2026-10-13).
+  - **Transition:** an eased tween, `duration.slow` with `ease.out`. It's not a spring, because a spring's overshoot would bounce the page below.
+  - **Clipping:** content is clipped only while it moves.
+  - **Reduced motion:** it's instant.
+  - **Where:** the Preview / Usage / Code card, and Installation opening (`duration.slower`).
 - `prefers-reduced-motion` sets every CSS duration to 1ms automatically.
 - JavaScript animations must also check `useReducedMotion()` and fall back to opacity, or to no motion.
 - `motion.ts` must match `tokens.css`. The token check fails if they drift apart.

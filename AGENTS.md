@@ -89,7 +89,7 @@ docs-internal/             long-term project memory (see map below)
    - Radix for behaviour
    - keyboard support and a visible focus ring
    - `prefers-reduced-motion` respected (CSS is automatic; in JavaScript use `useReducedMotion()`)
-4. **Motion** uses the presets in `@fewtone/ui/lib/motion` (`spring.snappy`, `spring.smooth`, `spring.bouncy`). Animate only `transform` and `opacity`.
+4. **Motion** uses the presets in `@fewtone/ui/lib/motion` (`spring.snappy`, `spring.smooth`, `spring.bouncy`). Animate only `transform` and `opacity`. The one exception: content that changes height glides to its new size through `AutoHeight` (`apps/www/components/motion/auto-height.tsx`, owner 2026-10-13). Examples are a tab set switching panels and a section opening.
 5. **`packages/ui` is the source of truth.** Registry JSON, docs, the npm build and AI files are generated from it, never hand-copied.
 6. **The Lab (`/lab`) is internal and dev-only.** Users customise the copied source in their own projects. There is no public customiser.
 7. **Version-specific docs:** read `apps/www/AGENTS.md` (Next.js) and the Turborepo block below before changing framework or build config.

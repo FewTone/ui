@@ -4,9 +4,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { readSource, toProjectImports } from "@/lib/code";
 import { items } from "@/lib/content";
-import { addCommands, installCommands } from "@/lib/install";
+import { installCommands } from "@/lib/install";
 import { CodeBlock } from "./code-block";
-import { InstallTabs } from "./install-tabs";
 import { Command } from "./package-manager";
 
 function Step({ number, children }: { number: number; children: ReactNode }) {
@@ -27,10 +26,11 @@ function Step({ number, children }: { number: number; children: ReactNode }) {
 const packageName = (dependency: string) => dependency.replace(/(.)@.*$/, "$1");
 
 /**
- * CLI (shadcn) or Manual. The Manual steps come from the same derived install data as the registry JSON
- * (ADR 0009): npm dependencies, the tokens, shared lib files, other FewTone items, then the source.
+ * The manual install steps. The CLI command and Copy prompt sit in the page header (item-article.tsx).
+ * The steps come from the same derived install data as the registry JSON (ADR 0009): npm dependencies,
+ * the tokens, shared lib files, other FewTone items, then the source.
  */
-export async function InstallSection({ item, prompt }: { item: Item; prompt: string }) {
+export async function InstallSection({ item }: { item: Item }) {
   const files = await Promise.all(
     item.files.map(async (file) => ({
       name: file,
@@ -95,7 +95,7 @@ export async function InstallSection({ item, prompt }: { item: Item; prompt: str
     <p className="text-body-sm">Update the import paths to match your project.</p>,
   );
 
-  const manual = (
+  return (
     <ol className="grid list-none gap-(--space-steps)">
       {steps.map((step, index) => (
         // Steps are built in a fixed order for this item, so the position is a stable key
@@ -106,6 +106,4 @@ export async function InstallSection({ item, prompt }: { item: Item; prompt: str
       ))}
     </ol>
   );
-
-  return <InstallTabs commands={addCommands(item.name)} manual={manual} prompt={prompt} title={item.title} />;
 }

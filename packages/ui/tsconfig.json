@@ -12,7 +12,6 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
-    "baseUrl": ".",
     "paths": {
       "@fewtone/ui/*": ["./src/*"]
     },

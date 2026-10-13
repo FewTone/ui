@@ -2,12 +2,14 @@
 
 import { Tabs } from "radix-ui";
 import type { ReactNode } from "react";
-import { PillGroup, Underline } from "@/components/motion/pill";
-import { tabList, tabRow, tabTrigger } from "./tabs-style";
+import { Pill, PillGroup } from "@/components/motion/pill";
+import { switchList, switchPill, switchTab } from "./tabs-style";
+
+export type SlidingTab = { value: string; label: string };
 
 /**
- * Underline tabs for a Radix tab set: the bar glides to the active tab. The Tabs root must be controlled.
- * `actions` sit at the right end of the same row (for example Replay).
+ * The tab row for a Radix tab set, in the docs' switcher style (tabs-style.ts): an ink pill glides to the
+ * active tab. The Tabs root must be controlled. `actions` sit at the right end of the row (for example Replay).
  */
 export function SlidingTabList({
   label,
@@ -16,23 +18,23 @@ export function SlidingTabList({
   actions,
 }: {
   label: string;
-  tabs: { value: string; label: string }[];
+  tabs: SlidingTab[];
   value: string;
   actions?: ReactNode;
 }) {
   return (
-    <div className={tabRow}>
+    <div className="flex items-center justify-between gap-(--space-heading)">
       <PillGroup>
-        <Tabs.List aria-label={label} className={tabList}>
+        <Tabs.List aria-label={label} className={switchList}>
           {tabs.map((tab) => (
-            <Tabs.Trigger key={tab.value} value={tab.value} className={tabTrigger}>
+            <Tabs.Trigger key={tab.value} value={tab.value} className={switchTab}>
+              {tab.value === value ? <Pill className={switchPill} /> : null}
               {tab.label}
-              {tab.value === value ? <Underline /> : null}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
       </PillGroup>
-      {actions ? <div className="flex items-center pb-1.5">{actions}</div> : null}
+      {actions ? <div className="flex items-center">{actions}</div> : null}
     </div>
   );
 }

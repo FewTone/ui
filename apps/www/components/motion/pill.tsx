@@ -43,16 +43,3 @@ export function Pill({
     />
   );
 }
-
-/** The bar under the active tab of an underline tab set. It sits on the set's bottom rule. */
-export function Underline({ instant = false }: { instant?: boolean }) {
-  return (
-    <motion.span
-      layoutId="underline"
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 bg-foreground"
-      style={{ borderRadius: 9999 }}
-      transition={instant ? { duration: 0 } : spring.snappy}
-    />
-  );
-}

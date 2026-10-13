@@ -88,3 +88,28 @@ Clarified with the owner:
 `--space-grid-row` is gone: the cards have their own surface now, so rows use `--space-grid`.
 
 **Found along the way:** drive D: filled up completely. A failed save emptied a Lab file, which was rebuilt from the session. The Turbo cache (`.turbo/cache`, 0.5 GB) was cleared to make room. Lab edits after that were saved to a temporary file first and then renamed into place.
+
+## Later still: the component page, explored on the real page
+
+**The Lab (`/lab`)** now renders the real component page (browse layout and `components/docs/item-article.tsx`, shared with the item route) with an options bar. The owner compared switcher styles and header actions there.
+
+**Shipped:**
+- **Switchers:** Framed · ink.
+- **Header:** the install command (secondary colours, package manager in our Select) and a text-only Copy prompt, beside the title. Installation shows the manual steps.
+- **Page layout:** 24px section titles with no divider lines, and the hero 24px under the description.
+- **Site-wide:**
+  - keyboard-only focus rings (`data-modality`)
+  - minimal scrollbars with a stable gutter (and Radix's scroll-lock margin cancelled)
+
+**Removed:**
+- underline tabs
+- the install tabs
+- the ⋯ menu
+- the Copy page split button and its v0, ChatGPT and Claude logos
+- `--space-rule`, `--space-rule-lg`, `--space-tab-gap` and `--space-tab-pad`
+
+**Afterwards:**
+- **Installation** collapses to 288px with a fade and our Button to open it (`Expandable`).
+- **Smooth motion:** the preview card and Installation glide to new heights (`AutoHeight`, the documented exception to rule 4). Panels slide in by direction, and hidden install steps rise in, staggered.
+- **The header command** has a fixed width, in `ch`.
+- **Lab:** with the page settled, the `/lab` exploration page and its options bar were removed. `/lab/tokens` remains.

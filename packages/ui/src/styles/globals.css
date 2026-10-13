@@ -23,6 +23,14 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Focus shows for the keyboard only, never after a click or tap (owner, 2026-10-13). The site marks the
+ * page data-modality="pointer" on a click and "keyboard" on Tab or arrow keys (apps/www/app/providers.tsx).
+ * Every focus-visible: class (outlines, Input and Select borders) and the focus-ring utility follow it.
+ * Without the attribute (for example in a user's own app) this is the normal :focus-visible.
+ */
+@custom-variant focus-visible (&:focus-visible:not([data-modality="pointer"] *));
+
 @theme inline {
   /* Remove Tailwind's default colours and shadows: only semantic tokens remain */
   --color-*: initial;
@@ -122,6 +130,59 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    /* No grey flash when a control is tapped on a touch screen */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /*
+   * Scrollbars (owner, 2026-10-13): thin and quiet everywhere, a thumb with no track. The page always keeps
+   * room for its scrollbar, so nothing shifts when a page becomes long enough to scroll.
+   */
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar) transparent;
+  }
+
+  /* Browsers without scrollbar-color (older Safari) draw the same thumb this way */
+  @supports not (scrollbar-color: auto) {
+    ::-webkit-scrollbar {
+      width: 0.625rem;
+      height: 0.625rem;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border: 0.1875rem solid transparent;
+      border-radius: 9999px;
+      background: var(--scrollbar) padding-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--scrollbar-hover);
+    }
+  }
+
+  /*
+   * When a dialog or menu locks scrolling, Radix adds the scrollbar's width as a right margin on the body.
+   * The reserved gutter already holds that space, so the margin would shift the page: cancel it.
+   */
+  html body[data-scroll-locked] {
+    /* biome-ignore lint/complexity/noImportantStyles: it has to beat the !important margin Radix injects */
+    margin-right: 0 !important;
+  }
+
+  /* Quick clicks on a button or tab don't select its label (which showed the selection colour) */
+  button,
+  [role="tab"] {
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   body {
@@ -152,9 +213,15 @@
     background-color: var(--selection);
   }
 
-  :focus-visible {
+  /* Keyboard focus only (see the focus-visible variant at the top) */
+  :focus-visible:not([data-modality="pointer"] *) {
     outline: var(--focus-ring-width) solid var(--ring);
     outline-offset: var(--focus-ring-offset);
+  }
+
+  /* After a click or tap: no ring at all, not even the browser's own */
+  [data-modality="pointer"] :focus-visible {
+    outline: none;
   }
 }
 
@@ -271,9 +338,9 @@
   background: var(--gradient-divider);
 }
 
-/* Standard focus ring for custom interactive elements */
+/* Standard focus ring for custom interactive elements; keyboard only (see the focus-visible variant above) */
 @utility focus-ring {
-  &:focus-visible {
+  &:focus-visible:not([data-modality="pointer"] *) {
     outline: var(--focus-ring-width) solid var(--ring);
     outline-offset: var(--focus-ring-offset);
   }

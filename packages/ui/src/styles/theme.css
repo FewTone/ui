@@ -26,6 +26,9 @@
   /* Item card preview tile: one step past muted, so it stands apart from the card (owner, 2026-10-13) */
   --preview: var(--gray-4);
   --preview-hover: var(--gray-5);
+  /* Scrollbars: a quiet thumb with no track (globals.css, owner 2026-10-13) */
+  --scrollbar: color-mix(in oklch, var(--foreground) 18%, transparent);
+  --scrollbar-hover: color-mix(in oklch, var(--foreground) 32%, transparent);
 
   /* Lines */
   --border: var(--gray-6);

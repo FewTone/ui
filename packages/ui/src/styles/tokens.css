@@ -246,6 +246,10 @@
 
   /* Item card on index pages and in Related: the live preview tile on top */
   --size-card-preview: 9.5rem;
+  /* Long sections (Installation) start at this height, fading into the page, with a button for the rest */
+  --size-collapsed: 18rem;
+  --size-collapsed-fade: 6rem;
+
   /* The card's corners stay concentric with the tile's (xl) around the frame */
   --radius-card: calc(var(--radius-xl) + var(--space-card-frame));
 
@@ -285,9 +289,8 @@
   --space-title: 1rem; /* breadcrumb to the title row */
   --space-intro: 0.5rem; /* title to the description */
   --space-page: 2.5rem; /* page header to the first section; between index sections */
+  --space-hero: 1.5rem; /* item page: the description to the framed hero preview */
   --space-block: 3rem; /* between examples; before Related */
-  --space-rule: 1.25rem; /* above and below a section rule */
-  --space-rule-lg: 2rem; /* below the rule before Related */
   --space-heading: 0.75rem; /* section heading to its content */
   --space-stack: 1rem; /* section label to its grid; title row to description */
   --space-grid: 1rem; /* card grid, between columns and rows */
@@ -301,8 +304,6 @@
   --space-card-tile: 1.25rem; /* padding inside the preview tile */
   --space-card-x: 1.25rem; /* title and description, in from the frame (32px from the card's edge) */
   --space-card-bottom: 0.75rem; /* below the description, inside the frame (24px to the letters) */
-  --space-tab-gap: 1.25rem; /* between underline tabs (Preview, Usage, Code) */
-  --space-tab-pad: 0.625rem; /* tab label to its underline */
   --space-tabs: 0.25rem; /* pill switch padding and gap */
   --space-tab-x: 0.875rem;
   --space-tab-y: 0.375rem;

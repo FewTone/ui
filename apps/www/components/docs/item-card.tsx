@@ -20,7 +20,7 @@ export function ItemCard({ item }: { item: Item }) {
   const Demo = hero ? demos[`${item.name}/${hero.name}`] : undefined;
 
   return (
-    <article className="group relative grid content-start gap-(--space-card-text) rounded-(--radius-card) bg-card p-(--space-card-frame) shadow-card outline-offset-4 outline-ring has-[a:focus-visible]:outline-(length:--focus-ring-width)">
+    <article className="group relative grid content-start gap-(--space-card-text) rounded-(--radius-card) bg-card p-(--space-card-frame) shadow-card outline-offset-4 outline-ring has-focus-visible:outline-(length:--focus-ring-width)">
       <div className="grid h-(--size-card-preview) place-items-center overflow-hidden rounded-xl bg-preview p-(--space-card-tile) transition-colors duration-(--duration-fast) ease-out group-hover:bg-preview-hover">
         {Demo ? (
           <div inert className="pointer-events-none grid w-full place-items-center select-none">
