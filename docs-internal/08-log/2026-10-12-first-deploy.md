@@ -9,5 +9,5 @@
 
 **Open:**
 - **Empty component list in production:** the only item, Example, is a draft, so `/components` shows nothing yet. Point the domain once Button ships, or accept the empty list for now.
-- **Broken GitHub link:** the header links to `github.com/FewTone/ui`, which is a 404 for visitors while the repo is private.
+- ~~**Broken GitHub link:** the header links to `github.com/FewTone/ui`, a 404 while the repo was private.~~ Resolved: the repo became public later the same day, after Vercel blocked a deploy from the private repo (see ADR 0005).
 - **Token rotation:** the deploy token was pasted in chat, so regenerate it and update `.env.deploy.local`.

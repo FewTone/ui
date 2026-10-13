@@ -209,14 +209,65 @@
   --size-logo-inline: 0.9em;
   --space-logo-gap: 0.4em;
 
+  /* Item card on index pages and in Related: a fixed height keeps every grid row even */
+  --size-card: 10rem;
+
   /* Site shell: sticky header, docs sidebar and the height left under the header */
   --size-header: 3.5rem;
   --size-sidebar: 15rem;
   --size-below-header: calc(100dvh - var(--size-header));
 
-  /* Page rhythm */
-  --space-gutter: clamp(1rem, 4vw, 2.5rem);
-  --space-section: clamp(4rem, 8vw, 8rem);
+  /*
+   * Layout spacing: the site's rhythm, measured from beUI (ADR 0007). Change a value here and every page follows.
+   * Use with the (--token) shorthand: `px-(--space-gutter)`, `gap-(--space-nav-group)`, `mt-(--space-title)`.
+   * The 4px scale (`gap-2`) is only for small gaps inside a control, such as an icon beside its label.
+   */
+
+  /* Shell */
+  --space-gutter: 1rem; /* page edge; 1.5rem from md, 2rem from xl (below) */
+  --space-shell: 1rem; /* sidebar to content; 2rem from xl (below) */
+  --space-sidebar-top: 1.5rem; /* sidebar inset under the header */
+  --space-sidebar-end: 1rem; /* sidebar links to the sidebar's right edge */
+  --space-content-y: 2rem; /* content and sidebar padding at top and bottom */
+  --space-header: 1rem; /* between the logo, the nav and the actions */
+  --space-header-nav: 1.5rem; /* between header nav links */
+  --space-header-actions: 0.5rem; /* between header buttons */
+  --space-section: clamp(4rem, 8vw, 8rem); /* landing page sections */
+
+  /* Sidebar */
+  --space-nav-group: 1.5rem; /* between groups */
+  --space-nav-label: 0.375rem; /* group label to its links */
+  --space-nav-item-x: 0.625rem;
+  --space-nav-item-y: 0.25rem; /* with a 20px line, rows are 28px */
+
+  /* Page */
+  --space-title: 1rem; /* breadcrumb to the title row */
+  --space-intro: 0.5rem; /* title to the description */
+  --space-page: 2.5rem; /* page header to the first section; between index sections */
+  --space-block: 3rem; /* between examples; before Related */
+  --space-rule: 1.25rem; /* above and below a section rule */
+  --space-rule-lg: 2rem; /* below the rule before Related */
+  --space-heading: 0.75rem; /* section heading to its content */
+  --space-stack: 1rem; /* section label to its grid; title row to description */
+  --space-grid: 1rem; /* card grid gap */
+
+  /* Surfaces */
+  --space-canvas: 2.5rem; /* preview canvas padding around a centred demo */
+  --space-steps: 2rem; /* between manual install steps */
+  --space-step-indent: 2.5rem; /* step text to the left edge, past its number */
+  --space-card-x: 1rem; /* card title row */
+  --space-card-y: 0.75rem;
+  --space-card-inset: 0.5rem; /* card edge to its inner panel */
+  --space-panel: 1rem; /* inner panel padding */
+  --space-tabs: 0.25rem; /* tab list padding and gap */
+  --space-tab-x: 0.875rem;
+  --space-tab-y: 0.375rem;
+  --space-bar-x: 0.75rem; /* code block top bar */
+  --space-bar-y: 0.375rem;
+  --space-code-x: 1.25rem; /* code block body */
+  --space-code-y: 1rem;
+  --space-cell-x: 1rem; /* table cells */
+  --space-cell-y: 0.75rem;
 
   /* Lines and focus */
   --border-width: 1px;
@@ -229,6 +280,20 @@
 
   /* shadcn/ui compatibility: components derive radii from --radius */
   --radius: var(--radius-lg);
+}
+
+/* Responsive layout spacing, at the md (48rem) and xl (80rem) breakpoints */
+@media (min-width: 48rem) {
+  :root {
+    --space-gutter: 1.5rem;
+  }
+}
+
+@media (min-width: 80rem) {
+  :root {
+    --space-gutter: 2rem;
+    --space-shell: 2rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

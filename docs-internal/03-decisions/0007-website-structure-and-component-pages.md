@@ -8,6 +8,11 @@ Before building the docs site, we studied how 12 popular UI libraries, plus beUI
 - **Layout reference:** beUI's layout (beui.dev/components), with FewTone UI's own visual identity. We don't copy beUI's cards or styling.
 - **Component pages:** two columns, with no "On this page" list. **Related components** replace prev/next at the bottom.
 - **Full width** (owner, 2026-10-12): the header and the sidebar layout span the whole screen, with no `max-w-wide` box. The sidebar sits against the left edge, and component pages use all the width that's left. Guides keep a readable line length through the MDX wrapper (`max-w-docs`). The card grid goes up to four columns at `2xl`.
+- **Spacing and borders follow beUI** (owner, 2026-10-12: "same to same as beUI, not colors or radius"; "remove the sidebar borders and mostly from everywhere").
+  - **Spacing:** measured from beui.dev's computed styles: the shell, sidebar, page rhythm, cards, tabs, code blocks and tables. Every value is a named `--space-*` token in `tokens.css`, which the owner asked for so the rhythm can be tuned in one place. See `design-system.md` §6.
+  - **Borders:** see §6 for where they appear. The header shows its bottom border only after scrolling.
+  - **Page titles and headings:** to match beUI's rhythm, page titles use `text-h2` and section headings are small (14px semibold), with each section opening on a thin rule.
+  - **Kept our own:** colours, radius and the type tokens.
 - **Theme switch** (owner, 2026-10-12): one button with a tooltip ("Switch to dark theme" or "Switch to light theme") that flips between light and dark. It replaces the three-way light / dark / system switch. Until someone clicks it, the site follows the default theme. The icon turns in on `spring.snappy`; with reduced motion it only fades.
 - **No Accessibility section** on component pages. Components stay accessible by default; it just isn't a docs section.
 - **Wording:** generic and search-friendly ("Accessible React components for Next.js"), not centred on motion.

@@ -73,11 +73,11 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="focus-ring inline-flex h-(--size-control-sm) items-center gap-2 rounded-lg border px-2.5 text-label text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground sm:pr-1.5"
+          className="focus-ring inline-flex h-(--size-control-md) items-center gap-2 rounded-lg border px-2.5 text-label text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground sm:pr-1.5"
         >
           <SearchIcon className="size-(--size-icon-sm)" aria-hidden />
           <span className="sr-only sm:not-sr-only">Search</span>
-          <kbd className="hidden rounded-sm border bg-muted px-1.5 font-mono text-caption sm:inline">⌘K</kbd>
+          <kbd className="hidden rounded-sm bg-muted px-1.5 font-mono text-caption sm:inline">⌘K</kbd>
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>

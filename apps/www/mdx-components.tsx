@@ -7,7 +7,7 @@ import { CodeBlock } from "@/components/docs/code-block";
 const components: MDXComponents = {
   // The page area is full width; guides keep a readable line length
   wrapper: ({ children }) => <article className="grid max-w-docs gap-5">{children}</article>,
-  h1: (props) => <h1 className="text-h1" {...props} />,
+  h1: (props) => <h1 className="text-h2" {...props} />,
   h2: (props) => <h2 className="mt-6 scroll-mt-24 text-h3" {...props} />,
   h3: (props) => <h3 className="mt-2 scroll-mt-24 text-h4" {...props} />,
   p: (props) => <p className="text-body text-muted-foreground" {...props} />,
@@ -35,10 +35,7 @@ const components: MDXComponents = {
   ul: (props) => <ul className="grid list-disc gap-2 pl-6 text-muted-foreground" {...props} />,
   ol: (props) => <ol className="grid list-decimal gap-2 pl-6 text-muted-foreground" {...props} />,
   code: (props) => (
-    <code
-      className="rounded-md border bg-muted px-1.5 py-0.5 font-mono text-caption text-foreground"
-      {...props}
-    />
+    <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-caption text-foreground" {...props} />
   ),
   pre: ({ children }) => {
     const code = children as ReactElement<{ className?: string; children?: string }>;

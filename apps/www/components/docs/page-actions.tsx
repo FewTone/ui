@@ -25,11 +25,11 @@ export function PageActions({ markdown, url, title }: { markdown: string; url: s
   }
 
   return (
-    <div className="inline-flex shrink-0 items-stretch overflow-hidden rounded-lg border text-label">
+    <div className="inline-flex h-(--size-control-sm) shrink-0 items-stretch overflow-hidden rounded-lg bg-muted text-label">
       <button
         type="button"
         onClick={copy}
-        className="focus-ring inline-flex items-center gap-1.5 px-2.5 py-1 transition-colors duration-(--duration-fast) ease-out hover:bg-accent"
+        className="focus-ring inline-flex items-center gap-1.5 px-(--space-nav-item-x) transition-colors duration-(--duration-fast) ease-out hover:bg-accent"
       >
         {copied ? (
           <CheckIcon className="size-(--size-icon-sm)" aria-hidden />
@@ -41,7 +41,7 @@ export function PageActions({ markdown, url, title }: { markdown: string; url: s
       <DropdownMenu.Root>
         <DropdownMenu.Trigger
           aria-label="More page actions"
-          className="focus-ring inline-flex items-center border-l px-1.5 transition-colors duration-(--duration-fast) ease-out hover:bg-accent"
+          className="focus-ring inline-flex items-center border-l border-background px-2 transition-colors duration-(--duration-fast) ease-out hover:bg-accent"
         >
           <ChevronDownIcon className="size-(--size-icon-sm)" aria-hidden />
         </DropdownMenu.Trigger>

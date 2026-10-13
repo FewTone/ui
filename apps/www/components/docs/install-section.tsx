@@ -8,10 +8,10 @@ import { Command } from "./package-manager";
 
 function Step({ number, children }: { number: number; children: ReactNode }) {
   return (
-    <li className="relative grid min-w-0 grid-cols-1 gap-3 pl-10">
+    <li className="relative grid min-w-0 grid-cols-1 gap-(--space-heading) pl-(--space-step-indent)">
       <span
         aria-hidden
-        className="absolute top-0 left-0 flex size-6 items-center justify-center rounded-full border bg-muted text-caption"
+        className="absolute top-0 left-0 flex size-6 items-center justify-center rounded-full bg-muted text-caption"
       >
         {number}
       </span>
@@ -32,7 +32,7 @@ export async function InstallSection({ item }: { item: Item }) {
   const offset = hasDeps ? 1 : 0;
 
   const manual = (
-    <ol className="grid list-none gap-8">
+    <ol className="grid list-none gap-(--space-steps)">
       {hasDeps ? (
         <Step number={1}>
           <p className="text-body-sm">Install the dependencies.</p>

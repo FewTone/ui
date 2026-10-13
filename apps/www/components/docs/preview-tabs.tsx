@@ -31,8 +31,8 @@ export function PreviewTabs({
   const [run, setRun] = useState(0);
 
   return (
-    <Tabs.Root defaultValue="preview" className="grid grid-cols-1 gap-3">
-      <div className="flex items-center justify-between gap-3">
+    <Tabs.Root defaultValue="preview" className="grid grid-cols-1 gap-(--space-heading)">
+      <div className="flex items-center justify-between gap-(--space-heading)">
         <Tabs.List aria-label="Example view" className={tabList}>
           <Tabs.Trigger value="preview" className={tabTrigger}>
             Preview
@@ -50,7 +50,7 @@ export function PreviewTabs({
           <button
             type="button"
             onClick={() => setRun((value) => value + 1)}
-            className="focus-ring inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-label text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
+            className="focus-ring inline-flex items-center gap-1.5 rounded-full px-(--space-tab-x) py-(--space-tab-y) text-body-sm leading-5 text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
           >
             <RotateCcwIcon className="size-(--size-icon-sm)" aria-hidden />
             Replay
@@ -58,11 +58,12 @@ export function PreviewTabs({
         ) : null}
       </div>
       <Tabs.Content value="preview" forceMount className={tabPanel}>
+        {/* An open canvas: no border or fill, the demo sits on the page (beUI) */}
         <div
           className={cn(
-            "grid place-items-center overflow-hidden rounded-xl border bg-card",
+            "grid place-items-center overflow-hidden rounded-xl",
             heights[height],
-            template === "centered" && "p-10",
+            template === "centered" && "p-(--space-canvas)",
           )}
         >
           <div key={run} className="contents">

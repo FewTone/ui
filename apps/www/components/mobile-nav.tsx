@@ -28,7 +28,7 @@ export function MobileNav({ sections }: { sections: NavSection[] }) {
         <Dialog.Overlay className="fixed inset-0 z-(--z-overlay) bg-overlay data-[state=open]:animate-fade-in" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed inset-y-0 left-0 z-(--z-modal) grid w-72 max-w-full content-start gap-6 overflow-y-auto border-r bg-background p-5 shadow-xl data-[state=open]:animate-fade-in"
+          className="fixed inset-y-0 left-0 z-(--z-modal) grid w-72 max-w-full content-start gap-(--space-nav-group) overflow-y-auto bg-background p-(--space-gutter) shadow-xl data-[state=open]:animate-fade-in"
         >
           <div className="flex items-center justify-between">
             <Dialog.Title asChild>

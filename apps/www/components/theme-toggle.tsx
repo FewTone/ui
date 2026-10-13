@@ -36,7 +36,7 @@ export function ThemeToggle() {
             type="button"
             aria-label={label}
             onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="focus-ring inline-flex size-(--size-control-sm) items-center justify-center rounded-lg text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
+            className="focus-ring inline-flex size-(--size-control-md) items-center justify-center rounded-lg border text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
           >
             <span className="relative grid size-(--size-icon-md) place-items-center">
               {mounted ? (

@@ -13,15 +13,16 @@ export default function BrowseLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <SiteHeader />
-      <div className="flex w-full flex-1">
-        <aside className="sticky top-(--size-header) hidden h-(--size-below-header) w-(--size-sidebar) shrink-0 overflow-y-auto border-r py-8 pr-4 pl-(--space-gutter) lg:block">
+      {/* Every space here is a layout token in tokens.css (beUI rhythm) */}
+      <div className="flex w-full flex-1 gap-(--space-shell) px-(--space-gutter)">
+        <aside className="sticky top-(--size-header) hidden h-(--size-below-header) w-(--size-sidebar) shrink-0 overflow-y-auto pt-(--space-sidebar-top) pr-(--space-sidebar-end) pb-(--space-content-y) lg:block">
           <SidebarNav sections={getNavSections()} />
         </aside>
         <div className="flex min-w-0 flex-1 flex-col">
-          <main id="main" className="w-full flex-1 px-(--space-gutter) py-10">
+          <main id="main" className="w-full flex-1 py-(--space-content-y)">
             {children}
           </main>
-          <footer className="flex w-full flex-wrap justify-between gap-2 px-(--space-gutter) py-6 text-caption text-muted-foreground">
+          <footer className="flex w-full flex-wrap justify-between gap-2 py-(--space-content-y) text-caption text-muted-foreground">
             <span>© 2026 FewTone · MIT licence</span>
             <a
               href={site.github}

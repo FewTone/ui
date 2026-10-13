@@ -20,7 +20,7 @@ export async function CodeBlock({
   return (
     <div className={cn("code-block overflow-hidden rounded-xl border bg-muted", className)}>
       {filename ? (
-        <div className="flex items-center justify-between gap-2 border-b py-1 pr-1.5 pl-4">
+        <div className="flex items-center justify-between gap-2 border-b px-(--space-bar-x) py-(--space-bar-y)">
           <span className="truncate font-mono text-caption text-muted-foreground">{filename}</span>
           <CopyButton value={source} />
         </div>
@@ -28,7 +28,7 @@ export async function CodeBlock({
       <div className="relative">
         {filename ? null : <CopyButton value={source} className="absolute top-2 right-2" />}
         <div
-          className="overflow-x-auto px-4 py-3 text-code"
+          className="overflow-x-auto px-(--space-code-x) py-(--space-code-y) text-code"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output, generated at build time from our own source files
           dangerouslySetInnerHTML={{ __html: html }}
         />

@@ -7,7 +7,7 @@ export type Crumb = { name: string; href: string };
 export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center gap-1.5 text-label text-muted-foreground">
+      <ol className="flex flex-wrap items-center gap-1.5 text-body-sm leading-5 text-muted-foreground">
         {trail.map((crumb, index) => {
           const last = index === trail.length - 1;
           return (

@@ -73,7 +73,7 @@ export default function Home() {
       >
         <ul className="grid gap-4 md:grid-cols-3">
           {points.map(({ Icon, title, body }) => (
-            <li key={title} className="grid content-start gap-2 rounded-xl border bg-card p-6 shadow-xs">
+            <li key={title} className="grid content-start gap-2 rounded-xl bg-muted p-6">
               <Icon className="size-(--size-icon-lg) text-muted-foreground" aria-hidden />
               <h2 className="text-h4">{title}</h2>
               <p className="text-body-sm text-muted-foreground">{body}</p>

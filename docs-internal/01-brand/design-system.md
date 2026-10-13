@@ -201,13 +201,73 @@ Each status colour has five tokens: `<status>`, `<status>-foreground`, `<status>
 
 ## 6. Spacing and layout
 
-**Grid:** 4px. `p-1` = 4px, `p-4` = 16px, `p-6` = 24px.
-**Allowed steps** for padding, margin and gap: `0, px, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32`. Any other step fails `pnpm check:tokens`.
+There are two layers:
+
+1. **Layout tokens (`--space-*`).** These set the site's rhythm and are measured from beUI (ADR 0007). Use them for page structure, the sidebar, cards, tabs, code blocks and tables, for example `gap-(--space-nav-group)` or `mt-(--space-title)`. Change a value once in `tokens.css` and every page follows. **Don't write `py-8` or `mt-10` for layout.** Use a token, or add one with a comment.
+2. **The 4px scale.** Only for small gaps inside a control, like an icon beside its label (`gap-1.5`). `p-1` = 4px, `p-4` = 16px. **Allowed steps:** `0, px, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32`. Any other step fails `pnpm check:tokens`.
+
+**Shell**
 
 | Token | Value | Use |
 |---|---|---|
-| `--space-gutter` | clamp(16px, 4vw, 40px) | Page side padding: `px-(--space-gutter)` |
-| `--space-section` | clamp(64px, 8vw, 128px) | Vertical gap between page sections: `py-(--space-section)` |
+| `--space-gutter` | 16 / 24 / 32px (base, md, xl) | Page edge, header and sidebar layout |
+| `--space-shell` | 16 / 32px (base, xl) | Sidebar to content |
+| `--space-sidebar-top` / `-end` | 24px / 16px | Sidebar inset under the header / to its right edge |
+| `--space-content-y` | 32px | Content and sidebar padding, top and bottom |
+| `--space-header` / `-header-nav` / `-header-actions` | 16 / 24 / 8px | Header groups / nav links / buttons |
+| `--space-section` | clamp(64px, 8vw, 128px) | Landing page sections |
+
+**Sidebar**
+
+| Token | Value | Use |
+|---|---|---|
+| `--space-nav-group` | 24px | Between groups |
+| `--space-nav-label` | 6px | Group label to its links |
+| `--space-nav-item-x` / `-y` | 10px / 4px | Link padding. With a 20px line (`leading-5`), rows are 28px. |
+
+**Page**
+
+| Token | Value | Use |
+|---|---|---|
+| `--space-title` | 16px | Breadcrumb to title |
+| `--space-intro` | 8px | Title to description |
+| `--space-page` | 40px | Page header to the first section; between index sections |
+| `--space-block` | 48px | Between examples; before Related |
+| `--space-rule` | 20px | Above and below a section rule (`mt-(--space-rule) border-t pt-(--space-rule)`) |
+| `--space-rule-lg` | 32px | Below the rule before Related |
+| `--space-heading` | 12px | Section heading to its content |
+| `--space-stack` | 16px | Section label to its grid; title row to description |
+| `--space-grid` | 16px | Card grid gap |
+
+**Surfaces**
+
+| Token | Value | Use |
+|---|---|---|
+| `--space-canvas` | 40px | Preview canvas padding |
+| `--space-card-x` / `-y` | 16px / 12px | Card title row |
+| `--space-card-inset` / `--space-panel` | 8px / 16px | Card edge to its inner panel / panel padding |
+| `--space-tabs`, `--space-tab-x` / `-y` | 4px, 14px / 6px | Tab list padding and gap, tab padding |
+| `--space-bar-x` / `-y` | 12px / 6px | Code block top bar |
+| `--space-code-x` / `-y` | 20px / 16px | Code block body |
+| `--space-cell-x` / `-y` | 16px / 12px | Table cells |
+| `--space-steps` / `--space-step-indent` | 32px / 40px | Manual install steps |
+| `--size-card` | 160px | Item card height |
+
+**Borders (beUI rules, ADR 0007).**
+- **No border on:**
+  - the header until the page scrolls
+  - the sidebar
+  - cards, which are two-tone: `bg-muted` outside, `bg-card` inside
+  - tab lists, which are filled pills
+  - the preview canvas, which is open
+  - chips
+- **Borders only on:**
+  - code blocks
+  - the API table (outline and row dividers)
+  - section rules
+  - popovers and dialogs
+  - secondary buttons
+  - the header's icon buttons
 
 **Widths (`max-w-*`)**
 

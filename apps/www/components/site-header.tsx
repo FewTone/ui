@@ -3,28 +3,31 @@ import { getNavSections, getSearchEntries } from "@/lib/nav";
 import { site } from "@/lib/site";
 import { CommandMenu } from "./command-menu";
 import { GithubIcon } from "./github-icon";
+import { HeaderFrame } from "./header-frame";
 import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { NavLink } from "./nav-link";
 import { ThemeToggle } from "./theme-toggle";
 
-/** Full width, so the logo lines up with the sidebar on component pages */
+/** Full width, so the logo lines up with the sidebar on component pages. Spacing follows beUI (ADR 0007). */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-(--z-sticky) h-(--size-header) border-b bg-background/85 backdrop-blur">
-      <div className="flex h-full items-center gap-4 px-(--space-gutter)">
+    <HeaderFrame>
+      <div className="flex h-full items-center gap-(--space-header) px-(--space-gutter)">
         <MobileNav sections={getNavSections()} />
-        <Link href="/" aria-label="FewTone UI home" className="focus-ring flex rounded-sm">
-          <Logo className="text-body-lg" />
-        </Link>
-        <nav
-          aria-label="Main"
-          className="ml-2 hidden items-center gap-5 text-body-sm text-muted-foreground md:flex"
-        >
-          <NavLink href="/components">Components</NavLink>
-          <NavLink href="/docs">Docs</NavLink>
-        </nav>
-        <div className="ml-auto flex items-center gap-2">
+        <div className="flex items-center gap-(--space-header-nav)">
+          <Link href="/" aria-label="FewTone UI home" className="focus-ring flex rounded-sm">
+            <Logo className="text-body-lg" />
+          </Link>
+          <nav
+            aria-label="Main"
+            className="hidden items-center gap-(--space-header-nav) text-body-sm text-muted-foreground md:flex"
+          >
+            <NavLink href="/components">Components</NavLink>
+            <NavLink href="/docs">Docs</NavLink>
+          </nav>
+        </div>
+        <div className="ml-auto flex items-center gap-(--space-header-actions)">
           <CommandMenu entries={getSearchEntries()} />
           <ThemeToggle />
           <a
@@ -32,12 +35,12 @@ export function SiteHeader() {
             target="_blank"
             rel="noreferrer"
             aria-label="FewTone UI on GitHub"
-            className="focus-ring inline-flex size-(--size-control-sm) items-center justify-center rounded-lg text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
+            className="focus-ring inline-flex size-(--size-control-md) items-center justify-center rounded-lg border text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:bg-accent hover:text-foreground"
           >
             <GithubIcon className="size-(--size-icon-md)" />
           </a>
         </div>
       </div>
-    </header>
+    </HeaderFrame>
   );
 }

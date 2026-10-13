@@ -48,8 +48,8 @@ export function Command({ commands }: { commands: Record<PackageManager, string>
 
   return (
     <div className="overflow-hidden rounded-xl border bg-muted">
-      <div className="flex items-center justify-between gap-2 border-b py-1 pr-1.5 pl-2">
-        <fieldset className="flex gap-0.5">
+      <div className="flex items-center justify-between gap-2 border-b px-(--space-bar-x) py-(--space-bar-y)">
+        <fieldset className="flex gap-(--space-tabs)">
           <legend className="sr-only">Package manager</legend>
           {packageManagers.map((option) => (
             <button
@@ -58,8 +58,8 @@ export function Command({ commands }: { commands: Record<PackageManager, string>
               aria-pressed={manager === option}
               onClick={() => choose(option)}
               className={cn(
-                "focus-ring rounded-md px-2 py-0.5 font-mono text-caption text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:text-foreground",
-                manager === option && "bg-background text-foreground shadow-xs",
+                "focus-ring rounded-md border border-transparent px-(--space-nav-item-x) py-(--space-nav-item-y) font-mono text-caption text-muted-foreground transition-colors duration-(--duration-fast) ease-out hover:text-foreground",
+                manager === option && "border-border bg-background text-foreground",
               )}
             >
               {option}
@@ -68,7 +68,7 @@ export function Command({ commands }: { commands: Record<PackageManager, string>
         </fieldset>
         <CopyButton value={command} label="Copy command" />
       </div>
-      <pre className="overflow-x-auto px-4 py-3 font-mono text-code">
+      <pre className="overflow-x-auto px-(--space-code-x) py-(--space-code-y) font-mono text-code">
         <code>
           <span className="text-muted-foreground select-none">$ </span>
           {command}

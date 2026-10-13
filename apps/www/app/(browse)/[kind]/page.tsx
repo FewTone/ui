@@ -32,6 +32,9 @@ export async function generateMetadata({ params }: PageProps<"/[kind]">): Promis
   };
 }
 
+/** Small uppercase label over each card grid, as on beUI */
+const sectionLabel = "text-overline text-muted-foreground uppercase";
+
 /** The page body reads params inside Suspense, so client navigations show the shell instantly */
 export default function KindPage({ params }: PageProps<"/[kind]">) {
   return (
@@ -52,24 +55,26 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
   const fresh = kind.items.filter(isNew);
 
   return (
-    <article className="grid grid-cols-1 gap-12">
-      <header className="grid grid-cols-1 gap-4">
+    <article>
+      <header>
         <Breadcrumbs trail={trail} />
-        <h1 className="text-h1">{kind.heading}</h1>
-        <p className="max-w-prose text-body-lg text-muted-foreground">{kind.intro}</p>
+        <h1 className="mt-(--space-title) text-h2">{kind.heading}</h1>
+        <p className="mt-(--space-intro) max-w-prose text-body text-muted-foreground">{kind.intro}</p>
       </header>
 
       {fresh.length > 0 ? (
-        <section aria-labelledby="new" className="grid gap-4">
-          <h2 id="new" className="text-overline text-muted-foreground uppercase">
+        <section aria-labelledby="new" className="mt-(--space-page)">
+          <h2 id="new" className={sectionLabel}>
             New
           </h2>
-          <ItemGrid items={fresh} />
+          <div className="mt-(--space-stack)">
+            <ItemGrid items={fresh} />
+          </div>
         </section>
       ) : null}
 
       {kind.items.length === 0 ? (
-        <div className="grid justify-items-start gap-3 rounded-xl border border-dashed p-8">
+        <div className="mt-(--space-page) grid justify-items-start gap-(--space-heading) rounded-xl bg-muted p-(--space-content-y)">
           <h2 className="text-h4">The first {kind.plural.toLowerCase()} are on the way</h2>
           <p className="text-body-sm text-muted-foreground">
             Get your project ready in the meantime: FewTone UI works with the shadcn CLI.
@@ -85,11 +90,13 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
         groupByCategory(kind.items).map(([category, list]) => {
           const id = `category-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
           return (
-            <section key={category} aria-labelledby={id} className="grid gap-4">
-              <h2 id={id} className="text-h4">
+            <section key={category} aria-labelledby={id} className="mt-(--space-page)">
+              <h2 id={id} className={sectionLabel}>
                 {category}
               </h2>
-              <ItemGrid items={list} />
+              <div className="mt-(--space-stack)">
+                <ItemGrid items={list} />
+              </div>
             </section>
           );
         })

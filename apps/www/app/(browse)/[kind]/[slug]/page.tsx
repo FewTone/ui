@@ -54,7 +54,9 @@ export async function generateMetadata({ params }: PageProps<"/[kind]/[slug]">):
 }
 
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" });
-const sectionTitle = "scroll-mt-24 text-h3";
+// Layout follows beUI (ADR 0007): small section headings, each section opens with a thin rule, spacing from tokens
+const sectionTitle = "scroll-mt-24 text-body-sm leading-5 font-semibold";
+const ruledSection = "mt-(--space-rule) border-t pt-(--space-rule)";
 
 /** The page body reads params inside Suspense, so client navigations show the shell instantly */
 export default function ItemPage({ params }: PageProps<"/[kind]/[slug]">) {
@@ -83,19 +85,19 @@ async function ItemContent({ params }: Pick<PageProps<"/[kind]/[slug]">, "params
   const updated = dateFormat.format(new Date(`${item.updatedAt}T00:00:00Z`));
 
   return (
-    <article className="grid grid-cols-1 gap-12">
-      <header className="grid grid-cols-1 gap-4">
+    <article>
+      <header>
         <Breadcrumbs trail={trail} />
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <h1 className="flex items-center gap-3 text-h1">
+        <div className="mt-(--space-title) flex flex-wrap items-start justify-between gap-(--space-stack)">
+          <h1 className="flex items-center gap-3 text-h2">
             {item.title}
             {isNew(item) ? <StatusBadge>New</StatusBadge> : null}
             {item.status === "draft" ? <StatusBadge>Draft</StatusBadge> : null}
           </h1>
           <PageActions markdown={itemMarkdown(item)} url={url} title={item.title} />
         </div>
-        <p className="max-w-prose text-body-lg text-muted-foreground">{item.description}</p>
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-label text-muted-foreground">
+        <p className="mt-(--space-intro) max-w-prose text-body text-muted-foreground">{item.description}</p>
+        <ul className="mt-(--space-stack) flex flex-wrap gap-x-5 gap-y-2 text-label text-muted-foreground">
           <li>
             <a
               href={source}
@@ -122,61 +124,75 @@ async function ItemContent({ params }: Pick<PageProps<"/[kind]/[slug]">, "params
         </ul>
       </header>
 
-      {hero ? <ComponentPreview item={item} demo={hero.name} withUsage /> : null}
+      {hero ? (
+        <div className="mt-(--space-page)">
+          <ComponentPreview item={item} demo={hero.name} withUsage />
+        </div>
+      ) : null}
 
-      <section aria-labelledby="installation" className="grid grid-cols-1 gap-4">
+      <section aria-labelledby="installation" className={ruledSection}>
         <h2 id="installation" className={sectionTitle}>
           Installation
         </h2>
-        <InstallSection item={item} />
+        <div className="mt-(--space-heading)">
+          <InstallSection item={item} />
+        </div>
       </section>
 
       {examples.length > 0 ? (
-        <section aria-labelledby="examples" className="grid grid-cols-1 gap-10">
+        <section aria-labelledby="examples" className={ruledSection}>
           <h2 id="examples" className={sectionTitle}>
             Examples
           </h2>
-          {examples.map((demo) => (
-            <div key={demo.name} className="grid grid-cols-1 gap-3">
-              <h3 id={demo.name} className="scroll-mt-24 text-h4">
-                {demo.title}
-              </h3>
-              {demo.description ? (
-                <p className="text-body-sm text-muted-foreground">{demo.description}</p>
-              ) : null}
-              <ComponentPreview item={item} demo={demo.name} />
-            </div>
-          ))}
+          <div className="mt-(--space-heading) grid grid-cols-1 gap-(--space-block)">
+            {examples.map((demo) => (
+              <div key={demo.name}>
+                <h3 id={demo.name} className="scroll-mt-24 text-h4">
+                  {demo.title}
+                </h3>
+                {demo.description ? (
+                  <p className="mt-(--space-stack) text-body-sm text-muted-foreground">{demo.description}</p>
+                ) : null}
+                <div className="mt-(--space-stack)">
+                  <ComponentPreview item={item} demo={demo.name} />
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       ) : null}
 
       {item.api.length > 0 ? (
-        <section aria-labelledby="api" className="grid grid-cols-1 gap-6">
+        <section aria-labelledby="api" className={ruledSection}>
           <h2 id="api" className={sectionTitle}>
             API reference
           </h2>
-          {item.api.map((part) => (
-            <div key={part.name} className="grid grid-cols-1 gap-3">
-              {item.api.length > 1 ? <h3 className="text-h4">{part.name}</h3> : null}
-              {part.description ? (
-                <p className="text-body-sm text-muted-foreground">{part.description}</p>
-              ) : null}
-              <PropsTable props={part.props} />
-            </div>
-          ))}
+          <div className="mt-(--space-heading) grid grid-cols-1 gap-(--space-block)">
+            {item.api.map((part) => (
+              <div key={part.name} className="grid grid-cols-1 gap-(--space-heading)">
+                {item.api.length > 1 ? <h3 className="text-h4">{part.name}</h3> : null}
+                {part.description ? (
+                  <p className="text-body-sm text-muted-foreground">{part.description}</p>
+                ) : null}
+                <PropsTable props={part.props} />
+              </div>
+            ))}
+          </div>
         </section>
       ) : null}
 
       {related.length > 0 ? (
-        <section aria-labelledby="related" className="grid grid-cols-1 gap-4">
+        <section aria-labelledby="related" className="mt-(--space-block) border-t pt-(--space-rule-lg)">
           <h2 id="related" className={sectionTitle}>
             Related {kind.plural.toLowerCase()}
           </h2>
-          <ItemGrid items={related} />
+          <div className="mt-(--space-stack)">
+            <ItemGrid items={related} />
+          </div>
         </section>
       ) : null}
 
-      <footer className="flex flex-wrap gap-x-5 gap-y-2 border-t pt-6 text-caption text-muted-foreground">
+      <footer className="mt-(--space-block) flex flex-wrap gap-x-5 gap-y-2 text-caption text-muted-foreground">
         <span>
           Last updated <time dateTime={item.updatedAt}>{updated}</time>
         </span>

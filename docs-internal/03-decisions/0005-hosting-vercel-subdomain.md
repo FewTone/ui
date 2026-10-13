@@ -48,7 +48,11 @@ The owner's personal Vercel account is busy with other projects and holds their 
   - pnpm 11 through Corepack (`--build-env ENABLE_EXPERIMENTAL_COREPACK=1`)
 
   `.vercelignore` skips `docs-internal` and `.turbo`.
-- **Repo location:** the repo is private at `FewTone/ui`. Vercel's free plan refuses private org repos through its *Git integration*, but deploying from the CLI worked (first deploy, 2026-10-12). If Vercel starts refusing CLI deploys too, make the repo public. Don't hide the git metadata.
+- **Repo location:** `FewTone/ui`, **public** since 2026-10-12.
+  - While it was private, the first deploy went through, but the second was **BLOCKED**: the commit author didn't have permission to create deployments for the project. The free plan's commit-author check applies to private org repos, and the owner's GitHub login belongs to their personal Vercel account.
+  - The owner chose to make the repo public. It is planned as MIT anyway, and the history was scanned first for tokens and keys.
+  - Rejected alternatives: Vercel Pro ($20/mo, invite the personal account as a team member), or moving the repo back to the personal account.
+  - Never hide the git metadata to get around the check.
 - **Where it lives:**
   - Vercel team `few-tone`, project `fewtone-ui`
   - production at `fewtone-ui.vercel.app`, behind Vercel's login protection; custom domains are public

@@ -63,7 +63,10 @@ docs-internal/             long-term project memory (see map below)
 | `pnpm deploy:preview` / `pnpm deploy:prod` | Deploy the site from this machine to the FewTone Vercel account. Needs a token in `.env.deploy.local` (see `scripts/deploy.mjs` and ADR 0005). The owner runs deploys, commits and pushes; agents don't. |
 
 ## Golden rules
-1. **Nothing hardcoded.** Every colour, size, space, radius, shadow, duration and easing comes from a token. Read `docs-internal/01-brand/design-system.md` before writing UI. `pnpm check:tokens` fails on:
+1. **Nothing hardcoded.** Every colour, size, space, radius, shadow, duration and easing comes from a token. Read `docs-internal/01-brand/design-system.md` before writing UI.
+   - **Layout spacing uses the named `--space-*` tokens** (design-system §6, measured from beUI): `gap-(--space-nav-group)`, `mt-(--space-title)`. Never use raw steps like `py-8`. The 4px scale is only for small gaps inside a control.
+
+   `pnpm check:tokens` fails on:
    - raw colours
    - arbitrary Tailwind values
    - default palette classes
