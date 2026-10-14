@@ -112,3 +112,31 @@ The Lab at `/lab` compares ways to reveal the other theme (`components/theme-swi
 - **Status from the index:** 5 Available (linked), 10 Next up (Checkbox, Radio Group, Textarea, Dialog, Dropdown Menu, Tooltip, Popover, Tabs, Accordion, Toast) and 36 Planned. A planned component that ships under the same name flips to Available on its own.
 - **Where it's linked:** with the guides (sidebar, search, sitemap) and in the footer's Library column.
 - **Look:** neutral styling (Navy stays for New) and wording for visitors.
+
+**Loading Button, in the Lab (owner: "in lab only"):**
+- **Where:** `packages/ui/src/components/loading-button/` has the component and its tests but no meta yet, so no page or registry entry. The workbench is `/lab`: every variant and size in a chosen state, plus real succeed and fail buttons with a delay setting.
+- **States:** idle, loading, success, error. A promise-driven or controlled `state`, a fixed width, a cross-swap on `spring.snappy`, a spinner, a check and cross that draw in, destructive colours on error, and an automatic reset.
+- **Navigation:** the header shows a Lab link in development only.
+- **Rules:** motion.md gained the async-button row and the stroke-drawing exception.
+- **Loading Button revised:** the content swaps through a blur (three variants), and there are five error colours to compare (the owner disliked solid red). Both are chosen with dropdowns on `/lab`.
+- **Loading Button:** the owner chose blur + rise and solid red, and the other options were removed. Six candidate reds (for the theme's danger colour) are now in the Lab to choose the hue itself.
+- **Danger is now Signal red** (owner): `oklch(0.55 0.2 27)`, generated into the palette, and the design-system table is updated. It's the one status colour that isn't muted.
+- **Success green explored on `/lab`:** Neutral against six greens, with the component unchanged until the owner chooses.
+- **Success stays neutral (owner):** the greens were rejected and removed from the Lab, so the Loading Button keeps a neutral success with a drawn check.
+- **Loading Button published (owner):** a meta file, an Async action hero, an Every state example and a card demo. The registry item needs motion, tokens and Button. The roadmap flips to Available by itself. The Lab workbench was deleted, and `/lab` is now an index (nothing in progress, plus Tokens).
+
+**Toggle Group, in the Lab:**
+- **Where:** `packages/ui/src/components/toggle-group/` has the component and 5 tests but no meta yet. The workbench is on `/lab`, with Variant and Size dropdowns and single and multiple examples (text, icons, both, deselectable, disabled).
+- **Single:** a segmented control with a sliding pill that always keeps a choice.
+- **Multiple:** each pressed option fades its own pill in.
+- **Look:** flat, with no shadow or scale.
+- **Split in two (owner):**
+  - **Switcher** (the name the owner chose): one choice, with a sliding pill and always a choice.
+  - **Toggle Group:** options switched on and off independently, with no `type` prop.
+  - **Both** have tests (6 together) and share the Lab page. The roadmap has separate entries for them.
+- **Switcher and Toggle Group published (owner):**
+  - **Pages:** each opens on a Default and Outline "Variants" preview with a Size Select, plus a few examples and a single-group card demo.
+  - **Roadmap:** both flip to Available.
+  - **Lab:** the workbench was deleted, and `/lab` is back to an index.
+- **Outline fixed in Switcher and Toggle Group (owner):** the `bg-accent` pill matched the preview canvas and disappeared, so it's now an inverted `bg-primary` pill with a flipped label. Hover only affects options that are off.
+- **Outline, final (owner):** the pill follows the theme (`bg-background`) with a hairline on Outline. The inverted pill was rejected.

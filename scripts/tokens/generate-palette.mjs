@@ -14,7 +14,8 @@ const HUES = {
   // Status colours share Navy's deep, muted tone: similar lightness, low chroma.
   success: { h: 150, c: 0.105, l: 0.52 },
   warning: { h: 70, c: 0.11, l: 0.66 },
-  danger: { h: 25, c: 0.13, l: 0.5 },
+  // Danger is the one exception: a clear, vivid "Signal red" (owner, 2026-10-14), chosen over the muted brick
+  danger: { h: 27, c: 0.2, l: 0.55 },
 };
 
 // Pure neutral: no hue, no chroma.

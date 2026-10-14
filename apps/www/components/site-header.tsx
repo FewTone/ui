@@ -25,6 +25,8 @@ export function SiteHeader() {
           >
             <NavLink href="/components">Components</NavLink>
             <NavLink href="/docs">Docs</NavLink>
+            {/* The Lab is dev only (it returns 404 in production), so its link is too */}
+            {process.env.NODE_ENV !== "production" ? <NavLink href="/lab">Lab</NavLink> : null}
           </nav>
         </div>
         <div className="ml-auto flex items-center gap-(--space-header-actions)">

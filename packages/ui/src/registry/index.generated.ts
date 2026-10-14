@@ -230,6 +230,139 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "loading-button",
+    "title": "Loading Button",
+    "description": "An accessible React loading button for Next.js that shows loading, success and error states for async actions, without changing width.",
+    "kind": "component",
+    "category": "Buttons",
+    "tags": [
+      "button",
+      "loading",
+      "spinner",
+      "async",
+      "submit",
+      "success",
+      "error"
+    ],
+    "keywords": [
+      "react loading button",
+      "nextjs loading button",
+      "button with spinner",
+      "async button",
+      "submit button loading state",
+      "button success state",
+      "shadcn loading button",
+      "tailwind loading button"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-14",
+    "updatedAt": "2026-10-14",
+    "tier": "free",
+    "files": [
+      "loading-button.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { LoadingButton } from \"@/components/ui/loading-button\"\n\nexport function SaveButton() {\n  return (\n    <LoadingButton\n      onClick={() => saveChanges()}\n      loadingText=\"Saving…\"\n      successText=\"Saved\"\n      errorText=\"Try again\"\n    >\n      Save changes\n    </LoadingButton>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "async",
+        "title": "Async action",
+        "description": "Return a promise from onClick: the button shows loading until it settles, then success or error, then its label again."
+      },
+      {
+        "name": "states",
+        "title": "Every state",
+        "description": "Set state yourself to control it. The width never changes, because the button is sized to its widest state."
+      }
+    ],
+    "api": [
+      {
+        "name": "LoadingButton",
+        "description": "Also accepts every Button prop except asChild. While loading it stays focusable (aria-busy, aria-disabled) and ignores clicks, and a polite live region announces each change.",
+        "props": [
+          {
+            "name": "onClick",
+            "type": "(event) => unknown",
+            "description": "Return a promise to show loading until it settles, then success when it resolves or error when it rejects."
+          },
+          {
+            "name": "state",
+            "type": "\"idle\" | \"loading\" | \"success\" | \"error\"",
+            "description": "Controls the state yourself. Leave it out and onClick's promise drives it."
+          },
+          {
+            "name": "loadingText",
+            "type": "ReactNode",
+            "description": "Shown next to the spinner. The label stays if left out."
+          },
+          {
+            "name": "successText",
+            "type": "ReactNode",
+            "description": "Shown next to the check."
+          },
+          {
+            "name": "errorText",
+            "type": "ReactNode",
+            "description": "Shown next to the cross, on solid red."
+          },
+          {
+            "name": "resetAfter",
+            "type": "number | false",
+            "default": "2000",
+            "description": "Milliseconds after success or error until it's idle again, or false to stay. Ignored when controlled."
+          },
+          {
+            "name": "variant",
+            "type": "Button variant",
+            "default": "\"default\"",
+            "description": "The button style."
+          },
+          {
+            "name": "size",
+            "type": "Button size",
+            "default": "\"md\"",
+            "description": "The button size."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Button"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "button",
+      "theme-toggle"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use LoadingButton for actions that take time, like saving or submitting, so people see progress and the result. Return a promise from onClick, or set state yourself. Use Button for instant actions."
+    },
+    "controls": {},
+    "href": "/components/loading-button",
+    "dir": "components/loading-button",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
     "name": "select",
     "title": "Select",
     "description": "An accessible React select with a gliding highlight, groups, labels and a scrollable list, built on Radix Select.",
@@ -553,6 +686,150 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "switcher",
+    "title": "Switcher",
+    "description": "An accessible React segmented control for Next.js: one choice from a few options, with a pill that slides to the one you pick.",
+    "kind": "component",
+    "category": "Buttons",
+    "tags": [
+      "switcher",
+      "segmented control",
+      "tabs",
+      "radio",
+      "toggle",
+      "view switcher"
+    ],
+    "keywords": [
+      "react segmented control",
+      "nextjs segmented control",
+      "react switcher",
+      "view switcher",
+      "segmented button",
+      "tailwind segmented control",
+      "shadcn segmented control",
+      "animated segmented control"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-14",
+    "updatedAt": "2026-10-14",
+    "tier": "free",
+    "files": [
+      "switcher.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Switcher, SwitcherItem } from \"@/components/ui/switcher\"\n\nexport function RangeSwitcher() {\n  return (\n    <Switcher defaultValue=\"week\" aria-label=\"Range\">\n      <SwitcherItem value=\"day\">Day</SwitcherItem>\n      <SwitcherItem value=\"week\">Week</SwitcherItem>\n      <SwitcherItem value=\"month\">Month</SwitcherItem>\n    </Switcher>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "variants",
+        "title": "Variants",
+        "description": "Default has a muted track; Outline a bordered track and pill. The pill matches the theme, dark in dark mode and light in light mode. Pick an option and the pill slides to it. There's always a choice."
+      },
+      {
+        "name": "icons",
+        "title": "Icons",
+        "description": "Name each icon-only option with aria-label, so screen readers can tell them apart."
+      },
+      {
+        "name": "icons-and-text",
+        "title": "Icons and text"
+      }
+    ],
+    "api": [
+      {
+        "name": "Switcher",
+        "description": "One choice from a few: a radiogroup, built on Radix Toggle Group. Arrow keys move between options; Home and End jump to the ends. Give it a name with aria-label.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The chosen option, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "description": "The option chosen at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called with the new option. Clicking the chosen option again keeps it."
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"outline\"",
+            "default": "\"default\"",
+            "description": "Default: a muted track. Outline: a bordered track, with a bordered pill. The pill is dark in dark mode and light in light mode."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "32, 36 or 40px tall, matching Button."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables every option."
+          }
+        ]
+      },
+      {
+        "name": "SwitcherItem",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The value this option picks."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the option."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Toggle Group"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/radio/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "toggle-group",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Switcher for one choice from two to five short options that change a view, like Day / Week / Month or List / Grid. Use Toggle Group when options switch on and off independently, Select for longer lists, and Tabs when each option shows its own panel."
+    },
+    "controls": {},
+    "href": "/components/switcher",
+    "dir": "components/switcher",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
     "name": "theme-toggle",
     "title": "Theme Toggle",
     "description": "An accessible React dark mode toggle for Next.js that reveals the new theme from the button with a View Transition: a circle, ink, a wave or a page turn.",
@@ -695,6 +972,151 @@ export const items: Item[] = [
         "tokens",
         "motion",
         "button"
+      ]
+    }
+  },
+  {
+    "name": "toggle-group",
+    "title": "Toggle Group",
+    "description": "An accessible React toggle group for Next.js: buttons you switch on and off independently, like Bold, Italic and Underline in a toolbar.",
+    "kind": "component",
+    "category": "Buttons",
+    "tags": [
+      "toggle group",
+      "toggle",
+      "toolbar",
+      "formatting",
+      "multi select",
+      "filter"
+    ],
+    "keywords": [
+      "react toggle group",
+      "shadcn toggle group",
+      "nextjs toggle group",
+      "toggle buttons",
+      "toolbar toggle buttons",
+      "tailwind toggle group",
+      "multi select buttons",
+      "radix toggle group"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-14",
+    "updatedAt": "2026-10-14",
+    "tier": "free",
+    "files": [
+      "toggle-group.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { ToggleGroup, ToggleGroupItem } from \"@/components/ui/toggle-group\"\n\nexport function Formatting() {\n  return (\n    <ToggleGroup defaultValue={[\"bold\"]} aria-label=\"Formatting\">\n      <ToggleGroupItem value=\"bold\">Bold</ToggleGroupItem>\n      <ToggleGroupItem value=\"italic\">Italic</ToggleGroupItem>\n      <ToggleGroupItem value=\"underline\">Underline</ToggleGroupItem>\n    </ToggleGroup>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "variants",
+        "title": "Variants",
+        "description": "Default has a muted track; Outline a bordered track and pill. The pill matches the theme, dark in dark mode and light in light mode. Each option you switch on fades its own pill in."
+      },
+      {
+        "name": "days",
+        "title": "Days",
+        "description": "Text options work the same way, here picking the days to repeat on."
+      },
+      {
+        "name": "disabled",
+        "title": "A disabled option",
+        "description": "Disabled options don't respond and the arrow keys skip them."
+      }
+    ],
+    "api": [
+      {
+        "name": "ToggleGroup",
+        "description": "Options switched on and off independently: a toolbar of pressed buttons, built on Radix Toggle Group. Arrow keys move between options; Home and End jump to the ends. For one choice, use Switcher. Give it a name with aria-label.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string[]",
+            "description": "The options switched on, when you control them."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string[]",
+            "description": "The options switched on at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string[]) => void",
+            "description": "Called with every option that's on, after each change."
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"outline\"",
+            "default": "\"default\"",
+            "description": "Default: a muted track. Outline: a bordered track, with a bordered pill. The pill is dark in dark mode and light in light mode."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "32, 36 or 40px tall, matching Button."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables every option."
+          }
+        ]
+      },
+      {
+        "name": "ToggleGroupItem",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The value this option adds when it's on."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the option."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Toggle Group"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "switcher",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use ToggleGroup for options people switch on and off independently, like text formatting, weekdays or notification channels. Use Switcher for one choice from a few, and Checkbox for options in a form."
+    },
+    "controls": {},
+    "href": "/components/toggle-group",
+    "dir": "components/toggle-group",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
       ]
     }
   }

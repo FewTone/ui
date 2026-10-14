@@ -35,12 +35,17 @@ const plan: { group: string; entries: Entry[] }[] = [
       {
         name: "loading-button",
         title: "Loading Button",
-        note: "A button that shows progress while it works.",
+        note: "Loading, success and error for async actions, at a steady width.",
+      },
+      {
+        name: "switcher",
+        title: "Switcher",
+        note: "One choice from a few, with a pill that slides to it.",
       },
       {
         name: "toggle-group",
         title: "Toggle Group",
-        note: "A segmented control with a pill that slides to the active option.",
+        note: "Buttons you switch on and off, like Bold and Italic.",
       },
       {
         name: "copy-button",

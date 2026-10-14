@@ -69,18 +69,18 @@
   --warning-11: oklch(0.52 0.099 70);
   --warning-12: oklch(0.3 0.055 70);
 
-  --danger-1: oklch(0.993 0.004 25);
-  --danger-2: oklch(0.98 0.009 25);
-  --danger-3: oklch(0.955 0.018 25);
-  --danger-4: oklch(0.93 0.029 25);
-  --danger-5: oklch(0.9 0.039 25);
-  --danger-6: oklch(0.865 0.049 25);
-  --danger-7: oklch(0.815 0.065 25);
-  --danger-8: oklch(0.75 0.086 25);
-  --danger-9: oklch(0.5 0.13 25);
-  --danger-10: oklch(0.455 0.13 25);
-  --danger-11: oklch(0.4 0.117 25);
-  --danger-12: oklch(0.3 0.065 25);
+  --danger-1: oklch(0.993 0.006 27);
+  --danger-2: oklch(0.98 0.014 27);
+  --danger-3: oklch(0.955 0.028 27);
+  --danger-4: oklch(0.93 0.044 27);
+  --danger-5: oklch(0.9 0.06 27);
+  --danger-6: oklch(0.865 0.076 27);
+  --danger-7: oklch(0.815 0.1 27);
+  --danger-8: oklch(0.75 0.132 27);
+  --danger-9: oklch(0.55 0.2 27);
+  --danger-10: oklch(0.505 0.2 27);
+  --danger-11: oklch(0.45 0.18 27);
+  --danger-12: oklch(0.3 0.1 27);
 }
 
 .dark {
@@ -136,16 +136,16 @@
   --warning-11: oklch(0.79 0.083 70);
   --warning-12: oklch(0.94 0.033 70);
 
-  --danger-1: oklch(0.16 0.013 25);
-  --danger-2: oklch(0.189 0.018 25);
-  --danger-3: oklch(0.224 0.033 25);
-  --danger-4: oklch(0.262 0.043 25);
-  --danger-5: oklch(0.302 0.052 25);
-  --danger-6: oklch(0.343 0.061 25);
-  --danger-7: oklch(0.386 0.073 25);
-  --danger-8: oklch(0.43 0.091 25);
-  --danger-9: oklch(0.5 0.13 25);
-  --danger-10: oklch(0.55 0.124 25);
-  --danger-11: oklch(0.78 0.098 25);
-  --danger-12: oklch(0.94 0.039 25);
+  --danger-1: oklch(0.16 0.02 27);
+  --danger-2: oklch(0.194 0.028 27);
+  --danger-3: oklch(0.236 0.05 27);
+  --danger-4: oklch(0.281 0.066 27);
+  --danger-5: oklch(0.328 0.08 27);
+  --danger-6: oklch(0.377 0.094 27);
+  --danger-7: oklch(0.428 0.112 27);
+  --danger-8: oklch(0.48 0.14 27);
+  --danger-9: oklch(0.55 0.2 27);
+  --danger-10: oklch(0.6 0.19 27);
+  --danger-11: oklch(0.78 0.15 27);
+  --danger-12: oklch(0.94 0.06 27);
 }

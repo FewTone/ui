@@ -103,7 +103,7 @@ They are deep and muted, in the same tone as Navy: low chroma and similar lightn
 |---|---|---|---|---|---|
 | Success | `oklch(0.52 0.105 150)` | `0.955 0.015 150` / `0.229 0.026 150` | `0.865 0.04 150` / `0.357 0.049 150` | `0.42 0.095 150` / `0.78 0.079 150` | white |
 | Warning | `oklch(0.66 0.11 70)` | `0.955 0.015 70` / `0.238 0.028 70` | `0.865 0.042 70` / `0.384 0.052 70` | `0.52 0.099 70` / `0.79 0.083 70` | near-black |
-| Danger | `oklch(0.5 0.13 25)` | `0.955 0.018 25` / `0.224 0.033 25` | `0.865 0.049 25` / `0.343 0.061 25` | `0.4 0.117 25` / `0.78 0.098 25` | white |
+| Danger ("Signal red", owner 2026-10-14) | `oklch(0.55 0.2 27)` | `0.955 0.028 27` / `0.236 0.05 27` | `0.865 0.076 27` / `0.377 0.094 27` | `0.45 0.18 27` / `0.78 0.15 27` | white |
 | Info | = Navy solid | = Navy 3 | = Navy 6 | = Navy 11 | white |
 
 Each status colour must always come with an icon or a label. Colour is never the only signal.

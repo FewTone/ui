@@ -4,7 +4,9 @@ Always on, for every UI change: library components, demos and the site. The owne
 
 ## Principles
 - **Motion explains a change.** It shows where something went, what opened, or what's active now. Nothing moves just to decorate: no hover tilts, bounces or wiggles (the owner removed a hover tilt on 2026-10-14).
-- **Only `transform` and `opacity` move.** Height is the one exception, through the height pattern below.
+- **Only `transform` and `opacity` move.** The exceptions:
+  - height, through the height pattern below
+  - a tiny icon stroke drawing itself in (`pathLength`, for example Loading Button's check)
 - **Use the presets:**
   - springs: `spring.snappy` (small controls), `spring.smooth` (panels), `spring.bouncy` (rare delight)
   - durations and easings: `duration.*` and `ease.*` from `@fewtone/ui/lib/motion`, and `duration-(--duration-*)` / `ease-*` in CSS
@@ -13,12 +15,12 @@ Always on, for every UI change: library components, demos and the site. The owne
 - **Nothing animates on first paint.** Use `initial={false}`. A state the user didn't just change, such as a choice restored from storage, jumps instead of gliding.
 - **One indicator per instance.** Scope shared-layout animations with `LayoutGroup id={useId()}` (library) or `PillGroup` (site), so two sets on a page never trade an indicator.
 - **Clean up.** Cancel Web Animations when they finish, remove injected styles, and disconnect observers. A forwards-filling animation left behind breaks the next one.
-- **Cost.** Prefer GPU-only (transform, opacity) over clip-path, and clip-path over mask, filter or blur. Never animate a full-screen blur.
+- **Cost.** Prefer GPU-only (transform, opacity) over clip-path, and clip-path over mask, filter or blur. A small blur on a label swap is fine (Loading Button); never animate a full-screen blur.
 
 ## Which pattern to use
 | Situation | Pattern | Reuse |
 |---|---|---|
-| Active item in a horizontal set: tabs, segmented control, filter | A pill or underline that **slides** to the active item (`layoutId`, `spring.snappy`). The item is `relative`, the set `isolate`. | Site: `Pill` and `PillGroup` (`apps/www/components/motion/pill.tsx`); `SlidingTabList` for Radix Tabs (`components/docs/sliding-tab-list.tsx`) |
+| Active item in a horizontal set: tabs, segmented control, filter | A pill or underline that **slides** to the active item (`layoutId`, `spring.snappy`). The item is `relative`, the set `isolate`. | Site: `Pill` and `PillGroup` (`apps/www/components/motion/pill.tsx`); `SlidingTabList` for Radix Tabs (`components/docs/sliding-tab-list.tsx`). Library: Switcher (`layoutId` inside `LayoutGroup id={useId()}`, with the corner radius read from the option) |
 | Active or hovered row in a vertical list: sidebar, menu, results, listbox | **One** highlight that glides between rows (transform only, works in scroll containers). Hover highlights are mouse-only and fade out on leave. It jumps (`instant`) while typing changes the list. | Site: `RowIndicator` + `useRowBox` (`components/motion/row-indicator.tsx`). Library: a `layoutId` pill inside the focused item, with `layoutScroll` on the scroller (Select) |
 | Content that changes height: tab panels, an opening section, accordion | The wrapper **glides** to the new height on an eased tween (`duration.slow`, `ease.out`), never a spring, because overshoot bounces the page. Clip only while moving. Instant with reduced motion. | Site: `AutoHeight` (`components/motion/auto-height.tsx`). Library default: Radix's `--radix-*-content-height` with CSS keyframes, same timing (decide this for good when Accordion is built) |
 | Long section | Show a fixed height with a fade and "View all …". Once open, a sticky "View less" floats at the bottom of the screen with a shadow and lands at the section's end. Pressing it folds the section while gliding back to the heading, and focus returns. Hidden items fade and rise 12px, staggered by 0.05s. | `Expandable` (`components/docs/expandable.tsx`) |
@@ -31,6 +33,7 @@ Always on, for every UI change: library components, demos and the site. The owne
 | A validation message | It follows the value. It shows while the rule is broken and goes as soon as it's met, gliding open and shut (opacity and height, `duration.base`, `ease.out`) inside a polite live region. The field's border colour fades with it. | Input's Invalid demo |
 | Long list in a popup | No scroll arrows: the list scrolls natively (capped at 18rem), with soft fades at the edges that can scroll. The selected option opens centred. Add search for long lists (Select's `searchable`). | Select |
 | Items appearing in a list or grid | Fade and rise 12px, staggered by 0.05s (`duration.slow`, `ease.out`) | `Expandable` |
+| Async action on a button | Loading Button: the content swaps through a blur with a 6px rise (the old lifts away blurring, the new rises in from blurred) at a fixed width sized to the widest state. Spinner while loading; a check or cross draws in; solid destructive colour on error; back to idle after 2s. No shake. | Loading Button (Lab) |
 | Theme change | Theme Toggle / `revealTheme()` (View Transitions) | Theme Toggle |
 
 ## Pitfalls already hit

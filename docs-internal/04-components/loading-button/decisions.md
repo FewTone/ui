@@ -1,0 +1,64 @@
+# Loading Button: decisions
+
+**Status:** published (owner, 2026-10-14) after review in the Lab, whose workbench was then deleted. It has a page at `/components/loading-button`, with an Async action hero (succeeds and fails, "Work takes" Select), an "Every state" example and a single loading button on its index card (`preview.card`).
+
+- **What it is:** a `Button` that shows the work it starts: idle → loading → success or error → idle.
+- **State:** the `state` prop controls it. If it's left out, a promise returned from `onClick` drives it: loading until the promise settles, then success or error, then idle after `resetAfter` (2000ms, or `false` to stay).
+- **Text:** `loadingText`, `successText` and `errorText` replace the label; leaving one out keeps the label.
+- **Width never jumps:** all four states are laid out invisibly in one grid cell, so the button is as wide as its widest state. The visible state sits in the same cell.
+- **Motion** (`.agents/rules/motion.md`):
+  - **Swapping states:** the content cross-swaps on `spring.snappy`. The old content slides up 8px and fades; the new one rises 8px and fades in. The button's `overflow-hidden` clips it, so it reads like a slot changing.
+  - **Spinner:** one turn a second, at a constant speed.
+  - **Check and cross:** they draw themselves in (`pathLength`, `duration.slow`). This is the one non-transform property, allowed for tiny icon strokes.
+  - **Reduced motion:** the content only fades and the spinner pulses.
+  - **No shake** on error: it would be decoration.
+- **Colour:**
+  - **Error:** the destructive colours on solid and outline variants; ghost and link turn only their text destructive.
+  - **Success:** stays neutral. The check carries the meaning, and status colours aren't in the portable vocabulary.
+- **Accessibility:**
+  - **While busy:** `aria-busy` and `aria-disabled`, not `disabled`, so focus isn't lost mid-action. Clicks are ignored while it's busy.
+  - **Announcements:** a polite live region next to the button says "Loading", "Done" or "Something went wrong".
+- **Tests:** promise success and reset, rejection, controlled state with clicks ignored while busy, and axe in all four states.
+- **Not built yet:** a progress percentage, and a cancel action while loading.
+- **Revised in the Lab (owner, 2026-10-14):**
+  - **Swap:** through a blur instead of the slide and fade ("add blur instead of the fade"). Three options are being compared in the `swap` prop: `blur` (in place, the default), `blur-rise` (with a 6px rise) and `blur-scale` (scaling from 0.9). Each uses 6px of blur, `duration.base` and `ease.out`; the rise and scale run on `spring.snappy`. With reduced motion it's a plain fade.
+  - **Error colour:** the owner disliked solid red, so five tones are being compared in the `errorTone` prop:
+    - `neutral`: no colour
+    - `icon`: only the cross red (the new default)
+    - `text`: the label and cross red
+    - `soft`: a 10% red tint with red text
+    - `solid`: the original
+  - **The Lab page** has a Swap and an Error colour dropdown applying to every button. Once the owner picks, the unchosen options are removed from the component.
+- **Chosen (owner, 2026-10-14):**
+  - **Swap:** blur with a rise. The new content rises 6px from blurred; the old lifts 6px and blurs away.
+  - **Error:** solid red.
+  - **Clean-up:** the `swap` and `errorTone` props and the other options were removed.
+  - **Rejected:** blur in place, blur with a scale, and the neutral, icon-only, text and soft-tint error tones.
+- **The red itself is being chosen next** (owner: "tell me variations of the actual colour"):
+  - It's the theme's danger colour (`--danger` → `--destructive`), shared with the Destructive button and invalid fields.
+  - **Candidates in the Lab,** all in sRGB and AA with white text (5.0–9.0:1):
+    - Brick (now): `oklch(0.5 0.13 25)`
+    - Signal red: `oklch(0.55 0.2 27)`
+    - Crimson: `oklch(0.5 0.19 18)`
+    - Rose: `oklch(0.55 0.17 10)`
+    - Vermilion: `oklch(0.56 0.17 35)`
+    - Wine: `oklch(0.42 0.12 15)`
+  - **Once chosen:** the pick goes into `scripts/tokens/generate-palette.mjs` (danger h, c, l), then `pnpm tokens`, and the candidates are deleted from the Lab.
+- **Red chosen: Signal red** (owner, 2026-10-14), `oklch(0.55 0.2 27)`, with white text at 5.4:1.
+  - **How:** it's now the theme's danger colour. `generate-palette.mjs` has danger `{ h: 27, c: 0.2, l: 0.55 }`, then `pnpm tokens`.
+  - **Where it shows:** the Destructive button, invalid fields and the error state everywhere.
+  - **It's an exception:** danger is the one status colour that isn't muted.
+  - **Rejected:** Brick (the old muted red), Crimson, Rose, Vermilion and Wine. The swatches were removed from the Lab.
+- **Success colour being explored** (owner: "explore green against the current"):
+  - **Candidates in the Lab:** Neutral (today), and six greens, all in sRGB and AA with white text (4.6–8.0:1):
+    - Sage (the theme's green today): `0.52 0.105 150`
+    - Signal green: `0.53 0.15 148`
+    - Emerald: `0.52 0.11 162`
+    - Leaf: `0.55 0.16 135`
+    - Jade: `0.5 0.095 172`
+    - Forest: `0.42 0.11 150`
+  - **The component is unchanged:** the Lab overrides `--success` and adds `data-[state=success]` classes itself.
+  - **If green wins:** the component fills success with `bg-success` (only the text on ghost), and `success` / `success-foreground` join the shipped colours in `registry/shared.ts`, because shadcn themes have no success colour.
+- **Success stays neutral** (owner, 2026-10-14: "we will use the neutral, green doesn't look good").
+  - The drawn check carries the meaning, so no success colour ships and the component is unchanged.
+  - **Rejected:** Sage, Signal green, Emerald, Leaf, Jade and Forest. The candidates were removed from the Lab.

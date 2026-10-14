@@ -35,7 +35,7 @@ apps/www/                  website (ADR 0007)
   app/(browse)/[kind]/     every kind's index (/components) and item pages (/components/button)
   app/(browse)/docs/       guides as page.mdx files (/docs, /docs/installation); blocks in components/docs/guide-blocks.tsx
   app/(browse)/roadmap/    public roadmap; the plan is lib/roadmap.ts (status comes from the index: Available / Next up / Planned)
-  app/lab/                 dev-only Lab
+  app/lab/                 dev-only Lab: the home (/lab) holds components being built before they get a meta file (none right now); /lab/tokens; the header shows a Lab link in development only
   app/sitemap.ts · robots.ts · opengraph-image.tsx   SEO, all from metadata
   components/docs/         preview tabs, install, code blocks, props table, cards, sidebar
   components/motion/       site motion: Pill (sliding tabs) · RowIndicator (sidebar, search)
@@ -139,6 +139,8 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - Phase 3a (ADR 0009):
   - the shadcn registry generated from the same index, with installs verified in a fresh Next app
   - the first components: Button, Input, Select, Switch (Toggle was built, then removed by the owner)
+  - Switcher and Toggle Group (2026-10-14): split from one component by the owner. Switcher is one choice with a sliding pill; Toggle Group switches options on and off. Both come in Default and Outline and were built in the Lab first.
+  - Loading Button (2026-10-14): idle, loading, success and error, with a blur + rise swap, Signal red errors and a neutral success; built in the Lab first
   - Theme Toggle (2026-10-14, ADR 0010): eleven View Transition reveals with a speed prop; the site header uses it with `reveal="random"` and `speed="slow"`
   - Vitest with axe
   - site motion: underline tabs, gliding sidebar and search indicators, drawer slide
