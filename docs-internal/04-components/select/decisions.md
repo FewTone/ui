@@ -13,3 +13,14 @@
   - **Stacking (fixed 2026-10-13):** options are not stacking contexts; the content is `isolate`. Otherwise a pill gliding down was painted over the options it passed.
 - **Chevron:** it rotates while open via `group-data-[state=open]:rotate-180`.
 - **Not built yet:** a multi-select, a searchable combobox, and a native `<select>` fallback.
+- **No scroll arrows** (owner, 2026-10-14). `SelectScrollUpButton` and `SelectScrollDownButton` were removed from the component and its exports.
+  - The list scrolls natively, capped at 18rem (`max-h-72`).
+  - Soft fades lie over the popup's edges where it can scroll. They sit outside the list, and its end is measured from the last shown option, because overlays inside the list and the gliding highlight inflate `scrollHeight`.
+  - The selected option opens centred, not at an edge.
+- **`searchable`** (owner: "add search in long list… make it perfect in UX"), with `searchPlaceholder` and `emptyMessage` on `SelectContent`:
+  - **Structure:** the field is pinned above the list. The popup becomes `role="dialog"` holding a combobox field and a `role="listbox"` list, linked by `aria-activedescendant`.
+  - **Filtering:** options that don't match are `hidden` rather than unmounted, so Radix keeps showing the selected option's text in the trigger. Groups with no shown options hide via `:has()`, and separators hide while searching.
+  - **Keyboard:** it stays in the field. Arrow keys move the pill through the matches, and Enter picks the highlighted one by sending Enter to that option (Radix's own selection path). Typing, Space, Home and End stay in the field, and Escape closes.
+  - **Focus:** Radix's first focus and its focus-on-leave are redirected to the field. Letters typed while an option has focus after hovering also go to the field.
+  - **Empty state:** "No results for “…”".
+  - **Verified in Chrome with real input:** filter, arrows, Enter, typing after a hover, empty state, Escape, and the trigger value kept throughout. Tests cover the same, plus axe on the open dialog.

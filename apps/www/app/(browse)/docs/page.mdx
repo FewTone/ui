@@ -1,32 +1,110 @@
 export const metadata = {
-  title: "Introduction",
-  description: "FewTone UI is a free, open-source set of accessible React components for Next.js, built with Tailwind CSS and Radix.",
+  title: { absolute: "Introduction to FewTone UI – React Components for Next.js" },
+  description:
+    "Free, open-source, accessible React components for Next.js, built with Tailwind CSS v4 and Radix. Add them with the shadcn CLI or copy the source into your app.",
   alternates: { canonical: "/docs" },
+  openGraph: {
+    type: "article",
+    url: "/docs",
+    title: "Introduction to FewTone UI – React Components for Next.js",
+    description:
+      "Free, open-source, accessible React components for Next.js, built with Tailwind CSS v4 and Radix. Add them with the shadcn CLI or copy the source into your app.",
+  },
 }
 
-# Introduction
+# Introduction to FewTone UI
 
-FewTone UI is a free, open-source set of accessible React components for Next.js. Every component is built with Tailwind CSS and Radix, and you own the code: it is copied into your project, not hidden in a package.
+FewTone UI is a free, open-source collection of accessible React components for Next.js, built with Tailwind CSS v4 and Radix. You add a component with one shadcn CLI command, and its full source lands in your project, ready to read, change and ship.
+
+## What is FewTone UI?
+
+FewTone UI is a component library you copy, not one you depend on. Each component is a single, readable TypeScript file that lives in your codebase, next to your own components. There is no package to keep up to date and no styles to override: you change the code directly.
+
+It works the same way as [shadcn/ui](https://ui.shadcn.com), and uses the same CLI and the same colour names. FewTone UI components sit naturally next to shadcn/ui ones and take your project's theme as they are.
+
+## Why use FewTone UI?
+
+- **Accessible by default.** Components are built on Radix primitives and follow the WAI-ARIA patterns. They work with a keyboard, show a clear focus ring, and are tested with axe for accessibility issues.
+- **You own the code.** The source is copied into `components/ui`, so you can rename props, change styles or remove what you don't need.
+- **Styled with Tailwind CSS v4.** Every style is a Tailwind class or a CSS variable, in light and dark mode.
+- **Considered motion.** Select highlights glide and switches spring into place, using shared presets. Everything respects the operating system's reduced-motion setting.
+- **Built for your AI assistant.** Every component page has a **Copy prompt** button: a step-by-step brief your assistant can follow to add the component without touching the rest of your app.
+- **Free and open source.** MIT licence, for personal and commercial projects.
 
 ## How it works
 
-FewTone UI follows the same model as shadcn/ui. You add a component with one command, and its source lands in your project, ready to change.
+1. **Pick a component** from [the components page](/components). Each one has a live preview, usage code, examples and its full API.
+2. **Run its install command.** The shadcn CLI reads the component from the FewTone UI registry at `ui.fewtone.com`.
+3. **The CLI writes the source into your project** and installs its npm dependencies. The first time, it also adds the FewTone UI tokens to your global CSS file: sizes, motion durations and the focus ring. It only adds variables you don't have yet, so your theme stays as it is.
+4. **Import it and make it yours.**
 
 ```bash
 npx shadcn@latest add https://ui.fewtone.com/r/button.json
 ```
 
-You can also copy the source by hand from any component page.
+```tsx
+import { Button } from "@/components/ui/button"
 
-## What you get
+export function Actions() {
+  return <Button>Continue</Button>
+}
+```
 
-- **Accessible by default.** Components use Radix for behaviour, support the keyboard, and show a clear focus ring.
-- **Yours to customize.** Styles are plain Tailwind CSS classes and CSS variables, in light and dark mode.
-- **Works with your stack.** React 19, Next.js and Tailwind CSS v4, installed with the shadcn CLI.
-- **Free and open source.** MIT licence, for personal and commercial projects.
+The [installation guide](/docs/installation) covers every step, including installing by hand.
+
+## Built with
+
+- **[React 19](https://react.dev)** and **[Next.js](https://nextjs.org)** with the App Router
+- **[Tailwind CSS v4](https://tailwindcss.com)** for styles, with CSS variables for the theme
+- **[Radix UI](https://www.radix-ui.com)** for accessible behaviour: focus management, keyboard support and ARIA attributes
+- **[Motion](https://motion.dev)** for the components that animate with JavaScript
+- **[shadcn CLI](https://ui.shadcn.com/docs/cli)** to install components from the registry
+
+## Accessibility
+
+Accessibility isn't an extra. Every component:
+
+- works with the keyboard alone, with the keys each WAI-ARIA pattern expects
+- shows a visible focus ring for keyboard users
+- has the right roles and ARIA attributes for screen readers, from Radix
+- keeps animations short and turns them off when the system asks for reduced motion
+- is tested with Testing Library and axe before it is published
+
+## Frequently asked questions
+
+<Faq
+  entries={[
+    {
+      question: "Is FewTone UI free?",
+      answer:
+        "Yes. FewTone UI is free and open source under the MIT licence, for personal and commercial projects.",
+    },
+    {
+      question: "Does FewTone UI work with shadcn/ui?",
+      answer:
+        "Yes. It uses the shadcn CLI and the same colour variables, so FewTone UI components install into a shadcn/ui project and match its theme.",
+    },
+    {
+      question: "Do I need Next.js?",
+      answer:
+        "FewTone UI is built and tested with Next.js and the App Router. The components are plain React 19 with Tailwind CSS v4, so other React frameworks that the shadcn CLI supports should work, but they are not tested yet.",
+    },
+    {
+      question: "Does it support dark mode?",
+      answer:
+        "Yes. Every component follows your light and dark colours through CSS variables, switched by the dark class on the html element, the way next-themes works.",
+    },
+    {
+      question: "Can I change the components?",
+      answer:
+        "Yes. The source is copied into your project, so you can edit any component like your own code.",
+    },
+  ]}
+/>
 
 ## Next steps
 
 - [Install FewTone UI](/docs/installation) in a Next.js project.
-- [Browse the components](/components).
-- [Change the theme](/docs/theming) to match your brand.
+- [Browse all components](/components).
+
+<GuideJsonLd href="/docs" />

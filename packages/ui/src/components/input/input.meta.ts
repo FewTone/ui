@@ -11,7 +11,7 @@ export default {
   keywords: ["react input", "nextjs input", "tailwind input", "shadcn input", "text field component"],
   status: "new",
   addedAt: "2026-10-13",
-  updatedAt: "2026-10-13",
+  updatedAt: "2026-10-14",
   files: ["input.tsx"],
   usage: {
     code: `import { Input } from "@/components/ui/input"
@@ -31,11 +31,10 @@ export function EmailField() {
       name: "invalid",
       title: "Invalid",
       description:
-        "Set aria-invalid and link the error message with aria-describedby, so screen readers announce it.",
+        "The error follows the value: it shows while the username is too short and goes away once it has 3 characters. Set aria-invalid and link the message with aria-describedby, so screen readers announce it.",
     },
     { name: "sizes", title: "Sizes", description: "Small, medium and large, matching Button's heights." },
     { name: "disabled", title: "Disabled" },
-    { name: "file", title: "File", description: "The file picker button takes the input's styles." },
   ],
   api: [
     {

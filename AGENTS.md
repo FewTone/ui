@@ -33,7 +33,8 @@ This file is the entry point for every AI agent (Claude, Codex, Cursor, Gemini, 
 apps/www/                  website (ADR 0007)
   app/(site)/              landing page: header, hero, Navy footer
   app/(browse)/[kind]/     every kind's index (/components) and item pages (/components/button)
-  app/(browse)/docs/       guides as page.mdx files (/docs, /docs/installation, /docs/theming)
+  app/(browse)/docs/       guides as page.mdx files (/docs, /docs/installation); blocks in components/docs/guide-blocks.tsx
+  app/(browse)/roadmap/    public roadmap; the plan is lib/roadmap.ts (status comes from the index: Available / Next up / Planned)
   app/lab/                 dev-only Lab
   app/sitemap.ts · robots.ts · opengraph-image.tsx   SEO, all from metadata
   components/docs/         preview tabs, install, code blocks, props table, cards, sidebar
@@ -50,6 +51,8 @@ scripts/build-index.mjs    validates every *.meta.ts, writes the item index and 
 scripts/registry/          registry generator: item JSON, tokens item, derived dependencies
 scripts/tokens/            colour generator (pnpm tokens)
 scripts/check-tokens.mjs   design-system enforcement (pnpm check:tokens)
+.agents/rules/              always-on standards: design.md, motion.md, components.md
+.agents/skills/             workflows (new-component); .claude/skills/ points to them for Claude Code
 docs-internal/             long-term project memory (see map below)
 ```
 
@@ -67,6 +70,15 @@ docs-internal/             long-term project memory (see map below)
 | `pnpm lint` / `pnpm format` | Biome |
 | `pnpm tokens` | Regenerate `palette.css` after changing hues in `scripts/tokens/generate-palette.mjs` |
 | `pnpm deploy:preview` / `pnpm deploy:prod` | Deploy the site from this machine to the FewTone Vercel account. Needs a token in `.env.deploy.local` (see `scripts/deploy.mjs` and ADR 0005). The owner runs deploys, commits and pushes; agents don't. |
+
+## Standards (read before any UI work)
+The owner's design, motion and component standards are always on. They apply to every new component and every change without being asked:
+- `.agents/rules/design.md`: neutral first, tokens and named spacing, few borders, accessibility, copy
+- `.agents/rules/motion.md`: which motion pattern to use where (sliding indicators, height that glides, sections that expand, overlays, icon morphs, press and hover) and the files to reuse
+- `.agents/rules/components.md`: library files, the portable vocabulary, meta, demos and tests
+- `.agents/skills/new-component/SKILL.md`: the step-by-step workflow for building or changing one component (Claude Code finds it through `.claude/skills/`)
+
+The owner asks for components one at a time; build only the one requested.
 
 ## Golden rules
 1. **Nothing hardcoded.** Every colour, size, space, radius, shadow, duration and easing comes from a token. Read `docs-internal/01-brand/design-system.md` before writing UI.
@@ -102,12 +114,12 @@ docs-internal/             long-term project memory (see map below)
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed) |
 | `04-components/` | One folder per component with `decisions.md`: why it's built the way it is, and what's deliberately not built yet |
 | `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
 
-Planned but not created yet: `00-vision`, `02-architecture`, `05-workflows`, `07-roadmap`, and `.agents/` for internal skills and rules.
+`05-workflows/` holds step-by-step owner procedures (the shadcn directory listing). Planned but not created yet: `00-vision`, `02-architecture`, `07-roadmap`.
 
 Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
@@ -127,6 +139,7 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - Phase 3a (ADR 0009):
   - the shadcn registry generated from the same index, with installs verified in a fresh Next app
   - the first components: Button, Input, Select, Switch (Toggle was built, then removed by the owner)
+  - Theme Toggle (2026-10-14, ADR 0010): eleven View Transition reveals with a speed prop; the site header uses it with `reveal="random"` and `speed="slow"`
   - Vitest with axe
   - site motion: underline tabs, gliding sidebar and search indicators, drawer slide
   - FewTone identity over beUI: framed gallery cards with live previews, underline tabs, a New badge with shines travelling round its Navy edge, Copy prompt for AI assistants
@@ -138,8 +151,10 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - npm package and CLI
 
 **Open (owner actions):**
-- claiming the npm org `@fewtone`
-- a PR adding `@fewtone` to shadcn's registry directory, then flip `useNamespace` in `apps/www/lib/install.ts`
+- add a `LICENSE` (MIT): the repo is public but not yet legally open source, and shadcn's directory requires open source
+- the PR adding `@fewtone` to shadcn's registry directory (entry, steps and PR text in `docs-internal/05-workflows/shadcn-directory.md`), then flip `useNamespace` in `apps/www/lib/install.ts`
+
+The npm org `@fewtone` is claimed (owner, 2026-10-14).
 
 <!-- BEGIN:turborepo-agent-rules -->
 

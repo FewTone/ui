@@ -47,7 +47,15 @@ export const itemSchema = z.object({
   usage: z.object({ code: z.string().min(1) }).optional(),
   /** demos/<name>.tsx files. The first is the hero preview, the rest are Examples */
   demos: z
-    .array(z.object({ name: slug, title: z.string().min(1), description: z.string().optional() }))
+    .array(
+      z.object({
+        name: slug,
+        title: z.string().min(1),
+        description: z.string().optional(),
+        /** Shows a small control bigger in its preview (CSS zoom, for example 2). The demo's code is unchanged. */
+        zoom: z.number().min(1).max(3).optional(),
+      }),
+    )
     .min(1),
   /** API reference, one entry per part (Root, Trigger...) */
   api: z
@@ -65,6 +73,11 @@ export const itemSchema = z.object({
     .object({
       template: z.enum(["centered", "full-bleed", "viewport"]).optional(),
       height: z.enum(["sm", "md", "lg"]).default("md"),
+      /**
+       * A demo shown only on index cards (a file in demos/, not listed in `demos`), for when the page's
+       * hero is too busy for a small tile. Without it, cards show the hero.
+       */
+      card: slug.optional(),
     })
     .default({ height: "md" }),
   /** Related items shown at the bottom of the page. Falls back to the same category */

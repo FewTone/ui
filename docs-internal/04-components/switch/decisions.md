@@ -8,3 +8,27 @@
 - **Reduced motion:** `useReducedMotion()` sets the transition to 0.
 - **Sizes:** `sm | md` (track 28×16 and 36×20).
 - **Not built yet:** a label slot inside the component. Demos pair it with `<label htmlFor>` and `aria-describedby` hints.
+- **Motion redone** (owner, 2026-10-14: "most basic and bad"):
+  - **Hover:** the thumb leans 2px towards the other side, as if it wants to go. It doesn't lean straight after a change until the pointer leaves and returns, or it would seem to want to go back.
+  - **Press:** it stretches towards the other side.
+  - **Change:** it stays stretched for 140ms while it travels, then settles round at the far end. Keyboard changes stretch the same way.
+- **The thumb is placed with numbers, not `layout`.** It's absolutely positioned, with `x` and its own width in rem, on `spring.snappy`, plus right-to-left support. Motion's layout animation measures on-screen boxes, so inside CSS `zoom` or a scaling parent it doubled the movement: the zoomed preview showed the thumb overshooting the track, measured in Chrome.
+- **Preview:** the hero is a single switch at `zoom: 2` (a new per-demo meta field), and Sizes at 1.5. The "Airplane mode" text is gone; the usage example says "Notifications".
+- **Revised the same day** (owner):
+  - **Hover:** the thumb no longer shifts. It stays at its end and stretches 2px towards the other side; press stretches it further.
+  - **The "on" colour follows the thumb:** a `bg-primary` pill under it (`data-slot="switch-fill"`), its far end at the thumb's far edge. On the spring it sweeps across behind the thumb and fades in (`duration.base`); going off, it retracts and fades.
+  - **No shadows:** on the track or the thumb. The track is `overflow-hidden` and `isolate`, so the fill stays inside.
+  - **Measured in Chrome:** the fill's far end tracked the thumb's (57 against 56px, zoomed) while fading in.
+- **Off mirrors on** (owner: "why we don't have that same in off"). Turning off, the fill used to fade over the same 220ms it took to retract, so no sweep showed. Now it stays solid while it retracts behind the thumb, so the "off" colour sweeps in from the far side, and the remnant under the thumb fades once the trip is done (`duration.fast` after a `duration.base` delay). Sampled in Chrome every 40ms: solid and tracking the thumb to about 290ms, then fading, gone by about 390ms.
+- **Off reworked: no ring** (owner: "what I don't like is that ring around the circle"). Retracting solid with its end at the thumb's far edge left a white band in the 2px margin around the thumb, still visible after the thumb stopped.
+  - **New behaviour:** going off, the colour ends at the thumb's near edge, so the thumb pushes it home with grey all round. Its opacity follows the thumb's progress: solid until the last fifth of the trip, then 0 on arrival.
+  - **Going on:** unchanged.
+  - **How:** the thumb's `x` and width are motion values animated on the spring, and the colour's position and opacity are derived from them (`useTransform` and `useMotionValueEvent`), along with the page direction and the state.
+  - **Measured in Chrome (zoomed):** off at 50ms, thumb 24–61 and colour end 24; at 96ms, thumb 16–54 and colour end 16; at rest, opacity 0.
+- **Off is on played backwards** (owner: the near-edge version was "bad, more than before": the grey took over before the thumb moved, and it felt disconnected from on).
+  - **Rejected:**
+    - fading over a fixed 220ms, so no sweep showed
+    - fading on a delay after arrival, which left a ring
+    - ending at the thumb's near edge, which disconnected it from on
+  - **Now:** the colour is driven only by the thumb's position. It always ends at the thumb's far edge, with opacity 1.6√p of the trip (the last 3% counted as home), so both directions are the same motion reversed.
+  - **Sampled every frame in Chrome:** the colour ends 4px past the thumb's far edge in every frame both ways. Going off it is solid while the thumb travels, at 0.92 and then 0.44 near home, and 0 on arrival (no frame with colour once the thumb is home). Going on, the same curve runs 0 → 0.93 → 1.

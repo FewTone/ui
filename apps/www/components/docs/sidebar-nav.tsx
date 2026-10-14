@@ -68,14 +68,16 @@ export function SidebarNav({ sections, onNavigate }: { sections: NavSection[]; o
         <RowIndicator box={currentBox} className="rounded-md bg-accent" />
         {visible.map((section) => (
           <div key={section.id}>
-            <p className="mb-(--space-nav-label) flex items-center gap-2 px-(--space-nav-item-x) text-overline font-semibold text-muted-foreground uppercase">
-              {section.label}
-              {section.count !== undefined ? (
-                <span className="rounded-full bg-muted px-1.5 text-caption tabular-nums">
-                  {section.count}
-                </span>
-              ) : null}
-            </p>
+            {section.label ? (
+              <p className="mb-(--space-nav-label) flex items-center gap-2 px-(--space-nav-item-x) text-overline font-semibold text-muted-foreground uppercase">
+                {section.label}
+                {section.count !== undefined ? (
+                  <span className="rounded-full bg-muted px-1.5 text-caption tabular-nums">
+                    {section.count}
+                  </span>
+                ) : null}
+              </p>
+            ) : null}
             <ul className="grid">
               {section.links.map((link) => {
                 const active = pathname === link.href;

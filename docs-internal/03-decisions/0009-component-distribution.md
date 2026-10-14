@@ -35,7 +35,7 @@ FewTone UI ships its components as source, through a shadcn-compatible registry,
 
   The allow-list lives in `packages/ui/src/registry/shared.ts`. The generator reads every value from `tokens.css`, `theme.css` and `palette.css`; nothing is copied by hand.
 - **A `motion` registry item** (`lib/motion.ts`) for components that animate in JavaScript (Select, Switch).
-- **Press feedback is CSS for Button:** `active:scale-(--scale-press)` with the `--ease-spring` curve.
+- **Press feedback is CSS for Button:** `active:scale-(--scale-press)` with the `--ease-spring` curve. *Superseded 2026-10-14 (owner): no scale; press is a colour step, and `--scale-press` was removed.*
   - Server-safe, so `buttonVariants` works in server components.
   - No motion dependency for the most-installed items.
   - `asChild` behaves the same.

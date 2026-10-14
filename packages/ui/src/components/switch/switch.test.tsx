@@ -7,8 +7,8 @@ import { axeViolations } from "../../test/axe";
 describe("Switch", () => {
   it("is a switch with aria-checked that turns on when clicked", async () => {
     const onCheckedChange = vi.fn();
-    render(<Switch aria-label="Airplane mode" onCheckedChange={onCheckedChange} />);
-    const control = screen.getByRole("switch", { name: "Airplane mode" });
+    render(<Switch aria-label="Notifications" onCheckedChange={onCheckedChange} />);
+    const control = screen.getByRole("switch", { name: "Notifications" });
     expect(control.getAttribute("aria-checked")).toBe("false");
     await userEvent.click(control);
     expect(control.getAttribute("aria-checked")).toBe("true");

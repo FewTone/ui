@@ -7,7 +7,7 @@
 Before building the docs site, we studied how 12 popular UI libraries, plus beUI, lay out their component pages. Developers expect one familiar page. The owner's choices on top of that:
 - **Layout reference:** beUI's layout (beui.dev/components), with FewTone UI's own visual identity. We don't copy beUI's cards or styling.
 - **Component pages:** two columns, with no "On this page" list. **Related components** replace prev/next at the bottom.
-- **Full width** (owner, 2026-10-12): the header and the sidebar layout span the whole screen, with no `max-w-wide` box. The sidebar sits against the left edge, and component pages use all the width that's left. Guides keep a readable line length through the MDX wrapper (`max-w-docs`). The card grid goes up to four columns at `2xl`.
+- **Full width** (owner, 2026-10-12): the header and the sidebar layout span the whole screen, with no `max-w-wide` box. The sidebar sits against the left edge, and component pages use all the width that's left. Guides are one centred column, `max-w-docs` (64rem), and everything in them, text included, uses its full width (owner, 2026-10-13). The card grid goes up to four columns at `2xl`.
 - **Spacing and borders follow beUI** (owner, 2026-10-12: "same to same as beUI, not colors or radius"; "remove the sidebar borders and mostly from everywhere").
   - **Spacing:** measured from beui.dev's computed styles: the shell, sidebar, page rhythm, cards, tabs, code blocks and tables. Every value is a named `--space-*` token in `tokens.css`, which the owner asked for so the rhythm can be tuned in one place. See `design-system.md` §6.
   - **Borders:** see §6 for where they appear. The header shows its bottom border only after scrolling.
@@ -48,9 +48,9 @@ Before building the docs site, we studied how 12 popular UI libraries, plus beUI
 | URL | Page |
 |---|---|
 | `/` | Landing page (basic for now): hero, **View components** → `/components`, **Get started** → `/docs/installation`, install line, three short points, Navy footer |
-| `/<kind>` | Index of a kind, for example `/components`: h1, sentence, a "New" row, then every item grouped by category |
+| `/<kind>` | Index of a kind, for example `/components`: h1, sentence, a "New" row (only when some items are new), then every item A–Z in one grid, with no category groups (owner, 2026-10-13) |
 | `/<kind>/<name>` | One item, for example `/components/button`. There is no `/docs` in item addresses |
-| `/docs`, `/docs/installation`, `/docs/theming` | Guides, written as `page.mdx` files |
+| `/docs`, `/docs/installation` | Guides, written as `page.mdx` files. `/docs/theming` redirects (308) to Installation's "Customize the theme" (owner, 2026-10-13) |
 
 - **One dynamic route pair** (`app/(browse)/[kind]` and `[kind]/[slug]`) serves every kind. Unknown addresses return a 404.
 - **Two layouts:**
@@ -67,11 +67,11 @@ Before building the docs site, we studied how 12 popular UI libraries, plus beUI
 7. Examples: one h3 and one demo (Preview / Code) each
 8. API reference: Prop / Type / Default / Description
 9. Related components (cards)
-10. Last updated, Edit on GitHub
+10. ~~Last updated, Edit on GitHub~~ removed (owner, 2026-10-13); the modified date stays in the structured data
 
 **Site-wide:**
 - **Header:** logo, Components, Docs, ⌘K search, light / dark / system switch, GitHub.
-- **Sidebar:** Getting started, then one section per kind with a count. A filter by kind appears once there are two kinds.
+- **Sidebar:** Home (→ `/components`, every component), then Getting started (Introduction, Installation), then one section per kind with a count. A filter by kind appears once there are two kinds.
 - **On phones:** a menu drawer.
 
 ## Consequences

@@ -55,6 +55,10 @@ for (const file of metaFiles) {
       errors.push(`${rel}: missing demo demos/${demo.name}.tsx`);
     }
   }
+  const card = item.preview.card;
+  if (card && !existsSync(join(SRC, dir, "demos", `${card}.tsx`))) {
+    errors.push(`${rel}: missing card demo demos/${card}.tsx`);
+  }
   items.push({ ...item, href: `/${kinds[item.kind].segment}/${item.name}`, dir });
 }
 
@@ -103,10 +107,13 @@ let imports = "";
 let entries = "";
 let n = 0;
 for (const item of items) {
-  for (const demo of item.demos) {
+  // The page's demos, plus the card-only demo when there is one
+  const names = item.demos.map((demo) => demo.name);
+  if (item.preview.card && !names.includes(item.preview.card)) names.push(item.preview.card);
+  for (const name of names) {
     const id = `Demo${n++}`;
-    imports += `import ${id} from "../${item.dir}/demos/${demo.name}";\n`;
-    entries += `  "${item.name}/${demo.name}": ${id},\n`;
+    imports += `import ${id} from "../${item.dir}/demos/${name}";\n`;
+    entries += `  "${item.name}/${name}": ${id},\n`;
   }
 }
 const demosSource = `${banner}import type { ComponentType } from "react";

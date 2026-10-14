@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@fewtone/ui/components/button/button";
-import { duration, ease } from "@fewtone/ui/lib/motion";
+import { duration, ease, spring } from "@fewtone/ui/lib/motion";
 import { cn } from "@fewtone/ui/lib/utils";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { AnimatePresence, animate, motion, stagger, useReducedMotion } from "motion/react";
@@ -18,7 +18,10 @@ import { AutoHeight } from "@/components/motion/auto-height";
  *   hidden (the list's direct children, such as install steps) fade in and rise 12px, one after another.
  * - Tabbing into a hidden part opens it, so nothing is out of keyboard reach. A click in the visible part
  *   (say, on a copy button) doesn't, since the page knows the last input was a pointer (data-modality).
- * - "Show less" first returns to the section's top, then folds it, so you watch it close.
+ * - Open, "View less" floats at the bottom of the screen while you read (sticky, so it's one button), lifted
+ *   by a shadow, and lands at the end of the section when you get there (owner, 2026-10-14). Pressing it
+ *   folds the section while the page glides back to its heading (if that's scrolled away), so the next
+ *   section is right there. Focus returns to "View all steps".
  */
 export function Expandable({
   children,
@@ -31,8 +34,13 @@ export function Expandable({
 }) {
   const id = useId();
   const box = useRef<HTMLDivElement>(null);
+  const moreButton = useRef<HTMLButtonElement>(null);
+  const lessRow = useRef<HTMLDivElement>(null);
+  const end = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [overflows, setOverflows] = useState(true);
+  const [floating, setFloating] = useState(false);
+  const returnFocus = useRef(false);
 
   // Does the content run past the collapsed height? Re-check when it changes size (fonts, code blocks).
   useLayoutEffect(() => {
@@ -57,6 +65,30 @@ export function Expandable({
     };
     node.addEventListener("focusin", onFocusIn);
     return () => node.removeEventListener("focusin", onFocusIn);
+  }, [open]);
+
+  // "View less" floats while the end of the section is below the screen. A marker just after it tells: once
+  // the marker is within the button's bottom offset of the screen's edge, the button has landed.
+  useEffect(() => {
+    const marker = end.current;
+    const row = lessRow.current;
+    if (!open || !marker || !row) return;
+    const offset = Number.parseFloat(getComputedStyle(row).bottom) || 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry) setFloating(!entry.isIntersecting && entry.boundingClientRect.top > 0);
+      },
+      { rootMargin: `0px 0px -${offset}px 0px` },
+    );
+    observer.observe(marker);
+    return () => observer.disconnect();
+  }, [open]);
+
+  // After folding, focus goes back to "View all steps" rather than being lost with the button that went
+  useEffect(() => {
+    if (open || !returnFocus.current) return;
+    returnFocus.current = false;
+    moreButton.current?.focus({ preventScroll: true });
   }, [open]);
 
   // Opening: the items below the fold fade and rise in, staggered (only opacity with reduced motion)
@@ -101,6 +133,7 @@ export function Expandable({
             className="pointer-events-none absolute inset-x-0 bottom-0 flex h-(--size-collapsed-fade) items-end justify-center bg-linear-to-t from-background to-transparent"
           >
             <Button
+              ref={moreButton}
               variant="secondary"
               size="sm"
               aria-expanded={false}
@@ -118,23 +151,47 @@ export function Expandable({
         ) : null}
       </AnimatePresence>
 
-      {open && overflows ? (
-        <div className="mt-(--space-stack) flex justify-center">
-          <Button
-            variant="ghost"
-            size="sm"
-            aria-expanded
-            aria-controls={id}
-            onClick={() => {
-              box.current?.scrollIntoView({ block: "start" });
-              setOpen(false);
-            }}
+      <AnimatePresence initial={false}>
+        {open && overflows ? (
+          <motion.div
+            key="less"
+            ref={lessRow}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16, transition: { duration: duration.fast, ease: ease.in } }}
+            transition={reduce ? { duration: 0 } : spring.snappy}
+            className="pointer-events-none sticky bottom-(--space-gutter) z-(--z-sticky) mt-(--space-stack) flex justify-center"
           >
-            {less}
-            <ChevronUpIcon aria-hidden className="size-(--size-icon-sm)" />
-          </Button>
-        </div>
-      ) : null}
+            <Button
+              variant="outline"
+              size="sm"
+              aria-expanded
+              aria-controls={id}
+              onClick={() => {
+                // Back to the section's heading if it's scrolled away; the fold happens on the way up
+                const anchor = box.current?.closest("section") ?? box.current;
+                if (anchor) {
+                  const margin = Number.parseFloat(getComputedStyle(anchor).scrollMarginTop) || 0;
+                  if (anchor.getBoundingClientRect().top < margin) {
+                    anchor.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+                  }
+                }
+                returnFocus.current = true;
+                setFloating(false);
+                setOpen(false);
+              }}
+              className={cn(
+                "pointer-events-auto rounded-full transition-shadow duration-(--duration-base) ease-out",
+                floating ? "shadow-lg" : "shadow-none",
+              )}
+            >
+              {less}
+              <ChevronUpIcon aria-hidden className="size-(--size-icon-sm)" />
+            </Button>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+      {open && overflows ? <div ref={end} aria-hidden /> : null}
     </div>
   );
 }

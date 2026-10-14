@@ -7,14 +7,14 @@ const columns = [
     title: "Library",
     links: [
       { label: "Components", href: "/components" },
-      { label: "Introduction", href: "/docs" },
+      { label: "Roadmap", href: "/roadmap" },
     ],
   },
   {
     title: "Guides",
     links: [
+      { label: "Introduction", href: "/docs" },
       { label: "Installation", href: "/docs/installation" },
-      { label: "Theming", href: "/docs/theming" },
     ],
   },
   {

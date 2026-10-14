@@ -129,7 +129,7 @@
   --container-heading: 15ch;
   --container-prose: 42rem;
   --container-content: 72rem;
-  --container-docs: 56rem;
+  --container-docs: 64rem; /* guides: one centred column (owner, 2026-10-13) */
   --container-wide: 80rem;
 
   /* Easing */
@@ -271,9 +271,12 @@
   /* Shell */
   --space-gutter: 1rem; /* page edge; 1.5rem from md, 2rem from xl (below) */
   --space-shell: 1rem; /* sidebar to content; 2rem from xl (below) */
-  --space-sidebar-top: 1.5rem; /* sidebar inset under the header */
+  --space-content-top: 1rem; /* header to the sidebar's first row */
+  /* Header to the content's first line: the sidebar's first link text sits inside its row's padding, so the
+     content starts that much lower, and every page's breadcrumb lines up with "Home" (owner, 2026-10-13) */
+  --space-content-first: calc(var(--space-content-top) + var(--space-nav-item-y));
   --space-sidebar-end: 1rem; /* sidebar links to the sidebar's right edge */
-  --space-content-y: 2rem; /* content and sidebar padding at top and bottom */
+  --space-content-y: 2rem; /* content and sidebar padding at the bottom; the footer line */
   --space-header: 1rem; /* between the logo, the nav and the actions */
   --space-header-nav: 1.5rem; /* between header nav links */
   --space-header-actions: 0.5rem; /* between header buttons */
@@ -321,7 +324,6 @@
 
   /* States */
   --opacity-disabled: 0.5;
-  --scale-press: 0.97;
 
   /* shadcn/ui compatibility: components derive radii from --radius */
   --radius: var(--radius-lg);

@@ -11,7 +11,7 @@ export default {
   keywords: ["react button", "nextjs button", "tailwind button", "shadcn button", "button component"],
   status: "new",
   addedAt: "2026-10-13",
-  updatedAt: "2026-10-13",
+  updatedAt: "2026-10-14",
   files: ["button.tsx"],
   usage: {
     code: `import { Button } from "@/components/ui/button"

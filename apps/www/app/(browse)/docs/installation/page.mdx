@@ -1,40 +1,89 @@
 export const metadata = {
-  title: "Installation",
-  description: "Add FewTone UI components to a Next.js project with the shadcn CLI, or copy the source by hand.",
+  title: { absolute: "Install FewTone UI in Next.js with the shadcn CLI" },
+  description:
+    "Install FewTone UI components in a Next.js project: requirements, one shadcn CLI command for pnpm, npm, yarn or bun, manual setup, theming and troubleshooting.",
   alternates: { canonical: "/docs/installation" },
+  openGraph: {
+    type: "article",
+    url: "/docs/installation",
+    title: "Install FewTone UI in Next.js with the shadcn CLI",
+    description:
+      "Install FewTone UI components in a Next.js project: requirements, one shadcn CLI command for pnpm, npm, yarn or bun, manual setup, theming and troubleshooting.",
+  },
 }
 
 # Installation
 
-Add FewTone UI components to a Next.js project with the shadcn CLI, or copy them by hand. Either way, the source ends up in your project.
+Add FewTone UI components to a Next.js project with one shadcn CLI command, or copy the source by hand. Either way, the code ends up in your project, and nothing else in your app changes.
 
 ## Requirements
 
-- Next.js with the App Router
-- React 19
-- Tailwind CSS v4
+| What | Version | Why |
+| --- | --- | --- |
+| React | 19 | Components use React 19 APIs |
+| Tailwind CSS | v4 | Styles use Tailwind v4 syntax, such as `h-(--size-control-md)` |
+| Next.js | App Router | What FewTone UI is built and tested with |
+| shadcn CLI | latest | Installs components from the registry (`npx shadcn@latest`) |
 
-## 1. Set up shadcn
+Your global CSS file should import Tailwind with `@import "tailwindcss";`. If it uses `@tailwind base;` instead, the project is on Tailwind v3: [upgrade to v4](https://tailwindcss.com/docs/upgrade-guide) first.
 
-If your project does not use shadcn yet, run its init command. It creates `components.json` and the `cn` helper that every component imports.
+## Install with the shadcn CLI
+
+### 1. Create a Next.js app (new projects only)
+
+Skip this step if you already have a Next.js project. Answer yes to Tailwind CSS and the App Router.
+
+```bash
+npx create-next-app@latest my-app
+```
+
+### 2. Set up shadcn
+
+Run this once per project. It creates `components.json` (where your components and helpers go), the `cn` helper that every component imports, and your theme's CSS variables. If your project already uses shadcn/ui, skip it: never run `init` again on an existing project, as it rewrites your theme.
 
 ```bash
 npx shadcn@latest init
 ```
 
-## 2. Add a component
+### 3. Add a component
 
-Copy the command from any component page. It points the CLI at the component's address, so no other setup is needed.
+Copy the command from any component page, or from here. Pick your package manager: the choice is remembered across the site.
 
-```bash
-npx shadcn@latest add https://ui.fewtone.com/r/button.json
+<InstallCommand name="button" />
+
+### 4. Use it
+
+The component is now in `components/ui`. Import it like any of your own components.
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export function Actions() {
+  return <Button>Continue</Button>
+}
 ```
 
-The component is written to `components/ui`, and its npm dependencies are installed. The first time, the CLI also adds the FewTone UI tokens to your global CSS file: control sizes, motion durations, the focus ring and the popover animations. It only adds variables your project doesn't define yet, so your theme stays as it is.
+## What the CLI adds
 
-Components that animate with JavaScript, such as Select and Switch, also bring `lib/motion.ts`, the spring presets they share.
+Each component brings its source file and the npm packages it needs:
 
-## Shorter commands (optional)
+<InstallTable />
+
+The first install also adds the **FewTone UI tokens** to your global CSS file: control and icon sizes, motion durations and easings, the focus ring, the popover layer, and the open and close animations. The CLI only adds the variables your project doesn't define yet, so your colours, fonts and radius stay exactly as they are.
+
+Components that animate with JavaScript, such as Select and Switch, also add `lib/motion.ts`: the spring presets they share.
+
+Running the same command again is safe. If the CLI asks to overwrite a file you've changed, answer no to keep your edits.
+
+## Install several components at once
+
+Pass several addresses to one command:
+
+```bash
+npx shadcn@latest add https://ui.fewtone.com/r/button.json https://ui.fewtone.com/r/select.json
+```
+
+## Shorter commands with the @fewtone namespace
 
 To write `@fewtone/button` instead of the full address, add the FewTone UI registry to `components.json`:
 
@@ -50,6 +99,116 @@ To write `@fewtone/button` instead of the full address, add the FewTone UI regis
 npx shadcn@latest add @fewtone/button @fewtone/select
 ```
 
-## Manual installation
+## Install with an AI assistant
 
-Every component page has a **Manual** tab with the steps in order: the npm dependencies to install, the tokens to paste into your global CSS file, `lib/motion.ts` when the component needs it, and the full source. Paste the source into your project and update the import paths.
+Every component page has a **Copy prompt** button. It copies a detailed brief for your AI coding assistant: Claude Code, Cursor, Copilot or ChatGPT. The brief has your assistant:
+
+1. check your package manager, React and Tailwind versions, and import paths
+2. install with the shadcn CLI, or by hand if the CLI isn't set up
+3. change nothing else: no overwritten files and no theme changes
+4. type-check the result and list every file it touched
+
+## Install manually
+
+You can also install without the CLI. Every component page has an **Installation** section with the steps in order:
+
+1. install the npm dependencies
+2. add the FewTone UI tokens to your global CSS file (only the variables you don't have)
+3. add `lib/motion.ts`, if the component animates with JavaScript
+4. copy the component's source into `components/ui`
+5. update the import paths to match your project
+
+If your project has no `cn` helper, add one at `lib/utils.ts`:
+
+```ts
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+## Customize the theme
+
+FewTone UI components take their colours, corners and fonts from CSS variables, so they follow your theme in light and dark mode without any changes.
+
+**Colours.** Components use the same semantic names as shadcn/ui: `background`, `foreground`, `primary`, `secondary`, `muted`, `accent`, `border`, `input` and `ring`. Change them and every component follows.
+
+```css
+:root {
+  --primary: oklch(0.17 0 0);
+  --primary-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --primary: oklch(0.97 0 0);
+  --primary-foreground: oklch(0.13 0 0);
+}
+```
+
+**Dark mode.** Dark values apply under the `dark` class on the `html` element, which is how [next-themes](https://github.com/pacocoursey/next-themes) works.
+
+**Radius.** Corners come from `--radius`. Set it once to make every component rounder or sharper.
+
+**Sizes and motion.** The FewTone UI tokens tune every component at once:
+
+```css
+:root {
+  --size-control-md: 2.25rem; /* height of buttons, inputs and selects */
+  --duration-fast: 150ms; /* hover and press transitions */
+  --scale-press: 0.97; /* how far buttons sink when pressed */
+}
+```
+
+When the operating system asks for reduced motion, the durations drop to almost nothing and spring animations become instant.
+
+## Troubleshooting
+
+**The CLI says `components.json` was not found.** Run `npx shadcn@latest init` once in the project, then add the component again.
+
+**Components render without styles.** The project is probably on Tailwind CSS v3. FewTone UI needs v4: check that your global CSS file has `@import "tailwindcss";`.
+
+**`Cannot find module '@/lib/utils'`.** Your import alias or utils path is different. Check the `aliases` in `components.json` and `paths` in `tsconfig.json`, or add the `cn` helper shown above.
+
+**A file already exists.** The CLI asks before overwriting. Answer no to keep your version.
+
+**Animations don't play.** Check whether reduced motion is turned on in your operating system's accessibility settings. FewTone UI turns animations off when it is.
+
+## Frequently asked questions
+
+<Faq
+  entries={[
+    {
+      question: "How do I install FewTone UI in Next.js?",
+      answer:
+        "Run npx shadcn@latest init once in your project, then run the install command from any component page, such as npx shadcn@latest add https://ui.fewtone.com/r/button.json. The component's source is added to components/ui.",
+    },
+    {
+      question: "Can I use pnpm, yarn or bun?",
+      answer:
+        "Yes. Use pnpm dlx, yarn dlx or bunx --bun in place of npx. Every install command on the site has a switch for your package manager.",
+    },
+    {
+      question: "Will installing a component change my theme?",
+      answer:
+        "No. The CLI only adds the FewTone UI variables your project doesn't already define, and never changes your existing colours, fonts or radius.",
+    },
+    {
+      question: "Can I install FewTone UI without the shadcn CLI?",
+      answer:
+        "Yes. Every component page lists the manual steps: the npm packages, the tokens for your global CSS file, and the full source to copy.",
+    },
+    {
+      question: "Does FewTone UI work with Tailwind CSS v3?",
+      answer: "No. FewTone UI is written for Tailwind CSS v4. Upgrade the project to v4 first.",
+    },
+  ]}
+/>
+
+## Next steps
+
+- [Browse all components](/components) and add the ones you need.
+- [Read the introduction](/docs) to see how FewTone UI is built.
+
+<GuideJsonLd href="/docs/installation" />

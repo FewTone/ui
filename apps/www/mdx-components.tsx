@@ -2,11 +2,12 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import type { ReactElement } from "react";
 import { CodeBlock } from "@/components/docs/code-block";
+import { Faq, GuideJsonLd, InstallCommand, InstallTable } from "@/components/docs/guide-blocks";
 
 /** How guide pages (app/(browse)/docs/**\/page.mdx) render: tokens only, code highlighted on the server */
 const components: MDXComponents = {
-  // The page area is full width; guides keep a readable line length
-  wrapper: ({ children }) => <article className="grid max-w-docs gap-5">{children}</article>,
+  // One centred column, 64rem wide (owner, 2026-10-13): text, code, tables and grids all use its full width
+  wrapper: ({ children }) => <article className="mx-auto grid w-full max-w-docs gap-5">{children}</article>,
   h1: (props) => <h1 className="text-h2" {...props} />,
   h2: (props) => <h2 className="mt-6 scroll-mt-24 text-h3" {...props} />,
   h3: (props) => <h3 className="mt-2 scroll-mt-24 text-h4" {...props} />,
@@ -52,6 +53,11 @@ const components: MDXComponents = {
   ),
   td: (props) => <td className="border-b px-4 py-2 align-top" {...props} />,
   hr: () => <hr className="border-t" />,
+  // Blocks guides can use without importing (components/docs/guide-blocks.tsx)
+  Faq,
+  GuideJsonLd,
+  InstallCommand,
+  InstallTable,
 };
 
 export function useMDXComponents(): MDXComponents {

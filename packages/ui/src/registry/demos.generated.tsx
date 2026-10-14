@@ -9,15 +9,17 @@ import Demo5 from "../components/input/demos/default";
 import Demo6 from "../components/input/demos/invalid";
 import Demo7 from "../components/input/demos/sizes";
 import Demo8 from "../components/input/demos/disabled";
-import Demo9 from "../components/input/demos/file";
-import Demo10 from "../components/select/demos/default";
-import Demo11 from "../components/select/demos/groups";
-import Demo12 from "../components/select/demos/scrollable";
-import Demo13 from "../components/select/demos/sizes";
-import Demo14 from "../components/switch/demos/default";
-import Demo15 from "../components/switch/demos/settings";
-import Demo16 from "../components/switch/demos/sizes";
-import Demo17 from "../components/switch/demos/disabled";
+import Demo9 from "../components/select/demos/default";
+import Demo10 from "../components/select/demos/groups";
+import Demo11 from "../components/select/demos/searchable";
+import Demo12 from "../components/select/demos/sizes";
+import Demo13 from "../components/switch/demos/default";
+import Demo14 from "../components/switch/demos/settings";
+import Demo15 from "../components/switch/demos/sizes";
+import Demo16 from "../components/switch/demos/disabled";
+import Demo17 from "../components/theme-toggle/demos/reveals";
+import Demo18 from "../components/theme-toggle/demos/switch";
+import Demo19 from "../components/theme-toggle/demos/card";
 
 /** Every demo component, keyed by "<item>/<demo>" */
 export const demos: Record<string, ComponentType> = {
@@ -30,13 +32,15 @@ export const demos: Record<string, ComponentType> = {
   "input/invalid": Demo6,
   "input/sizes": Demo7,
   "input/disabled": Demo8,
-  "input/file": Demo9,
-  "select/default": Demo10,
-  "select/groups": Demo11,
-  "select/scrollable": Demo12,
-  "select/sizes": Demo13,
-  "switch/default": Demo14,
-  "switch/settings": Demo15,
-  "switch/sizes": Demo16,
-  "switch/disabled": Demo17,
+  "select/default": Demo9,
+  "select/groups": Demo10,
+  "select/searchable": Demo11,
+  "select/sizes": Demo12,
+  "switch/default": Demo13,
+  "switch/settings": Demo14,
+  "switch/sizes": Demo15,
+  "switch/disabled": Demo16,
+  "theme-toggle/reveals": Demo17,
+  "theme-toggle/switch": Demo18,
+  "theme-toggle/card": Demo19,
 };

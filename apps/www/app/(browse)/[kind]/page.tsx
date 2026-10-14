@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/docs/breadcrumbs";
 import { ItemGrid } from "@/components/docs/item-card";
 import { PageSkeleton } from "@/components/docs/page-skeleton";
 import { breadcrumbList, JsonLd } from "@/components/json-ld";
-import { getKindBySegment, getKinds, groupByCategory, isNew } from "@/lib/content";
+import { getKindBySegment, getKinds, isNew } from "@/lib/content";
 import { absoluteUrl, site } from "@/lib/site";
 
 export async function generateStaticParams() {
@@ -44,7 +44,7 @@ export default function KindPage({ params }: PageProps<"/[kind]">) {
   );
 }
 
-/** All items of one kind: a "New" row, then every item grouped by category */
+/** All items of one kind: a "New" row (when only some are new), then every item A–Z, with no categories */
 async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
   const { kind: segment } = await params;
   const kind = getKindBySegment(segment);
@@ -89,19 +89,15 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
           </Link>
         </div>
       ) : (
-        groupByCategory(kind.items).map(([category, list]) => {
-          const id = `category-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-          return (
-            <section key={category} aria-labelledby={id} className="mt-(--space-page)">
-              <h2 id={id} className={sectionLabel}>
-                {category}
-              </h2>
-              <div className="mt-(--space-stack)">
-                <ItemGrid items={list} />
-              </div>
-            </section>
-          );
-        })
+        // One list, no categories (owner, 2026-10-13). A label only when the New row sits above it.
+        <section aria-labelledby="all" className="mt-(--space-page)">
+          <h2 id="all" className={showFresh ? sectionLabel : "sr-only"}>
+            All {kind.plural.toLowerCase()}
+          </h2>
+          <div className={showFresh ? "mt-(--space-stack)" : undefined}>
+            <ItemGrid items={[...kind.items].sort((a, b) => a.title.localeCompare(b.title))} />
+          </div>
+        </section>
       )}
 
       <JsonLd

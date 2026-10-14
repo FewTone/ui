@@ -216,8 +216,9 @@ There are two layers:
 |---|---|---|
 | `--space-gutter` | 16 / 24 / 32px (base, md, xl) | Page edge, header and sidebar layout |
 | `--space-shell` | 16 / 32px (base, xl) | Sidebar to content |
-| `--space-sidebar-top` / `-end` | 24px / 16px | Sidebar inset under the header / to its right edge |
-| `--space-content-y` | 32px | Content and sidebar padding, top and bottom |
+| `--space-content-top` / `--space-content-first` | 16px / 20px | Header to the sidebar's first row / to the content's first line: plus the row's padding, so every page's breadcrumb is level with "Home" |
+| `--space-sidebar-end` | 16px | Sidebar links to its right edge |
+| `--space-content-y` | 32px | Content and sidebar padding at the bottom; the footer line |
 | `--space-header` / `-header-nav` / `-header-actions` | 16 / 24 / 8px | Header groups / nav links / buttons |
 | `--space-section` | clamp(64px, 8vw, 128px) | Landing page sections |
 
@@ -368,7 +369,7 @@ The shadows are neutral. Dark mode uses deeper shadows plus a lit top edge on ca
 
 **Keyframe animations:** `animate-fade-in`, `animate-fade-out`, `animate-rise-in`, `animate-scale-in`, `animate-caret-blink`.
 
-**Press feedback:** `active:scale-(--scale-press)`, which scales to 0.97.
+**Press feedback:** a colour step, not a scale (owner, 2026-10-14). The `--scale-press` token was removed.
 
 **Rules:**
 - Animate only `transform` and `opacity`. The exception is height: content that changes size glides to it through `AutoHeight` (owner, 2026-10-13).
@@ -425,7 +426,7 @@ Components are installed into other people's shadcn projects, which have shadcn'
 |---|---|
 | shadcn colours: `background`, `foreground`, `primary`, `secondary`, `muted`, `accent`, `border`, `input`, `ring`, `popover`, `destructive` (+ `-foreground`) | `brand`, `success`, `warning`, `danger`, `info`, `overlay`, `sidebar` |
 | stock text sizes `text-xs`, `text-sm`, `text-base` (Tailwind's values, also defined on our site) | `text-label`, `text-body-sm` and the other named sizes |
-| shipped tokens via `(--token)`: `--size-control-*`, `--size-icon-*`, `--duration-*`, `--ease-spring`, `--z-popover`, `--focus-ring-*`, `--opacity-disabled`, `--scale-press` | `--space-*` and other site tokens |
+| shipped tokens via `(--token)`: `--size-control-*`, `--size-icon-*`, `--duration-*`, `--ease-spring`, `--z-popover`, `--focus-ring-*`, `--opacity-disabled` | `--space-*` and other site tokens |
 | focus: `outline-ring focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset)` | the `focus-ring` utility |
 | popovers: `animate-popover-in` / `animate-popover-out` | `animate-scale-in` and the other site animations |
 | radius: `rounded-md` / `rounded-lg` (follows the user's `--radius`) | fixed values |

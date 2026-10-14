@@ -18,28 +18,34 @@ export default {
   ],
   status: "new",
   addedAt: "2026-10-13",
-  updatedAt: "2026-10-13",
+  updatedAt: "2026-10-14",
   files: ["switch.tsx"],
   usage: {
     code: `import { Switch } from "@/components/ui/switch"
 
-export function AirplaneMode() {
+export function Notifications() {
   return (
     <>
-      <Switch id="airplane-mode" />
-      <label htmlFor="airplane-mode">Airplane mode</label>
+      <Switch id="notifications" />
+      <label htmlFor="notifications">Notifications</label>
     </>
   )
 }`,
   },
   demos: [
-    { name: "default", title: "Default" },
+    {
+      name: "default",
+      title: "Default",
+      description:
+        "Hover and the thumb leans towards the other side; switch it and it stretches on the way, then settles round.",
+      zoom: 2,
+    },
     {
       name: "settings",
       title: "Settings list",
       description: "Each switch has a label and a hint linked with aria-describedby, grouped in a fieldset.",
     },
-    { name: "sizes", title: "Sizes" },
+    { name: "sizes", title: "Sizes", zoom: 1.5 },
     { name: "disabled", title: "Disabled" },
   ],
   api: [

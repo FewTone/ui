@@ -26,7 +26,6 @@ export const shippedVariables = [
   "focus-ring-width",
   "focus-ring-offset",
   "opacity-disabled",
-  "scale-press",
 ] as const;
 
 /** Easing curves from tokens.css (@theme), shipped as plain variables so they never depend on Tailwind's defaults */

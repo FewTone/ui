@@ -15,11 +15,11 @@ export default function BrowseLayout({ children }: { children: ReactNode }) {
       <SiteHeader />
       {/* Every space here is a layout token in tokens.css (beUI rhythm) */}
       <div className="flex w-full flex-1 gap-(--space-shell) px-(--space-gutter)">
-        <aside className="sticky top-(--size-header) hidden h-(--size-below-header) w-(--size-sidebar) shrink-0 overflow-y-auto pt-(--space-sidebar-top) pr-(--space-sidebar-end) pb-(--space-content-y) lg:block">
+        <aside className="sticky top-(--size-header) hidden h-(--size-below-header) w-(--size-sidebar) shrink-0 overflow-y-auto pt-(--space-content-top) pr-(--space-sidebar-end) pb-(--space-content-y) lg:block">
           <SidebarNav sections={getNavSections()} />
         </aside>
         <div className="flex min-w-0 flex-1 flex-col">
-          <main id="main" className="w-full flex-1 py-(--space-content-y)">
+          <main id="main" className="w-full flex-1 pt-(--space-content-first) pb-(--space-content-y)">
             {children}
           </main>
           <footer className="flex w-full flex-wrap justify-between gap-2 py-(--space-content-y) text-caption text-muted-foreground">

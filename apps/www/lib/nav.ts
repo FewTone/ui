@@ -4,16 +4,18 @@ import { guides } from "./guides";
 export type NavLink = { title: string; href: string; badge?: "New" | "Beta" };
 export type NavSection = {
   id: string;
-  label: string;
+  /** Shown above the links; a section without one (Home) is just its links */
+  label?: string;
   /** Set for kind sections, so the sidebar can filter by kind */
   kind?: string;
   count?: number;
   links: NavLink[];
 };
 
-/** Sidebar sections: the guides, then one section per kind, all from the content index */
+/** Sidebar sections: Home (every component), the guides, then one section per kind, from the content index */
 export function getNavSections(): NavSection[] {
   return [
+    { id: "home", links: [{ title: "Home", href: "/components" }] },
     {
       id: "guides",
       label: "Getting started",

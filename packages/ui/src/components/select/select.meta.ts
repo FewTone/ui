@@ -18,7 +18,7 @@ export default {
   ],
   status: "new",
   addedAt: "2026-10-13",
-  updatedAt: "2026-10-13",
+  updatedAt: "2026-10-14",
   files: ["select.tsx"],
   usage: {
     code: `import {
@@ -52,9 +52,10 @@ export function PlanPicker() {
         "Group related options under a label, with a separator between groups. Options can be disabled.",
     },
     {
-      name: "scrollable",
-      title: "Long lists",
-      description: "Long lists scroll, with arrows at the ends. Type a few letters to jump to an option.",
+      name: "searchable",
+      title: "Long lists with search",
+      description:
+        "Add searchable to SelectContent and a search field filters the options. Arrow keys move through the matches, Enter picks the highlighted one, and Escape closes. The list scrolls, with soft fades at the ends.",
     },
     { name: "sizes", title: "Sizes", description: "The trigger comes in Button's small and medium heights." },
   ],
@@ -84,8 +85,28 @@ export function PlanPicker() {
     },
     {
       name: "SelectContent",
-      description: "The list. Opens below the trigger and flips when there is no room.",
+      description:
+        "The list. Opens below the trigger and flips when there is no room. It scrolls past 18rem, with soft fades at the ends.",
       props: [
+        {
+          name: "searchable",
+          type: "boolean",
+          default: "false",
+          description:
+            "Adds a search field above the options, for long lists. Typing filters them, arrow keys move through the matches, and Enter picks the highlighted one.",
+        },
+        {
+          name: "searchPlaceholder",
+          type: "string",
+          default: '"Search…"',
+          description: "The search field's placeholder and accessible name.",
+        },
+        {
+          name: "emptyMessage",
+          type: "ReactNode | (search: string) => ReactNode",
+          default: '"No results for “…”"',
+          description: "Shown when nothing matches the search.",
+        },
         {
           name: "position",
           type: '"popper" | "item-aligned"',
@@ -106,6 +127,11 @@ export function PlanPicker() {
       props: [
         { name: "value", type: "string", required: true, description: "The value this option selects." },
         { name: "disabled", type: "boolean", default: "false", description: "Skips the option." },
+        {
+          name: "textValue",
+          type: "string",
+          description: "The text the search and typeahead match, when the option's content isn't plain text.",
+        },
       ],
     },
   ],

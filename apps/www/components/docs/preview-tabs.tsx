@@ -29,6 +29,7 @@ export function PreviewTabs({
   replay,
   height,
   template,
+  zoom,
 }: {
   preview: ReactNode;
   usage?: ReactNode;
@@ -36,6 +37,8 @@ export function PreviewTabs({
   replay: boolean;
   height: keyof typeof heights;
   template: PreviewTemplate;
+  /** Shows a small control bigger (CSS zoom); the demo's code stays as written */
+  zoom?: number;
 }) {
   const [run, setRun] = useState(0);
   const [tab, setTab] = useState("preview");
@@ -102,9 +105,15 @@ export function PreviewTabs({
               template === "centered" && "p-(--space-canvas)",
             )}
           >
-            <div key={run} className="contents">
-              {preview}
-            </div>
+            {zoom ? (
+              <div key={run} style={{ zoom }}>
+                {preview}
+              </div>
+            ) : (
+              <div key={run} className="contents">
+                {preview}
+              </div>
+            )}
           </div>
         </Tabs.Content>
         {usage ? (

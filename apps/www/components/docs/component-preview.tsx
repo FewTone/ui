@@ -17,6 +17,7 @@ export async function ComponentPreview({
 }) {
   const Demo = demos[`${item.name}/${demo}`];
   if (!Demo) return null;
+  const zoom = item.demos.find((entry) => entry.name === demo)?.zoom;
   const source = toProjectImports(await readSource(`${item.dir}/demos/${demo}.tsx`));
 
   return (
@@ -25,6 +26,7 @@ export async function ComponentPreview({
       usage={withUsage && item.usage ? <CodeBlock code={item.usage.code} /> : undefined}
       code={<CodeBlock code={source} filename={`${demo}.tsx`} />}
       replay={item.motion.animated}
+      zoom={zoom}
       height={item.preview.height}
       template={item.preview.template ?? kinds[item.kind].template}
     />

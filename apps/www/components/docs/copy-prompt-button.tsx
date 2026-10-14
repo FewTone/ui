@@ -29,7 +29,7 @@ export function CopyPromptButton({ prompt, className }: { prompt: string; classN
       type="button"
       onClick={copy}
       className={cn(
-        "focus-ring inline-grid h-(--size-control-sm) shrink-0 place-items-center rounded-lg bg-primary px-3 text-label text-primary-foreground transition duration-(--duration-fast) ease-out hover:opacity-90 active:scale-(--scale-press)",
+        "focus-ring inline-grid h-(--size-control-sm) shrink-0 place-items-center rounded-lg bg-primary px-3 text-label text-primary-foreground transition duration-(--duration-fast) ease-out hover:opacity-90 active:opacity-80",
         className,
       )}
     >

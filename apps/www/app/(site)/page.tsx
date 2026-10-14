@@ -50,7 +50,7 @@ export default function Home() {
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <Link
             href="/components"
-            className="focus-ring inline-flex h-(--size-control-lg) items-center gap-2 rounded-lg bg-gradient-primary px-5 text-label text-primary-foreground shadow-sm transition-transform duration-(--duration-fast) ease-out active:scale-(--scale-press)"
+            className="focus-ring inline-flex h-(--size-control-lg) items-center gap-2 rounded-lg bg-gradient-primary px-5 text-label text-primary-foreground shadow-sm transition-opacity duration-(--duration-fast) ease-out hover:opacity-90 active:opacity-80"
           >
             View components
             <ArrowRightIcon className="size-(--size-icon-md)" aria-hidden />

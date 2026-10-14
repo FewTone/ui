@@ -14,11 +14,11 @@ import { addCommands } from "@/lib/install";
 import { itemPrompt } from "@/lib/prompt";
 import { absoluteUrl, site } from "@/lib/site";
 
-const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" });
 // Section titles are larger than the example and API titles inside them; space alone separates sections, with
 // no divider lines (owner, 2026-10-13). Spacing from tokens.
 const sectionTitle = "scroll-mt-24 text-h3";
-const section = "mt-(--space-block)";
+// Sections stop below the sticky header when scrolled to (View less returns to Installation's heading)
+const section = "mt-(--space-block) scroll-mt-24";
 
 /**
  * One item's page body: header, hero preview, install, examples, API, related. Sections without data are
@@ -35,8 +35,6 @@ export async function ItemArticle({ kind, item }: { kind: Kind; item: Item }) {
     { name: kind.plural, href: `/${kind.segment}` },
     { name: item.title, href: item.href },
   ];
-  const source = `${site.github}/tree/main/packages/ui/src/${item.dir}`;
-  const updated = dateFormat.format(new Date(`${item.updatedAt}T00:00:00Z`));
   const prompt = await itemPrompt(item);
 
   return (
@@ -68,7 +66,7 @@ export async function ItemArticle({ kind, item }: { kind: Kind; item: Item }) {
           Installation
         </h2>
         <div className="mt-(--space-stack)">
-          <Expandable more="View all steps">
+          <Expandable more="View all steps" less="View less">
             <InstallSection item={item} />
           </Expandable>
         </div>
@@ -126,20 +124,6 @@ export async function ItemArticle({ kind, item }: { kind: Kind; item: Item }) {
           </div>
         </section>
       ) : null}
-
-      <footer className="mt-(--space-block) flex flex-wrap gap-x-5 gap-y-2 text-caption text-muted-foreground">
-        <span>
-          Last updated <time dateTime={item.updatedAt}>{updated}</time>
-        </span>
-        <a
-          href={source}
-          target="_blank"
-          rel="noreferrer"
-          className="focus-ring rounded-sm hover:text-foreground"
-        >
-          Edit on GitHub
-        </a>
-      </footer>
 
       <JsonLd
         data={[

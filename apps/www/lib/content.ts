@@ -50,13 +50,6 @@ export function getRelated(item: Item, limit = 3): Item[] {
   return picked.slice(0, limit);
 }
 
-/** Items grouped by category, categories in alphabetical order */
-export function groupByCategory(list: Item[]) {
-  const groups = new Map<string, Item[]>();
-  for (const item of list) groups.set(item.category, [...(groups.get(item.category) ?? []), item]);
-  return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
-}
-
 /** Page title that matches what people search for: "React Button Component" */
 export function itemTitle(item: Item) {
   return item.seo.title ?? `React ${item.title} ${kinds[item.kind].label}`;

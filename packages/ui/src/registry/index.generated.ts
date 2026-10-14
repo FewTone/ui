@@ -22,7 +22,7 @@ export const items: Item[] = [
     ],
     "status": "new",
     "addedAt": "2026-10-13",
-    "updatedAt": "2026-10-13",
+    "updatedAt": "2026-10-14",
     "tier": "free",
     "files": [
       "button.tsx"
@@ -141,7 +141,7 @@ export const items: Item[] = [
     ],
     "status": "new",
     "addedAt": "2026-10-13",
-    "updatedAt": "2026-10-13",
+    "updatedAt": "2026-10-14",
     "tier": "free",
     "files": [
       "input.tsx"
@@ -159,7 +159,7 @@ export const items: Item[] = [
       {
         "name": "invalid",
         "title": "Invalid",
-        "description": "Set aria-invalid and link the error message with aria-describedby, so screen readers announce it."
+        "description": "The error follows the value: it shows while the username is too short and goes away once it has 3 characters. Set aria-invalid and link the message with aria-describedby, so screen readers announce it."
       },
       {
         "name": "sizes",
@@ -169,11 +169,6 @@ export const items: Item[] = [
       {
         "name": "disabled",
         "title": "Disabled"
-      },
-      {
-        "name": "file",
-        "title": "File",
-        "description": "The file picker button takes the input's styles."
       }
     ],
     "api": [
@@ -256,7 +251,7 @@ export const items: Item[] = [
     ],
     "status": "new",
     "addedAt": "2026-10-13",
-    "updatedAt": "2026-10-13",
+    "updatedAt": "2026-10-14",
     "tier": "free",
     "files": [
       "select.tsx"
@@ -277,9 +272,9 @@ export const items: Item[] = [
         "description": "Group related options under a label, with a separator between groups. Options can be disabled."
       },
       {
-        "name": "scrollable",
-        "title": "Long lists",
-        "description": "Long lists scroll, with arrows at the ends. Type a few letters to jump to an option."
+        "name": "searchable",
+        "title": "Long lists with search",
+        "description": "Add searchable to SelectContent and a search field filters the options. Arrow keys move through the matches, Enter picks the highlighted one, and Escape closes. The list scrolls, with soft fades at the ends."
       },
       {
         "name": "sizes",
@@ -339,8 +334,26 @@ export const items: Item[] = [
       },
       {
         "name": "SelectContent",
-        "description": "The list. Opens below the trigger and flips when there is no room.",
+        "description": "The list. Opens below the trigger and flips when there is no room. It scrolls past 18rem, with soft fades at the ends.",
         "props": [
+          {
+            "name": "searchable",
+            "type": "boolean",
+            "default": "false",
+            "description": "Adds a search field above the options, for long lists. Typing filters them, arrow keys move through the matches, and Enter picks the highlighted one."
+          },
+          {
+            "name": "searchPlaceholder",
+            "type": "string",
+            "default": "\"Search…\"",
+            "description": "The search field's placeholder and accessible name."
+          },
+          {
+            "name": "emptyMessage",
+            "type": "ReactNode | (search: string) => ReactNode",
+            "default": "\"No results for “…”\"",
+            "description": "Shown when nothing matches the search."
+          },
           {
             "name": "position",
             "type": "\"popper\" | \"item-aligned\"",
@@ -369,6 +382,11 @@ export const items: Item[] = [
             "type": "boolean",
             "default": "false",
             "description": "Skips the option."
+          },
+          {
+            "name": "textValue",
+            "type": "string",
+            "description": "The text the search and typeahead match, when the option's content isn't plain text."
           }
         ]
       }
@@ -428,7 +446,7 @@ export const items: Item[] = [
     ],
     "status": "new",
     "addedAt": "2026-10-13",
-    "updatedAt": "2026-10-13",
+    "updatedAt": "2026-10-14",
     "tier": "free",
     "files": [
       "switch.tsx"
@@ -436,12 +454,14 @@ export const items: Item[] = [
     "dependencies": [],
     "registryDependencies": [],
     "usage": {
-      "code": "import { Switch } from \"@/components/ui/switch\"\n\nexport function AirplaneMode() {\n  return (\n    <>\n      <Switch id=\"airplane-mode\" />\n      <label htmlFor=\"airplane-mode\">Airplane mode</label>\n    </>\n  )\n}"
+      "code": "import { Switch } from \"@/components/ui/switch\"\n\nexport function Notifications() {\n  return (\n    <>\n      <Switch id=\"notifications\" />\n      <label htmlFor=\"notifications\">Notifications</label>\n    </>\n  )\n}"
     },
     "demos": [
       {
         "name": "default",
-        "title": "Default"
+        "title": "Default",
+        "description": "Hover and the thumb leans towards the other side; switch it and it stretches on the way, then settles round.",
+        "zoom": 2
       },
       {
         "name": "settings",
@@ -450,7 +470,8 @@ export const items: Item[] = [
       },
       {
         "name": "sizes",
-        "title": "Sizes"
+        "title": "Sizes",
+        "zoom": 1.5
       },
       {
         "name": "disabled",
@@ -530,8 +551,154 @@ export const items: Item[] = [
         "motion"
       ]
     }
+  },
+  {
+    "name": "theme-toggle",
+    "title": "Theme Toggle",
+    "description": "An accessible React dark mode toggle for Next.js that reveals the new theme from the button with a View Transition: a circle, ink, a wave or a page turn.",
+    "kind": "component",
+    "category": "Buttons",
+    "tags": [
+      "theme",
+      "dark mode",
+      "light mode",
+      "toggle",
+      "view transition"
+    ],
+    "keywords": [
+      "react theme toggle",
+      "nextjs dark mode toggle",
+      "dark mode toggle",
+      "theme switcher",
+      "animated theme toggle",
+      "view transitions theme",
+      "tailwind dark mode",
+      "shadcn mode toggle"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-14",
+    "updatedAt": "2026-10-14",
+    "tier": "free",
+    "files": [
+      "theme-toggle.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { ThemeToggle } from \"@/components/ui/theme-toggle\"\n\n// Inside next-themes' ThemeProvider (shadcn's dark mode setup)\nexport function SiteHeader() {\n  return (\n    <header>\n      <ThemeToggle reveal=\"ink\" speed=\"medium\" />\n    </header>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "reveals",
+        "title": "All reveals",
+        "description": "Press any toggle to switch the theme with that reveal, starting from where you pressed. The speed applies to all of them."
+      },
+      {
+        "name": "switch",
+        "title": "With a switch",
+        "description": "revealTheme works with any control. Here a Switch turns dark mode on and off, and the new theme grows out of it."
+      }
+    ],
+    "api": [
+      {
+        "name": "ThemeToggle",
+        "description": "Switches between light and dark with next-themes, so wrap your app in its ThemeProvider. Its icon morphs between a sun and a moon: the rays spin away, a shadow carves a crescent and two stars twinkle in. Also accepts every Button prop. Without View Transitions support, or with reduced motion turned on, the switch is instant.",
+        "props": [
+          {
+            "name": "reveal",
+            "type": "ThemeReveal | ThemeReveal[] | \"random\" | \"none\"",
+            "default": "\"circle\"",
+            "description": "How the new theme appears: \"circle\", \"shrink\", \"ink\", \"tide\", \"page-turn\", \"fade\", \"wipe-right\", \"wipe-down\", \"feather\", \"curtain\" or \"diagonal\". \"random\" picks a different one each time; a list picks from that list."
+          },
+          {
+            "name": "speed",
+            "type": "\"quick\" | \"medium\" | \"slow\" | number",
+            "default": "\"medium\"",
+            "description": "How long the reveal takes: 450ms, 700ms, 1000ms, or a number of milliseconds."
+          },
+          {
+            "name": "variant",
+            "type": "Button variant",
+            "default": "\"outline\"",
+            "description": "The button style."
+          },
+          {
+            "name": "size",
+            "type": "Button size",
+            "default": "\"icon\"",
+            "description": "The button size."
+          }
+        ]
+      },
+      {
+        "name": "revealTheme",
+        "description": "The switch on its own, for a menu item or a keyboard shortcut. Returns the view transition, or undefined when the switch was instant.",
+        "props": [
+          {
+            "name": "theme",
+            "type": "string",
+            "description": "The theme to switch to, for example \"dark\"."
+          },
+          {
+            "name": "setTheme",
+            "type": "(theme: string) => void",
+            "description": "setTheme from next-themes."
+          },
+          {
+            "name": "origin",
+            "type": "{ x: number; y: number }",
+            "description": "Where the reveal starts, in viewport pixels. Defaults to the centre of the screen."
+          },
+          {
+            "name": "reveal",
+            "type": "ThemeReveal | ThemeReveal[] | \"random\" | \"none\"",
+            "default": "\"circle\"",
+            "description": "As on ThemeToggle."
+          },
+          {
+            "name": "speed",
+            "type": "\"quick\" | \"medium\" | \"slow\" | number",
+            "default": "\"medium\"",
+            "description": "As on ThemeToggle."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "next-themes",
+      "View Transitions API"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "button",
+      "switch"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use ThemeToggle for a one-click light/dark switch in a header. It needs next-themes' ThemeProvider. Use revealTheme to switch from a menu or a shortcut with the same reveal."
+    },
+    "controls": {},
+    "href": "/components/theme-toggle",
+    "dir": "components/theme-toggle",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0",
+        "next-themes@^0.4.6"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
   }
 ];
 
 /** The tokens item as CSS to paste, for the Manual install route (generated from tokens.css and theme.css) */
-export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-popover: 1400;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --scale-press: 0.97;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";
+export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-popover: 1400;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";

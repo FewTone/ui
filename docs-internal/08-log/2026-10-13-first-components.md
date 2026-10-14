@@ -113,3 +113,27 @@ Clarified with the owner:
 - **Smooth motion:** the preview card and Installation glide to new heights (`AutoHeight`, the documented exception to rule 4). Panels slide in by direction, and hidden install steps rise in, staggered.
 - **The header command** has a fixed width, in `ch`.
 - **Lab:** with the page settled, the `/lab` exploration page and its options bar were removed. `/lab/tokens` remains.
+
+## Later still: Home, and guides rewritten for search
+
+- **Sidebar:** **Home** at the top (→ `/components`).
+- **Theming:** removed. Its essentials are now Installation's "Customize the theme", and `/docs/theming` redirects there (308).
+- **Introduction and Installation:** rewritten, longer and aimed at search.
+  - **Titles:** absolute, under 60 characters. The descriptions are about 155 characters.
+  - **Headings:** question-style.
+  - **Links:** to every component.
+  - **Structured data:** FAQ, TechArticle and BreadcrumbList (`guide-blocks.tsx`).
+- **Guide blocks:** `ComponentGrid`, `InstallCommand`, `InstallTable` (generated from the install data), `Faq` (visible text and FAQPage from one source) and `GuideJsonLd`.
+
+**Page tops:**
+- The content starts at `--space-content-first`: 16px plus the sidebar row's 4px padding. Every page's first line is now level with the sidebar's "Home", measured at 77px on all four pages.
+- Guides open with their title, with no breadcrumb: it only repeated the title. The title's capitals already sit level with "Home" (82px against 81px, measured).
+- The components index is one A–Z grid, with no category groups.
+
+**Found along the way:** drive C: filled up. 103 headless-Chrome profiles from the scratch screenshot and probe scripts (1.8 GB in %TEMP%) were never deleted. They are removed, and the scripts now delete their profile on exit.
+
+**Search redesigned** (`command-menu.tsx`, `kbd.tsx`):
+- **Header button:** a field-like button in the secondary colours, with key caps (⌘ K on a Mac, Ctrl K elsewhere). Its parts share one centre line (measured).
+- **Window:** springs open and fades out quickly (motion inside Radix Dialog). Results have icon tiles, are ranked, and show the match underlined. The highlight glides between rows and an Enter arrow slides in on the active one. A footer shows the key hints; there is a clearer empty state.
+- **Search is reset** only after the window has gone, so nothing changes while it leaves.
+

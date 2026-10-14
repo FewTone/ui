@@ -6,7 +6,8 @@ import { StatusBadge } from "./status-badge";
 
 /**
  * Card used on index pages and in "Related components" (owner, 2026-10-13): one outer card holds a live
- * preview tile of the item's first demo, with the title and description underneath. FewTone's own style.
+ * preview tile of the item's first demo (or its card-only demo, `preview.card`, when the hero is too busy
+ * for a small tile), with the title and description underneath. FewTone's own style.
  *
  * Spacing is all --space-card-* tokens: a 12px frame round the tile (the corners stay concentric), the text
  * 32px in from the card's sides, and 24px under the description, measured to the letters.
@@ -16,8 +17,8 @@ import { StatusBadge } from "./status-badge";
  * buttons and inputs inside an anchor. The badges ignore the pointer, so clicks on them reach the link.
  */
 export function ItemCard({ item }: { item: Item }) {
-  const hero = item.demos[0];
-  const Demo = hero ? demos[`${item.name}/${hero.name}`] : undefined;
+  const shown = item.preview.card ?? item.demos[0]?.name;
+  const Demo = shown ? demos[`${item.name}/${shown}`] : undefined;
 
   return (
     <article className="group relative grid content-start gap-(--space-card-text) rounded-(--radius-card) bg-card p-(--space-card-frame) shadow-card outline-offset-4 outline-ring has-focus-visible:outline-(length:--focus-ring-width)">
