@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@fewtone/ui/components/button/button";
-import { duration, ease, spring } from "@fewtone/ui/lib/motion";
+import { blur, duration, ease, spring } from "@fewtone/ui/lib/motion";
 import { cn } from "@fewtone/ui/lib/utils";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { AnimatePresence, animate, motion, stagger, useReducedMotion } from "motion/react";
@@ -91,7 +91,8 @@ export function Expandable({
     moreButton.current?.focus({ preventScroll: true });
   }, [open]);
 
-  // Opening: the items below the fold fade and rise in, staggered (only opacity with reduced motion)
+  // Opening: the items below the fold rise and sharpen in through the blur, staggered (only opacity with
+  // reduced motion). The filter is cleared afterwards, so it doesn't leave stacking contexts behind.
   const reduce = useReducedMotion();
   const fold = useRef(0);
   useLayoutEffect(() => {
@@ -103,12 +104,16 @@ export function Expandable({
       : [];
     fold.current = 0;
     if (hidden.length === 0) return;
-    animate(hidden, reduce ? { opacity: [0, 1] } : { opacity: [0, 1], y: [12, 0] }, {
-      duration: duration.slow,
-      ease: ease.out,
-      delay: stagger(0.05),
+    animate(
+      hidden,
+      reduce ? { opacity: [0, 1] } : { opacity: [0, 1], y: [12, 0], filter: [blur.hidden, blur.shown] },
+      { duration: duration.slow, ease: ease.out, delay: stagger(0.05) },
+    ).then(() => {
+      for (const item of hidden) (item as HTMLElement).style.removeProperty("filter");
     });
   }, [open, reduce]);
+  // The buttons come and go through the blur; with reduced motion they only fade
+  const blurred = reduce ? blur.shown : blur.hidden;
 
   return (
     <div className="relative">
@@ -126,9 +131,9 @@ export function Expandable({
         {collapsed ? (
           <motion.div
             key="fade"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, filter: blurred }}
+            animate={{ opacity: 1, filter: blur.shown }}
+            exit={{ opacity: 0, filter: blurred }}
             transition={{ duration: duration.base, ease: ease.out }}
             className="pointer-events-none absolute inset-x-0 bottom-0 flex h-(--size-collapsed-fade) items-end justify-center bg-linear-to-t from-background to-transparent"
           >
@@ -156,9 +161,14 @@ export function Expandable({
           <motion.div
             key="less"
             ref={lessRow}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 16, transition: { duration: duration.fast, ease: ease.in } }}
+            initial={{ opacity: 0, filter: blurred, y: 16 }}
+            animate={{ opacity: 1, filter: blur.shown, y: 0 }}
+            exit={{
+              opacity: 0,
+              filter: blurred,
+              y: 16,
+              transition: { duration: duration.fast, ease: ease.in },
+            }}
             transition={reduce ? { duration: 0 } : spring.snappy}
             className="pointer-events-none sticky bottom-(--space-gutter) z-(--z-sticky) mt-(--space-stack) flex justify-center"
           >

@@ -1,7 +1,6 @@
 import { demos } from "@fewtone/ui/registry/demos";
 import type { Item } from "@fewtone/ui/registry/schema";
 import Link from "next/link";
-import { isNew } from "@/lib/content";
 import { StatusBadge } from "./status-badge";
 
 /**
@@ -37,7 +36,6 @@ export function ItemCard({ item }: { item: Item }) {
           >
             {item.title}
           </Link>
-          {isNew(item) ? <StatusBadge status="New" className="pointer-events-none" /> : null}
           {item.status === "draft" ? <StatusBadge status="Draft" className="pointer-events-none" /> : null}
         </div>
         <p className="trim-leading-end line-clamp-2 text-body-sm text-muted-foreground">{item.description}</p>

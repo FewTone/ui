@@ -151,7 +151,7 @@ const plan: { group: string; entries: Entry[] }[] = [
       {
         name: "badge",
         title: "Badge",
-        note: "Small status labels, including a New badge with a shining edge.",
+        note: "Small status labels, including one with a shining edge.",
       },
       { name: "alert", title: "Alert", note: "An inline message for important information." },
       { name: "progress", title: "Progress", note: "A bar or ring that shows how far along a task is." },

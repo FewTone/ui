@@ -1,13 +1,14 @@
 "use client";
 
 import { Input } from "@fewtone/ui/components/input/input";
-import { duration, ease } from "@fewtone/ui/lib/motion";
+import { blur, duration, ease } from "@fewtone/ui/lib/motion";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useId, useState } from "react";
 
 /*
  * The error follows the value: it shows while the username is too short and goes away as soon as it's long
- * enough. The border colour fades with it, and the message glides open and shut. A polite live region
+ * enough. The border colour fades with it, and the message glides open and shut, sharpening in from the
+ * library's blur. A polite live region
  * announces the change, and aria-describedby links the message while it's there.
  */
 export default function InputInvalid() {
@@ -36,9 +37,9 @@ export default function InputInvalid() {
           {invalid ? (
             <motion.div
               key="error"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 0, filter: blur.hidden, height: 0 }}
+              animate={{ opacity: 1, filter: blur.shown, height: "auto" }}
+              exit={{ opacity: 0, filter: blur.hidden, height: 0 }}
               transition={reduce ? { duration: 0 } : { duration: duration.base, ease: ease.out }}
               className="overflow-hidden"
             >

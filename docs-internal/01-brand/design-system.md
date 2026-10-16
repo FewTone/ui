@@ -64,7 +64,7 @@ Apps import the whole system with one line: `@import "@fewtone/ui/globals.css";`
 |---|---|
 | Footer | `surface-brand-footer`, with the wordmark in `text-gradient-on-brand` |
 | Pro and premium cards | `surface-brand` |
-| "New" signals | `edge-shine` badge: a solid Navy edge with two light shines travelling round it |
+| Beta badge | `edge-shine` badge: a solid Navy edge with two light shines travelling round it. (It was the "New" badge; New tags were removed everywhere, owner 2026-10-14.) |
 | Announcement pill, Pro link | `edge-brand` (border fades from brand to neutral) |
 | Text selection | automatic (`--selection`) |
 | Info status | `info-*` tokens alias the brand scale |
@@ -120,7 +120,7 @@ Components use only these, as Tailwind utilities (`bg-card`, `text-muted-foregro
 | `muted-foreground` | gray-11 | gray-11 | Secondary text |
 | `accent` | gray-4 | gray-4 | Hover surface (shadcn name, not the brand) |
 | `preview` / `preview-hover` | gray-4 / gray-5 | gray-4 / gray-5 | Item card preview tile, one step past muted so it stands apart from the card |
-| `--shine` | Navy 65% towards white | same | The light shines on the New badge's edge (`edge-shine`) |
+| `--shine` | Navy 65% towards white | same | The light shines on the Beta badge's edge (`edge-shine`) |
 | `overlay` | black 40% | black 60% | Behind dialogs |
 | `border` | gray-6 | gray-6 | Dividers, card edges |
 | `input` | gray-7 | gray-7 | Input borders |
@@ -367,12 +367,21 @@ The shadows are neutral. Dark mode uses deeper shadows plus a lit top edge on ca
 | `smooth` | 120 / 20 | Panels, sidebars, sections |
 | `bouncy` | 300 / 15 | Rare moments of delight |
 
-**Keyframe animations:** `animate-fade-in`, `animate-fade-out`, `animate-rise-in`, `animate-scale-in`, `animate-caret-blink`.
+**The blur** (owner, 2026-10-15, ADR 0011). Content that appears, leaves or swaps sharpens in from a 6px blur as it fades, instead of only fading.
+
+| Where | Use |
+|---|---|
+| JavaScript | `blur.hidden` (`blur(6px)`) / `blur.shown`, and `swap` (a 6px rise through the blur) from `@fewtone/ui/lib/motion` |
+| CSS | every keyframe below that fades content also blurs it, with the same 6px (the token check keeps the two in step) |
+| Not for | full-screen overlays, fills, highlights, hover or scroll-edge fades: those still only fade |
+| Reduced motion | opacity only |
+
+**Keyframe animations:** `animate-blur-in` and `animate-blur-out` (they were `fade-in` / `fade-out`), `animate-rise-in`, `animate-scale-in`, `animate-popover-in` / `animate-popover-out` (shipped to users), and `animate-caret-blink`.
 
 **Press feedback:** a colour step, not a scale (owner, 2026-10-14). The `--scale-press` token was removed.
 
 **Rules:**
-- Animate only `transform` and `opacity`. The exception is height: content that changes size glides to it through `AutoHeight` (owner, 2026-10-13).
+- Animate only `transform` and `opacity`, plus the blur on content that comes and goes (above). The other exception is height: content that changes size glides to it through `AutoHeight` (owner, 2026-10-13).
   - **Transition:** an eased tween, `duration.slow` with `ease.out`. It's not a spring, because a spring's overshoot would bounce the page below.
   - **Clipping:** content is clipped only while it moves.
   - **Reduced motion:** it's instant.
@@ -429,7 +438,7 @@ Components are installed into other people's shadcn projects, which have shadcn'
 | shipped tokens via `(--token)`: `--size-control-*`, `--size-icon-*`, `--duration-*`, `--ease-spring`, `--z-popover`, `--focus-ring-*`, `--opacity-disabled` | `--space-*` and other site tokens |
 | focus: `outline-ring focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset)` | the `focus-ring` utility |
 | popovers: `animate-popover-in` / `animate-popover-out` | `animate-scale-in` and the other site animations |
-| radius: `rounded-md` / `rounded-lg` (follows the user's `--radius`) | fixed values |
+| radius: `rounded-md` / `rounded-lg` (follows the user's `--radius`); `rounded-sm` and `rounded-xs` only for the smallest controls (Checkbox). `sm` follows `--radius` in shadcn's theme too; `xs` is Tailwind's 2px there, our 4px here. | fixed values |
 
 The shipped list lives in `packages/ui/src/registry/shared.ts`. To ship a new token, add it there, then use it. The registry generator reads its value from the token files.
 

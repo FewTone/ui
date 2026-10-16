@@ -29,10 +29,6 @@ export function getItem(segment: string, name: string): Item | undefined {
   return kind?.items.find((item) => item.name === name);
 }
 
-export function isNew(item: Item) {
-  return item.status === "new";
-}
-
 /** Items listed in `related`, topped up from the same category, then the same kind */
 export function getRelated(item: Item, limit = 3): Item[] {
   const others = items.filter((other) => other.name !== item.name);

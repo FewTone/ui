@@ -9,7 +9,7 @@ import { getRoadmap, type RoadmapStatus } from "@/lib/roadmap";
  * The public roadmap (owner, 2026-10-14). The list is lib/roadmap.ts; each entry's status comes from the
  * content index, so a component appears as Available, with a link, the day it ships. Listed with the
  * guides (lib/guides.ts), so it's in the sidebar, search and sitemap. Neutral styling only: Navy stays
- * for "New".
+ * for the footer, Pro surfaces and the Beta badge.
  */
 
 const page = guides.find((guide) => guide.href === "/roadmap");

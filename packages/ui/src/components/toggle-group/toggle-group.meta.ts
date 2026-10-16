@@ -18,7 +18,7 @@ export default {
     "multi select buttons",
     "radix toggle group",
   ],
-  status: "new",
+  status: "stable",
   addedAt: "2026-10-14",
   updatedAt: "2026-10-14",
   files: ["toggle-group.tsx"],

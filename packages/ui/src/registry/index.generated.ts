@@ -20,7 +20,7 @@ export const items: Item[] = [
       "shadcn button",
       "button component"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-13",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -122,6 +122,287 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "checkbox",
+    "title": "Checkbox",
+    "description": "An accessible React checkbox for Next.js forms, with a check that draws itself in and an indeterminate state, built on Radix Checkbox.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "checkbox",
+      "check",
+      "form",
+      "select all"
+    ],
+    "keywords": [
+      "react checkbox",
+      "nextjs checkbox",
+      "tailwind checkbox",
+      "shadcn checkbox",
+      "animated checkbox",
+      "indeterminate checkbox",
+      "select all checkbox"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-15",
+    "updatedAt": "2026-10-15",
+    "tier": "free",
+    "files": [
+      "checkbox.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Checkbox } from \"@/components/ui/checkbox\"\n\nexport function Terms() {\n  return (\n    <>\n      <Checkbox id=\"terms\" />\n      <label htmlFor=\"terms\">Accept terms and conditions</label>\n    </>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Default",
+        "description": "Check it and the box fills as the check draws itself in; uncheck it and the check erases.",
+        "zoom": 2
+      },
+      {
+        "name": "hint",
+        "title": "Label and hint",
+        "description": "A visible label, and a hint linked with aria-describedby."
+      },
+      {
+        "name": "select-all",
+        "title": "Select all",
+        "description": "The parent shows a dash while only some are picked; checking it picks them all. Checked and dash swap marks without the fill moving."
+      },
+      {
+        "name": "sizes",
+        "title": "Sizes",
+        "zoom": 1.5
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled"
+      }
+    ],
+    "api": [
+      {
+        "name": "Checkbox",
+        "description": "Also accepts every Radix Checkbox prop. Inside a form it submits through a hidden native checkbox, and a form reset restores its first state.",
+        "props": [
+          {
+            "name": "checked",
+            "type": "boolean | \"indeterminate\"",
+            "description": "The state, when you control it. Indeterminate shows a dash."
+          },
+          {
+            "name": "defaultChecked",
+            "type": "boolean | \"indeterminate\"",
+            "default": "false",
+            "description": "The initial state."
+          },
+          {
+            "name": "onCheckedChange",
+            "type": "(checked: boolean | \"indeterminate\") => void",
+            "description": "Called when the user checks or unchecks it. An indeterminate box becomes checked."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "16 or 20px, the heights of Switch's sizes."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents interaction."
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Must be checked to submit the form."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the value with a form."
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "default": "\"on\"",
+            "description": "The value submitted when checked."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Checkbox"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "switch",
+      "toggle-group",
+      "input"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Checkbox for choices submitted with a form, agreeing to terms, and picking several items from a list. Set checked to \"indeterminate\" on a select-all box when only some are picked. Use Switch for settings that apply right away."
+    },
+    "controls": {},
+    "href": "/components/checkbox",
+    "dir": "components/checkbox",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "copy-button",
+    "title": "Copy Button",
+    "description": "An accessible React copy to clipboard button for Next.js: the copy icon turns into a check, and screen readers hear \"Copied\".",
+    "kind": "component",
+    "category": "Buttons",
+    "tags": [
+      "copy",
+      "clipboard",
+      "button",
+      "share",
+      "code"
+    ],
+    "keywords": [
+      "react copy button",
+      "react copy to clipboard",
+      "nextjs copy to clipboard",
+      "copy to clipboard button",
+      "copy code button",
+      "shadcn copy button",
+      "tailwind copy button"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-14",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "copy-button.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { CopyButton } from \"@/components/ui/copy-button\"\n\nexport function CopyCommand() {\n  return <CopyButton value=\"npm install @fewtone/ui\" />\n}"
+    },
+    "demos": [
+      {
+        "name": "variants",
+        "title": "Variants",
+        "description": "Icon only (named \"Copy\" for screen readers), or with a label that changes once it's copied, without the button changing width."
+      },
+      {
+        "name": "command",
+        "title": "A command",
+        "description": "Next to a command or a snippet, in a small size."
+      },
+      {
+        "name": "input",
+        "title": "Next to a field",
+        "description": "For links and keys people need to paste somewhere else."
+      }
+    ],
+    "api": [
+      {
+        "name": "CopyButton",
+        "description": "Also accepts every Button prop except asChild. Uses the Clipboard API, falling back to a hidden textarea where it's unavailable. A polite live region says \"Copied\".",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The text to copy."
+          },
+          {
+            "name": "copiedText",
+            "type": "ReactNode",
+            "description": "Shown instead of the label once copied."
+          },
+          {
+            "name": "onCopy",
+            "type": "(value: string) => void",
+            "description": "Called after the text is copied."
+          },
+          {
+            "name": "resetAfter",
+            "type": "number",
+            "default": "2000",
+            "description": "Milliseconds the check shows before the copy icon returns."
+          },
+          {
+            "name": "icon",
+            "type": "boolean",
+            "default": "true",
+            "description": "Shows the copy icon and the check. Set false for a text-only button with a label."
+          },
+          {
+            "name": "variant",
+            "type": "Button variant",
+            "default": "\"ghost\"",
+            "description": "The button style."
+          },
+          {
+            "name": "size",
+            "type": "Button size",
+            "default": "\"icon\", or \"md\" with a label",
+            "description": "The button size."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Button",
+      "Clipboard API"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "button",
+      "loading-button",
+      "input"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use CopyButton next to anything people copy: commands, code, links, API keys. Pass the text as value; add a label and copiedText when an icon alone isn't clear."
+    },
+    "controls": {},
+    "href": "/components/copy-button",
+    "dir": "components/copy-button",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
     "name": "input",
     "title": "Input",
     "description": "An accessible React text input with three sizes and clear invalid, disabled and file states, built on a native input.",
@@ -139,7 +420,7 @@ export const items: Item[] = [
       "shadcn input",
       "text field component"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-13",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -254,7 +535,7 @@ export const items: Item[] = [
       "shadcn loading button",
       "tailwind loading button"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-14",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -363,6 +644,172 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "radio-group",
+    "title": "Radio Group",
+    "description": "An accessible React radio group for Next.js forms, where the selected dot travels to the new choice, built on Radix Radio Group.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "radio",
+      "radio group",
+      "radio button",
+      "form",
+      "choice"
+    ],
+    "keywords": [
+      "react radio group",
+      "react radio button",
+      "nextjs radio group",
+      "tailwind radio button",
+      "shadcn radio group",
+      "animated radio button",
+      "radio card"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-15",
+    "updatedAt": "2026-10-15",
+    "tier": "free",
+    "files": [
+      "radio-group.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\"\n\nexport function Density() {\n  return (\n    <RadioGroup defaultValue=\"comfortable\" aria-label=\"Density\">\n      <div>\n        <RadioGroupItem id=\"comfortable\" value=\"comfortable\" />\n        <label htmlFor=\"comfortable\">Comfortable</label>\n      </div>\n      <div>\n        <RadioGroupItem id=\"compact\" value=\"compact\" />\n        <label htmlFor=\"compact\">Compact</label>\n      </div>\n    </RadioGroup>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "travel",
+        "title": "Slide and stretch",
+        "description": "Pick another option and the dot travels to it: straight across, or stretching on the way and landing round."
+      },
+      {
+        "name": "horizontal",
+        "title": "In a row",
+        "description": "Left and right arrow keys move along the row, and the dot follows."
+      },
+      {
+        "name": "cards",
+        "title": "Cards",
+        "description": "Each card is the radio's label, so the whole card picks it. Its border follows the choice."
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled",
+        "description": "One option can't be picked; arrow keys skip it."
+      }
+    ],
+    "api": [
+      {
+        "name": "RadioGroup",
+        "description": "Also accepts every Radix Radio Group prop. Arrow keys move the choice; Tab leaves the group.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The chosen value, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "description": "The value chosen at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called when the user picks another option."
+          },
+          {
+            "name": "travel",
+            "type": "\"slide\" | \"stretch\"",
+            "default": "\"slide\"",
+            "description": "How the dot travels to the new choice: straight across, or stretching on the way."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "16 or 20px radios, the sizes of Checkbox and Switch."
+          },
+          {
+            "name": "orientation",
+            "type": "\"horizontal\" | \"vertical\"",
+            "description": "Which arrow keys move the choice. Both work when it's left out."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents interaction with every option."
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "A choice is needed to submit the form."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the chosen value with a form."
+          }
+        ]
+      },
+      {
+        "name": "RadioGroupItem",
+        "description": "One radio. Give it an id and a visible label with htmlFor.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The value this radio picks."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents picking this option."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Radio Group"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/radio/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "checkbox",
+      "switcher",
+      "switch"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use RadioGroup for one choice from a few options that should all stay visible, in forms and settings. Use Select for long lists, Switcher for a compact segmented control, and Checkbox when several can be picked."
+    },
+    "controls": {},
+    "href": "/components/radio-group",
+    "dir": "components/radio-group",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
     "name": "select",
     "title": "Select",
     "description": "An accessible React select with a gliding highlight, groups, labels and a scrollable list, built on Radix Select.",
@@ -382,7 +829,7 @@ export const items: Item[] = [
       "shadcn select",
       "animated select"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-13",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -577,7 +1024,7 @@ export const items: Item[] = [
       "shadcn switch",
       "animated switch"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-13",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -709,7 +1156,7 @@ export const items: Item[] = [
       "shadcn segmented control",
       "animated segmented control"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-14",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -852,7 +1299,7 @@ export const items: Item[] = [
       "tailwind dark mode",
       "shadcn mode toggle"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-14",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -999,7 +1446,7 @@ export const items: Item[] = [
       "multi select buttons",
       "radix toggle group"
     ],
-    "status": "new",
+    "status": "stable",
     "addedAt": "2026-10-14",
     "updatedAt": "2026-10-14",
     "tier": "free",
@@ -1123,4 +1570,4 @@ export const items: Item[] = [
 ];
 
 /** The tokens item as CSS to paste, for the Manual install route (generated from tokens.css and theme.css) */
-export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-popover: 1400;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      transform: scale(0.96);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";
+export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-popover: 1400;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";

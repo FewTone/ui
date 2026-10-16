@@ -18,7 +18,7 @@ export default {
     "tailwind dark mode",
     "shadcn mode toggle",
   ],
-  status: "new",
+  status: "stable",
   addedAt: "2026-10-14",
   updatedAt: "2026-10-14",
   files: ["theme-toggle.tsx"],

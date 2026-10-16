@@ -140,3 +140,7 @@ The Lab at `/lab` compares ways to reveal the other theme (`components/theme-swi
   - **Lab:** the workbench was deleted, and `/lab` is back to an index.
 - **Outline fixed in Switcher and Toggle Group (owner):** the `bg-accent` pill matched the preview canvas and disappeared, so it's now an inverted `bg-primary` pill with a flipped label. Hover only affects options that are off.
 - **Outline, final (owner):** the pill follows the theme (`bg-background`) with a hairline on Outline. The inverted pill was rejected.
+
+**No New tags, and Copy Button (owner):**
+- **New tags removed:** from item cards, the page title, the sidebar badges and the Components index's "New" row. The `isNew` helper is gone, and every component's status is now `stable`. The Beta badge keeps the Navy edge style. The rules and the design system are updated.
+- **Copy Button published directly** (the owner prefers skipping the Lab now): the icon swaps to a drawn check with the blur + rise, the width stays fixed, there's a "Copied" announcement and a textarea fallback, 3 tests, and Variants, Command and Field demos.

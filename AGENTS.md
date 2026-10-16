@@ -92,7 +92,6 @@ The owner asks for components one at a time; build only the one requested.
 2. **Neutral first.** The UI is near-black or white. The brand colour (Navy) appears only in:
    - the footer
    - Pro and premium surfaces
-   - "New" signals
    - badge edges
    - text selection
 
@@ -101,7 +100,9 @@ The owner asks for components one at a time; build only the one requested.
    - Radix for behaviour
    - keyboard support and a visible focus ring
    - `prefers-reduced-motion` respected (CSS is automatic; in JavaScript use `useReducedMotion()`)
-4. **Motion** uses the presets in `@fewtone/ui/lib/motion` (`spring.snappy`, `spring.smooth`, `spring.bouncy`). Animate only `transform` and `opacity`. The one exception: content that changes height glides to its new size through `AutoHeight` (`apps/www/components/motion/auto-height.tsx`, owner 2026-10-13). Examples are a tab set switching panels and a section opening.
+4. **Motion** uses the presets in `@fewtone/ui/lib/motion` (`spring.snappy`, `spring.smooth`, `spring.bouncy`). Animate only `transform` and `opacity`, with two exceptions:
+   - Content that appears, leaves or swaps comes **through the blur** (`blur`, `swap`, or the CSS `animate-blur-in`/`out`, `popover-in`/`out`), never a plain fade (owner 2026-10-15, ADR 0011). Full-screen overlays, fills, highlights and hover still only fade.
+   - Content that changes height glides to its new size through `AutoHeight` (`apps/www/components/motion/auto-height.tsx`, owner 2026-10-13). Examples are a tab set switching panels and a section opening.
 5. **`packages/ui` is the source of truth.** Registry JSON, docs, the npm build and AI files are generated from it, never hand-copied.
 6. **The Lab (`/lab`) is internal and dev-only.** Users customise the copied source in their own projects. There is no public customiser.
 7. **Version-specific docs:** read `apps/www/AGENTS.md` (Next.js) and the Turborepo block below before changing framework or build config.
@@ -114,7 +115,7 @@ The owner asks for components one at a time; build only the one requested.
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade) |
 | `04-components/` | One folder per component with `decisions.md`: why it's built the way it is, and what's deliberately not built yet |
 | `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
@@ -123,7 +124,7 @@ The owner asks for components one at a time; build only the one requested.
 
 Exploration files (mockups, drafts) are temporary. Once a decision is made, record it in an ADR, including what was rejected and why, then delete the files.
 
-## Status (2026-10-13)
+## Status (2026-10-16)
 **Done:**
 - brand (Navy, neutral first)
 - typography (Geist)
@@ -139,16 +140,19 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - Phase 3a (ADR 0009):
   - the shadcn registry generated from the same index, with installs verified in a fresh Next app
   - the first components: Button, Input, Select, Switch (Toggle was built, then removed by the owner)
+  - Copy Button (2026-10-14): published directly, without a Lab step; it shares Loading Button's blur + rise swap and drawn check. Since 2026-10-15 the site uses it for every copy action.
+  - Checkbox (2026-10-15): published directly; the fill grows in and the check draws itself in, unchecking plays it backwards, and indeterminate draws a dash. Sizes match Switch.
+  - Radio Group (2026-10-15): built in the Lab; the selected dot travels to the new choice, sliding (the default) or stretching like Switch's thumb
   - Switcher and Toggle Group (2026-10-14): split from one component by the owner. Switcher is one choice with a sliding pill; Toggle Group switches options on and off. Both come in Default and Outline and were built in the Lab first.
   - Loading Button (2026-10-14): idle, loading, success and error, with a blur + rise swap, Signal red errors and a neutral success; built in the Lab first
   - Theme Toggle (2026-10-14, ADR 0010): eleven View Transition reveals with a speed prop; the site header uses it with `reveal="random"` and `speed="slow"`
   - Vitest with axe
   - site motion: underline tabs, gliding sidebar and search indicators, drawer slide
-  - FewTone identity over beUI: framed gallery cards with live previews, underline tabs, a New badge with shines travelling round its Navy edge, Copy prompt for AI assistants
+  - FewTone identity over beUI: framed gallery cards with live previews, underline tabs, Copy prompt for AI assistants
 
 **Next:**
 - the internal Lab with knobs (`/lab/<name>`), and CI (GitHub Actions running `pnpm check`)
-- more components (Loading Button, Dropdown Menu, Dialog…)
+- more components: the roadmap's Next up (Textarea, Dialog, Dropdown Menu, Tooltip, Popover, Tabs, Accordion, Toast)
 - AI layer (llms.txt, `.md` pages, MCP, skills)
 - npm package and CLI
 

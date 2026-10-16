@@ -5,32 +5,45 @@ import Demo1 from "../components/button/demos/variants";
 import Demo2 from "../components/button/demos/sizes";
 import Demo3 from "../components/button/demos/with-icon";
 import Demo4 from "../components/button/demos/as-link";
-import Demo5 from "../components/input/demos/default";
-import Demo6 from "../components/input/demos/invalid";
-import Demo7 from "../components/input/demos/sizes";
-import Demo8 from "../components/input/demos/disabled";
-import Demo9 from "../components/loading-button/demos/async";
-import Demo10 from "../components/loading-button/demos/states";
-import Demo11 from "../components/loading-button/demos/card";
-import Demo12 from "../components/select/demos/default";
-import Demo13 from "../components/select/demos/groups";
-import Demo14 from "../components/select/demos/searchable";
-import Demo15 from "../components/select/demos/sizes";
-import Demo16 from "../components/switch/demos/default";
-import Demo17 from "../components/switch/demos/settings";
-import Demo18 from "../components/switch/demos/sizes";
-import Demo19 from "../components/switch/demos/disabled";
-import Demo20 from "../components/switcher/demos/variants";
-import Demo21 from "../components/switcher/demos/icons";
-import Demo22 from "../components/switcher/demos/icons-and-text";
-import Demo23 from "../components/switcher/demos/card";
-import Demo24 from "../components/theme-toggle/demos/reveals";
-import Demo25 from "../components/theme-toggle/demos/switch";
-import Demo26 from "../components/theme-toggle/demos/card";
-import Demo27 from "../components/toggle-group/demos/variants";
-import Demo28 from "../components/toggle-group/demos/days";
-import Demo29 from "../components/toggle-group/demos/disabled";
-import Demo30 from "../components/toggle-group/demos/card";
+import Demo5 from "../components/checkbox/demos/default";
+import Demo6 from "../components/checkbox/demos/hint";
+import Demo7 from "../components/checkbox/demos/select-all";
+import Demo8 from "../components/checkbox/demos/sizes";
+import Demo9 from "../components/checkbox/demos/disabled";
+import Demo10 from "../components/copy-button/demos/variants";
+import Demo11 from "../components/copy-button/demos/command";
+import Demo12 from "../components/copy-button/demos/input";
+import Demo13 from "../components/input/demos/default";
+import Demo14 from "../components/input/demos/invalid";
+import Demo15 from "../components/input/demos/sizes";
+import Demo16 from "../components/input/demos/disabled";
+import Demo17 from "../components/loading-button/demos/async";
+import Demo18 from "../components/loading-button/demos/states";
+import Demo19 from "../components/loading-button/demos/card";
+import Demo20 from "../components/radio-group/demos/travel";
+import Demo21 from "../components/radio-group/demos/horizontal";
+import Demo22 from "../components/radio-group/demos/cards";
+import Demo23 from "../components/radio-group/demos/disabled";
+import Demo24 from "../components/radio-group/demos/card";
+import Demo25 from "../components/select/demos/default";
+import Demo26 from "../components/select/demos/groups";
+import Demo27 from "../components/select/demos/searchable";
+import Demo28 from "../components/select/demos/sizes";
+import Demo29 from "../components/switch/demos/default";
+import Demo30 from "../components/switch/demos/settings";
+import Demo31 from "../components/switch/demos/sizes";
+import Demo32 from "../components/switch/demos/disabled";
+import Demo33 from "../components/switcher/demos/variants";
+import Demo34 from "../components/switcher/demos/icons";
+import Demo35 from "../components/switcher/demos/icons-and-text";
+import Demo36 from "../components/switcher/demos/card";
+import Demo37 from "../components/theme-toggle/demos/reveals";
+import Demo38 from "../components/theme-toggle/demos/switch";
+import Demo39 from "../components/theme-toggle/demos/card";
+import Demo40 from "../components/toggle-group/demos/variants";
+import Demo41 from "../components/toggle-group/demos/days";
+import Demo42 from "../components/toggle-group/demos/disabled";
+import Demo43 from "../components/toggle-group/demos/card";
 
 /** Every demo component, keyed by "<item>/<demo>" */
 export const demos: Record<string, ComponentType> = {
@@ -39,30 +52,43 @@ export const demos: Record<string, ComponentType> = {
   "button/sizes": Demo2,
   "button/with-icon": Demo3,
   "button/as-link": Demo4,
-  "input/default": Demo5,
-  "input/invalid": Demo6,
-  "input/sizes": Demo7,
-  "input/disabled": Demo8,
-  "loading-button/async": Demo9,
-  "loading-button/states": Demo10,
-  "loading-button/card": Demo11,
-  "select/default": Demo12,
-  "select/groups": Demo13,
-  "select/searchable": Demo14,
-  "select/sizes": Demo15,
-  "switch/default": Demo16,
-  "switch/settings": Demo17,
-  "switch/sizes": Demo18,
-  "switch/disabled": Demo19,
-  "switcher/variants": Demo20,
-  "switcher/icons": Demo21,
-  "switcher/icons-and-text": Demo22,
-  "switcher/card": Demo23,
-  "theme-toggle/reveals": Demo24,
-  "theme-toggle/switch": Demo25,
-  "theme-toggle/card": Demo26,
-  "toggle-group/variants": Demo27,
-  "toggle-group/days": Demo28,
-  "toggle-group/disabled": Demo29,
-  "toggle-group/card": Demo30,
+  "checkbox/default": Demo5,
+  "checkbox/hint": Demo6,
+  "checkbox/select-all": Demo7,
+  "checkbox/sizes": Demo8,
+  "checkbox/disabled": Demo9,
+  "copy-button/variants": Demo10,
+  "copy-button/command": Demo11,
+  "copy-button/input": Demo12,
+  "input/default": Demo13,
+  "input/invalid": Demo14,
+  "input/sizes": Demo15,
+  "input/disabled": Demo16,
+  "loading-button/async": Demo17,
+  "loading-button/states": Demo18,
+  "loading-button/card": Demo19,
+  "radio-group/travel": Demo20,
+  "radio-group/horizontal": Demo21,
+  "radio-group/cards": Demo22,
+  "radio-group/disabled": Demo23,
+  "radio-group/card": Demo24,
+  "select/default": Demo25,
+  "select/groups": Demo26,
+  "select/searchable": Demo27,
+  "select/sizes": Demo28,
+  "switch/default": Demo29,
+  "switch/settings": Demo30,
+  "switch/sizes": Demo31,
+  "switch/disabled": Demo32,
+  "switcher/variants": Demo33,
+  "switcher/icons": Demo34,
+  "switcher/icons-and-text": Demo35,
+  "switcher/card": Demo36,
+  "theme-toggle/reveals": Demo37,
+  "theme-toggle/switch": Demo38,
+  "theme-toggle/card": Demo39,
+  "toggle-group/variants": Demo40,
+  "toggle-group/days": Demo41,
+  "toggle-group/disabled": Demo42,
+  "toggle-group/card": Demo43,
 };

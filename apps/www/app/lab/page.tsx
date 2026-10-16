@@ -17,6 +17,7 @@ const links = [
   { href: "/components/switcher", title: "Switcher", note: "Built here, now published." },
   { href: "/components/toggle-group", title: "Toggle Group", note: "Built here, now published." },
   { href: "/components/loading-button", title: "Loading Button", note: "Built here, now published." },
+  { href: "/components/radio-group", title: "Radio Group", note: "Built here, now published." },
 ];
 
 export default function LabPage() {

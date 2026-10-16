@@ -1,5 +1,6 @@
 "use client";
 
+import { CopyButton } from "@fewtone/ui/components/copy-button/copy-button";
 import {
   Select,
   SelectContent,
@@ -11,7 +12,6 @@ import { cn } from "@fewtone/ui/lib/utils";
 import { useState, useSyncExternalStore } from "react";
 import { Pill, PillGroup } from "@/components/motion/pill";
 import { type PackageManager, packageManagers } from "@/lib/install";
-import { CopyButton } from "./copy-button";
 import { switchButton, switchList, switchPill } from "./tabs-style";
 
 /* The chosen package manager is shared by every command on the site and remembered per browser. */
@@ -50,6 +50,9 @@ function choose(manager: PackageManager) {
   for (const listener of listeners) listener();
 }
 
+/** The library's Copy Button, quiet until hovered; 28px, so it sits 2px inside the 32px chip */
+const copy = "size-7 text-muted-foreground hover:text-foreground";
+
 /** A shell command with a package-manager switch (the docs' ink pill, tabs-style.ts) and a copy button */
 export function Command({ commands }: { commands: Record<PackageManager, string> }) {
   const manager = usePackageManager();
@@ -80,7 +83,7 @@ export function Command({ commands }: { commands: Record<PackageManager, string>
             ))}
           </fieldset>
         </PillGroup>
-        <CopyButton value={command} label="Copy command" />
+        <CopyButton value={command} size="icon-sm" aria-label="Copy command" className={copy} />
       </div>
       <pre className="overflow-x-auto px-(--space-code-x) py-(--space-code-y) font-mono text-code">
         <code>
@@ -139,7 +142,7 @@ export function CommandChip({ commands }: { commands: Record<PackageManager, str
       >
         {shorten(command)}
       </code>
-      <CopyButton value={command} label="Copy command" />
+      <CopyButton value={command} size="icon-sm" aria-label="Copy command" className={copy} />
     </div>
   );
 }

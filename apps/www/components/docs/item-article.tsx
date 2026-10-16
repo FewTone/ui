@@ -1,7 +1,7 @@
+import { CopyButton } from "@fewtone/ui/components/copy-button/copy-button";
 import type { Item } from "@fewtone/ui/registry/schema";
 import { Breadcrumbs } from "@/components/docs/breadcrumbs";
 import { ComponentPreview } from "@/components/docs/component-preview";
-import { CopyPromptButton } from "@/components/docs/copy-prompt-button";
 import { Expandable } from "@/components/docs/expandable";
 import { InstallSection } from "@/components/docs/install-section";
 import { ItemGrid } from "@/components/docs/item-card";
@@ -9,7 +9,7 @@ import { CommandChip } from "@/components/docs/package-manager";
 import { PropsTable } from "@/components/docs/props-table";
 import { StatusBadge } from "@/components/docs/status-badge";
 import { breadcrumbList, JsonLd, organization } from "@/components/json-ld";
-import { getRelated, isNew, itemDescription, itemTitle, type Kind } from "@/lib/content";
+import { getRelated, itemDescription, itemTitle, type Kind } from "@/lib/content";
 import { addCommands } from "@/lib/install";
 import { itemPrompt } from "@/lib/prompt";
 import { absoluteUrl, site } from "@/lib/site";
@@ -26,6 +26,11 @@ const section = "mt-(--space-block) scroll-mt-24";
  *
  * The header's actions (owner, 2026-10-13): the install command (package-manager dropdown, copy) and
  * Copy prompt, on one line beside the title. Installation below holds the manual steps.
+ *
+ * Copy prompt copies the item's AI prompt (lib/prompt.ts), a brief to paste into a coding assistant. It's
+ * the library's Copy Button (owner, 2026-10-15), filled and neutral as primary actions are, with the
+ * chip's corners and the site's label size so the two sit together. Text only (owner, 2026-10-13 and again
+ * 2026-10-15): "Copy prompt" swaps to "Copied" through the blur, with no icon.
  */
 export async function ItemArticle({ kind, item }: { kind: Kind; item: Item }) {
   const [hero, ...examples] = item.demos;
@@ -44,12 +49,20 @@ export async function ItemArticle({ kind, item }: { kind: Kind; item: Item }) {
         <div className="mt-(--space-title) flex flex-wrap items-center justify-between gap-(--space-stack)">
           <h1 className="flex items-center gap-3 text-h2">
             {item.title}
-            {isNew(item) ? <StatusBadge status="New" /> : null}
             {item.status === "draft" ? <StatusBadge status="Draft" /> : null}
           </h1>
           <div className="flex min-w-0 flex-wrap items-center gap-(--space-header-actions)">
             <CommandChip commands={addCommands(item.name)} />
-            <CopyPromptButton prompt={prompt} />
+            <CopyButton
+              value={prompt}
+              variant="default"
+              size="sm"
+              copiedText="Copied"
+              icon={false}
+              className="rounded-lg text-label"
+            >
+              Copy prompt
+            </CopyButton>
           </div>
         </div>
         <p className="mt-(--space-intro) max-w-prose text-body text-muted-foreground">{item.description}</p>

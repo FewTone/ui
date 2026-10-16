@@ -36,7 +36,7 @@ export function ThemeToggle() {
           <Tooltip.Content
             side="bottom"
             sideOffset={6}
-            className="z-(--z-tooltip) rounded-md bg-primary px-2 py-1 text-caption text-primary-foreground shadow-md data-[state=delayed-open]:animate-fade-in"
+            className="z-(--z-tooltip) rounded-md bg-primary px-2 py-1 text-caption text-primary-foreground shadow-md data-[state=delayed-open]:animate-blur-in"
           >
             {label}
           </Tooltip.Content>

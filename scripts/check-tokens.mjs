@@ -5,7 +5,7 @@
 //   2. No Tailwind arbitrary values like `p-[13px]` or `bg-[#fff]`. Use a token, or `(--token)` syntax.
 //   3. No Tailwind default palette classes like `bg-zinc-500` (they no longer exist and render nothing).
 //   4. Padding, margin and gap use only the approved 4px-grid steps.
-//   5. Motion values in lib/motion.ts match the CSS tokens.
+//   5. Motion values in lib/motion.ts match the CSS tokens (durations, easings and the blur).
 //   6. Library components (packages/ui/src/components, demos included) use the portable vocabulary, so they
 //      work in any shadcn project (ADR 0009): shadcn colours, stock text-xs/sm/base, and only the CSS
 //      variables the tokens item ships. Site code (apps/) uses the named type tokens instead of stock sizes.
@@ -190,6 +190,13 @@ function checkMotionSync() {
         .join(",");
     if (!match) report(file, 1, `ease "${name}" exists in tokens.css but not in motion.ts`);
     else if (norm(match[1]) !== norm(values)) report(file, 1, `ease "${name}" differs from tokens.css`);
+  }
+
+  // The blur: every blur in the keyframes is the one in motion.ts (or 0)
+  const blur = ts.match(/hidden:\s*"blur\(([\d.]+)px\)"/)?.[1];
+  if (!blur) report(file, 1, `blur.hidden is missing from motion.ts`);
+  for (const [, px] of css.matchAll(/filter:\s*blur\(([\d.]+)px\)/g)) {
+    if (blur && px !== blur) report(file, 1, `a keyframe blur is ${px}px in tokens.css but ${blur}px here`);
   }
 }
 

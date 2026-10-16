@@ -18,7 +18,7 @@ export default {
     "shadcn segmented control",
     "animated segmented control",
   ],
-  status: "new",
+  status: "stable",
   addedAt: "2026-10-14",
   updatedAt: "2026-10-14",
   files: ["switcher.tsx"],

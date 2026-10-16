@@ -1,6 +1,6 @@
 "use client";
 
-import { duration, ease, spring } from "@fewtone/ui/lib/motion";
+import { blur, duration, ease, spring } from "@fewtone/ui/lib/motion";
 import { cn } from "@fewtone/ui/lib/utils";
 import {
   ComponentIcon,
@@ -10,7 +10,7 @@ import {
   SearchIcon,
   SearchXIcon,
 } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
 import {
@@ -113,6 +113,9 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
   const [activeOption, setActiveOption] = useState<HTMLElement | null>(null);
   const [typing, setTyping] = useState(false);
   const activeBox = useRowBox(list, activeOption);
+  // The window and the Enter arrow come and go through the blur; the full-screen overlay only fades, and
+  // with reduced motion everything only fades
+  const blurred = useReducedMotion() ? blur.shown : blur.hidden;
 
   const q = query.trim().toLowerCase();
   // No search: everything, grouped. A search: the matches, best first, without groups
@@ -212,10 +215,11 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
             <Dialog.Content asChild forceMount aria-describedby={undefined}>
               <motion.div
                 className="fixed inset-x-(--space-gutter) top-24 z-(--z-modal) mx-auto grid max-w-xl overflow-hidden rounded-2xl border bg-popover text-popover-foreground shadow-xl"
-                initial={{ opacity: 0, scale: 0.96, y: -8 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
+                initial={{ opacity: 0, filter: blurred, scale: 0.96, y: -8 }}
+                animate={{ opacity: 1, filter: blur.shown, scale: 1, y: 0 }}
                 exit={{
                   opacity: 0,
+                  filter: blurred,
                   scale: 0.98,
                   y: -4,
                   transition: { duration: duration.fast, ease: ease.in },
@@ -309,12 +313,16 @@ export function CommandMenu({ entries }: { entries: SearchEntry[] }) {
                                   {entry.description}
                                 </span>
                               </span>
-                              {/* The Enter arrow slides in on the active row */}
+                              {/* The Enter arrow slides and sharpens in on the active row */}
                               <motion.span
                                 aria-hidden
                                 className="shrink-0 text-muted-foreground"
                                 initial={false}
-                                animate={selected ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
+                                animate={
+                                  selected
+                                    ? { opacity: 1, filter: blur.shown, x: 0 }
+                                    : { opacity: 0, filter: blurred, x: -6 }
+                                }
                                 transition={typing ? { duration: 0 } : spring.snappy}
                               >
                                 <CornerDownLeftIcon className="size-(--size-icon-sm)" />

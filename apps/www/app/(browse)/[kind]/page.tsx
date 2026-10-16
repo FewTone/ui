@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/docs/breadcrumbs";
 import { ItemGrid } from "@/components/docs/item-card";
 import { PageSkeleton } from "@/components/docs/page-skeleton";
 import { breadcrumbList, JsonLd } from "@/components/json-ld";
-import { getKindBySegment, getKinds, isNew } from "@/lib/content";
+import { getKindBySegment, getKinds } from "@/lib/content";
 import { absoluteUrl, site } from "@/lib/site";
 
 export async function generateStaticParams() {
@@ -32,9 +32,6 @@ export async function generateMetadata({ params }: PageProps<"/[kind]">): Promis
   };
 }
 
-/** Small uppercase label over each card grid, as on beUI */
-const sectionLabel = "text-overline text-muted-foreground uppercase";
-
 /** The page body reads params inside Suspense, so client navigations show the shell instantly */
 export default function KindPage({ params }: PageProps<"/[kind]">) {
   return (
@@ -44,7 +41,7 @@ export default function KindPage({ params }: PageProps<"/[kind]">) {
   );
 }
 
-/** All items of one kind: a "New" row (when only some are new), then every item A–Z, with no categories */
+/** All items of one kind, A–Z, with no categories and no "New" row (owner, 2026-10-14: no New tags anywhere) */
 async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
   const { kind: segment } = await params;
   const kind = getKindBySegment(segment);
@@ -52,9 +49,6 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
 
   const href = `/${kind.segment}`;
   const trail = [{ name: kind.plural, href }];
-  // The "New" row only adds something when part of the list is new; otherwise it would repeat every card
-  const fresh = kind.items.filter(isNew);
-  const showFresh = fresh.length > 0 && fresh.length < kind.items.length;
 
   return (
     <article>
@@ -63,17 +57,6 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
         <h1 className="mt-(--space-title) text-h2">{kind.heading}</h1>
         <p className="mt-(--space-intro) max-w-prose text-body text-muted-foreground">{kind.intro}</p>
       </header>
-
-      {showFresh ? (
-        <section aria-labelledby="new" className="mt-(--space-page)">
-          <h2 id="new" className={sectionLabel}>
-            New
-          </h2>
-          <div className="mt-(--space-stack)">
-            <ItemGrid items={fresh} />
-          </div>
-        </section>
-      ) : null}
 
       {kind.items.length === 0 ? (
         <div className="mt-(--space-page) grid justify-items-start gap-(--space-heading) rounded-xl bg-muted p-(--space-content-y)">
@@ -89,12 +72,12 @@ async function KindContent({ params }: Pick<PageProps<"/[kind]">, "params">) {
           </Link>
         </div>
       ) : (
-        // One list, no categories (owner, 2026-10-13). A label only when the New row sits above it.
+        // One list, no categories (owner, 2026-10-13)
         <section aria-labelledby="all" className="mt-(--space-page)">
-          <h2 id="all" className={showFresh ? sectionLabel : "sr-only"}>
+          <h2 id="all" className="sr-only">
             All {kind.plural.toLowerCase()}
           </h2>
-          <div className={showFresh ? "mt-(--space-stack)" : undefined}>
+          <div>
             <ItemGrid items={[...kind.items].sort((a, b) => a.title.localeCompare(b.title))} />
           </div>
         </section>

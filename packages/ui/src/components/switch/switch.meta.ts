@@ -16,7 +16,7 @@ export default {
     "shadcn switch",
     "animated switch",
   ],
-  status: "new",
+  status: "stable",
   addedAt: "2026-10-13",
   updatedAt: "2026-10-14",
   files: ["switch.tsx"],

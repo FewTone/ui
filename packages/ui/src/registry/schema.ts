@@ -31,8 +31,11 @@ export const itemSchema = z.object({
   tags: z.array(z.string()).default([]),
   /** Extra search phrases, for example "react dropdown" */
   keywords: z.array(z.string()).default([]),
-  /** draft: dev only. new: shows a "New" badge. deprecated: kept for old links */
-  status: z.enum(["draft", "new", "beta", "stable", "deprecated"]),
+  /**
+   * draft: dev only. beta: the API may change (a Beta badge in the sidebar). deprecated: kept for old links.
+   * There's no "new" (owner, 2026-10-14: no New tags anywhere).
+   */
+  status: z.enum(["draft", "beta", "stable", "deprecated"]),
   addedAt: isoDate,
   /** Drives the sitemap lastmod and "Last updated" */
   updatedAt: isoDate,

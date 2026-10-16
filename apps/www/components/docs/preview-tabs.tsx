@@ -1,6 +1,6 @@
 "use client";
 
-import { duration, ease } from "@fewtone/ui/lib/motion";
+import { blur, duration, ease } from "@fewtone/ui/lib/motion";
 import { cn } from "@fewtone/ui/lib/utils";
 import type { PreviewTemplate } from "@fewtone/ui/registry/kinds";
 import { RotateCcwIcon } from "lucide-react";
@@ -48,7 +48,8 @@ export function PreviewTabs({
     { value: "code", label: "Code" },
   ];
 
-  // The panel that just appeared animates in, before the first paint (so it never flashes in place)
+  // The panel that just appeared slides and sharpens in through the blur, before the first paint (so it never
+  // flashes in place). The filter is cleared afterwards, so it doesn't leave a stacking context round the demo.
   const reduce = useReducedMotion();
   const panels = useRef(new Map<string, HTMLDivElement>());
   const direction = useRef(0);
@@ -63,10 +64,13 @@ export function PreviewTabs({
     const node = panels.current.get(tab);
     if (!changed.current || !node) return;
     changed.current = false;
-    animate(node, reduce ? { opacity: [0, 1] } : { opacity: [0, 1], x: [direction.current * 12, 0] }, {
-      duration: duration.base,
-      ease: ease.out,
-    });
+    animate(
+      node,
+      reduce
+        ? { opacity: [0, 1] }
+        : { opacity: [0, 1], x: [direction.current * 12, 0], filter: [blur.hidden, blur.shown] },
+      { duration: duration.base, ease: ease.out },
+    ).then(() => node.style.removeProperty("filter"));
   }, [tab, reduce]);
   const register = (value: string) => (node: HTMLDivElement | null) => {
     if (node) panels.current.set(value, node);

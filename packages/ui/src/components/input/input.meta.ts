@@ -9,7 +9,7 @@ export default {
   category: "Forms",
   tags: ["input", "text field", "form"],
   keywords: ["react input", "nextjs input", "tailwind input", "shadcn input", "text field component"],
-  status: "new",
+  status: "stable",
   addedAt: "2026-10-13",
   updatedAt: "2026-10-14",
   files: ["input.tsx"],

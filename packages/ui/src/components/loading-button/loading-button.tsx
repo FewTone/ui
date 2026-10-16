@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, type ButtonProps } from "@fewtone/ui/components/button/button";
-import { duration, ease, spring } from "@fewtone/ui/lib/motion";
+import { duration, ease, spring, swap } from "@fewtone/ui/lib/motion";
 import { cn } from "@fewtone/ui/lib/utils";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { type MouseEvent, type ReactNode, useEffect, useRef, useState } from "react";
@@ -39,16 +39,6 @@ export type LoadingButtonProps = Omit<ButtonProps, "onClick" | "asChild"> & {
   errorText?: ReactNode;
   /** After success or error, milliseconds until it's idle again; `false` to stay. Ignored when controlled. */
   resetAfter?: number | false;
-};
-
-/**
- * The swap between states (owner, 2026-10-14: blur with a small rise): the new content rises 6px from
- * blurred and faded; the old blurs and fades as it lifts away
- */
-const swap = {
-  initial: { opacity: 0, filter: "blur(6px)", y: 6 },
-  animate: { opacity: 1, filter: "blur(0px)", y: 0 },
-  exit: { opacity: 0, filter: "blur(6px)", y: -6 },
 };
 
 const CHECK = "M5 12.5l4.5 4.5L19 7.5";

@@ -19,7 +19,7 @@ After any change to these, run `pnpm index`, which regenerates the index and the
   - `text-xs`/`text-sm`/`text-base`
   - shipped tokens through `(--token)`
   - the outline-ring focus classes
-  - `rounded-md`/`rounded-lg`
+  - `rounded-md`/`rounded-lg` (`rounded-sm`/`rounded-xs` only for the smallest controls, such as Checkbox)
 
   Never use site tokens (`--space-*`, `text-label`, `focus-ring`, brand or status colours). To ship a new token, add it to `src/registry/shared.ts` first.
 - **Imports:** from `@fewtone/ui/...`, never relative paths. The generator rewrites them to the user's aliases and derives npm and registry dependencies from them. Any new npm package goes in `packages/ui/package.json`.
@@ -36,7 +36,7 @@ After any change to these, run `pnpm index`, which regenerates the index and the
 - **Comments** explain why: a short block at the top of the file, and a line wherever something isn't obvious. Match the density of the existing components.
 
 ## Metadata and demos
-- `status: "new"` and `addedAt` / `updatedAt` (bump `updatedAt` on every user-visible change).
+- `status: "stable"` (or `beta` while the API may change). There are no "New" tags (owner, 2026-10-14). Set `addedAt` / `updatedAt`, and bump `updatedAt` on every user-visible change.
 - `description` in search words ("An accessible React … for Next.js …").
 - `keywords` people actually type, `related` items, `primitives`, `ariaPattern`, and `ai.whenToUse`.
 - **API table:** every prop with its type, default and a plain-English description. Mention what it builds on ("Also accepts every Button prop").

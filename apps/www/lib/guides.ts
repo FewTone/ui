@@ -28,7 +28,7 @@ export const guides = [
     href: "/roadmap",
     description:
       "What FewTone UI has today, what's being built next and what's planned: accessible React components for Next.js and Tailwind CSS, from Dialog and Tabs to Toast.",
-    updatedAt: "2026-10-14",
+    updatedAt: "2026-10-16",
   },
 ] as const;
 

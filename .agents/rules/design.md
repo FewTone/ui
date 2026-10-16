@@ -6,9 +6,10 @@ Always on, for every UI change. The spec with every value is `docs-internal/01-b
 - **Neutral first.** The UI is near-black (dark, the default) or white (light). Navy, the brand colour, appears only in:
   - the footer
   - Pro and premium surfaces
-  - "New" signals (`StatusBadge`: a Navy edge with travelling shines)
   - badge edges
   - text selection
+
+  There are no "New" tags anywhere (owner, 2026-10-14). The Beta badge (`StatusBadge`, a Navy edge with travelling shines) still marks an API that may change, and Draft shows in development only.
 
   Primary buttons are neutral.
 - **No glow and no grain.** Gradients keep one hue and move lightness only (about ±0.055). There are never multi-colour gradients.
