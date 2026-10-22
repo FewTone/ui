@@ -173,18 +173,6 @@ const plan: { group: string; entries: Entry[] }[] = [
       { name: "stepper", title: "Stepper", note: "Progress through the steps of a task." },
       { name: "marquee", title: "Marquee", note: "A row of logos or cards that scrolls on its own." },
       { name: "text-effects", title: "Text Effects", note: "Shimmer, reveal and typewriter text." },
-      // The backgrounds are their own kind (/backgrounds), one entry each (2026-10-16)
-      {
-        name: "dot-grid",
-        title: "Dot Grid",
-        note: "A fine dot pattern behind a section; the dots near the pointer brighten.",
-      },
-      { name: "line-grid", title: "Line Grid", note: "Thin grid lines that can pan slowly and seamlessly." },
-      {
-        name: "gradient-drift",
-        title: "Gradient Drift",
-        note: "Soft single-colour light that drifts very slowly behind a hero.",
-      },
     ],
   },
 ];
