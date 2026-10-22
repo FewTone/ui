@@ -57,7 +57,8 @@ export function Settings() {
     },
   ],
   // The page opens on both looks; the index card shows a single set
-  preview: { card: "card" },
+  // Top: the panels change height as you switch, and a centred demo would move the tabs with them
+  preview: { card: "card", align: "top" },
   api: [
     {
       name: "Tabs",

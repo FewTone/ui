@@ -28,6 +28,7 @@ export async function ComponentPreview({
       replay={item.motion.animated}
       zoom={zoom}
       height={item.preview.height}
+      align={item.preview.align}
       template={item.preview.template ?? kinds[item.kind].template}
     />
   );

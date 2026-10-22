@@ -28,6 +28,7 @@ export function PreviewTabs({
   code,
   replay,
   height,
+  align = "center",
   template,
   zoom,
 }: {
@@ -36,6 +37,8 @@ export function PreviewTabs({
   code: ReactNode;
   replay: boolean;
   height: keyof typeof heights;
+  /** Top keeps a demo whose height changes (Tabs) from re-centring, so its controls stay where they were */
+  align?: "center" | "top";
   template: PreviewTemplate;
   /** Shows a small control bigger (CSS zoom); the demo's code stays as written */
   zoom?: number;
@@ -104,7 +107,8 @@ export function PreviewTabs({
         <Tabs.Content ref={register("preview")} value="preview" forceMount className={tabPanel}>
           <div
             className={cn(
-              "grid place-items-center overflow-hidden rounded-xl bg-preview",
+              "grid overflow-hidden rounded-xl bg-preview",
+              align === "top" ? "content-start justify-items-center" : "place-items-center",
               heights[height],
               template === "centered" && "p-(--space-canvas)",
             )}

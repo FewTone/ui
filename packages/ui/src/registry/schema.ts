@@ -77,6 +77,11 @@ export const itemSchema = z.object({
       template: z.enum(["centered", "full-bleed", "viewport"]).optional(),
       height: z.enum(["sm", "md", "lg"]).default("md"),
       /**
+       * Where the demo sits in its preview: centred, or at the top for a demo whose height changes as you use
+       * it (Tabs' panels), so its controls stay put instead of re-centring under the pointer
+       */
+      align: z.enum(["center", "top"]).optional(),
+      /**
        * A demo shown only on index cards (a file in demos/, not listed in `demos`), for when the page's
        * hero is too busy for a small tile. Without it, cards show the hero.
        */
