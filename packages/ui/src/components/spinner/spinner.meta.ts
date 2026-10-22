@@ -4,10 +4,10 @@ export default {
   name: "spinner",
   title: "Spinner",
   description:
-    "An accessible React spinner for Next.js and Tailwind CSS: a small loading indicator in three sizes that takes the text's colour and pulses with reduced motion.",
+    "An accessible React spinner for Next.js and Tailwind CSS: one line going round an infinity that fills it once the task is done.",
   kind: "component",
   category: "Feedback",
-  tags: ["spinner", "loading", "loader", "progress", "busy"],
+  tags: ["spinner", "loading", "loader", "progress", "busy", "infinity"],
   keywords: [
     "react spinner",
     "shadcn spinner",
@@ -16,10 +16,12 @@ export default {
     "tailwind spinner",
     "loading indicator",
     "react loader",
+    "infinity loader",
+    "animated loading icon",
   ],
   status: "stable",
   addedAt: "2026-10-16",
-  updatedAt: "2026-10-16",
+  updatedAt: "2026-10-22",
   files: ["spinner.tsx"],
   usage: {
     code: `import { Spinner } from "@/components/ui/spinner"
@@ -33,7 +35,13 @@ export function Loading() {
       name: "sizes",
       title: "Sizes",
       description:
-        "The three icon sizes, and one inside a button. The arc turns once a second; with reduced motion it pulses instead.",
+        "The three icon sizes, and one inside a button. One line goes round the infinity at an even pace; with reduced motion it pulses instead.",
+    },
+    {
+      name: "finish",
+      title: "Finish",
+      description:
+        "Set done when the task is finished: the line stops where it is and grows until it fills the whole infinity. Back to loading, it shrinks and travels on.",
     },
     {
       name: "with-text",
@@ -63,6 +71,18 @@ export function Loading() {
           description:
             "What's loading, for screen readers. Inside a button or beside text that already says it, pass aria-hidden instead.",
         },
+        {
+          name: "done",
+          type: "boolean",
+          default: "false",
+          description: "The task is finished: the line fills the whole infinity and stops.",
+        },
+        {
+          name: "doneLabel",
+          type: "string",
+          default: '"Done"',
+          description: "Its name for screen readers once done.",
+        },
       ],
     },
   ],
@@ -70,6 +90,6 @@ export function Loading() {
   related: ["loading-button", "button", "badge"],
   ai: {
     whenToUse:
-      "Use Spinner while something loads and there's no way to tell how far along it is: a panel fetching data, a button submitting. Use LoadingButton for a button that shows loading, success and error by itself.",
+      "Use Spinner while something loads and there's no way to tell how far along it is: a panel fetching data, a button submitting. Set done when it finishes to fill the infinity. Use LoadingButton for a button that shows loading, success and error by itself.",
   },
 } satisfies ItemMeta;
