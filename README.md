@@ -19,4 +19,4 @@ pnpm check        # lint + typecheck + design-token check
 
 ## Licence
 
-MIT (to be added at open-source launch).
+[MIT](LICENSE) © FewTone.

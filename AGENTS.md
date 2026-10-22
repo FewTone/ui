@@ -170,10 +170,9 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - npm package and CLI
 
 **Open (owner actions):**
-- add a `LICENSE` (MIT): the repo is public but not yet legally open source, and shadcn's directory requires open source
 - the PR adding `@fewtone` to shadcn's registry directory (entry, steps and PR text in `docs-internal/05-workflows/shadcn-directory.md`), then flip `useNamespace` in `apps/www/lib/install.ts`
 
-The npm org `@fewtone` is claimed (owner, 2026-10-14).
+The npm org `@fewtone` is claimed (owner, 2026-10-14). The repo is MIT licensed (`LICENSE`, © FewTone, 2026-10-22).
 
 <!-- BEGIN:turborepo-agent-rules -->
 

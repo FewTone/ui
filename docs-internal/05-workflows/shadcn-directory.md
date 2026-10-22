@@ -7,7 +7,7 @@ Checked 2026-10-14 against shadcn's docs (ui.shadcn.com/docs/registry/registry-i
 ## Requirements and where we stand
 | Requirement (shadcn's words) | Status |
 |---|---|
-| "The registry must be open source and publicly accessible." | **Blocked:** `FewTone/ui` is public but has **no LICENSE**, so it isn't legally open source yet. Add the MIT licence first (owner decision). The registry itself is public, with CORS `*`. |
+| "The registry must be open source and publicly accessible." | Yes: `FewTone/ui` is public and MIT licensed (`LICENSE`, © FewTone, added 2026-10-22). The registry itself is public, with CORS `*`. |
 | "The registry must be a valid JSON file that conforms to the registry schema specification." | Yes. The generator writes schema-shaped JSON. |
 | "The registry is expected to be a flat registry with no nested items." | Yes: `/r/registry.json` and `/r/<name>.json` sit side by side. |
 | "The `files` array, if present, must NOT include a `content` property." | Yes (checked on the live `/r/registry.json`). |
@@ -31,7 +31,7 @@ Add this object at the end of the array in `apps/v4/registry/directory.json` (th
 The logo is the FewTone mark (ADR 0006), its coordinates rounded to two decimals. Like the other entries, it fills with `var(--foreground)`, so it follows their light and dark themes.
 
 ## Steps (owner)
-1. **Add the licence:** a `LICENSE` file (MIT, © FewTone) at the repo root, then commit and push. Optionally set the repo's description and homepage: `gh repo edit FewTone/ui --description "Accessible React components for Next.js and Tailwind CSS" --homepage https://ui.fewtone.com`.
+1. **Add the licence:** done 2026-10-22 (`LICENSE`, MIT, © FewTone). Optionally set the repo's description and homepage: `gh repo edit FewTone/ui --description "Accessible React components for Next.js and Tailwind CSS" --homepage https://ui.fewtone.com`.
 2. **Deploy** (`pnpm deploy:prod`), so the live registry includes everything built so far, Theme Toggle included.
 3. **Open the PR.** The easiest way is on GitHub's website, which avoids cloning shadcn's large monorepo:
    1. Open https://github.com/shadcn-ui/ui/blob/main/apps/v4/registry/directory.json and press the pencil icon. GitHub forks the repo for you.

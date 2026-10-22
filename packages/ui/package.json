@@ -2,6 +2,7 @@
   "name": "@fewtone/ui",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "FewTone UI: source of truth for the design system, components and their metadata.",
   "exports": {
