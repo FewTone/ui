@@ -102,8 +102,8 @@ describe("Slider", () => {
     await user.keyboard("{ArrowRight}");
     expect(thumb.getAttribute("aria-valuetext")).toBe("$130");
     expect(thumb.hasAttribute("data-open")).toBe(true);
-    const pill = container.querySelector("[data-slot=slider-knob]");
-    expect(pill?.querySelector("[data-slot=number-ticker]")?.getAttribute("aria-label")).toBe("$130");
+    // The thumb is the pill: the value flows inside it
+    expect(thumb.querySelector("[data-slot=number-ticker]")?.getAttribute("aria-label")).toBe("$130");
     // Leaving, it shrinks back to a dot
     await user.tab();
     expect(thumb.hasAttribute("data-open")).toBe(false);

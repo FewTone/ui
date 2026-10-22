@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
-import { SliderDirections } from "./_slider/directions";
 
 /*
  * The Lab home (dev only: app/lab/layout.tsx returns 404 in production). The component being built lives
@@ -19,6 +18,8 @@ const links = [
   { href: "/components/toggle-group", title: "Toggle Group", note: "Built here, now published." },
   { href: "/components/loading-button", title: "Loading Button", note: "Built here, now published." },
   { href: "/components/radio-group", title: "Radio Group", note: "Built here, now published." },
+  { href: "/components/slider", title: "Slider", note: "Its value thumb was chosen here, now published." },
+  { href: "/components/spinner", title: "Spinner", note: "Its infinity was chosen here, now published." },
 ];
 
 export default function LabPage() {
@@ -30,11 +31,10 @@ export default function LabPage() {
           <p className="text-overline font-mono text-muted-foreground uppercase">Lab · dev only</p>
           <h1 className="text-h2">Lab</h1>
           <p className="max-w-prose text-body text-muted-foreground">
-            In progress: new directions for Slider. New components start here, out of sight of the public
-            site, until they're approved.
+            Nothing is in progress right now. New components start here, out of sight of the public site,
+            until they're approved.
           </p>
         </header>
-        <SliderDirections />
         <ul className="grid gap-(--space-grid) sm:grid-cols-2">
           {links.map((link) => (
             <li key={link.href}>

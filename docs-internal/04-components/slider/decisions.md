@@ -1,24 +1,29 @@
 # Slider: decisions
 
-**Status:** published directly, without a Lab step (2026-10-16, roadmap build). Waiting for the owner's review on the dev server.
+**Status:** published 2026-10-16 (roadmap build). Redesigned on 2026-10-22 as the **value thumb**, chosen by the owner in the Lab from eight directions in two rounds: a control bar (iOS Control Center), a ruler dial, level bars, a knob and a scrubber (the first round; all but the control bar were for one kind of value), then the control bar refined, a split track (Material 3 Expressive), the value thumb and detents. The Lab's concepts were deleted once it was chosen. Before that it was a track with a round thumb, a value tooltip and elastic ends ("too basic").
 
-- **What it is:** one value or a range on Radix Slider: drag, click the track, arrow keys (Shift for ten steps), Page Up/Down, Home/End, a hidden input per thumb in forms, `minStepsBetweenThumbs`, vertical, inverted and right to left. shadcn's API: one `Slider` with `value` / `defaultValue` arrays (one number per thumb), plus `tooltip`, `formatValue` and `thumbLabels`.
+- **What it is:** one value or a range, the WAI-ARIA slider pattern built here rather than on Radix Slider (2026-10-22): each thumb is a `role="slider"` with arrow keys (Shift for ten steps), Page Up/Down (ten steps), Home/End; a press on the track moves the nearest thumb there and focuses it; a range's thumbs can't cross (`minStepsBetweenThumbs`); vertical, right to left and inverted; `onValueCommit` when a drag ends or a key moves it; with `name`, a hidden input per value for forms.
+- **Why not Radix (2026-10-22):** the first library version of the value thumb kept Radix and drew the pill on top of Radix's own thumb placement (an offset from where Radix put it, inside the ends). The owner: "really different from the Lab, not smooth at all, we need it exactly the same." So the Lab's code is the component now, line for line: the thumb's centre placed straight from its value along the whole track (`left` / `top` at the value's percent, so the server's HTML draws it in place before anything is measured: placed from a measured length, it sat at a guess until the page woke up, owner 2026-10-22), the glide on `spring.snappy` from a motion value per thumb (jumped while dragging), the pointer read off the whole slider, the 14px dot and 46×26 pill, the speed stretch from the position's velocity, the track's ×1.5 thickening. Radix's keyboard, names and form inputs are rebuilt to match its behaviour.
 - **Names:** the thumbs are what screen readers see (`role="slider"`), so the slider's `aria-label` / `aria-labelledby` move to them (left on the root they'd name nothing).
   - One thumb takes the name as it is.
   - A range's thumbs: "Price, minimum" / "Price, maximum" from `aria-label`; from `aria-labelledby`, the label's text then the thumb's own part, by pointing `aria-labelledby` at the label and the thumb itself.
   - `thumbLabels` sets each name outright.
-  - `formatValue` also gives `aria-valuetext` ("$120").
-- **Look:** flat. A `bg-muted` track 6px high, a `bg-primary` range, a 16px round thumb, `bg-background` with a 2px `border-primary`, no shadow. The root is 20px high (so the grown thumb fits and the track is easy to hit). Vertical is at least 11rem tall.
+  - `format` (Intl options) also gives `aria-valuetext` ("$120"), the same text the pill shows.
+- **The value thumb (2026-10-22):** a thin track and a small round thumb that, the moment you reach for it, grows into a pill with the value inside. The number is the thumb, so there's no tooltip to float or follow, and at rest the slider is quiet: a line and a dot.
+  - **Reaching for it:** the pointer over the slider (mouse only) opens every thumb (a range shows both values); keyboard focus with the keys, or a press, opens the thumb in use. Leaving, it shrinks back to a dot.
+  - **The pill** grows from the 14px dot to 26px tall and as wide as its value plus 10px either side, never narrower than 46px (the Lab's size; a fixed 46px let "51 hours" spill out, owner 2026-10-22; the value's width is measured by a ResizeObserver, so a change of width glides on the same spring), on `spring.snappy`, centred on the thumb so growing never moves where it sits. Its number comes through the blur as it opens (`duration.base`, `ease.out`) and leaves quicker (`duration.fast`, `ease.in`).
+  - **The number flows:** our Number Ticker, with the slider's `format` and `locale`, so its digits roll as it changes and a quick drag counts through the values. Nothing rolls when the pill opens (`from` is the value).
+  - **It stretches with its speed:** moving, the pill stretches along the track by up to a quarter (full at 900px/s), like Switch's thumb, and settles round when it stops.
+  - **The track wakes:** while a thumb is open, the 4px track thickens to 6px (`scale`, ×1.5) on `spring.snappy`.
+  - **API:** `format` and `locale` (Intl options, like Number Ticker) replace `tooltip` and `formatValue`: the pill always shows the value when open, and one format serves the pill and screen readers. Breaking, but nothing was released.
+  - **Removed with the redesign:** the elastic ends (the track stretching past an end and snapping back on `spring.bouncy`), the press-to-grow thumb and the tooltip. The motion rule for elastic ends went with them.
+- **Look:** flat and neutral: a `bg-muted` track 4px high in a 44px-tall slider (the Lab's), a `bg-primary` range, a `bg-primary` thumb, the value in `primary-foreground`, `text-xs` medium, tabular. Disabled: the disabled opacity, no hover.
 - **Motion** (the thumb is a cousin of Switch's):
-  - **A track click glides** the thumb to the point on `spring.snappy` instead of jumping. On the way it stretches along the track with its speed, up to a quarter (the 1rem → 1.25rem of Switch's thumb), and lands round. Keyboard steps and changes from outside glide the same way; a held arrow key keeps turning the same spring.
-  - **Dragging follows the pointer exactly:** values from a drag jump, with no spring (and `jump()` resets the speed, so a drag never stretches). Dragging straight after a track click, while the glide is still going, keeps turning the glide towards the pointer until it settles, then follows exactly.
-  - **Elastic ends** (owner, 2026-10-22: "too basic… make it cool and creative"): dragging past either end, the track stretches towards the pointer, resisting harder the further it goes (`16px × (1 − e^(−over/32px))`, so it never reaches 16px), and slims by 1.2% of its thickness per pixel, like rubber. It stretches from its far end (a scale, so only transforms move), and the end's thumb rides the pull to stay on its tip. Released, it snaps back on `spring.bouncy`, the rare-delight spring, the overshoot reading as a band let go. The pointer's overrun comes from the slider's box while Radix holds the pointer capture. Off with reduced motion.
-  - **The track wakes under the hand:** hovered (mouse only) or pressed, it thickens from 6px to 9px (`scale`, ×1.5) on `spring.snappy`, and settles back when you leave. Not while disabled.
-  - **Pressed or dragged, the thumb grows** a little (×1.2, about 19px) on `spring.snappy`.
-  - **The range follows the drawn thumbs,** so it never runs ahead of a gliding thumb (like Switch's colour following its thumb).
-  - **`tooltip`:** the value shows above the thumb (beside it when vertical) while it's dragged, or once the keys move it, and stays while it has keyboard focus. It rises out of the thumb through the blur (`swap`) and sinks back. The library's tooltip look: `rounded-md bg-primary px-2 py-1 text-xs text-primary-foreground`, `z-(--z-tooltip)`, tabular figures.
-  - **Focus:** keyboard focus shows the outline ring round the thumb; pointer focus doesn't (Radix focuses with `focusVisible: false`).
-  - **First paint and reduced motion:** nothing animates on first paint. With reduced motion the thumb jumps, doesn't stretch or grow, and the tooltip only fades.
+  - **A track click glides** the thumb to the point on `spring.snappy` instead of jumping; keyboard steps and outside changes glide the same way.
+  - **Dragging follows the pointer exactly:** values from a drag jump, with no spring (and `jump()` resets the speed).
+  - **The range follows the drawn thumbs,** so it never runs ahead of a gliding thumb.
+  - **Focus:** keyboard focus shows the outline ring round the pill; pointer focus doesn't.
+  - **First paint and reduced motion:** nothing animates on first paint. With reduced motion the thumb jumps, the pill opens at once without stretching, the track keeps its thickness and the number only fades.
 - **How the glide works:** Radix places each thumb at its value at once, through an inline `left` on a wrapper we can't style. So the glide is drawn on top:
   - two motion values hold where the range's ends are drawn (percent), and two where Radix has placed them
   - each thumb is offset by the difference, converted with the slider's length less a thumb (offsetWidth, layout pixels, so a zoomed preview doesn't double it; measured with a ResizeObserver)
@@ -26,10 +31,10 @@
   - the stretch comes from the drawn value's velocity (`useVelocity`), full at 800px/s
   - Radix's own `Range` part isn't used, since it jumps.
   - With three or more thumbs, the middle ones don't glide.
-- **The thumb's parts:** the focusable `role="slider"` span carries the glide offset and the tooltip; a `pointer-events-none` knob inside it is what's scaled, so the tooltip and the hit area keep their size, and a press on the thumb is seen as a press on the thumb (Radix checks the event target).
+- **The thumb's parts:** the thumb is one element: the focusable `role="slider"` span is the dot and the pill (`data-open` while it's open), with the Number Ticker inside (aria-hidden; the thumb's `aria-valuenow` / `aria-valuetext` is what's read). It's centred on its value's point (translated −50%), so it overhangs the ends at 0 and 100, as in the Lab.
 - **Demos:**
-  - **Hero:** Single (volume, %) and Range (price, $0–1000 in $10 steps, 5 steps apart), both with `tooltip`, named underneath.
+  - **Hero:** Single (volume, `unit: percent`) and Range (price in whole dollars, $0–1000 in $10 steps, 5 steps apart), named underneath.
   - **Card demo:** one slider.
   - **Examples:** With a label (aria-labelledby, the value beside the label, controlled), Vertical (three bands).
-- **Tests:** a named slider with value and bounds; arrow keys, Page Up, Home, End; a track click goes to the point and focuses the thumb (with a stubbed bounding box); a range named from aria-label and from a visible label, moved with the keys; formatValue as aria-valuetext and in the tooltip, which goes when focus leaves; disabled; axe for single and range.
-- **Not built yet:** marks or ticks under the track; a tooltip that's always on; sizes. The tooltip can be covered by a later positioned sibling, since Radix's thumb wrapper is a stacking context; a portalled tooltip would fix that if it matters.
+- **Tests:** a named slider with value and bounds; arrow keys, Page Up, Home, End; a track click goes to the point and focuses its thumb; a range's thumbs named from `aria-label` and from a visible label; the pill opening with the keys and on hover and closing when focus leaves, with the formatted value inside and as `aria-valuetext`; disabled; axe.
+- **Not built yet:** marks or ticks under the track; sizes; a pill that stays open; two pills of a range overlapping when the thumbs are close (they stack).

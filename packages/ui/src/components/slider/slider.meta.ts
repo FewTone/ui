@@ -4,7 +4,7 @@ export default {
   name: "slider",
   title: "Slider",
   description:
-    "An accessible React slider for Next.js and Tailwind: one value or a range, with a thumb that grows into a pill showing its value, on Radix.",
+    "An accessible React slider for Next.js and Tailwind: one value or a range, with a thumb that grows into a pill showing its value as you reach for it.",
   kind: "component",
   category: "Forms",
   tags: ["slider", "range slider", "range", "input range", "form"],
@@ -56,7 +56,7 @@ export function Volume() {
     {
       name: "Slider",
       description:
-        "Also accepts every Radix Slider prop. One number in value for one thumb, two for a range. aria-label or aria-labelledby names the thumbs.",
+        'Also accepts every native div prop. One number in value for one thumb, two for a range. aria-label or aria-labelledby names the thumbs; each thumb is a role="slider" with the full keyboard.',
       props: [
         {
           name: "value",
@@ -127,7 +127,7 @@ export function Volume() {
       ],
     },
   ],
-  primitives: ["Radix Slider"],
+  primitives: ["WAI-ARIA slider pattern"],
   related: ["number-input", "switch", "input"],
   ariaPattern: "https://www.w3.org/WAI/ARIA/apg/patterns/slider/",
   ai: {
