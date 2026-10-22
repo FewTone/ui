@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
+import { SliderDirections } from "./_slider/directions";
 
 /*
  * The Lab home (dev only: app/lab/layout.tsx returns 404 in production). The component being built lives
@@ -29,10 +30,11 @@ export default function LabPage() {
           <p className="text-overline font-mono text-muted-foreground uppercase">Lab · dev only</p>
           <h1 className="text-h2">Lab</h1>
           <p className="max-w-prose text-body text-muted-foreground">
-            Nothing is in progress right now. New components start here, out of sight of the public site,
-            until they're approved.
+            In progress: new directions for Slider. New components start here, out of sight of the public
+            site, until they're approved.
           </p>
         </header>
+        <SliderDirections />
         <ul className="grid gap-(--space-grid) sm:grid-cols-2">
           {links.map((link) => (
             <li key={link.href}>

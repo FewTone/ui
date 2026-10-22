@@ -50,3 +50,18 @@ export const swap = {
   animate: { opacity: 1, filter: blur.shown, y: 0 },
   exit: { opacity: 0, filter: blur.hidden, y: -6 },
 } as const;
+
+/**
+ * The flow of a changing number (Number Ticker): a spring for the characters' moves, the width and the digits'
+ * spin, sampled into CSS linear(), and a fade for characters coming and going. Web Animations timings, in
+ * milliseconds. The curve is from number-flow, © 2024 Maxwell Barvian, MIT licence (its full notice is in
+ * components/number-ticker/number-ticker.tsx).
+ */
+export const flow = {
+  transform: {
+    duration: 900,
+    easing:
+      "linear(0,.005,.019,.039,.066,.096,.129,.165,.202,.24,.278,.316,.354,.39,.426,.461,.494,.526,.557,.586,.614,.64,.665,.689,.711,.731,.751,.769,.786,.802,.817,.831,.844,.856,.867,.877,.887,.896,.904,.912,.919,.925,.931,.937,.942,.947,.951,.955,.959,.962,.965,.968,.971,.973,.976,.978,.98,.981,.983,.984,.986,.987,.988,.989,.99,.991,.992,.992,.993,.994,.994,.995,.995,.996,.996,.9963,.9967,.9969,.9972,.9975,.9977,.9979,.9981,.9982,.9984,.9985,.9987,.9988,.9989,1)",
+  },
+  opacity: { duration: 450, easing: "ease-out" },
+} as const satisfies Record<string, EffectTiming>;

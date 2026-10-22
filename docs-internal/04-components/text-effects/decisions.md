@@ -1,0 +1,33 @@
+# Text Effects: decisions
+
+**Status:** published directly, without a Lab step (2026-10-16, built from the roadmap note "Shimmer, reveal and typewriter text"). Category Effects. One item, three exports: `TextShimmer`, `TextReveal`, `Typewriter`. The page opens on all three side by side, named underneath, with Replay. Examples: Reveal by character, Type once. The index card shows the shimmer (`preview.card`).
+
+- **The rule for all three:** one neutral hue, calm, off with reduced motion, and the words stay real text for search engines and screen readers. Effects are where a library most easily turns decorative, so each one has a job: the shimmer says "working", the reveal brings a line in once, the typewriter cycles a few short options.
+
+## TextShimmer
+- **What:** text in `muted-foreground` with a `foreground` sheen sweeping across it: lightness of one hue, never a colour (ADR 0003).
+- **How (transforms only):** a copy of the text in `foreground` sits inside a band with a soft-edged static mask (transparent at 25% and 75%, brightest in the middle). The band slides across the text while the copy slides back by the same amount, so the copy's letters never move and only the light does. A clip wrapper hides the band outside the text. The common way, animating `background-position` on `background-clip: text`, was rejected: it repaints every frame, and motion.md allows only transform and opacity here.
+- **Pace and clock:** Skeleton's: a 2s period (`duration.slower * 4`), sweeping for 75% of it on `ease.inOut`, then resting; `startTime = 0` on the document timeline. So a shimmering "Loading…" label sweeps in step with the skeletons beside it, as one loading surface. From the right in RTL.
+- **Before hydration and with reduced motion:** still muted text (the band rests off to the side).
+- **Accessibility:** the readable text is the original; the light's copy is `aria-hidden` and not selectable. Keep the children to text: they're drawn twice.
+
+## TextReveal
+- **What:** words (or characters, `by="character"`) rise 12px through the blur, 0.05s apart, `duration.slow` on `ease.out`: motion.md's "items appearing", applied to the words of a line. Once, when it scrolls into view (any part of it; IntersectionObserver), or on mount with `startOnView={false}`. `as` picks the element (`p` by default, `h1`–`h6`, `span`, `div`, `blockquote`, `li`).
+- **Real text:** the pieces are `aria-hidden`; a visually hidden copy carries the whole text, so screen readers read it as written (split letters are spelled out by some screen readers, which is why the pieces aren't read) and search engines index it. The hidden copy isn't selectable, so copying the line takes the visible pieces once.
+- **Hidden in the server's HTML:** the pieces render at opacity 0 until they reveal, so a reveal above the fold never shows the line, hides it at hydration and then plays (the alternative, visible server text, flashes on every page load). The hidden copy keeps the text in the HTML for crawlers and screen readers. The cost: without JavaScript the line doesn't show; see "Not built yet".
+- **Clean:** one Web Animation per piece, filling backwards only: each holds its hidden state while it waits, then lets go, so no `filter` or `transform` is left behind (ADR 0011). The pieces drop their inline opacity in the same frame the animations start. Cancelled on unmount.
+- **Characters** stay grouped per word in a `nowrap` inline-block, so a word never breaks across lines mid-reveal. For short lines: 0.05s a character adds up.
+- **Reduced motion:** the text is simply there.
+
+## Typewriter
+- **What:** types a phrase (`phrases` takes one or several), holds it, deletes it faster and types the next; `loop` is on by default for several phrases and off for one. Defaults come from the motion tokens: `typeSpeed` `duration.instant` (80ms a character), `deleteSpeed` half that, `hold` `duration.slower * 4` (2s), a `duration.slow` beat between phrases, and `delay` before the first character.
+- **The crafted part, the caret:** a 2px rounded bar in the text's colour, one line tall (a zero-width space with `leading-none` gives it the font's height and baseline). It stays solid while the text moves and breathes (an eased fade over a second, not a hard blink) while it waits, like an editor's caret. Typing a phrase once, it fades away after the hold, so nothing blinks forever. One Web Animation at a time on its opacity; the fade starts from wherever the breath was.
+- **When it runs:** it starts once it's in view and rests while it's off-screen, picking up where it was. No `startOnView`: typing off-screen can't be seen, so the two settings would behave the same.
+- **Accessibility (decided):** nothing is announced. The typed text and the caret are `aria-hidden`; a visually hidden copy says every phrase once, joined with commas ("Build forms, menus, dialogs"). A polite live region announcing each phrase was rejected: a loop would talk over the page every few seconds, forever, and the phrases are decoration around a sentence that already makes sense.
+- **Server HTML:** the caret alone (the typing starts after hydration); the hidden copy carries the text. With reduced motion, after hydration, the first phrase is simply there, without a caret.
+- **Layout:** the line grows as it types. The hero holds the width with an invisible copy of the longest phrase in the same grid cell, so the centred line doesn't re-centre on every character; that's a demo technique, not built in, because inline text can't reserve a width across line breaks.
+
+## Demos and tests
+- **Hero:** server-rendered (the effects are the client parts): the shimmer ("Generating a reply…"), a reveal ("Ship it this afternoon") and "Build forms / menus / dialogs". Replay (`motion.animated`) remounts it.
+- **Tests:** the shimmer keeps one readable copy, sweeps light and copy in opposite directions with `startTime` 0, stays still with reduced motion and cancels on unmount; the reveal names a heading by its text, raises each word through the blur 0.05s apart with backwards fill and drops the inline opacity, keeps words whole by character, waits hidden until in view, and is simply there with reduced motion; the typewriter types, holds, deletes and types the next (fake timers), says every phrase once with no live region, breathes the caret while waiting and stops while typing, fades it after a single phrase, and shows the first phrase without a caret with reduced motion; axe for all three.
+- **Not built yet:** a no-JavaScript fallback for TextReveal (it needs a `<noscript>` style or a shipped CSS keyframe); a gradient width or speed prop for the shimmer; per-line reveals; the typewriter's selection-style delete (select the phrase, then remove it).

@@ -146,13 +146,22 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
   - Switcher and Toggle Group (2026-10-14): split from one component by the owner. Switcher is one choice with a sliding pill; Toggle Group switches options on and off. Both come in Default and Outline and were built in the Lab first.
   - Loading Button (2026-10-14): idle, loading, success and error, with a blur + rise swap, Signal red errors and a neutral success; built in the Lab first
   - Theme Toggle (2026-10-14, ADR 0010): eleven View Transition reveals with a speed prop; the site header uses it with `reveal="random"` and `speed="slow"`
+  - The whole roadmap (2026-10-16, owner: "build all the components in the roadmap"), 43 new items, awaiting the owner's review:
+    - Forms: Textarea, Combobox, Slider, Input OTP, Number Input, Calendar, Date Picker (Field was built too, then removed by the owner on 2026-10-21)
+    - Overlays: Dialog, Alert Dialog, Sheet, Popover, Tooltip, Hover Card, Dropdown Menu, Context Menu
+    - Navigation: Tabs, Accordion, Breadcrumb, Pagination, Navigation Menu, Sidebar, Command
+    - Feedback: Toast, Badge, Progress, Skeleton, Spinner (Alert was built too, then removed by the owner on 2026-10-19)
+    - Display: Card, Avatar, Table, Scroll Area (Empty State, Kbd and Separator were built too, then removed by the owner on 2026-10-21)
+    - Effects: Number Ticker, Marquee, Text Effects, Stepper
+    - Backgrounds (their own kind, `/backgrounds`): Dot Grid, Line Grid, Gradient Drift
   - Vitest with axe
   - site motion: underline tabs, gliding sidebar and search indicators, drawer slide
   - FewTone identity over beUI: framed gallery cards with live previews, underline tabs, Copy prompt for AI assistants
 
 **Next:**
 - the internal Lab with knobs (`/lab/<name>`), and CI (GitHub Actions running `pnpm check`)
-- more components: the roadmap's Next up (Textarea, Dialog, Dropdown Menu, Tooltip, Popover, Tabs, Accordion, Toast)
+- the owner's review of the 43 new items, then the changes it asks for
+- new roadmap entries once the review is done (every current entry is built)
 - AI layer (llms.txt, `.md` pages, MCP, skills)
 - npm package and CLI
 

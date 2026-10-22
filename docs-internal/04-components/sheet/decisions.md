@@ -1,0 +1,29 @@
+# Sheet: decisions
+
+- **What it is:** a panel that slides in from an edge of the screen, for forms, filters, settings or navigation beside the page (2026-10-16, roadmap: "A panel that slides in from any edge"). Built on Radix Dialog, so it's a modal. Parts and props follow shadcn: `Sheet`, `SheetTrigger`, `SheetClose`, `SheetContent` (`side`: `top` | `right` | `bottom` | `left`, default `right`; plus `showCloseButton`), `SheetHeader`, `SheetFooter`, `SheetTitle`, `SheetDescription`. `sheetVariants` is exported; the portal and overlay are internal, as in shadcn.
+- **Behaviour is Radix Dialog's:** focus moves in and stays, Escape and the backdrop close it, focus goes back to the trigger, the page behind is hidden from screen readers and doesn't scroll. The title names it.
+- **Standalone, not built on our Dialog:** a sheet shares Dialog's behaviour but not its window, motion or trigger origin, so it keeps its own few lines of open state and overlay. Installing it doesn't bring `dialog.tsx` along.
+- **The root keeps the open state** (as Dialog does): controlled (`open` / `onOpenChange`) or not (`defaultOpen`), so the portal can stay mounted (`forceMount` inside `AnimatePresence`) while the panel slides out.
+- **Motion** (`.agents/rules/motion.md`, modal row: "a drawer slides"):
+  - **Enter:** from its edge (`x` or `y` from ±100%) on `spring.snappy`, like the site's mobile nav.
+  - **Exit:** timed, `duration.base` + `ease.in`, back past the edge.
+  - **No blur on the panel:** it's a surface moving, not content appearing (ADR 0011 keeps the blur for content that comes and goes).
+  - **Backdrop:** `bg-overlay`, fading only.
+  - **Reduced motion:** opacity only, in place.
+  - **First paint:** `AnimatePresence initial={false}`, so a sheet that starts open is simply there.
+- **The crafted detail: no gap at the edge.** `spring.snappy` overshoots by just under 1%, which for a 384px panel is about 3px: for a frame or two the panel lifted off the screen edge and showed the dimmed page in a sliver. Each side now sits 8px past its edge (`-right-2` and so on) with an 8px border in the panel's own colour there (`border-r-8 border-r-background`), so the overshoot shows more panel instead of a gap. It's a border, not a pseudo-element, so `overflow-y-auto` doesn't clip it and the scrollbar stays on screen (scrollbars sit inside the border).
+- **Leaving:** clicks go through the fading backdrop and the panel to the page (the overlay's inline `pointer-events` is overridden while it fades, and the panel has `data-[state=closed]:pointer-events-none`). Focus then goes back to the trigger, unless someone has already focused something on the page (the same check as Dialog's `keepMovedFocus`, written out here so Sheet stays standalone).
+- **Layout:**
+  - **Right and left:** full height, `w-3/4` up to `sm:max-w-sm` (24rem), like shadcn. **Top and bottom:** full width, as tall as their content, up to the screen.
+  - **One hairline** on the side facing the page (`border-l` for a right sheet), plus `shadow-lg`; no radius, since it's attached to the edge.
+  - **Padding:** `p-6` and `gap-4` on the panel, like Dialog, so the family shares a rhythm. (shadcn pads the header and footer instead.)
+  - **Long content** scrolls inside the panel (`overflow-y-auto`), which shadcn leaves to the user.
+  - **Close button:** our `Button` (ghost, `icon-sm`, named "Close") at `top-5 end-4`, on the title's line; `SheetHeader` gets `pe-8` while it's shown.
+  - **Footer:** pinned to the panel's foot (`mt-auto`); stacked on phones with the main action on top, a row at the end from `sm`, matching Dialog's footer.
+  - **Sides are physical** (`left` stays left in right-to-left pages), as in shadcn.
+- **Demo:** Sides (hero): four outline icon buttons with Lucide's panel icons, named underneath (Top, Right, Bottom, Left), each opening the same Edit profile form from its edge. The fields are capped at `sm:max-w-sm`, so they stay a comfortable width in a top or bottom sheet. No card demo: four small buttons fit the tile.
+- **Tests:** the dialog role, name and description; `data-side` (right by default, or the given side); focus moving in, Escape, and focus back on the trigger; the close button, `SheetClose` and the backdrop closing it; axe closed and open.
+- **Not built yet:**
+  - dragging or swiping to close (a bottom sheet on phones would want it)
+  - sizes beyond the default width
+  - a sticky header and footer around a scrolling body (the whole panel scrolls today)

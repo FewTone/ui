@@ -1,0 +1,22 @@
+# Alert Dialog: decisions
+
+- **What it is:** a modal that asks people to confirm something, usually an action they can't undo, built on Radix Alert Dialog (2026-10-16, roadmap: "Confirmation for destructive actions"). Parts and props follow shadcn: `AlertDialog`, `AlertDialogTrigger`, `AlertDialogPortal`, `AlertDialogOverlay`, `AlertDialogContent`, `AlertDialogHeader`, `AlertDialogFooter`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogAction`, `AlertDialogCancel`.
+- **Behaviour is Radix's:**
+  - `role="alertdialog"`, named by the title and described by the description
+  - focus starts on Cancel, the safe choice, so pressing Enter by reflex does no harm
+  - Escape cancels; clicking the backdrop does nothing, so it's never dismissed by accident
+  - focus goes back to the trigger; the page behind is hidden from screen readers and doesn't scroll
+- **One family with Dialog:** the window, its motion and the open state come from `dialog.tsx` (`dialogStyles`, `dialogOverlayMotion`, `keepMovedFocus`, `useDialogState`, `useDialogWindow`, `useMergedRef`). It imports them rather than copying them, so the two can't drift apart; the registry installs Dialog with it. The Radix parts themselves can't be shared: Alert Dialog has its own scoped context.
+  - **Motion:** the same as Dialog. The window grows out of its trigger through the blur on `spring.snappy` (scale from 96%, with the trigger's centre as the origin), and leaves on a timed `duration.base` + `ease.in`. The backdrop only fades. Reduced motion: opacity only. A dialog that starts open doesn't animate.
+  - **Leaving:** clicks go through the fading backdrop and window to the page, as in Dialog, and focus stays wherever someone puts it during the exit instead of jumping back to the trigger.
+  - **Open state:** controlled (`open` / `onOpenChange`) or not (`defaultOpen`), kept in the root so the exit can play.
+- **Narrower than Dialog:** `max-w-md` instead of `max-w-lg`. It holds a question, a sentence and two buttons; at `lg` the line runs long and the buttons sit far from the text.
+- **No close button:** the question needs an answer, and Cancel is the way out (as in shadcn).
+- **Action and Cancel are buttons:** `buttonVariants` on the Radix parts, with Button's `variant` and `size` props. Action defaults to `default` (neutral, design rule: primary buttons are neutral); Cancel to `outline`. `variant="destructive"` on Action for deleting. An `onClick` that calls `event.preventDefault()` keeps the dialog open (Radix composes the handlers), for work the caller wants to finish first.
+- **No shake when the backdrop is clicked:** some systems nudge the window to say "answer me". The motion standard rules out shakes, and the backdrop staying put already says it.
+- **Demo:** Delete project (hero): an outline trigger, the question as the title, what goes and that it can't be undone as the description, Cancel and a destructive "Delete project". No card demo: the hero is one button.
+- **Tests:** the alertdialog role, name and description; focus on Cancel; Escape closing it with focus back on the trigger; the backdrop not closing it; the action running and closing it, with the destructive style; Cancel closing it without acting; axe closed and open.
+- **Not built yet:**
+  - an async action that keeps the dialog open with a spinner. Today a caller controls `open`, puts a Loading Button in the footer in place of `AlertDialogAction`, and closes the dialog when the work is done.
+  - a media or icon slot above the title (shadcn's newer `AlertDialogMedia`)
+  - a smaller size

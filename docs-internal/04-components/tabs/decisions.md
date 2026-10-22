@@ -1,0 +1,28 @@
+# Tabs: decisions
+
+**Status:** built 2026-10-16 from the roadmap ("Panels switched by an underline that slides between tabs"), published as stable for the owner's review with the other roadmap components. The page opens on both looks side by side on a small settings set (Account / Password / Notifications), named underneath. The examples are Icons and Disabled. The index card shows one set with short text panels (`preview.card`).
+
+- **What it is:** panels of related content in one place, one shown at a time, on Radix Tabs (`tablist`, `tab`, `tabpanel`; arrow keys move and show, Home and End jump, Tab moves into the panel). The API is shadcn's: `Tabs` (`value`, `defaultValue`, `onValueChange`, `activationMode`), `TabsList` (`variant`), `TabsTrigger` (`value`), `TabsContent` (`value`, `forceMount`). `variant` sits on the list, as on shadcn's newer `TabsList`.
+- **Two looks:**
+  - **`underline` (the default):** muted labels that brighten on hover; the active one is foreground with a 2px `bg-foreground` line under it, riding a full-width hairline (`border-b border-border`). The line's lower pixel covers the hairline. Tabs are `px-1` with a 16px gap, so the line hugs the label.
+  - **`pill`:** Switcher's look, a muted track with a `bg-background` pill (dark in dark mode, light in light), the track a control height (36px). The pill's corners are read from the tab as a number, so motion keeps them true while it changes width; until then (server HTML) the class gives the same corners.
+- **Why underline is the default:**
+  - It's what the roadmap promises.
+  - It keeps Tabs apart from Switcher. A pill on a track already means "pick one view" in the library; a line under a label reads as "these are sections of one thing".
+  - It's the calmest option: no filled surface, one hairline that also divides the tabs from the panel (a section rule, which design.md allows).
+  - **Note for the owner:** the site's own docs switchers rejected underline tabs in favour of the "Framed · ink" pill (ADR 0007). That was the site's chrome; for a library Tabs the roadmap note won. Flipping the default is one line (`defaultVariants`) if the owner prefers the pill.
+- **Motion:**
+  - **The indicator slides** to the active tab: `layoutId` on `spring.snappy`, inside `LayoutGroup id={useId()}` per list, so two sets never trade it. The list is `isolate` and the tabs aren't stacking contexts, so the pill passes behind every label (the 2026-10-13 pitfall). The labels change colour over `duration-base`, so they arrive with it. With reduced motion it jumps.
+  - **The new panel comes through the blur** and slides 12px in from the side of the tab you moved to (from the right when you move right), on `duration.base` with `ease.out`, the same as the site's Preview / Usage / Code. The side comes from the two tabs' `offsetLeft`, so right-to-left pages and zoomed previews get it right. The `filter` is cleared when it ends, so no stacking context or containing block is left round the content.
+  - **Its height glides** from the old panel's height to its own (`duration.slow`, `ease.out`, never a spring), clipped only while it moves. This is motion.md's height pattern for tab panels, done in JavaScript because Radix measures nothing for tabs (Accordion uses Radix's measured height and CSS keyframes instead; see its decisions). A `ResizeObserver` on the shown panel keeps its height current, so switching again mid-glide starts from wherever the panel is.
+  - **The old panel goes at once**, so the two never overlap and nothing has to be positioned on top of anything.
+  - **Interrupted or hidden mid-entrance:** the animations stop and every inline style they set is removed, so the next showing starts clean.
+  - **Nothing animates on first paint.** With reduced motion the panel only fades and its height is instant.
+- **Mounting:** `TabsContent` always passes `forceMount` to Radix and decides itself what's hidden (`hidden`) and what's mounted. Radix's Presence shows a panel one render after its tab changes; deciding it ourselves puts the panel in the DOM in the same commit, so the entrance can measure it and start before the first paint (no flash in place). Without `forceMount` a hidden panel renders nothing, as on Radix. With it, the panel's content stays mounted and hidden, keeping its state and staying in the HTML. (On Radix, `forceMount` leaves the panel visible for you to hide yourself; here it's hidden for you.)
+- **No `flex-1` on the panel** (shadcn has it): a flex-basis would override the height the glide sets. Add it to fill a fixed-height Tabs.
+- **Tests:** roles and names, a click shows its panel and hides the old one, arrow keys skipping a disabled tab, Home, Tab into the panel, one indicator in the active tab for both looks, a controlled value, `forceMount` keeping an input's value, and axe for both looks. jsdom has no layout, so the glide itself is skipped there (it only runs when both heights are measurable).
+- **Not built yet:**
+  - vertical tabs: Radix's `orientation="vertical"` already switches the arrow keys, but there's no vertical styling or vertical slide
+  - sizes (the underline is a control height; the pill track matches Switcher's medium)
+  - a tab row that scrolls when it overflows on small screens (it would need `layoutScroll` on the list)
+  - an exit for the old panel

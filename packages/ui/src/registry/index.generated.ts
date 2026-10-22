@@ -3,6 +3,761 @@ import type { Item } from "./schema.ts";
 
 export const items: Item[] = [
   {
+    "name": "accordion",
+    "title": "Accordion",
+    "description": "An accessible React accordion for Next.js: sections that open and close with a smooth height change, as one card, separate cards or plain rows. Built on Radix.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "accordion",
+      "collapsible",
+      "faq",
+      "disclosure",
+      "expand collapse"
+    ],
+    "keywords": [
+      "react accordion",
+      "nextjs accordion",
+      "tailwind accordion",
+      "shadcn accordion",
+      "animated accordion",
+      "faq accordion",
+      "accordion card",
+      "react collapsible",
+      "expand collapse react"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-19",
+    "tier": "free",
+    "files": [
+      "accordion.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Accordion,\n  AccordionContent,\n  AccordionItem,\n  AccordionTrigger,\n} from \"@/components/ui/accordion\"\n\nexport function Faq() {\n  return (\n    <Accordion type=\"single\" collapsible>\n      <AccordionItem value=\"refunds\">\n        <AccordionTrigger>Can I get a refund?</AccordionTrigger>\n        <AccordionContent>Yes, within 30 days of your purchase.</AccordionContent>\n      </AccordionItem>\n      <AccordionItem value=\"shipping\">\n        <AccordionTrigger>How long does shipping take?</AccordionTrigger>\n        <AccordionContent>Three to five working days.</AccordionContent>\n      </AccordionItem>\n    </Accordion>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "variants",
+        "title": "Card, separated and plain",
+        "description": "One section open at a time. It glides open as its answer sharpens in and the chevron turns; separated sections also move apart from their neighbours."
+      },
+      {
+        "name": "multiple",
+        "title": "Several open at once",
+        "description": "With type=\"multiple\", each section opens and closes on its own."
+      }
+    ],
+    "api": [
+      {
+        "name": "Accordion",
+        "description": "The root, built on Radix Accordion. Also accepts every Radix Accordion Root prop. Arrow keys move between the questions; Home and End jump to the ends.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"card\" | \"separated\" | \"plain\"",
+            "default": "\"card\"",
+            "description": "Card is one surface with a rule between sections. Separated makes each section its own card, and an open one moves apart from the rest. Plain is rows and rules only, for inside a surface that's already a card."
+          },
+          {
+            "name": "type",
+            "type": "\"single\" | \"multiple\"",
+            "required": true,
+            "description": "Single opens one section at a time; multiple lets each open on its own."
+          },
+          {
+            "name": "value",
+            "type": "string | string[]",
+            "description": "The open section (single) or sections (multiple), when you control them."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string | string[]",
+            "description": "The section or sections open at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void | (value: string[]) => void",
+            "description": "Called when a section opens or closes. Single sends an empty string once it's closed."
+          },
+          {
+            "name": "collapsible",
+            "type": "boolean",
+            "default": "false",
+            "description": "Single only: the open section closes when its question is pressed again."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents opening or closing any section."
+          }
+        ]
+      },
+      {
+        "name": "AccordionItem",
+        "description": "One section: a row between quiet rules (card and plain), or its own small card (separated).",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "Names the section in the accordion's value."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents opening or closing it."
+          }
+        ]
+      },
+      {
+        "name": "AccordionTrigger",
+        "description": "The question: a button inside a heading (h3), with aria-expanded. On hover the row tints (card and separated) and the chevron brightens; the chevron turns on a spring as the section opens.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "required": true,
+            "description": "The question."
+          }
+        ]
+      },
+      {
+        "name": "AccordionContent",
+        "description": "The answer, a region named by its question. Its height glides on a spring while the answer follows through a blur, clipped only while it moves. Closed, it stays in the page, hidden until found, so find in page opens it.",
+        "props": [
+          {
+            "name": "className",
+            "type": "string",
+            "description": "Applies to the inner block, so padding and text styles never fight the height animation."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Accordion"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "tabs"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Accordion for FAQs and long pages split into sections people scan and open one by one. Use type=\"multiple\" when sections are independent. Card is the default; separated suits a few large sections, and plain goes inside a surface that is already a card (a Card, Sheet or Dialog). Use Tabs when one panel at a time should show in the same place, and don't hide content people need to compare side by side."
+    },
+    "controls": {},
+    "href": "/components/accordion",
+    "dir": "components/accordion",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "alert-dialog",
+    "title": "Alert Dialog",
+    "description": "An accessible React alert dialog for Next.js that asks people to confirm destructive actions, with focus starting on Cancel, built on Radix Alert Dialog.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "alert dialog",
+      "confirm",
+      "confirmation",
+      "modal",
+      "destructive",
+      "delete"
+    ],
+    "keywords": [
+      "react alert dialog",
+      "react confirm dialog",
+      "confirmation modal",
+      "delete confirmation dialog",
+      "nextjs alert dialog",
+      "shadcn alert dialog",
+      "tailwind confirm dialog",
+      "radix alert dialog"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "alert-dialog.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from \"@/components/ui/alert-dialog\"\nimport { Button } from \"@/components/ui/button\"\n\nexport function DeleteAccount() {\n  return (\n    <AlertDialog>\n      <AlertDialogTrigger asChild>\n        <Button variant=\"outline\">Delete account</Button>\n      </AlertDialogTrigger>\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogTitle>Delete your account?</AlertDialogTitle>\n          <AlertDialogDescription>\n            Your projects and settings go with it. You can't undo this.\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>Cancel</AlertDialogCancel>\n          <AlertDialogAction variant=\"destructive\" onClick={deleteAccount}>\n            Delete account\n          </AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "delete-project",
+        "title": "Delete project",
+        "description": "Focus starts on Cancel, so pressing Enter by reflex does no harm. Escape cancels; clicking the backdrop does nothing. Like Dialog, the window grows out of its trigger."
+      }
+    ],
+    "api": [
+      {
+        "name": "AlertDialog",
+        "description": "The root. It keeps the open state, so the window can play its exit before it unmounts.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes: the trigger, Cancel, the action or Escape."
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogTrigger",
+        "description": "The button that opens it. Focus comes back here when it closes.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own element, such as a Button, as the trigger."
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogContent",
+        "description": "The window, with its backdrop, in a portal: the same look and motion as Dialog, a little narrower, without a close button. Announced as an alertdialog, named by its title and described by its description. Also accepts every Radix Alert Dialog Content prop.",
+        "props": [
+          {
+            "name": "onOpenAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Runs as focus moves to Cancel. Call event.preventDefault() to focus something else yourself."
+          },
+          {
+            "name": "onCloseAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Runs as focus goes back to the trigger. Call event.preventDefault() to send it elsewhere."
+          },
+          {
+            "name": "onEscapeKeyDown",
+            "type": "(event: KeyboardEvent) => void",
+            "description": "Runs when Escape is pressed. Call event.preventDefault() to keep it open."
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogHeader",
+        "description": "Holds the title and description.",
+        "props": []
+      },
+      {
+        "name": "AlertDialogFooter",
+        "description": "Holds Cancel and the action: stacked on phones with the action on top, in a row at the end from the sm breakpoint.",
+        "props": []
+      },
+      {
+        "name": "AlertDialogTitle",
+        "description": "The question, and the dialog's accessible name. Say what will happen: “Delete project?”.",
+        "props": []
+      },
+      {
+        "name": "AlertDialogDescription",
+        "description": "What the action does and whether it can be undone, read out after the name.",
+        "props": []
+      },
+      {
+        "name": "AlertDialogAction",
+        "description": "Confirms and closes. It's a Button, so it takes Button's variant and size. Your onClick runs first; call event.preventDefault() there to keep the dialog open.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"default\" | \"secondary\" | \"outline\" | \"ghost\" | \"destructive\" | \"link\"",
+            "default": "\"default\"",
+            "description": "The button style. Use destructive for actions that remove things."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "The button height."
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogCancel",
+        "description": "Closes without doing anything. It has focus when the dialog opens.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"default\" | \"secondary\" | \"outline\" | \"ghost\" | \"destructive\" | \"link\"",
+            "default": "\"outline\"",
+            "description": "The button style."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "The button height."
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogPortal",
+        "description": "Renders its children into document.body while the dialog is open, and while it leaves. AlertDialogContent already uses it.",
+        "props": [
+          {
+            "name": "container",
+            "type": "HTMLElement",
+            "default": "document.body",
+            "description": "Where to render instead."
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogOverlay",
+        "description": "The backdrop that dims the page. It only fades, and clicking it does nothing. AlertDialogContent already includes it.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Alert Dialog"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "dialog",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use AlertDialog to confirm an action that is destructive or can't be undone, such as deleting. It needs an explicit answer: the backdrop doesn't close it. For anything else in a modal, use Dialog."
+    },
+    "controls": {},
+    "href": "/components/alert-dialog",
+    "dir": "components/alert-dialog",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "button",
+        "dialog"
+      ]
+    }
+  },
+  {
+    "name": "avatar",
+    "title": "Avatar",
+    "description": "An accessible React avatar for Next.js and Tailwind CSS: a picture or initials in three sizes, alone or in an overlapping group, built on Radix Avatar.",
+    "kind": "component",
+    "category": "Display",
+    "tags": [
+      "avatar",
+      "profile picture",
+      "initials",
+      "user",
+      "avatar group"
+    ],
+    "keywords": [
+      "react avatar",
+      "shadcn avatar",
+      "nextjs avatar",
+      "tailwind avatar",
+      "avatar group",
+      "avatar stack",
+      "user avatar initials",
+      "radix avatar"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "avatar.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\n\nexport function UserAvatar({ user }) {\n  return (\n    <Avatar>\n      <AvatarImage src={user.image} alt={user.name} />\n      <AvatarFallback>{user.initials}</AvatarFallback>\n    </Avatar>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "sizes",
+        "title": "Sizes",
+        "description": "Each size with a picture and with initials, and a group with a count. A picture comes in through the blur once it has loaded, over the initials, so nothing jumps."
+      },
+      {
+        "name": "with-name",
+        "title": "With a name",
+        "description": "With the name written beside it, give the picture alt=\"\": the avatar is hidden from screen readers and the name is read once."
+      }
+    ],
+    "api": [
+      {
+        "name": "Avatar",
+        "description": "The circle. Also accepts every Radix Avatar Root prop.",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "24, 32 or 40px. A group's count follows the avatars beside it."
+          }
+        ]
+      },
+      {
+        "name": "AvatarImage",
+        "description": "The picture. It appears once it has loaded, coming in through the blur when the initials were on screen first; a missing or broken src leaves the initials. Also accepts every native img prop.",
+        "props": [
+          {
+            "name": "src",
+            "type": "string",
+            "description": "The picture's URL."
+          },
+          {
+            "name": "alt",
+            "type": "string",
+            "description": "The person's name. The initials carry it while they stand in. Use alt=\"\" when the name is written beside the avatar."
+          },
+          {
+            "name": "onLoadingStatusChange",
+            "type": "(status: \"idle\" | \"loading\" | \"loaded\" | \"error\") => void",
+            "description": "Called as the picture loads, or fails to."
+          }
+        ]
+      },
+      {
+        "name": "AvatarFallback",
+        "description": "Initials or an icon, shown until the picture is fully in, and instead of it when it can't load. Also accepts every native span prop.",
+        "props": [
+          {
+            "name": "delayMs",
+            "type": "number",
+            "description": "Wait this long before showing the initials, so a quick picture never flashes them."
+          }
+        ]
+      },
+      {
+        "name": "AvatarGroup",
+        "description": "Overlapping avatars, each ringed in the page's background colour. A group (role=\"group\"): name it with aria-label.",
+        "props": []
+      },
+      {
+        "name": "AvatarGroupCount",
+        "description": "The last circle in a group, for the people not shown (\"+3\"), at the size of its neighbours.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Avatar"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "badge",
+      "card"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Avatar for a person or account: a picture with initials as the fallback. Give the picture the person's name as alt, or alt=\"\" when the name is written beside it. Use AvatarGroup with AvatarGroupCount to show a team or the people on a document."
+    },
+    "controls": {},
+    "href": "/components/avatar",
+    "dir": "components/avatar",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "badge",
+    "title": "Badge",
+    "description": "An accessible React badge for Next.js and Tailwind CSS: small status labels in five variants, including one with a light travelling round its edge.",
+    "kind": "component",
+    "category": "Feedback",
+    "tags": [
+      "badge",
+      "label",
+      "status",
+      "tag",
+      "chip",
+      "pill"
+    ],
+    "keywords": [
+      "react badge",
+      "nextjs badge",
+      "tailwind badge",
+      "shadcn badge",
+      "status badge",
+      "badge component",
+      "animated badge",
+      "shine border badge",
+      "pill label"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "badge.tsx",
+      "badge-shine.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Badge } from \"@/components/ui/badge\"\n\nexport function Status() {\n  return <Badge variant=\"secondary\">Draft</Badge>\n}"
+    },
+    "demos": [
+      {
+        "name": "variants",
+        "title": "Variants",
+        "description": "Default for the main status, secondary and outline for quieter ones, destructive for problems. Shine is the outline badge with two lights travelling round its edge, in the label's colour."
+      },
+      {
+        "name": "as-link",
+        "title": "As a link",
+        "description": "With asChild, the badge styles go onto its child, so a link stays a real link. Its background shifts on hover."
+      }
+    ],
+    "api": [
+      {
+        "name": "Badge",
+        "description": "Also accepts every native span prop. Exports badgeVariants for styling other elements. Flat, with no shadow; icons inside size themselves.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"default\" | \"secondary\" | \"destructive\" | \"outline\" | \"shine\"",
+            "default": "\"default\"",
+            "description": "The visual style. Shine is the outline badge with two lights travelling round its edge, one lap every 3 seconds; with reduced motion they rest on the left and right."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a link) with the badge styles instead of a span."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Slot"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "spinner",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Badge for short, non-interactive labels: a status, a version, a count or a category. Use variant=\"shine\" sparingly, for the one label that should draw the eye (Beta, Pro). Use Button for actions, and asChild with a link when the badge should navigate."
+    },
+    "controls": {},
+    "href": "/components/badge",
+    "dir": "components/badge",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "breadcrumb",
+    "title": "Breadcrumb",
+    "description": "An accessible React breadcrumb for Next.js and Tailwind CSS: a trail of links whose levels animate as you move, with custom separators and a collapsed middle.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "breadcrumb",
+      "breadcrumbs",
+      "navigation",
+      "trail",
+      "path"
+    ],
+    "keywords": [
+      "react breadcrumb",
+      "nextjs breadcrumb",
+      "tailwind breadcrumb",
+      "shadcn breadcrumb",
+      "breadcrumb component",
+      "breadcrumb navigation",
+      "collapsed breadcrumb",
+      "animated breadcrumb"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-19",
+    "tier": "free",
+    "files": [
+      "breadcrumb.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Breadcrumb,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbList,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n} from \"@/components/ui/breadcrumb\"\nimport Link from \"next/link\"\n\nexport function Trail() {\n  return (\n    <Breadcrumb>\n      <BreadcrumbList>\n        <BreadcrumbItem>\n          <BreadcrumbLink asChild>\n            <Link href=\"/\">Home</Link>\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbLink asChild>\n            <Link href=\"/components\">Components</Link>\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>\n        </BreadcrumbItem>\n      </BreadcrumbList>\n    </Breadcrumb>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "trails",
+        "title": "Trails",
+        "description": "Point at a link and its underline fades in. A long trail can fold its middle into a menu: the ellipsis opens a Dropdown Menu of the hidden levels. Pass any icon to BreadcrumbSeparator for a different mark."
+      },
+      {
+        "name": "folders",
+        "title": "A trail that follows you",
+        "description": "Open a folder and the trail grows a level out of the one before it while the list moves on, row by row; press a level above and it plays backwards. Key each level by its path to get this."
+      }
+    ],
+    "api": [
+      {
+        "name": "Breadcrumb",
+        "description": "The nav landmark. Also accepts every native nav prop.",
+        "props": [
+          {
+            "name": "aria-label",
+            "type": "string",
+            "default": "\"Breadcrumb\"",
+            "description": "The landmark's name."
+          }
+        ]
+      },
+      {
+        "name": "BreadcrumbList",
+        "description": "The ordered list of levels. It wraps onto more lines when it runs out of room. Levels that come and go animate in and out, and the rest glide to their new places; give each level a key (its path) when you map over one.",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbItem",
+        "description": "One level (li), a motion element: it accepts every native li prop and motion's props.",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbLink",
+        "description": "A link to a level above. Also accepts every native a prop.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child, for example Next.js Link, with the link's styles."
+          }
+        ]
+      },
+      {
+        "name": "BreadcrumbPage",
+        "description": "The page you're on: the last item, as text, marked aria-current=\"page\".",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbSeparator",
+        "description": "The mark between levels, hidden from screen readers.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "default": "a chevron",
+            "description": "Your own mark, such as a slash icon. A chevron flips in right-to-left pages."
+          }
+        ]
+      },
+      {
+        "name": "BreadcrumbEllipsis",
+        "description": "Stands for collapsed levels. Put it inside a DropdownMenuTrigger to list them, and name the trigger (aria-label).",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Slot"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "pagination",
+      "dropdown-menu"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Breadcrumb at the top of a page deep in a hierarchy (docs, settings, file folders) to show where it sits and link back up. Skip it on flat sites. Collapse the middle into a Dropdown Menu when a trail is long."
+    },
+    "controls": {},
+    "href": "/components/breadcrumb",
+    "dir": "components/breadcrumb",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
     "name": "button",
     "title": "Button",
     "description": "An accessible React button with six variants, three sizes, icon support and a spring press, built on a native button.",
@@ -111,6 +866,332 @@ export const items: Item[] = [
     "controls": {},
     "href": "/components/button",
     "dir": "components/button",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens"
+      ]
+    }
+  },
+  {
+    "name": "calendar",
+    "title": "Calendar",
+    "description": "An accessible React calendar for Next.js and Tailwind CSS: pick a day or a range, with full keyboard support, disabled days and Intl names. No date library.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "calendar",
+      "date",
+      "date range",
+      "form",
+      "month view"
+    ],
+    "keywords": [
+      "react calendar",
+      "nextjs calendar",
+      "shadcn calendar",
+      "tailwind calendar",
+      "react day picker",
+      "react date range calendar",
+      "accessible calendar",
+      "animated calendar"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "calendar.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "\"use client\"\n\nimport { useState } from \"react\"\nimport { Calendar } from \"@/components/ui/calendar\"\n\nexport function DueDate() {\n  const [date, setDate] = useState<Date | undefined>()\n\n  return <Calendar mode=\"single\" selected={date} onSelect={setDate} />\n}"
+    },
+    "demos": [
+      {
+        "name": "modes",
+        "title": "Single and range",
+        "description": "Pick another day on the left and its circle travels there. On the right, pick a start and an end: the band grows from the first day to the second, row by row. Turning the page slides the new month in from the side you're going to."
+      },
+      {
+        "name": "two-months",
+        "title": "Two months",
+        "description": "numberOfMonths={2} shows two months side by side, for ranges that cross a month's end."
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled days and limits",
+        "description": "Weekends are disabled with { dayOfWeek: [0, 6] }, and min and max keep the pick between 5 October and 20 November. The arrow keys skip what can't be picked, and the month buttons stop at the limits."
+      },
+      {
+        "name": "locale",
+        "title": "Other languages",
+        "description": "locale names the months, weekdays and days through Intl, weekStartsOn sets the first column, and labels translates the few words the calendar says itself."
+      }
+    ],
+    "api": [
+      {
+        "name": "Calendar",
+        "description": "A month view. Also accepts every div prop. Arrow keys move by day, Up and Down by week, PageUp and PageDown by month (with Shift, by year), Home and End to the week's ends, and Enter or Space picks. Props follow react-day-picker's main ones.",
+        "props": [
+          {
+            "name": "mode",
+            "type": "\"single\" | \"range\"",
+            "default": "\"single\"",
+            "description": "Pick one day, or a range from a start to an end."
+          },
+          {
+            "name": "selected",
+            "type": "Date | DateRange",
+            "description": "The picked day (single) or range ({ from, to }), when you control it."
+          },
+          {
+            "name": "defaultSelected",
+            "type": "Date | DateRange",
+            "description": "What's picked at first."
+          },
+          {
+            "name": "onSelect",
+            "type": "(value: Date | DateRange | undefined, day: Date) => void",
+            "description": "Called with the new day or range, and the day that was clicked. In range mode the first click starts a range, the second ends it (either way round) and a third starts again."
+          },
+          {
+            "name": "month",
+            "type": "Date",
+            "description": "The month shown first, when you control it."
+          },
+          {
+            "name": "defaultMonth",
+            "type": "Date",
+            "description": "The month shown at first. Defaults to the picked day's month, else today's. Pass it to server-render the right month."
+          },
+          {
+            "name": "onMonthChange",
+            "type": "(month: Date) => void",
+            "description": "Called with the first day of the month when the page turns."
+          },
+          {
+            "name": "numberOfMonths",
+            "type": "number",
+            "default": "1",
+            "description": "Months shown side by side."
+          },
+          {
+            "name": "disabled",
+            "type": "Matcher | Matcher[]",
+            "description": "Days that can't be picked: a Date, an array of Dates, { from, to }, { before }, { after }, { dayOfWeek: [0, 6] } or a function that gets each day."
+          },
+          {
+            "name": "min",
+            "type": "Date",
+            "description": "The earliest day that can be picked. The calendar doesn't page before its month."
+          },
+          {
+            "name": "max",
+            "type": "Date",
+            "description": "The latest day that can be picked. The calendar doesn't page past its month."
+          },
+          {
+            "name": "weekStartsOn",
+            "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+            "default": "0",
+            "description": "The first day of the week: 0 is Sunday, 1 is Monday."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "default": "\"en-US\"",
+            "description": "A language tag, such as fr-FR. Intl writes the month, weekday and day names."
+          },
+          {
+            "name": "showOutsideDays",
+            "type": "boolean",
+            "default": "true",
+            "description": "Shows the days of the months either side, muted. They can be picked."
+          },
+          {
+            "name": "fixedWeeks",
+            "type": "boolean",
+            "default": "true",
+            "description": "Always six weeks, so the calendar keeps its height from month to month. Without it, the height glides to fit."
+          },
+          {
+            "name": "today",
+            "type": "Date",
+            "description": "The day marked as today. Defaults to the browser's today, known once the page has loaded, so server HTML never disagrees with it."
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Single mode: clicking the picked day again keeps it instead of clearing it."
+          },
+          {
+            "name": "labels",
+            "type": "{ previousMonth?: string; nextMonth?: string; selected?: string }",
+            "description": "The words the calendar says: \"Previous month\", \"Next month\" and \", selected\" after a picked day."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Intl.DateTimeFormat"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "date-picker",
+      "popover",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Calendar to show a month and pick a day or a range in place, for example a booking page or a filter panel. Use Date Picker for a form field that opens a calendar from a trigger, and Input with type=date when a typed date is enough."
+    },
+    "controls": {},
+    "href": "/components/calendar",
+    "dir": "components/calendar",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
+    "name": "card",
+    "title": "Card",
+    "description": "A React card for Next.js and Tailwind CSS: a surface for grouped content with header, action, content and footer parts, a small size and a link style.",
+    "kind": "component",
+    "category": "Display",
+    "tags": [
+      "card",
+      "surface",
+      "panel",
+      "container",
+      "link card"
+    ],
+    "keywords": [
+      "react card",
+      "shadcn card",
+      "nextjs card",
+      "tailwind card",
+      "card component",
+      "link card",
+      "dashboard card",
+      "settings card"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "card.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { Button } from \"@/components/ui/button\"\n\nexport function CreateProject() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Create project</CardTitle>\n        <CardDescription>Deploy a new project in a few clicks.</CardDescription>\n      </CardHeader>\n      <CardContent>{/* fields */}</CardContent>\n      <CardFooter>\n        <Button>Deploy</Button>\n      </CardFooter>\n    </Card>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "overview",
+        "title": "Overview",
+        "description": "A card with every part, a small card with an action beside its title, and a whole card as a link. Hover the link: its surface lifts a step, and nothing moves."
+      }
+    ],
+    "api": [
+      {
+        "name": "Card",
+        "description": "The surface: a soft shadow and a hairline, no border. Also accepts every native div prop. Exports cardVariants for styling other elements.",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "Padding and gaps: 24px, or 16px for dense grids."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a link) with the card styles. As a link, the surface lifts a step on hover; everything inside is read as the link's name, so keep it short."
+          }
+        ]
+      },
+      {
+        "name": "CardHeader",
+        "description": "Holds the title, description and action. Add className=\"border-b\" for a rule under it; the padding below follows.",
+        "props": []
+      },
+      {
+        "name": "CardTitle",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render a heading at the level your page needs instead of a div, for example <h3>."
+          }
+        ]
+      },
+      {
+        "name": "CardDescription",
+        "description": "Muted text under the title.",
+        "props": []
+      },
+      {
+        "name": "CardAction",
+        "description": "Sits at the end of the header, beside the title and description: a button, a badge, a menu.",
+        "props": []
+      },
+      {
+        "name": "CardContent",
+        "description": "The body, with the card's side padding.",
+        "props": []
+      },
+      {
+        "name": "CardFooter",
+        "description": "A row for actions, 8px apart. Add className=\"border-t\" for a rule above it; the padding above follows.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Slot"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "button",
+      "badge"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Card to group related content and actions on a surface: forms, settings, stats, previews. Render it asChild with a link when the whole card goes somewhere. Use Separator for a line between sections without a surface."
+    },
+    "controls": {},
+    "href": "/components/card",
+    "dir": "components/card",
     "install": {
       "dependencies": [
         "class-variance-authority@^0.7.1",
@@ -269,6 +1350,828 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "combobox",
+    "title": "Combobox",
+    "description": "An accessible React combobox for Next.js and Tailwind CSS: type in the field to filter and pick one option, or several as chips, with a gliding highlight.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "combobox",
+      "autocomplete",
+      "typeahead",
+      "multi select",
+      "chips",
+      "select",
+      "form"
+    ],
+    "keywords": [
+      "react combobox",
+      "shadcn combobox",
+      "react autocomplete",
+      "nextjs combobox",
+      "react multi select",
+      "tailwind combobox",
+      "searchable select react",
+      "react select with search",
+      "tags input react"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "combobox.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Combobox } from \"@/components/ui/combobox\"\n\nconst frameworks = [\n  { value: \"next\", label: \"Next.js\" },\n  { value: \"astro\", label: \"Astro\" },\n  { value: \"nuxt\", label: \"Nuxt\", keywords: [\"vue\"] },\n]\n\nexport function FrameworkPicker() {\n  return (\n    <Combobox\n      aria-label=\"Framework\"\n      options={frameworks}\n      placeholder=\"Pick a framework\"\n      emptyText=\"No framework found.\"\n    />\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "pickers",
+        "title": "One value or several",
+        "description": "Type in the field to filter, use the arrow keys or the pointer to move, and Enter or a click to pick. With multiple, choices become chips: the list stays open, Backspace in an empty field removes the last one, and the field grows smoothly when they wrap."
+      },
+      {
+        "name": "groups",
+        "title": "Groups and long lists",
+        "description": "Options with a group are listed under it as a heading, and keywords widen the search: try IST or Pacific. renderOption adds detail to each row while the field shows the label. Long lists scroll, with soft fades at the ends."
+      }
+    ],
+    "api": [
+      {
+        "name": "Combobox",
+        "description": "A text field with a list of options below it, built on Command and Radix Popover. Give it a visible label (<label htmlFor> with its id) or an aria-label. Also accepts every input prop, passed to the field.",
+        "props": [
+          {
+            "name": "options",
+            "type": "{ value: string; label: string; keywords?: string[]; disabled?: boolean; group?: string }[]",
+            "required": true,
+            "description": "The options. The search matches the label and keywords; options with the same group are listed under it."
+          },
+          {
+            "name": "multiple",
+            "type": "boolean",
+            "default": "false",
+            "description": "Pick several, shown as chips. The value is then a string[]."
+          },
+          {
+            "name": "value",
+            "type": "string | string[]",
+            "description": "The chosen value (or values, with multiple), when you control it. An empty string is none."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string | string[]",
+            "description": "The value chosen at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string | string[]) => void",
+            "description": "Called when the choice changes: a string, or a string[] with multiple."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "The hint in the empty field."
+          },
+          {
+            "name": "emptyText",
+            "type": "ReactNode",
+            "default": "\"No results found.\"",
+            "description": "Shown when nothing matches."
+          },
+          {
+            "name": "renderOption",
+            "type": "(option) => ReactNode",
+            "description": "Custom content for a row in the list. The field still shows the label."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "The height of one line: Select's small and medium."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the value with a form (one hidden input per value with multiple)."
+          },
+          {
+            "name": "filter",
+            "type": "(text: string, search: string, keywords?: string[]) => number",
+            "description": "Scores an option against the search; 0 hides it. Defaults to Command's ranking."
+          },
+          {
+            "name": "onSearchChange",
+            "type": "(search: string) => void",
+            "description": "Called with the search as it changes."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents typing and opening."
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "Marks the value as wrong: a destructive border and focus ring."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Popover",
+      "Command"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "select",
+      "command",
+      "input"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Combobox to pick one value, or several, from a long list by typing, such as a framework, a country or labels. Use Select for a short list without typing, Radio Group for 2 to 4 visible options, and Command for a menu of pages and actions."
+    },
+    "controls": {},
+    "href": "/components/combobox",
+    "dir": "components/combobox",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "command"
+      ]
+    }
+  },
+  {
+    "name": "command",
+    "title": "Command",
+    "description": "An accessible React command menu for Next.js and Tailwind CSS: a ⌘K palette that filters and ranks as you type, with groups, shortcuts and a gliding highlight.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "command",
+      "command palette",
+      "cmdk",
+      "search",
+      "menu",
+      "spotlight",
+      "keyboard"
+    ],
+    "keywords": [
+      "react command palette",
+      "react command menu",
+      "shadcn command",
+      "react cmdk",
+      "cmd k menu",
+      "nextjs command palette",
+      "tailwind command palette",
+      "spotlight search react",
+      "kbar alternative"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "command.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  CommandDialog,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"@/components/ui/command\"\n\nexport function Palette() {\n  return (\n    <CommandDialog shortcut=\"k\">\n      <CommandInput placeholder=\"Type a command or search…\" />\n      <CommandList>\n        <CommandEmpty>No results found.</CommandEmpty>\n        <CommandGroup heading=\"Pages\">\n          <CommandItem onSelect={() => {}}>Dashboard</CommandItem>\n          <CommandItem keywords={[\"preferences\"]}>Settings</CommandItem>\n        </CommandGroup>\n      </CommandList>\n    </CommandDialog>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Command menu",
+        "description": "Type to filter: the best matches rise to the top, groups with nothing left hide, and the list glides to its new height. The arrow keys move the highlight, Home and End jump, and Enter runs the item. Try “stg” or “invoices”."
+      },
+      {
+        "name": "dialog",
+        "title": "Command palette",
+        "description": "CommandDialog puts it in a dialog near the top of the screen. Open it from the button or with ⌘J (Ctrl J on Windows and Linux); this site already uses ⌘K for its own search. Escape or the backdrop closes it."
+      }
+    ],
+    "api": [
+      {
+        "name": "Command",
+        "description": "The root: the search, the highlight and the filtering. Put a CommandInput and a CommandList inside.",
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The search field's accessible name. Defaults to its placeholder."
+          },
+          {
+            "name": "filter",
+            "type": "(text: string, search: string, keywords?: string[]) => number",
+            "description": "Scores an item against the search, from 0 (hidden) to 1 (exact). The default ranks exact matches, then word starts, then anywhere, then keywords, then letters in order. Export: commandFilter."
+          },
+          {
+            "name": "shouldFilter",
+            "type": "boolean",
+            "default": "true",
+            "description": "Set false to filter yourself, for example results fetched as you type."
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "default": "false",
+            "description": "ArrowDown on the last item goes back to the first, and ArrowUp the other way."
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The highlighted item's value, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "description": "The item highlighted at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called when the highlight moves to another item."
+          },
+          {
+            "name": "search",
+            "type": "string",
+            "description": "The search, when you control it here (CommandInput's value does the same)."
+          },
+          {
+            "name": "onSearchChange",
+            "type": "(search: string) => void",
+            "description": "Called with the search as it changes."
+          }
+        ]
+      },
+      {
+        "name": "CommandInput",
+        "description": "The search field. It keeps focus and the keyboard, and points screen readers at the highlighted item. Also accepts every input prop.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The search, when you control it."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(search: string) => void",
+            "description": "Called with the search as it changes."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "The hint in the empty field."
+          }
+        ]
+      },
+      {
+        "name": "CommandList",
+        "description": "The listbox. It scrolls past 18rem, with soft fades at the ends, and glides to its new height as results change.",
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "default": "\"Results\"",
+            "description": "The list's accessible name."
+          }
+        ]
+      },
+      {
+        "name": "CommandEmpty",
+        "description": "Shown when nothing matches. It comes in through the blur, and screen readers hear it from a status line.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "default": "\"No results found.\"",
+            "description": "The message."
+          }
+        ]
+      },
+      {
+        "name": "CommandGroup",
+        "description": "Items under a heading. It hides when none of its items match; while searching, the group with the best match comes first.",
+        "props": [
+          {
+            "name": "heading",
+            "type": "ReactNode",
+            "description": "The heading, which also names the group."
+          }
+        ]
+      },
+      {
+        "name": "CommandItem",
+        "description": "One item. Enter or a click runs it; the pointer moves the highlight.",
+        "props": [
+          {
+            "name": "onSelect",
+            "type": "(value: string) => void",
+            "description": "Runs the item, with its value."
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "description": "What onSelect receives. Defaults to the item's text; keep it unique."
+          },
+          {
+            "name": "keywords",
+            "type": "string[]",
+            "description": "More words the search matches, for example “preferences” for Settings."
+          },
+          {
+            "name": "textValue",
+            "type": "string",
+            "description": "The text the search matches, when the content isn't plain text."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "forceMount",
+            "type": "boolean",
+            "default": "false",
+            "description": "Always shown, whatever the search."
+          }
+        ]
+      },
+      {
+        "name": "CommandShortcut",
+        "description": "A keyboard shortcut at the end of an item. The search doesn't match it.",
+        "props": []
+      },
+      {
+        "name": "CommandSeparator",
+        "description": "A line between groups. It hides while searching.",
+        "props": [
+          {
+            "name": "alwaysRender",
+            "type": "boolean",
+            "default": "false",
+            "description": "Keep it while searching."
+          }
+        ]
+      },
+      {
+        "name": "CommandDialog",
+        "description": "The palette in a Dialog, near the top of the screen. Put CommandInput and CommandList inside. Also accepts every Command prop.",
+        "props": [
+          {
+            "name": "shortcut",
+            "type": "string",
+            "description": "Opens and closes it with ⌘ (Ctrl on Windows and Linux) plus this key, for example “k”."
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes. Close it from an item's onSelect to run and dismiss."
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "default": "\"Command palette\"",
+            "description": "Names the dialog for screen readers."
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "default": "\"Search for a command to run.\"",
+            "description": "Describes the dialog for screen readers."
+          },
+          {
+            "name": "showCloseButton",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows a close button in the corner. Escape and the backdrop close it either way."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Dialog"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "combobox",
+      "dialog"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Command for a searchable list of pages and actions, inline or as a ⌘K palette (CommandDialog). Use Combobox to pick a form value from a long list, Dropdown Menu for a short menu of actions on a button, and Select for a short list of values."
+    },
+    "controls": {},
+    "href": "/components/command",
+    "dir": "components/command",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "dialog"
+      ]
+    }
+  },
+  {
+    "name": "context-menu",
+    "title": "Context Menu",
+    "description": "An accessible React context menu for Next.js: a right-click menu with a gliding highlight, shortcuts, checkbox and radio items and sub-menus, built on Radix.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "context menu",
+      "right-click menu",
+      "menu",
+      "actions",
+      "overlay"
+    ],
+    "keywords": [
+      "react context menu",
+      "react right click menu",
+      "shadcn context menu",
+      "nextjs context menu",
+      "tailwind context menu",
+      "radix context menu",
+      "custom right click menu"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "context-menu.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuItem,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuTrigger,\n} from \"@/components/ui/context-menu\"\n\nexport function FileActions() {\n  return (\n    <ContextMenu>\n      <ContextMenuTrigger className=\"rounded-lg border p-6\" tabIndex={0}>\n        Right-click here\n      </ContextMenuTrigger>\n      <ContextMenuContent className=\"w-48\">\n        <ContextMenuItem>\n          Rename\n          <ContextMenuShortcut>F2</ContextMenuShortcut>\n        </ContextMenuItem>\n        <ContextMenuItem>Duplicate</ContextMenuItem>\n        <ContextMenuSeparator />\n        <ContextMenuItem variant=\"destructive\">Delete</ContextMenuItem>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Default",
+        "description": "Right-click the area, or long-press on touch. With the area focused, the keyboard's context-menu key or Shift+F10 opens it too. The settings and the text size keep this menu open, so you see the check draw in and the dot grow."
+      }
+    ],
+    "api": [
+      {
+        "name": "ContextMenu",
+        "description": "The root. It opens where the pointer is, so there's no open prop. Also accepts every Radix Context Menu Root prop.",
+        "props": [
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when the menu opens or closes."
+          },
+          {
+            "name": "modal",
+            "type": "boolean",
+            "default": "true",
+            "description": "While open, the rest of the page can't be scrolled or clicked, and screen readers only see the menu."
+          },
+          {
+            "name": "dir",
+            "type": "\"ltr\" | \"rtl\"",
+            "description": "Reading direction. In rtl, sub-menus open to the left."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuTrigger",
+        "description": "The area that opens the menu on right-click or long-press. Give it tabIndex={0} so keyboard users can open it with the context-menu key or Shift+F10.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own element, for example a card or a table row, instead of a span."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Leaves the browser's own menu."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuContent",
+        "description": "The menu. It grows from the pointer through the blur, and moves to stay on screen. It scrolls when it's taller than the space left. Renders in a portal.",
+        "props": [
+          {
+            "name": "alignOffset",
+            "type": "number",
+            "default": "0",
+            "description": "Shifts it from the pointer, in px."
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "default": "false",
+            "description": "Arrow keys wrap from the last item to the first, and back."
+          },
+          {
+            "name": "collisionPadding",
+            "type": "number",
+            "default": "0",
+            "description": "Space to keep from the screen's edges, in px."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuItem",
+        "description": "An action. One highlight glides to the item under the pointer or the keyboard, and fades out when the pointer leaves the items.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\"",
+            "description": "Destructive is red, and the highlight takes a red tint as it lands on it."
+          },
+          {
+            "name": "inset",
+            "type": "boolean",
+            "default": "false",
+            "description": "Indents the label to line up with items that start with an icon."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Called when the item is picked with a click, Enter or Space. The menu then closes; call event.preventDefault() to keep it open."
+          },
+          {
+            "name": "textValue",
+            "type": "string",
+            "description": "The text typeahead matches, when the item's content isn't plain text."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuCheckboxItem",
+        "description": "An item that switches a setting on and off. Its check draws itself in at the end of the row.",
+        "props": [
+          {
+            "name": "checked",
+            "type": "boolean | \"indeterminate\"",
+            "default": "false",
+            "description": "Whether it's on. Indeterminate draws a dash."
+          },
+          {
+            "name": "onCheckedChange",
+            "type": "(checked: boolean) => void",
+            "description": "Called with the new state when it's picked."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Call event.preventDefault() to keep the menu open while switching."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuRadioGroup",
+        "description": "Holds radio items, one of which is picked.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The picked item's value."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called with the new value when another item is picked."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuRadioItem",
+        "description": "One choice in a radio group. Its dot grows in at the end of the row.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The value this item picks."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Call event.preventDefault() to keep the menu open while choosing."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuLabel",
+        "description": "A heading for the items below it. It isn't focusable.",
+        "props": [
+          {
+            "name": "inset",
+            "type": "boolean",
+            "default": "false",
+            "description": "Indents it to line up with items that start with an icon."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuGroup",
+        "description": "Groups related items (role=\"group\").",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "required": true,
+            "description": "The items, often after a ContextMenuLabel."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSeparator",
+        "description": "A line between groups.",
+        "props": [
+          {
+            "name": "className",
+            "type": "string",
+            "description": "Extra classes, merged with cn."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuShortcut",
+        "description": "A shortcut hint at the end of an item.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "required": true,
+            "description": "The keys, for example ⌘R. It only shows them: bind the keys yourself."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSub",
+        "description": "A sub-menu: wraps its trigger and its content.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the sub-menu is open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Opens it at first."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSubTrigger",
+        "description": "The item that opens a sub-menu, on hover, a click, Enter, Space or ArrowRight. It keeps the highlight while its sub-menu is open, and its chevron nudges towards it.",
+        "props": [
+          {
+            "name": "inset",
+            "type": "boolean",
+            "default": "false",
+            "description": "Indents the label to line up with items that start with an icon."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSubContent",
+        "description": "The sub-menu. It opens beside its trigger with its first item level with it, and has its own highlight. ArrowLeft goes back to the trigger; Escape closes the whole menu. Renders in a portal.",
+        "props": [
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the menu and the sub-menu, in px."
+          },
+          {
+            "name": "alignOffset",
+            "type": "number",
+            "default": "-5",
+            "description": "Shifts it along the trigger, in px. The default lines its first item up with the trigger."
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuPortal",
+        "description": "Renders its children into document.body. ContextMenuContent and ContextMenuSubContent already use it.",
+        "props": [
+          {
+            "name": "container",
+            "type": "HTMLElement | null",
+            "default": "document.body",
+            "description": "Where to render instead."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Context Menu"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "dropdown-menu",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use ContextMenu for shortcuts to actions on a specific area or object when people right-click it: a file, a canvas, a table row. Offer the same actions somewhere visible too, such as a DropdownMenu or buttons, because touch and keyboard users may never find a right-click menu."
+    },
+    "controls": {},
+    "href": "/components/context-menu",
+    "dir": "components/context-menu",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "dropdown-menu"
+      ]
+    }
+  },
+  {
     "name": "copy-button",
     "title": "Copy Button",
     "description": "An accessible React copy to clipboard button for Next.js: the copy icon turns into a check, and screen readers hear \"Copied\".",
@@ -403,6 +2306,1077 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "date-picker",
+    "title": "Date Picker",
+    "description": "An accessible React date picker for Next.js and Tailwind CSS: a calendar in a popover for a date or a date range, with presets and Intl formatting.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "date picker",
+      "date range picker",
+      "calendar",
+      "popover",
+      "form"
+    ],
+    "keywords": [
+      "react date picker",
+      "nextjs date picker",
+      "shadcn date picker",
+      "react date range picker",
+      "tailwind datepicker",
+      "date picker with presets",
+      "accessible date picker",
+      "animated date picker"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "date-picker.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "\"use client\"\n\nimport { useState } from \"react\"\nimport { DatePicker } from \"@/components/ui/date-picker\"\n\nexport function DueDate() {\n  const [date, setDate] = useState<Date | undefined>()\n\n  return (\n    <div className=\"grid gap-2\">\n      <label htmlFor=\"due\" className=\"text-sm font-medium\">\n        Due date\n      </label>\n      <DatePicker id=\"due\" value={date} onChange={setDate} />\n    </div>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "pickers",
+        "title": "Date and date range",
+        "description": "Open either and the focus lands on the picked day, ready for the arrow keys. Picking a day closes the date picker once the circle has landed, and the trigger's text swaps to the new date. The range picker shows two months and stays open while you pick."
+      },
+      {
+        "name": "presets",
+        "title": "Presets",
+        "description": "A small list beside the calendar for the dates people pick most. Each works its date out from today when it's picked, and the calendar turns to it."
+      }
+    ],
+    "api": [
+      {
+        "name": "DatePicker",
+        "description": "A field for one day: a trigger drawn like Select's that opens a Calendar in a Popover, and closes once a day is picked. The trigger is a combobox with a dialog, so give it a visible label (<label htmlFor>) or an aria-label. Also accepts every button prop, for the trigger.",
+        "props": [
+          {
+            "name": "value",
+            "type": "Date",
+            "description": "The picked day, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "Date",
+            "description": "The day picked at first."
+          },
+          {
+            "name": "onChange",
+            "type": "(date: Date | undefined) => void",
+            "description": "Called with the new day."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the day with a form, as YYYY-MM-DD."
+          },
+          {
+            "name": "numberOfMonths",
+            "type": "number",
+            "default": "1",
+            "description": "Months shown side by side."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "default": "\"Pick a date\"",
+            "description": "Shown in the trigger while nothing is picked."
+          },
+          {
+            "name": "presets",
+            "type": "{ label: string; value: T | (() => T) }[]",
+            "description": "A short list beside the calendar. A function value is worked out when it's picked, so presets like Today never read the clock while rendering."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "default": "\"en-US\"",
+            "description": "A language tag for the trigger's date and the calendar's names."
+          },
+          {
+            "name": "formatOptions",
+            "type": "Intl.DateTimeFormatOptions",
+            "default": "{ dateStyle: \"medium\" }",
+            "description": "How the trigger writes the date, as Intl.DateTimeFormat options."
+          },
+          {
+            "name": "min",
+            "type": "Date",
+            "description": "The earliest day that can be picked."
+          },
+          {
+            "name": "max",
+            "type": "Date",
+            "description": "The latest day that can be picked."
+          },
+          {
+            "name": "disabledDates",
+            "type": "Matcher | Matcher[]",
+            "description": "Days that can't be picked: Calendar's disabled prop."
+          },
+          {
+            "name": "weekStartsOn",
+            "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+            "default": "0",
+            "description": "0 is Sunday."
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the calendar is open, when you control it."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          },
+          {
+            "name": "align",
+            "type": "\"start\" | \"center\" | \"end\"",
+            "default": "\"start\"",
+            "description": "How the popover lines up with the trigger."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "The trigger's height, as Select's."
+          },
+          {
+            "name": "today",
+            "type": "Date",
+            "description": "The day marked as today. Defaults to the browser's today."
+          },
+          {
+            "name": "labels",
+            "type": "{ dialog?, presets?, previousMonth?, nextMonth?, selected? }",
+            "description": "The words it says, for other languages: the popup's name, the presets' name and Calendar's labels."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents opening."
+          }
+        ]
+      },
+      {
+        "name": "DateRangePicker",
+        "description": "A field for a range: the same trigger, opening a Calendar in range mode that stays open while you pick. The trigger writes the range the short way (Oct 12 – 18, 2026). Also accepts every button prop, for the trigger.",
+        "props": [
+          {
+            "name": "value",
+            "type": "DateRange",
+            "description": "The picked range ({ from, to }), when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "DateRange",
+            "description": "The range picked at first."
+          },
+          {
+            "name": "onChange",
+            "type": "(range: DateRange | undefined) => void",
+            "description": "Called with the new range: first with only its start, then with both ends."
+          },
+          {
+            "name": "numberOfMonths",
+            "type": "number",
+            "default": "2",
+            "description": "Months shown side by side."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "default": "\"Pick a date range\"",
+            "description": "Shown in the trigger while nothing is picked."
+          },
+          {
+            "name": "presets",
+            "type": "{ label: string; value: T | (() => T) }[]",
+            "description": "A short list beside the calendar. A function value is worked out when it's picked, so presets like Today never read the clock while rendering."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "default": "\"en-US\"",
+            "description": "A language tag for the trigger's date and the calendar's names."
+          },
+          {
+            "name": "formatOptions",
+            "type": "Intl.DateTimeFormatOptions",
+            "default": "{ dateStyle: \"medium\" }",
+            "description": "How the trigger writes the date, as Intl.DateTimeFormat options."
+          },
+          {
+            "name": "min",
+            "type": "Date",
+            "description": "The earliest day that can be picked."
+          },
+          {
+            "name": "max",
+            "type": "Date",
+            "description": "The latest day that can be picked."
+          },
+          {
+            "name": "disabledDates",
+            "type": "Matcher | Matcher[]",
+            "description": "Days that can't be picked: Calendar's disabled prop."
+          },
+          {
+            "name": "weekStartsOn",
+            "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+            "default": "0",
+            "description": "0 is Sunday."
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the calendar is open, when you control it."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          },
+          {
+            "name": "align",
+            "type": "\"start\" | \"center\" | \"end\"",
+            "default": "\"start\"",
+            "description": "How the popover lines up with the trigger."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "The trigger's height, as Select's."
+          },
+          {
+            "name": "today",
+            "type": "Date",
+            "description": "The day marked as today. Defaults to the browser's today."
+          },
+          {
+            "name": "labels",
+            "type": "{ dialog?, presets?, previousMonth?, nextMonth?, selected? }",
+            "description": "The words it says, for other languages: the popup's name, the presets' name and Calendar's labels."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents opening."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Popover",
+      "Intl.DateTimeFormat"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-datepicker/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "calendar",
+      "popover",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use DatePicker for a date field in a form, and DateRangePicker for a start and an end (stays, reports, campaigns). Use Calendar to show a month on the page itself, and Input with type=date when a typed date is enough."
+    },
+    "controls": {},
+    "href": "/components/date-picker",
+    "dir": "components/date-picker",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "calendar",
+        "popover"
+      ]
+    }
+  },
+  {
+    "name": "dialog",
+    "title": "Dialog",
+    "description": "An accessible React dialog for Next.js and Tailwind CSS: a modal window that grows out of its trigger, keeps focus inside and returns it, built on Radix Dialog.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "dialog",
+      "modal",
+      "overlay",
+      "popup",
+      "window"
+    ],
+    "keywords": [
+      "react dialog",
+      "react modal",
+      "nextjs modal",
+      "nextjs dialog",
+      "shadcn dialog",
+      "tailwind modal",
+      "radix dialog",
+      "animated modal",
+      "accessible modal"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "dialog.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\n\nexport function InviteDialog() {\n  return (\n    <Dialog>\n      <DialogTrigger asChild>\n        <Button variant=\"outline\">Invite people</Button>\n      </DialogTrigger>\n      <DialogContent>\n        <DialogHeader>\n          <DialogTitle>Invite people</DialogTitle>\n          <DialogDescription>They'll get an email with a link to join.</DialogDescription>\n        </DialogHeader>\n        <DialogFooter>\n          <Button>Send invites</Button>\n        </DialogFooter>\n      </DialogContent>\n    </Dialog>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "edit-profile",
+        "title": "Edit profile",
+        "description": "A form in a dialog. The window grows out of the button that opened it and shrinks back into it. Saving closes it, so it's controlled with open and onOpenChange."
+      },
+      {
+        "name": "scrolling",
+        "title": "Long content",
+        "description": "Long content scrolls between a header and a footer that stay in place. The window never grows past the screen; it keeps 16px clear on every side."
+      }
+    ],
+    "api": [
+      {
+        "name": "Dialog",
+        "description": "The root. It keeps the open state, so the window can play its exit before it unmounts.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes: the trigger, a close button, Escape or the backdrop."
+          },
+          {
+            "name": "modal",
+            "type": "boolean",
+            "default": "true",
+            "description": "Modal blocks the page behind, hides it from screen readers and keeps focus inside. Set false to let people use the page while it's open (there's no backdrop then)."
+          }
+        ]
+      },
+      {
+        "name": "DialogTrigger",
+        "description": "The button that opens it. Focus comes back here when it closes.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own element, such as a Button, as the trigger."
+          }
+        ]
+      },
+      {
+        "name": "DialogContent",
+        "description": "The window, with its backdrop, in a portal. It comes through the blur, scaling up from the trigger's centre, and leaves quickly; with reduced motion it only fades. Long content scrolls inside it. Give it a DialogTitle, which names it. Also accepts every Radix Dialog Content prop.",
+        "props": [
+          {
+            "name": "showCloseButton",
+            "type": "boolean",
+            "default": "true",
+            "description": "Shows a close button in the top corner, named Close."
+          },
+          {
+            "name": "onOpenAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Runs as focus moves in (to the first focusable element). Call event.preventDefault() to focus something else yourself."
+          },
+          {
+            "name": "onCloseAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Runs as focus goes back to the trigger. Call event.preventDefault() to send it elsewhere."
+          },
+          {
+            "name": "onEscapeKeyDown",
+            "type": "(event: KeyboardEvent) => void",
+            "description": "Runs when Escape is pressed. Call event.preventDefault() to keep it open."
+          },
+          {
+            "name": "onInteractOutside",
+            "type": "(event: Event) => void",
+            "description": "Runs on a click or focus outside the window. Call event.preventDefault() to keep it open."
+          }
+        ]
+      },
+      {
+        "name": "DialogHeader",
+        "description": "Holds the title and description. It leaves room for the close button.",
+        "props": []
+      },
+      {
+        "name": "DialogFooter",
+        "description": "Holds the actions: stacked on phones with the last one on top, in a row at the end from the sm breakpoint. Put the main action last.",
+        "props": []
+      },
+      {
+        "name": "DialogTitle",
+        "description": "The heading, and the dialog's accessible name.",
+        "props": []
+      },
+      {
+        "name": "DialogDescription",
+        "description": "A line under the title, read out after the name.",
+        "props": []
+      },
+      {
+        "name": "DialogClose",
+        "description": "Closes the dialog. Use asChild to make your own Button close it, such as Cancel.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own element as the close button."
+          }
+        ]
+      },
+      {
+        "name": "DialogPortal",
+        "description": "Renders its children into document.body while the dialog is open, and while it leaves. DialogContent already uses it.",
+        "props": [
+          {
+            "name": "container",
+            "type": "HTMLElement",
+            "default": "document.body",
+            "description": "Where to render instead."
+          }
+        ]
+      },
+      {
+        "name": "DialogOverlay",
+        "description": "The backdrop that dims the page. It only fades. DialogContent already includes it.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Dialog"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "alert-dialog",
+      "sheet"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Dialog for a focused task that interrupts the page, such as a short form or details that need a response. Use Alert Dialog to confirm a destructive action, and Sheet for longer panels beside the page."
+    },
+    "controls": {},
+    "href": "/components/dialog",
+    "dir": "components/dialog",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
+    "name": "dropdown-menu",
+    "title": "Dropdown Menu",
+    "description": "An accessible React dropdown menu for Next.js with a highlight that glides between items, shortcuts, checkbox and radio items and sub-menus, built on Radix.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "dropdown menu",
+      "menu",
+      "actions",
+      "sub-menu",
+      "overlay"
+    ],
+    "keywords": [
+      "react dropdown menu",
+      "shadcn dropdown menu",
+      "nextjs dropdown menu",
+      "tailwind dropdown menu",
+      "radix dropdown menu",
+      "animated dropdown menu",
+      "react menu button",
+      "account menu",
+      "actions menu"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "dropdown-menu.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuShortcut,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\n\nexport function AccountMenu() {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger asChild>\n        <Button variant=\"outline\">Open menu</Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent className=\"w-56\" align=\"start\">\n        <DropdownMenuLabel>My account</DropdownMenuLabel>\n        <DropdownMenuItem>\n          Profile\n          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>\n        </DropdownMenuItem>\n        <DropdownMenuItem>Settings</DropdownMenuItem>\n        <DropdownMenuSeparator />\n        <DropdownMenuItem variant=\"destructive\">Log out</DropdownMenuItem>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "account",
+        "title": "Account menu",
+        "description": "Items with shortcuts, a setting to switch, a sub-menu and a destructive Log out. Hover or use the arrow keys: one highlight glides between the items, and fades out when the pointer leaves."
+      },
+      {
+        "name": "options",
+        "title": "Checkbox and radio items",
+        "description": "Checkbox items draw their check in and erase it backwards; radio items grow their dot. This menu stays open while you choose: call event.preventDefault() in onSelect."
+      },
+      {
+        "name": "icons",
+        "title": "Icon trigger and icons",
+        "description": "An icon button opens a row's actions, and items can start with an icon. The highlight takes a red tint on a destructive item."
+      }
+    ],
+    "api": [
+      {
+        "name": "DropdownMenu",
+        "description": "The root. Also accepts every Radix Dropdown Menu Root prop.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the menu is open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Opens the menu at first."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when the menu opens or closes."
+          },
+          {
+            "name": "modal",
+            "type": "boolean",
+            "default": "true",
+            "description": "While open, the rest of the page can't be scrolled or clicked, and screen readers only see the menu."
+          },
+          {
+            "name": "dir",
+            "type": "\"ltr\" | \"rtl\"",
+            "description": "Reading direction. In rtl, sub-menus open to the left."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuTrigger",
+        "description": "The button that opens the menu. Enter, Space and ArrowDown open it from the keyboard and focus the first item.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own button, for example Button, instead of a plain one."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents opening."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuContent",
+        "description": "The menu. It opens from the trigger and closes back into it through the blur, and flips when there's no room. It scrolls when it's taller than the space left. Renders in a portal.",
+        "props": [
+          {
+            "name": "align",
+            "type": "\"start\" | \"center\" | \"end\"",
+            "default": "\"center\"",
+            "description": "How it lines up with the trigger."
+          },
+          {
+            "name": "side",
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+            "default": "\"bottom\"",
+            "description": "The side of the trigger it opens on, when there's room."
+          },
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the trigger and the menu, in px."
+          },
+          {
+            "name": "alignOffset",
+            "type": "number",
+            "default": "0",
+            "description": "Shifts it along the trigger, in px."
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "default": "false",
+            "description": "Arrow keys wrap from the last item to the first, and back."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuItem",
+        "description": "An action. One highlight glides to the item under the pointer or the keyboard, and fades out when the pointer leaves the items.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\"",
+            "description": "Destructive is red, and the highlight takes a red tint as it lands on it."
+          },
+          {
+            "name": "inset",
+            "type": "boolean",
+            "default": "false",
+            "description": "Indents the label to line up with items that start with an icon."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Called when the item is picked with a click, Enter or Space. The menu then closes; call event.preventDefault() to keep it open."
+          },
+          {
+            "name": "textValue",
+            "type": "string",
+            "description": "The text typeahead matches, when the item's content isn't plain text."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuCheckboxItem",
+        "description": "An item that switches a setting on and off. Its check draws itself in at the end of the row.",
+        "props": [
+          {
+            "name": "checked",
+            "type": "boolean | \"indeterminate\"",
+            "default": "false",
+            "description": "Whether it's on. Indeterminate draws a dash."
+          },
+          {
+            "name": "onCheckedChange",
+            "type": "(checked: boolean) => void",
+            "description": "Called with the new state when it's picked."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Call event.preventDefault() to keep the menu open while switching."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuRadioGroup",
+        "description": "Holds radio items, one of which is picked.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The picked item's value."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called with the new value when another item is picked."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuRadioItem",
+        "description": "One choice in a radio group. Its dot grows in at the end of the row.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The value this item picks."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Call event.preventDefault() to keep the menu open while choosing."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuLabel",
+        "description": "A heading for the items below it. It isn't focusable.",
+        "props": [
+          {
+            "name": "inset",
+            "type": "boolean",
+            "default": "false",
+            "description": "Indents it to line up with items that start with an icon."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuGroup",
+        "description": "Groups related items (role=\"group\").",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "required": true,
+            "description": "The items, often after a DropdownMenuLabel."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSeparator",
+        "description": "A line between groups.",
+        "props": [
+          {
+            "name": "className",
+            "type": "string",
+            "description": "Extra classes, merged with cn."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuShortcut",
+        "description": "A shortcut hint at the end of an item.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "required": true,
+            "description": "The keys, for example ⌘K. It only shows them: bind the keys yourself."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSub",
+        "description": "A sub-menu: wraps its trigger and its content.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the sub-menu is open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Opens it at first."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSubTrigger",
+        "description": "The item that opens a sub-menu, on hover, a click, Enter, Space or ArrowRight. It keeps the highlight while its sub-menu is open, and its chevron nudges towards it.",
+        "props": [
+          {
+            "name": "inset",
+            "type": "boolean",
+            "default": "false",
+            "description": "Indents the label to line up with items that start with an icon."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the item."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSubContent",
+        "description": "The sub-menu. It opens beside its trigger with its first item level with it, and has its own highlight. ArrowLeft goes back to the trigger; Escape closes the whole menu. Renders in a portal.",
+        "props": [
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the menu and the sub-menu, in px."
+          },
+          {
+            "name": "alignOffset",
+            "type": "number",
+            "default": "-5",
+            "description": "Shifts it along the trigger, in px. The default lines its first item up with the trigger."
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "default": "false",
+            "description": "Arrow keys wrap from the last item to the first, and back."
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuPortal",
+        "description": "Renders its children into document.body. DropdownMenuContent and DropdownMenuSubContent already use it.",
+        "props": [
+          {
+            "name": "container",
+            "type": "HTMLElement | null",
+            "default": "document.body",
+            "description": "Where to render instead."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Dropdown Menu"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "context-menu",
+      "select",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use DropdownMenu for actions or settings behind a button: an account menu, a row's More actions, view options. Use Select to pick a form value, ContextMenu for the same actions on right-click, and a popover for rich content or forms."
+    },
+    "controls": {},
+    "href": "/components/dropdown-menu",
+    "dir": "components/dropdown-menu",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "hover-card",
+    "title": "Hover Card",
+    "description": "An accessible React hover card for Next.js and Tailwind CSS: a preview card for a link, like a profile on an @mention, built on Radix Hover Card.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "hover card",
+      "preview",
+      "profile",
+      "mention",
+      "overlay"
+    ],
+    "keywords": [
+      "react hover card",
+      "nextjs hover card",
+      "shadcn hover card",
+      "tailwind hover card",
+      "radix hover card",
+      "link preview",
+      "profile card on hover",
+      "user mention preview"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-21",
+    "tier": "free",
+    "files": [
+      "hover-card.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  HoverCard,\n  HoverCardContent,\n  HoverCardTrigger,\n} from \"@/components/ui/hover-card\"\n\nexport function Mention() {\n  return (\n    <HoverCard>\n      <HoverCardTrigger href=\"/people/maya\">@maya</HoverCardTrigger>\n      <HoverCardContent>\n        <p className=\"text-sm font-medium\">Maya Chen</p>\n        <p className=\"text-sm text-muted-foreground\">Design engineer.</p>\n      </HoverCardContent>\n    </HoverCard>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "profile",
+        "title": "Profiles on mentions",
+        "description": "Rest the pointer on a name, or reach it with Tab, and a card shows who it is. Move to the next name and the card glides over to it, changing size to fit. Escape closes it."
+      }
+    ],
+    "api": [
+      {
+        "name": "HoverCard",
+        "description": "The root. Also accepts every Radix Hover Card Root prop.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          },
+          {
+            "name": "openDelay",
+            "type": "number",
+            "default": "300",
+            "description": "Milliseconds the pointer rests on the link, or focus stays on it, before the card opens."
+          },
+          {
+            "name": "closeDelay",
+            "type": "number",
+            "default": "300",
+            "description": "Milliseconds before it closes once the pointer leaves, so it can move onto the card."
+          },
+          {
+            "name": "skipDelayDuration",
+            "type": "number",
+            "default": "300",
+            "description": "Milliseconds after a card closes during which the next one, anywhere on the page, opens at once without the delay, gliding over from the last one instead of opening from its link."
+          }
+        ]
+      },
+      {
+        "name": "HoverCardTrigger",
+        "description": "The link the card previews; it renders an <a>, so give it an href. It has to make sense on its own, because screen readers don't get the card. Use asChild to make your own link the trigger.",
+        "props": [
+          {
+            "name": "href",
+            "type": "string",
+            "description": "Where the link goes."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a Next.js Link) as the trigger."
+          }
+        ]
+      },
+      {
+        "name": "HoverCardContent",
+        "description": "The card. It opens out of the link through a soft blur and stays open while the pointer is on it. Links inside it are skipped by Tab. Also accepts every Radix Hover Card Content prop.",
+        "props": [
+          {
+            "name": "side",
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+            "default": "\"bottom\"",
+            "description": "The side of the link it opens on. It flips when there's no room."
+          },
+          {
+            "name": "align",
+            "type": "\"start\" | \"center\" | \"end\"",
+            "default": "\"center\"",
+            "description": "How it lines up with the link along that side."
+          },
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the link and the card, in px."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Hover Card"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "popover",
+      "tooltip"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use HoverCard to preview what a link points to, such as a person behind an @mention or a page behind a link, for sighted pointer and keyboard users. Never put anything essential only in the card: use Popover for content people interact with, and Tooltip for a short hint."
+    },
+    "controls": {},
+    "href": "/components/hover-card",
+    "dir": "components/hover-card",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
     "name": "input",
     "title": "Input",
     "description": "An accessible React text input with three sizes and clear invalid, disabled and file states, built on a native input.",
@@ -507,6 +3481,190 @@ export const items: Item[] = [
       ],
       "registry": [
         "tokens"
+      ]
+    }
+  },
+  {
+    "name": "input-otp",
+    "title": "Input OTP",
+    "description": "An accessible React one-time code input for Next.js and Tailwind: boxes that move on as you type and take a pasted code, built on Radix.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "otp",
+      "one-time code",
+      "verification code",
+      "pin",
+      "2fa",
+      "form"
+    ],
+    "keywords": [
+      "react otp input",
+      "react input otp",
+      "shadcn input otp",
+      "nextjs otp input",
+      "tailwind otp input",
+      "verification code input",
+      "pin input react",
+      "2fa code input",
+      "one time password input"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-21",
+    "tier": "free",
+    "files": [
+      "input-otp.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSeparator,\n  InputOTPSlot,\n} from \"@/components/ui/input-otp\"\n\nexport function VerificationCode() {\n  return (\n    <InputOTP aria-label=\"Verification code\" name=\"code\">\n      <InputOTPGroup>\n        <InputOTPSlot index={0} />\n        <InputOTPSlot index={1} />\n        <InputOTPSlot index={2} />\n      </InputOTPGroup>\n      <InputOTPSeparator />\n      <InputOTPGroup>\n        <InputOTPSlot index={3} />\n        <InputOTPSlot index={4} />\n        <InputOTPSlot index={5} />\n      </InputOTPGroup>\n    </InputOTP>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "code",
+        "title": "Six digits",
+        "description": "Type and the focus box glides on to the next box as each digit rises into place; paste a whole code and it fills in left to right. Once it's in, it's checked: 123456 runs a wave along the boxes, anything else shakes the field. Set status from your own check."
+      },
+      {
+        "name": "pin",
+        "title": "PIN",
+        "description": "type=\"password\" draws a dot for each digit. Turn autocomplete off for a PIN."
+      }
+    ],
+    "api": [
+      {
+        "name": "InputOTP",
+        "description": "Also accepts every Radix One-Time Password Field prop. The number of InputOTPSlots sets the code's length (shadcn's maxLength isn't needed), and the change callback is onValueChange.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The code, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "description": "The code at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called with the whole code after every change."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "32, 36 or 40px boxes, matching Input's heights."
+          },
+          {
+            "name": "validationType",
+            "type": "\"numeric\" | \"alpha\" | \"alphanumeric\" | \"none\"",
+            "default": "\"numeric\"",
+            "description": "Which characters a box accepts; others are ignored. Use sanitizeValue with none for your own rule."
+          },
+          {
+            "name": "type",
+            "type": "\"text\" | \"password\"",
+            "default": "\"text\"",
+            "description": "password hides each character behind a dot."
+          },
+          {
+            "name": "autoSubmit",
+            "type": "boolean",
+            "default": "false",
+            "description": "Submits the form once every box is filled. onAutoSubmit is called first."
+          },
+          {
+            "name": "autoComplete",
+            "type": "\"one-time-code\" | \"off\"",
+            "default": "\"one-time-code\"",
+            "description": "Lets the phone or a password manager fill in a code it received."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the code with a form, through a hidden input."
+          },
+          {
+            "name": "status",
+            "type": "\"success\" | \"error\"",
+            "description": "The result of checking the code. success runs a wave along the boxes and makes their borders solid; error shakes the field and marks it invalid. Leave it unset while the code is typed or checked."
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "Marks the code as wrong without the shake: the boxes and focus box turn destructive."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents typing."
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "One character per box, shown while the code is empty."
+          }
+        ]
+      },
+      {
+        "name": "InputOTPGroup",
+        "description": "Boxes that sit together, such as the first three digits. A div.",
+        "props": []
+      },
+      {
+        "name": "InputOTPSlot",
+        "description": "One box. className styles the box; other props go to its input, which Radix names “Character 1 of 6”.",
+        "props": [
+          {
+            "name": "index",
+            "type": "number",
+            "required": true,
+            "description": "The box's place in the code, from 0."
+          }
+        ]
+      },
+      {
+        "name": "InputOTPSeparator",
+        "description": "A dash between groups (role separator). Pass children to draw something else.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix One-Time Password Field"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "input",
+      "number-input",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use InputOTP for one-time codes, verification codes and short PINs, where each character gets its own box. Use Input for passwords and other free text."
+    },
+    "controls": {},
+    "href": "/components/input-otp",
+    "dir": "components/input-otp",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
       ]
     }
   },
@@ -640,6 +3798,1245 @@ export const items: Item[] = [
         "tokens",
         "motion",
         "button"
+      ]
+    }
+  },
+  {
+    "name": "marquee",
+    "title": "Marquee",
+    "description": "An accessible React marquee for Next.js and Tailwind CSS: an endless, seamless row of logos or cards that pauses on hover and stops with reduced motion.",
+    "kind": "component",
+    "category": "Effects",
+    "tags": [
+      "marquee",
+      "infinite scroll",
+      "logo cloud",
+      "ticker",
+      "carousel",
+      "testimonials"
+    ],
+    "keywords": [
+      "react marquee",
+      "nextjs marquee",
+      "tailwind marquee",
+      "shadcn marquee",
+      "infinite scroll logos",
+      "logo cloud react",
+      "scrolling testimonials",
+      "infinite slider react",
+      "auto scrolling row"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "marquee.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Marquee } from \"@/components/ui/marquee\"\n\nexport function Logos() {\n  return (\n    <Marquee>\n      <span>Northwind</span>\n      <span>Atlas</span>\n      <span>Vertex</span>\n    </Marquee>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "rows",
+        "title": "Logos and cards",
+        "description": "The items repeat until they fill the row, so the loop never shows a seam. Hover a row and it slows to a stop rather than freezing; Pause stops both the same way."
+      },
+      {
+        "name": "vertical",
+        "title": "Vertical",
+        "description": "Up and down need a height on the marquee. Two columns going opposite ways make a wall of quotes."
+      }
+    ],
+    "api": [
+      {
+        "name": "Marquee",
+        "description": "Put the items straight inside. The first copy is the content; the copies that fill the row are aria-hidden and inert, so screen readers and Tab meet each item once. It rests off-screen and in a hidden tab, and slows to a stop while it has keyboard focus. With reduced motion it doesn't move: one copy, in a row you can scroll. Also accepts every native div prop.",
+        "props": [
+          {
+            "name": "direction",
+            "type": "\"left\" | \"right\" | \"up\" | \"down\"",
+            "default": "\"left\"",
+            "description": "Which way the items travel. Up and down need a height (className=\"h-72\")."
+          },
+          {
+            "name": "speed",
+            "type": "number",
+            "default": "40",
+            "description": "Pixels a second."
+          },
+          {
+            "name": "pauseOnHover",
+            "type": "boolean",
+            "default": "true",
+            "description": "Slow to a stop while the pointer is over it, and pick up again on leaving."
+          },
+          {
+            "name": "paused",
+            "type": "boolean",
+            "default": "false",
+            "description": "Stops it, slowing down the same way. Wire it to a pause control when the marquee runs beside other content."
+          },
+          {
+            "name": "gap",
+            "type": "number | string",
+            "default": "16px (gap-4)",
+            "description": "Space between items and between the copies: a CSS length, or a number of pixels."
+          },
+          {
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "description": "Fades the items out at both ends."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Web Animations API"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "card",
+      "text-effects",
+      "number-ticker"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Marquee for a band that moves on its own: customer logos, a wall of testimonials, a ticker of short updates. Keep the items short and give users a way to stop it (paused) when it runs beside other content. Use direction=\"up\" or \"down\" with a height for a vertical column."
+    },
+    "controls": {},
+    "href": "/components/marquee",
+    "dir": "components/marquee",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "navigation-menu",
+    "title": "Navigation Menu",
+    "description": "An accessible React navigation menu for Next.js and Tailwind CSS: a top bar with rich dropdown panels that glide between sizes, built on Radix Navigation Menu.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "navigation menu",
+      "navbar",
+      "header",
+      "mega menu",
+      "dropdown",
+      "navigation"
+    ],
+    "keywords": [
+      "react navigation menu",
+      "nextjs navigation menu",
+      "tailwind navigation menu",
+      "shadcn navigation menu",
+      "react navbar",
+      "react mega menu",
+      "animated navigation menu",
+      "header dropdown menu"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-21",
+    "tier": "free",
+    "files": [
+      "navigation-menu.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuIndicator,\n  NavigationMenuItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuTrigger,\n} from \"@/components/ui/navigation-menu\"\n\nexport function SiteNav() {\n  return (\n    <NavigationMenu>\n      <NavigationMenuList>\n        <NavigationMenuItem>\n          <NavigationMenuTrigger>Components</NavigationMenuTrigger>\n          <NavigationMenuContent>\n            <ul className=\"grid w-md grid-cols-2 gap-1\">\n              <li>\n                <NavigationMenuLink href=\"/components/button\">\n                  <span className=\"font-medium\">Button</span>\n                  <span className=\"text-muted-foreground\">Actions, in calm variants.</span>\n                </NavigationMenuLink>\n              </li>\n              <li>\n                <NavigationMenuLink href=\"/components/dialog\">\n                  <span className=\"font-medium\">Dialog</span>\n                  <span className=\"text-muted-foreground\">A window that holds focus.</span>\n                </NavigationMenuLink>\n              </li>\n            </ul>\n          </NavigationMenuContent>\n        </NavigationMenuItem>\n        <NavigationMenuItem>\n          <NavigationMenuLink href=\"/docs\">Docs</NavigationMenuLink>\n        </NavigationMenuItem>\n        <NavigationMenuIndicator />\n      </NavigationMenuList>\n    </NavigationMenu>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "header",
+        "title": "Site header",
+        "description": "Hover or open a trigger, then move to the other one: the panel glides to its new size, the content slides in from the side you moved towards, and the caret follows the open trigger. One highlight glides between the items."
+      },
+      {
+        "name": "without-viewport",
+        "title": "Panels under their triggers",
+        "description": "With viewport={false}, each trigger opens its own small surface right under it, like a row of dropdowns, instead of one shared panel."
+      }
+    ],
+    "api": [
+      {
+        "name": "NavigationMenu",
+        "description": "The root, a nav landmark built on Radix Navigation Menu. Also accepts every Radix Navigation Menu Root prop. Hover opens a panel after a short delay; click, Enter and Space toggle it; ArrowDown opens it and moves in; Escape closes it.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The open item, when you control it. An empty string is closed."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "default": "\"\"",
+            "description": "The item open at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called with the item that opens, or an empty string when the menu closes."
+          },
+          {
+            "name": "viewport",
+            "type": "boolean",
+            "default": "true",
+            "description": "Opens the panels in one shared surface under the list, which glides between their sizes. Set it to false to open each panel under its own trigger."
+          },
+          {
+            "name": "delayDuration",
+            "type": "number",
+            "default": "200",
+            "description": "How long the pointer rests on a trigger before its panel opens, in milliseconds."
+          },
+          {
+            "name": "skipDelayDuration",
+            "type": "number",
+            "default": "300",
+            "description": "How soon after leaving one trigger another opens without the delay, in milliseconds."
+          },
+          {
+            "name": "aria-label",
+            "type": "string",
+            "default": "\"Main\"",
+            "description": "Names the landmark. Give each navigation menu on a page its own name."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuList",
+        "description": "The row of items. Place NavigationMenuIndicator inside it, after the items.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "description": "NavigationMenuItem elements."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuItem",
+        "description": "One item: a trigger with its content, or a link. One highlight glides to the item under the mouse, and otherwise rests on the open one.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "Names the item for value and onValueChange. One is made up when you leave it out."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuTrigger",
+        "description": "The button that opens its item's panel, with a chevron that turns over while it's open. Also accepts every Button element prop.",
+        "props": [
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Can't be opened or focused."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuContent",
+        "description": "The item's panel. In the viewport it slides 12px in from the side you moved towards through a soft blur, while the previous panel slides out the other way. Give what's inside a width (for example w-md on a grid), so the viewport knows the size to glide to.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "description": "The panel's links and layout."
+          },
+          {
+            "name": "onEscapeKeyDown",
+            "type": "(event: KeyboardEvent) => void",
+            "description": "Called when Escape closes the menu. Call event.preventDefault() to keep it open."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuLink",
+        "description": "A link. In the list it looks like a trigger; inside a panel it's a row that fills on hover. Selecting it closes the menu.",
+        "props": [
+          {
+            "name": "href",
+            "type": "string",
+            "description": "Where it goes."
+          },
+          {
+            "name": "active",
+            "type": "boolean",
+            "default": "false",
+            "description": "Marks the current page (aria-current=\"page\")."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Renders your own link instead, for example Next.js's Link."
+          },
+          {
+            "name": "onSelect",
+            "type": "(event: Event) => void",
+            "description": "Called when the link is selected. Call event.preventDefault() to keep the menu open."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuIndicator",
+        "description": "A caret on the panel's top edge that points at the open trigger and slides along when another opens. It needs the viewport.",
+        "props": [
+          {
+            "name": "className",
+            "type": "string",
+            "description": "Classes for the caret."
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuViewport",
+        "description": "The shared surface the panels open in. NavigationMenu renders it for you unless viewport is false. It opens through a soft blur, glides between panel sizes and closes quickly; with reduced motion it all happens at once.",
+        "props": [
+          {
+            "name": "className",
+            "type": "string",
+            "description": "Classes for the surface."
+          }
+        ]
+      },
+      {
+        "name": "navigationMenuTriggerStyle",
+        "description": "The trigger's classes, for a link or button of your own in the list.",
+        "props": [
+          {
+            "name": "()",
+            "type": "() => string",
+            "description": "Returns the class names. Merge your own with cn."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Navigation Menu"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "dropdown-menu",
+      "tabs",
+      "breadcrumb",
+      "sidebar"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Navigation Menu for a website's top bar, where some items open panels of links (a docs or marketing site header). Use Dropdown Menu for a list of actions, Tabs to switch panels in place, Sidebar for an app's navigation, and a Sheet for the menu on small screens."
+    },
+    "controls": {},
+    "href": "/components/navigation-menu",
+    "dir": "components/navigation-menu",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "number-input",
+    "title": "Number Input",
+    "description": "An accessible React number input for Next.js and Tailwind with step buttons, keyboard control, min and max, and Intl number formatting.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "number input",
+      "number field",
+      "stepper",
+      "spinbutton",
+      "quantity",
+      "form"
+    ],
+    "keywords": [
+      "react number input",
+      "nextjs number input",
+      "tailwind number input",
+      "shadcn number input",
+      "react number field",
+      "quantity input react",
+      "react stepper input",
+      "currency input react",
+      "spinbutton"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-21",
+    "tier": "free",
+    "files": [
+      "number-input.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { NumberInput } from \"@/components/ui/number-input\"\n\nexport function Quantity() {\n  return (\n    <>\n      <label htmlFor=\"quantity\">Quantity</label>\n      <NumberInput id=\"quantity\" defaultValue={1} min={1} max={99} />\n    </>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "fields",
+        "title": "Quantity and price",
+        "description": "Step with the buttons or the arrow keys and the number rolls: the digits that change lift away as the new ones rise in, upwards for up and downwards for down. Hold a button to keep stepping. The price is formatted with Intl.NumberFormat."
+      },
+      {
+        "name": "percent",
+        "title": "Percent",
+        "description": "A value from 0 to 1 shown as a percent, in steps of 5%. Page Up and Page Down take bigger steps; Home and End go to the ends."
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled"
+      }
+    ],
+    "api": [
+      {
+        "name": "NumberInput",
+        "description": "A spinbutton with step buttons. className styles the field; every other native input prop, id and ref included, goes to the input. Typed text is read when you leave the field or press Enter.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "description": "The number, when you control it. null is an empty field."
+          },
+          {
+            "name": "defaultValue",
+            "type": "number | null",
+            "default": "null",
+            "description": "The number at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: number | null) => void",
+            "description": "Called with the new number after a step, after typing a number in range, or when you leave the field."
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "description": "The lowest number. Home goes here."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "description": "The highest number. End goes here."
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "default": "1",
+            "description": "How much the arrow keys and the buttons change it."
+          },
+          {
+            "name": "largeStep",
+            "type": "number",
+            "default": "step × 10",
+            "description": "How much Page Up and Page Down change it."
+          },
+          {
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "description": "How the number is shown, for example { style: \"currency\", currency: \"USD\" }. Typed text is read back the same way."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "description": "The locale for formatting and reading numbers. Set it when you render on the server, so the server and the browser agree."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "32, 36 or 40px tall, matching Input."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the plain number with a form, through a hidden input."
+          },
+          {
+            "name": "incrementLabel",
+            "type": "string",
+            "default": "\"Increase\"",
+            "description": "The plus button's accessible name."
+          },
+          {
+            "name": "decrementLabel",
+            "type": "string",
+            "default": "\"Decrease\"",
+            "description": "The minus button's accessible name."
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "Marks the number as wrong: the border and focus ring turn destructive."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents changes."
+          },
+          {
+            "name": "readOnly",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows the number without letting it change."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Button",
+      "Intl.NumberFormat"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "input",
+      "slider",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use NumberInput for numbers people type or nudge: quantities, prices, percentages, counts. Use Slider when the exact number matters less than its place in a range, and Input for numbers that aren't amounts, like phone or card numbers."
+    },
+    "controls": {},
+    "href": "/components/number-input",
+    "dir": "components/number-input",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
+    "name": "number-ticker",
+    "title": "Number Ticker",
+    "description": "An accessible React number ticker for Next.js and Tailwind CSS: digits roll like an odometer and glide as the number changes length, with Intl formatting.",
+    "kind": "component",
+    "category": "Effects",
+    "tags": [
+      "number ticker",
+      "counter",
+      "odometer",
+      "count up",
+      "stats",
+      "animated number"
+    ],
+    "keywords": [
+      "react number ticker",
+      "animated counter react",
+      "count up animation react",
+      "nextjs number animation",
+      "tailwind number ticker",
+      "shadcn number ticker",
+      "odometer react",
+      "animated stats",
+      "rolling number",
+      "animated price react"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-21",
+    "tier": "free",
+    "files": [
+      "number-ticker.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { NumberTicker } from \"@/components/ui/number-ticker\"\n\nexport function Users() {\n  return <NumberTicker value={12480} className=\"text-4xl font-semibold\" />\n}"
+    },
+    "demos": [
+      {
+        "name": "flow",
+        "title": "A changing value",
+        "description": "Step it or shuffle to a number of another length. Every change flows on one soft spring: the digits roll, the characters that stay glide to their new places as the width follows, new ones come in through the blur and the ones that go leave through it. Switch the format and it flows to that too."
+      },
+      {
+        "name": "stats",
+        "title": "Stats on view",
+        "description": "Each stat rolls up from 0 once it's half in view. Places 0 doesn't have, and the separators and signs beside them, come in as they roll, so the number grows leftwards. Press Replay to roll again."
+      }
+    ],
+    "api": [
+      {
+        "name": "NumberTicker",
+        "description": "A span that inherits the text's size and colour, with a line height of 1. It's an image named by its formatted value, so screen readers hear the number, never the roll. Also accepts every native span prop.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number",
+            "required": true,
+            "description": "The number to show."
+          },
+          {
+            "name": "from",
+            "type": "number",
+            "default": "0",
+            "description": "Where the first roll starts."
+          },
+          {
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "description": "How to write it, for example { style: \"currency\", currency: \"USD\" } or { style: \"percent\" }."
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "default": "\"en-US\"",
+            "description": "The locale to format in. Fixed by default so the server and the browser write the same text."
+          },
+          {
+            "name": "prefix",
+            "type": "string",
+            "description": "Text before the number, part of what flows."
+          },
+          {
+            "name": "suffix",
+            "type": "string",
+            "description": "Text after the number, part of what flows."
+          },
+          {
+            "name": "continuous",
+            "type": "boolean",
+            "default": "true",
+            "description": "When a higher place changes, the places below spin a whole turn, so a jump reads as counting. Off, each digit takes the short way."
+          },
+          {
+            "name": "direction",
+            "type": "\"up\" | \"down\"",
+            "description": "Which way the digits turn. Left out, up when the number grows and down when it shrinks; set it to always turn one way, like an odometer."
+          },
+          {
+            "name": "delay",
+            "type": "number",
+            "default": "0",
+            "description": "Seconds to wait before the first roll."
+          },
+          {
+            "name": "startOnView",
+            "type": "boolean",
+            "default": "true",
+            "description": "Roll once it's half in view, once. With false, it rolls as soon as it mounts."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Web Animations API",
+      "CSS registered properties",
+      "Intl.NumberFormat"
+    ],
+    "motion": {
+      "animated": true
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "progress",
+      "number-input",
+      "text-effects"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use NumberTicker for numbers that should draw the eye as they arrive: stats on a landing page, a dashboard total, a live count. It renders the final value on the server and rolls when scrolled into view. For a number the user edits, use NumberInput; for how far a task is, use Progress."
+    },
+    "controls": {},
+    "href": "/components/number-ticker",
+    "dir": "components/number-ticker",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "pagination",
+    "title": "Pagination",
+    "description": "An accessible React pagination for Next.js and Tailwind CSS: page links with ellipses, Previous and Next, and a pill that slides to the current page.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "pagination",
+      "pages",
+      "pager",
+      "navigation",
+      "next",
+      "previous"
+    ],
+    "keywords": [
+      "react pagination",
+      "nextjs pagination",
+      "tailwind pagination",
+      "shadcn pagination",
+      "pagination component",
+      "animated pagination",
+      "pagination with ellipsis",
+      "pager"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "pagination.tsx",
+      "pagination-pill.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  getPaginationRange,\n  Pagination,\n  PaginationContent,\n  PaginationEllipsis,\n  PaginationItem,\n  PaginationLink,\n  PaginationNext,\n  PaginationPrevious,\n} from \"@/components/ui/pagination\"\n\n// Pages as URLs (?page=3): links work in a server component\nexport function Pages({ page, pageCount }: { page: number; pageCount: number }) {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationPrevious href={`?page=${page - 1}`} disabled={page === 1} />\n        </PaginationItem>\n        {getPaginationRange({ page, pageCount }).map((item, index) => (\n          <PaginationItem key={item === \"ellipsis\" ? `ellipsis-${index}` : item}>\n            {item === \"ellipsis\" ? (\n              <PaginationEllipsis />\n            ) : (\n              <PaginationLink href={`?page=${item}`} isActive={item === page}>\n                {item}\n              </PaginationLink>\n            )}\n          </PaginationItem>\n        ))}\n        <PaginationItem>\n          <PaginationNext href={`?page=${page + 1}`} disabled={page === pageCount} />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "pages",
+        "title": "Ten pages",
+        "description": "Pick a page and the pill slides to it. Ellipses stand for the pages in between, and the links keep their places as you move. Previous and Next turn off at the ends. Without an href, the links are buttons that change the page in place."
+      }
+    ],
+    "api": [
+      {
+        "name": "Pagination",
+        "description": "The nav landmark. Also accepts every native nav prop.",
+        "props": [
+          {
+            "name": "aria-label",
+            "type": "string",
+            "default": "\"Pagination\"",
+            "description": "The landmark's name. Give each one its own name when a page has two."
+          }
+        ]
+      },
+      {
+        "name": "PaginationContent",
+        "description": "The list of items (ul). The pill slides within it.",
+        "props": []
+      },
+      {
+        "name": "PaginationItem",
+        "description": "One item (li), holding a link or an ellipsis.",
+        "props": []
+      },
+      {
+        "name": "PaginationLink",
+        "description": "A page. A link with href, a button without one, or your router's Link with asChild. Styled with buttonVariants (ghost); also accepts every native a prop.",
+        "props": [
+          {
+            "name": "isActive",
+            "type": "boolean",
+            "default": "false",
+            "description": "The current page: it gets the pill and aria-current=\"page\"."
+          },
+          {
+            "name": "href",
+            "type": "string",
+            "description": "The page's URL. Leave it out for a button that changes the page in place (use onClick)."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child, for example Next.js Link, with the link's styles. When it's disabled, leave out the child's href too."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Marks it aria-disabled, fades it and stops it: onClick isn't called and a link loses its href. A button keeps its focus."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\" | \"icon\" | \"icon-sm\" | \"icon-lg\"",
+            "default": "\"icon\"",
+            "description": "Button's sizes. Page numbers are square icon sizes."
+          }
+        ]
+      },
+      {
+        "name": "PaginationPrevious",
+        "description": "A link to the previous page: a chevron, with the word Previous from the sm breakpoint. Named \"Go to previous page\". Takes PaginationLink's props.",
+        "props": []
+      },
+      {
+        "name": "PaginationNext",
+        "description": "A link to the next page, named \"Go to next page\". Takes PaginationLink's props.",
+        "props": []
+      },
+      {
+        "name": "PaginationEllipsis",
+        "description": "Stands for pages that aren't shown. Screen readers hear \"More pages\".",
+        "props": []
+      },
+      {
+        "name": "getPaginationRange",
+        "description": "Works out which pages to show: returns page numbers and \"ellipsis\" for each gap. With enough pages the list is always the same length, so the links keep their places.",
+        "props": [
+          {
+            "name": "page",
+            "type": "number",
+            "required": true,
+            "description": "The current page, from 1."
+          },
+          {
+            "name": "pageCount",
+            "type": "number",
+            "required": true,
+            "description": "How many pages there are."
+          },
+          {
+            "name": "siblingCount",
+            "type": "number",
+            "default": "1",
+            "description": "Pages shown either side of the current one."
+          },
+          {
+            "name": "boundaryCount",
+            "type": "number",
+            "default": "1",
+            "description": "Pages always shown at the start and the end."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Slot"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "table",
+      "breadcrumb",
+      "switcher"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Pagination below a list or table split into pages, such as search results or orders. Use hrefs when each page has its own URL, and buttons when the page changes in place. For a few views of the same data, use Switcher or Tabs instead."
+    },
+    "controls": {},
+    "href": "/components/pagination",
+    "dir": "components/pagination",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
+    "name": "popover",
+    "title": "Popover",
+    "description": "An accessible React popover for Next.js and Tailwind CSS: forms, settings and other rich content anchored to a button, built on Radix Popover.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "popover",
+      "overlay",
+      "floating",
+      "dialog",
+      "form"
+    ],
+    "keywords": [
+      "react popover",
+      "nextjs popover",
+      "shadcn popover",
+      "tailwind popover",
+      "radix popover",
+      "animated popover",
+      "popover form",
+      "floating panel"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "popover.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Button } from \"@/components/ui/button\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverDescription,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\nexport function Dimensions() {\n  return (\n    <Popover>\n      <PopoverTrigger asChild>\n        <Button variant=\"outline\">Dimensions</Button>\n      </PopoverTrigger>\n      <PopoverContent>\n        <PopoverHeader>\n          <PopoverTitle>Dimensions</PopoverTitle>\n          <PopoverDescription>Set the size of the layer.</PopoverDescription>\n        </PopoverHeader>\n      </PopoverContent>\n    </Popover>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "uses",
+        "title": "Dimensions and Share",
+        "description": "Two everyday popovers. In Dimensions, turn on Limit size: two fields come in and the popover glides to its new height instead of jumping. Focus moves into the popover when it opens, and Escape closes it."
+      },
+      {
+        "name": "sides",
+        "title": "Side and alignment",
+        "description": "A popover opens on any side of its trigger and lines up with its start, centre or end. It grows out of the edge it's attached to, and flips when there's no room."
+      },
+      {
+        "name": "anchor",
+        "title": "Anchored to a field",
+        "description": "With PopoverAnchor, the filter button opens the popover but it lines up with the whole search field and takes its width. PopoverClose closes it and focus goes back to the button."
+      }
+    ],
+    "api": [
+      {
+        "name": "Popover",
+        "description": "The root. Also accepts every Radix Popover Root prop.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          },
+          {
+            "name": "modal",
+            "type": "boolean",
+            "default": "false",
+            "description": "Keeps focus inside and makes the rest of the page inert while it's open, like a dialog."
+          }
+        ]
+      },
+      {
+        "name": "PopoverTrigger",
+        "description": "The button that opens and closes it. With asChild, your own Button becomes the trigger. Screen readers hear that it opens a dialog, and whether it's open.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a Button) as the trigger."
+          }
+        ]
+      },
+      {
+        "name": "PopoverAnchor",
+        "description": "Optional. Positions the popover against this element instead of the trigger, for example a whole field with the trigger inside it.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child as the anchor."
+          }
+        ]
+      },
+      {
+        "name": "PopoverContent",
+        "description": "The popover: a non-modal dialog. It opens from its trigger through a soft blur, and when its content changes size it glides to the new height (instant with reduced motion). Focus moves into it on open and back to the trigger on close; Escape and a click outside close it. Also accepts every Radix Popover Content prop.",
+        "props": [
+          {
+            "name": "side",
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+            "default": "\"bottom\"",
+            "description": "The side of the trigger it opens on. It flips when there's no room."
+          },
+          {
+            "name": "align",
+            "type": "\"start\" | \"center\" | \"end\"",
+            "default": "\"center\"",
+            "description": "How it lines up with the trigger along that side."
+          },
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the trigger and the popover, in px."
+          },
+          {
+            "name": "onOpenAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Called when focus moves in on open. Call event.preventDefault() to keep it on the trigger."
+          }
+        ]
+      },
+      {
+        "name": "PopoverHeader",
+        "description": "Optional. Stacks the title and description.",
+        "props": []
+      },
+      {
+        "name": "PopoverTitle",
+        "description": "Names the popover for screen readers. Give every popover a title, or an aria-label on PopoverContent.",
+        "props": []
+      },
+      {
+        "name": "PopoverDescription",
+        "description": "Optional. Read out after the title when the popover opens.",
+        "props": []
+      },
+      {
+        "name": "PopoverClose",
+        "description": "A button that closes the popover. Use asChild to make your own Button close it.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a Button) as the close button."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Popover"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg"
+    },
+    "related": [
+      "tooltip",
+      "hover-card",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Popover for interactive content anchored to a button: a small form, settings, filters or a share link. Use Tooltip for a short text hint, Hover Card for a preview on hover, and Select to pick one value from a list."
+    },
+    "controls": {},
+    "href": "/components/popover",
+    "dir": "components/popover",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "progress",
+    "title": "Progress",
+    "description": "An accessible React progress bar and ring for Next.js and Tailwind CSS that show how far along a task is, with an indeterminate state.",
+    "kind": "component",
+    "category": "Feedback",
+    "tags": [
+      "progress",
+      "progress bar",
+      "progress ring",
+      "circular progress",
+      "loading",
+      "indeterminate"
+    ],
+    "keywords": [
+      "react progress bar",
+      "shadcn progress",
+      "nextjs progress bar",
+      "tailwind progress bar",
+      "circular progress react",
+      "progress ring",
+      "radix progress",
+      "upload progress"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-21",
+    "tier": "free",
+    "files": [
+      "progress.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Progress } from \"@/components/ui/progress\"\n\nexport function Upload({ percent }: { percent: number }) {\n  return <Progress value={percent} aria-label=\"Upload\" />\n}"
+    },
+    "demos": [
+      {
+        "name": "overview",
+        "title": "Bar and ring",
+        "description": "Press Run to step the value: the bar's fill, the ring's arc and the number rise continuously, each change lasting until the next one comes, so steady updates read as one smooth rise. Without a value both are indeterminate; with reduced motion they pulse instead."
+      },
+      {
+        "name": "with-label",
+        "title": "With a label",
+        "description": "Name the bar with a visible label (aria-labelledby) and describe it with a hint. ProgressValue shows the percentage beside the label."
+      },
+      {
+        "name": "ring-sizes",
+        "title": "Ring sizes",
+        "description": "Small sits beside text like an icon; medium and large have room for the value."
+      }
+    ],
+    "api": [
+      {
+        "name": "Progress",
+        "description": "A bar, built on Radix Progress (role=\"progressbar\"). Give it a name with aria-label or aria-labelledby. Also accepts every native div prop.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "description": "How far along, from 0 to max. Leave it out, or pass null, while there's no telling: a segment sweeps across instead."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "default": "100",
+            "description": "The value that means done."
+          },
+          {
+            "name": "getValueLabel",
+            "type": "(value: number, max: number) => string",
+            "default": "\"64%\"",
+            "description": "What screen readers say for the value."
+          }
+        ]
+      },
+      {
+        "name": "ProgressRing",
+        "description": "The same as a ring: an arc that goes round from the top. It takes the text colour (text-primary unless you set another).",
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "description": "How far along, from 0 to max. Without it, an arc turns round the ring."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "default": "100",
+            "description": "The value that means done."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "20, 40 or 64px. Small fits beside text like an icon."
+          },
+          {
+            "name": "showValue",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows the percentage in the middle, counting as it changes. Medium and large only."
+          }
+        ]
+      },
+      {
+        "name": "ProgressValue",
+        "description": "The percentage as text, for beside a bar. It counts to a new value in step with the fill. Hidden from screen readers, since the progressbar already says its value.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number | null",
+            "description": "The same value as the Progress it labels."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "default": "100",
+            "description": "The same max."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Progress"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "spinner",
+      "loading-button",
+      "toast"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Progress (a bar) or ProgressRing to show how far along a task is, such as an upload or a multi-step setup; leave out value while the length is unknown. Use Spinner for a small busy indicator with no amount, and LoadingButton for a button that waits on its own action."
+    },
+    "controls": {},
+    "href": "/components/progress",
+    "dir": "components/progress",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
       ]
     }
   },
@@ -806,6 +5203,125 @@ export const items: Item[] = [
       "registry": [
         "tokens",
         "motion"
+      ]
+    }
+  },
+  {
+    "name": "scroll-area",
+    "title": "Scroll Area",
+    "description": "An accessible React scroll area for Next.js and Tailwind CSS: native scrolling with a slim scrollbar and soft fades at the edges, built on Radix.",
+    "kind": "component",
+    "category": "Display",
+    "tags": [
+      "scroll area",
+      "scroll",
+      "scrollbar",
+      "overflow",
+      "fade"
+    ],
+    "keywords": [
+      "react scroll area",
+      "nextjs scroll area",
+      "tailwind scroll area",
+      "shadcn scroll area",
+      "custom scrollbar",
+      "scroll fade",
+      "horizontal scroll",
+      "scroll shadow"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "scroll-area.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { ScrollArea } from \"@/components/ui/scroll-area\"\n\nexport function Tags({ tags }: { tags: string[] }) {\n  return (\n    <ScrollArea aria-label=\"Tags\" className=\"h-72 w-48 rounded-lg\">\n      <div className=\"p-4\">\n        {tags.map((tag) => (\n          <div key={tag} className=\"text-sm\">\n            {tag}\n          </div>\n        ))}\n      </div>\n    </ScrollArea>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "directions",
+        "title": "Vertical and horizontal",
+        "description": "A fade shows at each edge with more to scroll to, and goes when you reach it. Point at the area and the scrollbar appears; point at the bar and it thickens. To scroll sideways, add a horizontal ScrollBar inside."
+      }
+    ],
+    "api": [
+      {
+        "name": "ScrollArea",
+        "description": "The scrolling box, with a vertical scrollbar. Give it a height (or a width to scroll sideways). Also accepts every Radix Scroll Area Root prop.",
+        "props": [
+          {
+            "name": "aria-label",
+            "type": "string",
+            "description": "Names the area. A named area is a focusable region, so keyboard users can reach it and scroll with the arrow keys."
+          },
+          {
+            "name": "aria-labelledby",
+            "type": "string",
+            "description": "Names the area after a visible heading's id, with the same effect as aria-label."
+          },
+          {
+            "name": "type",
+            "type": "\"hover\" | \"scroll\" | \"auto\" | \"always\"",
+            "default": "\"hover\"",
+            "description": "When the scrollbar shows: while the pointer is over the area, while scrolling, whenever there's more to scroll, or always."
+          },
+          {
+            "name": "scrollHideDelay",
+            "type": "number",
+            "default": "600",
+            "description": "Milliseconds before the scrollbar fades out, for the hover and scroll types."
+          },
+          {
+            "name": "className",
+            "type": "string",
+            "description": "The fades take the area's background, bg-background by default. On a card or a popover, add bg-card or bg-popover so they match."
+          }
+        ]
+      },
+      {
+        "name": "ScrollBar",
+        "description": "A scrollbar. ScrollArea already has the vertical one; put a horizontal one inside it to scroll sideways. Also accepts every Radix Scroll Area Scrollbar prop.",
+        "props": [
+          {
+            "name": "orientation",
+            "type": "\"vertical\" | \"horizontal\"",
+            "default": "\"vertical\"",
+            "description": "Which way it scrolls."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Scroll Area"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "table",
+      "select"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use ScrollArea for a fixed-size box whose content can be longer than it, such as a list of tags, a sidebar or a row of cards, when you want a slim scrollbar and fades at the edges. Let the page scroll normally for main content."
+    },
+    "controls": {},
+    "href": "/components/scroll-area",
+    "dir": "components/scroll-area",
+    "install": {
+      "dependencies": [
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens"
       ]
     }
   },
@@ -995,6 +5511,1051 @@ export const items: Item[] = [
     "install": {
       "dependencies": [
         "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "sheet",
+    "title": "Sheet",
+    "description": "An accessible React sheet for Next.js: a side panel that slides in from any edge of the screen, for forms, filters and navigation, built on Radix Dialog.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "sheet",
+      "drawer",
+      "side panel",
+      "slide over",
+      "modal",
+      "overlay"
+    ],
+    "keywords": [
+      "react sheet",
+      "react drawer",
+      "react side panel",
+      "nextjs drawer",
+      "shadcn sheet",
+      "tailwind drawer",
+      "slide over panel",
+      "off canvas menu"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "sheet.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Button } from \"@/components/ui/button\"\nimport {\n  Sheet,\n  SheetContent,\n  SheetDescription,\n  SheetHeader,\n  SheetTitle,\n  SheetTrigger,\n} from \"@/components/ui/sheet\"\n\nexport function Filters() {\n  return (\n    <Sheet>\n      <SheetTrigger asChild>\n        <Button variant=\"outline\">Filters</Button>\n      </SheetTrigger>\n      <SheetContent side=\"right\">\n        <SheetHeader>\n          <SheetTitle>Filters</SheetTitle>\n          <SheetDescription>Narrow the results.</SheetDescription>\n        </SheetHeader>\n      </SheetContent>\n    </Sheet>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "sides",
+        "title": "Sides",
+        "description": "A sheet slides in from any edge and slides back out quickly. The backdrop fades, and the page behind waits until it's closed."
+      }
+    ],
+    "api": [
+      {
+        "name": "Sheet",
+        "description": "The root. It keeps the open state, so the panel can slide out before it unmounts.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes: the trigger, a close button, Escape or the backdrop."
+          },
+          {
+            "name": "modal",
+            "type": "boolean",
+            "default": "true",
+            "description": "Modal blocks the page behind, hides it from screen readers and keeps focus inside. Set false to let people use the page while it's open (there's no backdrop then)."
+          }
+        ]
+      },
+      {
+        "name": "SheetTrigger",
+        "description": "The button that opens it. Focus comes back here when it closes.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own element, such as a Button, as the trigger."
+          }
+        ]
+      },
+      {
+        "name": "SheetContent",
+        "description": "The panel, with its backdrop, in a portal. It slides in from its edge on a spring and leaves quickly; with reduced motion it only fades. Long content scrolls inside it. Give it a SheetTitle, which names it. Also accepts every Radix Dialog Content prop.",
+        "props": [
+          {
+            "name": "side",
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+            "default": "\"right\"",
+            "description": "The edge it slides in from. Right and left panels are three quarters of the screen wide, up to 24rem; top and bottom ones are as tall as their content."
+          },
+          {
+            "name": "showCloseButton",
+            "type": "boolean",
+            "default": "true",
+            "description": "Shows a close button in the top corner, named Close."
+          },
+          {
+            "name": "onOpenAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Runs as focus moves in (to the first focusable element). Call event.preventDefault() to focus something else yourself."
+          },
+          {
+            "name": "onCloseAutoFocus",
+            "type": "(event: Event) => void",
+            "description": "Runs as focus goes back to the trigger. Call event.preventDefault() to send it elsewhere."
+          },
+          {
+            "name": "onEscapeKeyDown",
+            "type": "(event: KeyboardEvent) => void",
+            "description": "Runs when Escape is pressed. Call event.preventDefault() to keep it open."
+          }
+        ]
+      },
+      {
+        "name": "SheetHeader",
+        "description": "Holds the title and description. It leaves room for the close button.",
+        "props": []
+      },
+      {
+        "name": "SheetFooter",
+        "description": "Holds the actions at the panel's foot: stacked on phones with the last one on top, in a row at the end from the sm breakpoint.",
+        "props": []
+      },
+      {
+        "name": "SheetTitle",
+        "description": "The heading, and the sheet's accessible name.",
+        "props": []
+      },
+      {
+        "name": "SheetDescription",
+        "description": "A line under the title, read out after the name.",
+        "props": []
+      },
+      {
+        "name": "SheetClose",
+        "description": "Closes the sheet. Use asChild to make your own Button close it.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Use your own element as the close button."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Dialog"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "dialog",
+      "alert-dialog"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Sheet for a panel beside the page: a form, filters, settings or navigation on small screens. Use Dialog for a short task in the middle of the screen, and Alert Dialog to confirm a destructive action."
+    },
+    "controls": {},
+    "href": "/components/sheet",
+    "dir": "components/sheet",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button"
+      ]
+    }
+  },
+  {
+    "name": "sidebar",
+    "title": "Sidebar",
+    "description": "An accessible React sidebar for Next.js and Tailwind CSS: collapses to icons or off canvas, with a gliding active indicator and a sheet on phones.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "sidebar",
+      "navigation",
+      "app shell",
+      "collapsible",
+      "menu",
+      "layout"
+    ],
+    "keywords": [
+      "react sidebar",
+      "nextjs sidebar",
+      "shadcn sidebar",
+      "tailwind sidebar",
+      "collapsible sidebar",
+      "sidebar navigation",
+      "app sidebar",
+      "dashboard sidebar",
+      "sidebar menu",
+      "mobile sidebar"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-22",
+    "tier": "free",
+    "files": [
+      "sidebar.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Sidebar,\n  SidebarContent,\n  SidebarGroup,\n  SidebarGroupLabel,\n  SidebarInset,\n  SidebarMenu,\n  SidebarMenuButton,\n  SidebarMenuItem,\n  SidebarProvider,\n  SidebarTrigger,\n} from \"@/components/ui/sidebar\"\nimport { HomeIcon, InboxIcon } from \"lucide-react\"\nimport Link from \"next/link\"\n\nexport function AppShell({ children }: { children: React.ReactNode }) {\n  return (\n    <SidebarProvider>\n      <Sidebar collapsible=\"icon\">\n        <SidebarContent>\n          <SidebarGroup>\n            <SidebarGroupLabel>Application</SidebarGroupLabel>\n            <SidebarMenu>\n              <SidebarMenuItem>\n                <SidebarMenuButton asChild isActive tooltip=\"Home\">\n                  <Link href=\"/\">\n                    <HomeIcon />\n                    <span>Home</span>\n                  </Link>\n                </SidebarMenuButton>\n              </SidebarMenuItem>\n              <SidebarMenuItem>\n                <SidebarMenuButton asChild tooltip=\"Inbox\">\n                  <Link href=\"/inbox\">\n                    <InboxIcon />\n                    <span>Inbox</span>\n                  </Link>\n                </SidebarMenuButton>\n              </SidebarMenuItem>\n            </SidebarMenu>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <SidebarInset>\n        <header className=\"flex h-14 items-center px-4\">\n          <SidebarTrigger />\n        </header>\n        {children}\n      </SidebarInset>\n    </SidebarProvider>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "app-shell",
+        "title": "An app shell",
+        "description": "Pick a page and the highlight glides to it. Collapse with the trigger, the rail on the sidebar's edge or ⌘B / Ctrl+B: down to icons, the labels leave through a soft blur, the Settings section folds and its row holds the highlight, and each icon names itself in a tooltip. On a phone the sidebar opens as a sheet."
+      }
+    ],
+    "api": [
+      {
+        "name": "SidebarProvider",
+        "description": "Wraps the sidebar and the content beside it, and holds the open state. It sets --sidebar-width (16rem) and --sidebar-width-icon (3rem); change them through its style. Also accepts every div prop.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the sidebar is open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "true",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or collapses, for example to save the choice. The sheet on phones keeps its own state."
+          },
+          {
+            "name": "shortcut",
+            "type": "string | false",
+            "default": "\"b\"",
+            "description": "The letter that toggles the sidebar with ⌘ or Ctrl. It's ignored while typing in a field. false turns it off, for example when a page shows several sidebars."
+          }
+        ]
+      },
+      {
+        "name": "Sidebar",
+        "description": "The sidebar itself: a navigation landmark, sticky beside the content. Below 768px it opens as a Sheet from its side instead. Also accepts every nav prop.",
+        "props": [
+          {
+            "name": "collapsible",
+            "type": "\"offcanvas\" | \"icon\" | \"none\"",
+            "default": "\"offcanvas\"",
+            "description": "What collapsing does: slide it away, narrow it to its icons (labels become tooltips), or nothing."
+          },
+          {
+            "name": "side",
+            "type": "\"left\" | \"right\"",
+            "default": "\"left\"",
+            "description": "The edge it's on. Put a right sidebar after SidebarInset."
+          },
+          {
+            "name": "aria-label",
+            "type": "string",
+            "default": "\"Sidebar\"",
+            "description": "The landmark's name, and the sheet's title on phones."
+          }
+        ]
+      },
+      {
+        "name": "SidebarTrigger",
+        "description": "An icon button that opens and collapses the sidebar (the sheet on phones), named Toggle sidebar, with aria-expanded and aria-controls. Its panel icon shows the state: the divider slides in as the sidebar narrows. Also accepts every Button prop; children replace the icon.",
+        "props": []
+      },
+      {
+        "name": "SidebarRail",
+        "description": "A strip along the sidebar's edge that toggles it on click, with a line that shows on hover. For the mouse only: the trigger is the keyboard and screen reader path. Place it inside Sidebar.",
+        "props": []
+      },
+      {
+        "name": "SidebarInset",
+        "description": "The main content beside the sidebar, a main landmark. Also accepts every main prop.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child instead of a main, when the page already has one."
+          }
+        ]
+      },
+      {
+        "name": "SidebarHeader",
+        "description": "The top of the sidebar, for a team switcher or a search. A div.",
+        "props": []
+      },
+      {
+        "name": "SidebarContent",
+        "description": "The scrolling middle, holding the groups. The highlights for the current page and the hovered row glide behind its rows. A div.",
+        "props": []
+      },
+      {
+        "name": "SidebarFooter",
+        "description": "The bottom of the sidebar, for the signed-in user or settings. A div.",
+        "props": []
+      },
+      {
+        "name": "SidebarGroup",
+        "description": "A section of the content, with a label and a menu. A div.",
+        "props": []
+      },
+      {
+        "name": "SidebarGroupLabel",
+        "description": "A group's heading. Down to icons it fades away through a blur and keeps its place, so no row moves.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a button) as the label."
+          }
+        ]
+      },
+      {
+        "name": "SidebarGroupContent",
+        "description": "Wraps a group's content when it's more than a menu. A div.",
+        "props": []
+      },
+      {
+        "name": "SidebarMenu",
+        "description": "A list of rows (ul).",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuItem",
+        "description": "One row's list item (li), holding its button and, optionally, a badge or a sub-menu.",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuButton",
+        "description": "A row: an icon, then a label in a span. Down to icons, everything after the icon fades away. A button, or with asChild your link. Also accepts every button prop.",
+        "props": [
+          {
+            "name": "isActive",
+            "type": "boolean",
+            "default": "false",
+            "description": "Marks the current page: the highlight glides behind it, and it gets aria-current=\"page\"."
+          },
+          {
+            "name": "tooltip",
+            "type": "string | TooltipContent props",
+            "description": "Names the row in a tooltip while the sidebar is down to its icons. It doesn't show otherwise."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "Row height: 28, 32 or 48px. lg suits a team switcher or a user, with a 32px picture first."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a Next.js Link) as the row. On phones, following a link closes the sheet."
+          }
+        ]
+      },
+      {
+        "name": "SidebarMenuBadge",
+        "description": "A count or status at a row's end, placed inside its SidebarMenuItem after the button. Down to icons it fades away and a dot on the icon's corner takes its place.",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuCollapsible",
+        "description": "A menu item whose row opens a sub-menu, built on Radix Collapsible. Down to icons it folds away, remembers whether it was open, and its row holds the highlight for a current page inside. Also accepts every li prop.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether the section is open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Stops it opening or closing."
+          }
+        ]
+      },
+      {
+        "name": "SidebarMenuCollapsibleTrigger",
+        "description": "The section's row, with a chevron that turns as it opens. Down to icons, clicking it opens the sidebar with the section showing. Also accepts every SidebarMenuButton prop.",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuCollapsibleContent",
+        "description": "The section's sub-menu. It opens and closes with a smooth height change and a soft blur. Also accepts every Radix Collapsible Content prop.",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuSub",
+        "description": "Rows under a row, along a quiet line (ul). Down to icons it's hidden.",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuSubItem",
+        "description": "One sub-row's list item (li).",
+        "props": []
+      },
+      {
+        "name": "SidebarMenuSubButton",
+        "description": "A sub-row: a link by default. Also accepts every a prop.",
+        "props": [
+          {
+            "name": "isActive",
+            "type": "boolean",
+            "default": "false",
+            "description": "Marks the current page, with aria-current=\"page\"."
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\"",
+            "default": "\"md\"",
+            "description": "Text size: text-xs or text-sm."
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a Next.js Link) as the sub-row."
+          }
+        ]
+      },
+      {
+        "name": "SidebarSeparator",
+        "description": "A quiet line between parts of the sidebar, decorative (hidden from screen readers). A div; also accepts every native div prop.",
+        "props": []
+      },
+      {
+        "name": "useSidebar",
+        "description": "Reads the sidebar from inside SidebarProvider: state (\"expanded\" or \"collapsed\"), open, setOpen, openMobile, setOpenMobile, isMobile and toggleSidebar.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Collapsible",
+      "Radix Dialog (Sheet)",
+      "Radix Tooltip"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "template": "full-bleed",
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "sheet",
+      "tooltip",
+      "tabs"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Sidebar for an app's main navigation beside the page: a dashboard or settings area with groups of links, collapsing to icons or off canvas, and a sheet on phones. Mark the current page with isActive. For a short set of views inside a page use Tabs; for a panel of actions or a form use Sheet."
+    },
+    "controls": {},
+    "href": "/components/sidebar",
+    "dir": "components/sidebar",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button",
+        "sheet",
+        "tooltip"
+      ]
+    }
+  },
+  {
+    "name": "skeleton",
+    "title": "Skeleton",
+    "description": "A React skeleton loader for Next.js and Tailwind CSS: placeholder blocks while content loads, with a calm sheen that sweeps every skeleton in step.",
+    "kind": "component",
+    "category": "Feedback",
+    "tags": [
+      "skeleton",
+      "loading",
+      "placeholder",
+      "shimmer",
+      "loader"
+    ],
+    "keywords": [
+      "react skeleton",
+      "shadcn skeleton",
+      "nextjs skeleton loading",
+      "tailwind skeleton",
+      "skeleton loader",
+      "loading placeholder",
+      "shimmer loading",
+      "skeleton screen"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "skeleton.tsx",
+      "skeleton-sheen.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Skeleton } from \"@/components/ui/skeleton\"\n\nexport function ProfileLoading() {\n  return (\n    <div aria-busy=\"true\" className=\"flex items-center gap-3\">\n      <span className=\"sr-only\">Loading profile</span>\n      <Skeleton className=\"size-10 rounded-full\" />\n      <div className=\"grid gap-2\">\n        <Skeleton className=\"h-4 w-40\" />\n        <Skeleton className=\"h-4 w-24\" />\n      </div>\n    </div>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "placeholders",
+        "title": "Placeholders",
+        "description": "A profile row and a card. A sheen one step lighter sweeps across, every skeleton in step; with reduced motion they're still."
+      },
+      {
+        "name": "loading",
+        "title": "Loading, then content",
+        "description": "Reload: the skeleton fades in while the region is aria-busy, then the content comes back through the blur in the same place."
+      }
+    ],
+    "api": [
+      {
+        "name": "Skeleton",
+        "description": "A muted block you shape with classes, for example \"h-4 w-40\" or \"size-10 rounded-full\". Hidden from screen readers: put aria-busy=\"true\" and a visually hidden \"Loading…\" on the region that's loading. Also accepts every native div prop.",
+        "props": [
+          {
+            "name": "className",
+            "type": "string",
+            "description": "Its size and shape. Rounded md by default; rounded-full for a circle."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "spinner",
+      "card",
+      "avatar"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Skeleton for placeholders shaped like the content that's loading (a profile row, a card, a table), so the page doesn't jump when it arrives. Mark the loading region aria-busy=\"true\" with a visually hidden label. Use Spinner for a small busy state with no layout to hold, such as a button."
+    },
+    "controls": {},
+    "href": "/components/skeleton",
+    "dir": "components/skeleton",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "slider",
+    "title": "Slider",
+    "description": "An accessible React slider for Next.js and Tailwind: one value or a range, with a thumb that glides to a click and an optional value tooltip, on Radix.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "slider",
+      "range slider",
+      "range",
+      "input range",
+      "form"
+    ],
+    "keywords": [
+      "react slider",
+      "react range slider",
+      "nextjs slider",
+      "tailwind slider",
+      "shadcn slider",
+      "radix slider",
+      "price range slider",
+      "dual range slider",
+      "animated slider"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-22",
+    "tier": "free",
+    "files": [
+      "slider.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Slider } from \"@/components/ui/slider\"\n\nexport function Volume() {\n  return <Slider aria-label=\"Volume\" defaultValue={[60]} max={100} step={1} />\n}"
+    },
+    "demos": [
+      {
+        "name": "single-and-range",
+        "title": "Single and range",
+        "description": "Hover and the track wakes, thickening under the hand. Click it and the thumb glides there, stretching on the way; drag and it follows the pointer exactly. Drag past an end and the track stretches like elastic, then snaps back when you let go. The value rises into a tooltip above the thumb."
+      },
+      {
+        "name": "labelled",
+        "title": "With a label",
+        "description": "A visible label names the thumb through aria-labelledby, with the value beside it. formatValue gives screen readers the same text."
+      },
+      {
+        "name": "vertical",
+        "title": "Vertical",
+        "description": "orientation=\"vertical\": at least 11rem tall, filling a taller container. Up and Right raise the value, and the tooltip sits beside the thumb."
+      }
+    ],
+    "api": [
+      {
+        "name": "Slider",
+        "description": "Also accepts every Radix Slider prop. One number in value for one thumb, two for a range. aria-label or aria-labelledby names the thumbs.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number[]",
+            "description": "The values, when you control them: one per thumb."
+          },
+          {
+            "name": "defaultValue",
+            "type": "number[]",
+            "default": "[min]",
+            "description": "The values at first. Two numbers make a range."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: number[]) => void",
+            "description": "Called on every change, while dragging too."
+          },
+          {
+            "name": "onValueCommit",
+            "type": "(value: number[]) => void",
+            "description": "Called once a drag ends or a key changes the value."
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "default": "0",
+            "description": "The lowest value."
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "default": "100",
+            "description": "The highest value."
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "default": "1",
+            "description": "The values snap to steps of this size."
+          },
+          {
+            "name": "minStepsBetweenThumbs",
+            "type": "number",
+            "default": "0",
+            "description": "How many steps a range's thumbs keep apart."
+          },
+          {
+            "name": "tooltip",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows the value above the thumb while it's dragged or moved with the keys."
+          },
+          {
+            "name": "formatValue",
+            "type": "(value: number) => string",
+            "description": "Formats the value for the tooltip and for screen readers (aria-valuetext)."
+          },
+          {
+            "name": "thumbLabels",
+            "type": "string[]",
+            "description": "A name for each thumb. Without it a range's thumbs are named from aria-label, for example “Price, minimum”."
+          },
+          {
+            "name": "orientation",
+            "type": "\"horizontal\" | \"vertical\"",
+            "default": "\"horizontal\"",
+            "description": "Vertical is at least 11rem tall and fills a taller container."
+          },
+          {
+            "name": "inverted",
+            "type": "boolean",
+            "default": "false",
+            "description": "Puts the lowest value at the other end."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents interaction."
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Submits the values with a form, through a hidden input per thumb."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Slider"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/slider/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "number-input",
+      "switch",
+      "input"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Slider to pick a value or a range where its place between a minimum and a maximum matters more than the exact number: volume, price filters, sizes. Use NumberInput when people need to type or nudge an exact number."
+    },
+    "controls": {},
+    "href": "/components/slider",
+    "dir": "components/slider",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "spinner",
+    "title": "Spinner",
+    "description": "An accessible React spinner for Next.js and Tailwind CSS: a small loading indicator in three sizes that takes the text's colour and pulses with reduced motion.",
+    "kind": "component",
+    "category": "Feedback",
+    "tags": [
+      "spinner",
+      "loading",
+      "loader",
+      "progress",
+      "busy"
+    ],
+    "keywords": [
+      "react spinner",
+      "shadcn spinner",
+      "loading spinner",
+      "nextjs loading spinner",
+      "tailwind spinner",
+      "loading indicator",
+      "react loader"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "spinner.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Spinner } from \"@/components/ui/spinner\"\n\nexport function Loading() {\n  return <Spinner />\n}"
+    },
+    "demos": [
+      {
+        "name": "sizes",
+        "title": "Sizes",
+        "description": "The three icon sizes, and one inside a button. The arc turns once a second; with reduced motion it pulses instead."
+      },
+      {
+        "name": "with-text",
+        "title": "With text",
+        "description": "Beside text, put role=\"status\" on the row and hide the spinner, so it's read once as the text."
+      }
+    ],
+    "api": [
+      {
+        "name": "Spinner",
+        "description": "A status (role=\"status\") drawn in currentColor, so it takes the text's colour. Also accepts every native span prop.",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "default": "\"md\"",
+            "description": "14, 16 or 20px, the icon sizes, so it can stand in for an icon."
+          },
+          {
+            "name": "aria-label",
+            "type": "string",
+            "default": "\"Loading\"",
+            "description": "What's loading, for screen readers. Inside a button or beside text that already says it, pass aria-hidden instead."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "loading-button",
+      "button",
+      "badge"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Spinner while something loads and there's no way to tell how far along it is: a panel fetching data, a button submitting. Use LoadingButton for a button that shows loading, success and error by itself."
+    },
+    "controls": {},
+    "href": "/components/spinner",
+    "dir": "components/spinner",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "stepper",
+    "title": "Stepper",
+    "description": "An accessible React stepper for Next.js and Tailwind CSS: the steps of a checkout or setup, with a line that fills as you advance and checks that draw in.",
+    "kind": "component",
+    "category": "Effects",
+    "tags": [
+      "stepper",
+      "steps",
+      "wizard",
+      "progress steps",
+      "multi-step form",
+      "checkout"
+    ],
+    "keywords": [
+      "react stepper",
+      "nextjs stepper",
+      "tailwind stepper",
+      "shadcn stepper",
+      "multi step form react",
+      "wizard component react",
+      "progress steps",
+      "checkout steps",
+      "vertical stepper"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "stepper.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Stepper,\n  StepperIndicator,\n  StepperItem,\n  StepperSeparator,\n  StepperTitle,\n  StepperTrigger,\n} from \"@/components/ui/stepper\"\n\nconst steps = [\"Cart\", \"Shipping\", \"Payment\"]\n\nexport function Checkout() {\n  return (\n    <Stepper defaultValue={2} aria-label=\"Checkout\">\n      {steps.map((title, index) => (\n        <StepperItem key={title} step={index + 1}>\n          <StepperTrigger>\n            <StepperIndicator />\n            <StepperTitle>{title}</StepperTitle>\n          </StepperTrigger>\n          <StepperSeparator />\n        </StepperItem>\n      ))}\n    </Stepper>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "checkout",
+        "title": "Checkout",
+        "description": "Next fills the line to the next step, which takes the ring as the fill arrives, while the step you leave swaps its number for a check. Back plays it backwards. Press a step you've reached to jump back: each line empties in turn."
+      },
+      {
+        "name": "vertical",
+        "title": "Vertical",
+        "description": "orientation=\"vertical\", with a description under each title. Every step can be pressed here."
+      }
+    ],
+    "api": [
+      {
+        "name": "Stepper",
+        "description": "An ordered list of the steps. Give it a name with aria-label (\"Checkout\"). Also accepts every native ol prop.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number",
+            "description": "The current step, from 1, when you control it. Past the last step, every step is done."
+          },
+          {
+            "name": "defaultValue",
+            "type": "number",
+            "default": "1",
+            "description": "The current step at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: number) => void",
+            "description": "Called with the step a trigger was pressed for."
+          },
+          {
+            "name": "orientation",
+            "type": "\"horizontal\" | \"vertical\"",
+            "default": "\"horizontal\"",
+            "description": "A row with the lines between the steps, or a column with the lines down the side."
+          }
+        ]
+      },
+      {
+        "name": "StepperItem",
+        "description": "One step (an li), holding its trigger and its separator. Also accepts every native li prop.",
+        "props": [
+          {
+            "name": "step",
+            "type": "number",
+            "required": true,
+            "description": "Its place in the task, from 1."
+          },
+          {
+            "name": "completed",
+            "type": "boolean",
+            "description": "Done or not, whatever the current step. Left out, the steps before the current one are done."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Its trigger can't be pressed, for example a step that isn't reachable yet."
+          }
+        ]
+      },
+      {
+        "name": "StepperTrigger",
+        "description": "A button that goes to its step, named by its title; the current one has aria-current=\"step\". It lays the indicator beside the title and the description. Also accepts every native button prop.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child instead, for example a link to the step's page."
+          }
+        ]
+      },
+      {
+        "name": "StepperIndicator",
+        "description": "The circle: the step's number, a check that draws in once it's done, and a ring round the current step. Hidden from screen readers. Pass children (an icon) to show them instead of the number and the check.",
+        "props": []
+      },
+      {
+        "name": "StepperTitle",
+        "description": "The step's name, muted until the progress reaches it. Also accepts every native span prop.",
+        "props": []
+      },
+      {
+        "name": "StepperDescription",
+        "description": "A line under the title. Also accepts every native span prop.",
+        "props": []
+      },
+      {
+        "name": "StepperSeparator",
+        "description": "The line to the next step: it fills once this step is done, and empties the way it came. Hidden in the last step, so it can be written in every item.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Slot"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "progress",
+      "tabs",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Stepper to show where someone is in a task with a fixed order of steps: a checkout, an onboarding flow, a multi-step form. Drive value from your own Back and Next buttons, and disable the steps that aren't reachable yet. For switching between views in any order, use Tabs; for how much of one task is done, use Progress."
+    },
+    "controls": {},
+    "href": "/components/stepper",
+    "dir": "components/stepper",
+    "install": {
+      "dependencies": [
         "motion@^14.0.0",
         "radix-ui@^1.7.0"
       ],
@@ -1277,6 +6838,624 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "table",
+    "title": "Table",
+    "description": "An accessible React table for Next.js and Tailwind CSS: rows and columns with sortable headers, selectable rows and rows that glide when sorted.",
+    "kind": "component",
+    "category": "Display",
+    "tags": [
+      "table",
+      "data table",
+      "grid",
+      "sort",
+      "rows",
+      "columns"
+    ],
+    "keywords": [
+      "react table",
+      "nextjs table",
+      "tailwind table",
+      "shadcn table",
+      "sortable table",
+      "data table",
+      "table component",
+      "animated table",
+      "aria-sort"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "table.tsx",
+      "table-motion.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import {\n  Table,\n  TableBody,\n  TableCaption,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"@/components/ui/table\"\n\nexport function Invoices() {\n  return (\n    <Table>\n      <TableCaption>Recent invoices</TableCaption>\n      <TableHeader>\n        <TableRow>\n          <TableHead>Invoice</TableHead>\n          <TableHead className=\"text-right\">Amount</TableHead>\n        </TableRow>\n      </TableHeader>\n      <TableBody>\n        <TableRow>\n          <TableCell>INV-1048</TableCell>\n          <TableCell className=\"text-right\">$1,250.00</TableCell>\n        </TableRow>\n      </TableBody>\n    </Table>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "invoices",
+        "title": "Invoices",
+        "description": "Sort by date or amount and the rows glide to their new places. Pick rows with the checkboxes; a picked row is muted. The footer holds the total."
+      }
+    ],
+    "api": [
+      {
+        "name": "Table",
+        "description": "The table, inside a container that scrolls sideways when the columns don't fit. Also accepts every native table prop. Name it with a TableCaption or aria-label.",
+        "props": []
+      },
+      {
+        "name": "TableHeader",
+        "description": "The header rows (thead). Its rows don't take the hover.",
+        "props": []
+      },
+      {
+        "name": "TableBody",
+        "description": "The body (tbody). When its rows change order, for example on a sort, they glide to their new places; give each row a stable key. Instant with reduced motion.",
+        "props": []
+      },
+      {
+        "name": "TableFooter",
+        "description": "The footer rows (tfoot), for totals. A line above it, in medium weight.",
+        "props": []
+      },
+      {
+        "name": "TableRow",
+        "description": "A row (tr). Also accepts every native tr prop.",
+        "props": [
+          {
+            "name": "data-state",
+            "type": "\"selected\"",
+            "description": "Marks the row as selected: it takes a muted background."
+          }
+        ]
+      },
+      {
+        "name": "TableHead",
+        "description": "A header cell (th). Also accepts every native th prop. Add className=\"text-right\" for a column of numbers; a sort arrow then goes before the label.",
+        "props": [
+          {
+            "name": "sort",
+            "type": "\"ascending\" | \"descending\" | \"none\"",
+            "description": "The column's sort. The sorted column gets aria-sort; the arrow points up for ascending and turns down for descending."
+          },
+          {
+            "name": "onSort",
+            "type": "() => void",
+            "description": "Makes the label a button that sorts the column. Called when it's pressed; update sort in response. Unsorted columns show their arrow on hover."
+          }
+        ]
+      },
+      {
+        "name": "TableCell",
+        "description": "A data cell (td). Also accepts every native td prop, such as colSpan.",
+        "props": []
+      },
+      {
+        "name": "TableCaption",
+        "description": "The table's title, shown below it and read as its name.",
+        "props": []
+      },
+      {
+        "name": "TableSortButton",
+        "description": "The button TableHead renders for a sortable column. Use it directly only for a header of your own, and set aria-sort on that header yourself. Also accepts every native button prop.",
+        "props": [
+          {
+            "name": "direction",
+            "type": "\"ascending\" | \"descending\" | \"none\"",
+            "default": "\"none\"",
+            "description": "Which way the arrow points; hidden until hover when none."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "pagination",
+      "checkbox",
+      "badge",
+      "scroll-area"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Table for data people compare across rows and columns: invoices, orders, users. Make a column sortable with TableHead's sort and onSort, and add a Checkbox column for picking rows. Use a list for single-column content, and Pagination below the table for long data."
+    },
+    "controls": {},
+    "href": "/components/table",
+    "dir": "components/table",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "tabs",
+    "title": "Tabs",
+    "description": "Accessible React tabs for Next.js, with an underline or pill that slides to the active tab and panels that glide in, built on Radix Tabs.",
+    "kind": "component",
+    "category": "Navigation",
+    "tags": [
+      "tabs",
+      "tab panel",
+      "tab bar",
+      "navigation",
+      "underline tabs"
+    ],
+    "keywords": [
+      "react tabs",
+      "nextjs tabs",
+      "tailwind tabs",
+      "shadcn tabs",
+      "animated tabs",
+      "underline tabs",
+      "sliding tabs",
+      "react tab component"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "tabs.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\"\n\nexport function Settings() {\n  return (\n    <Tabs defaultValue=\"account\">\n      <TabsList aria-label=\"Settings\">\n        <TabsTrigger value=\"account\">Account</TabsTrigger>\n        <TabsTrigger value=\"password\">Password</TabsTrigger>\n      </TabsList>\n      <TabsContent value=\"account\">Change your name and email.</TabsContent>\n      <TabsContent value=\"password\">Change your password.</TabsContent>\n    </Tabs>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "variants",
+        "title": "Underline and pill",
+        "description": "Pick a tab and the underline or pill slides to it. The new panel comes in from the side you moved towards while its height glides to fit."
+      },
+      {
+        "name": "icons",
+        "title": "Icons",
+        "description": "Icons sit before the label at the icon size. Give icon-only tabs an aria-label."
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled",
+        "description": "A disabled tab can't be picked, and the arrow keys skip it."
+      }
+    ],
+    "api": [
+      {
+        "name": "Tabs",
+        "description": "The root, built on Radix Tabs. Also accepts every Radix Tabs Root prop. Arrow keys move between tabs and show their panel; Home and End jump to the ends.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The tab shown, when you control it."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "description": "The tab shown at first."
+          },
+          {
+            "name": "onValueChange",
+            "type": "(value: string) => void",
+            "description": "Called with the new tab when the user picks one."
+          },
+          {
+            "name": "activationMode",
+            "type": "\"automatic\" | \"manual\"",
+            "default": "\"automatic\"",
+            "description": "Automatic shows a tab's panel as soon as the arrow keys reach it; manual waits for Enter or Space."
+          },
+          {
+            "name": "dir",
+            "type": "\"ltr\" | \"rtl\"",
+            "description": "The reading direction. The arrow keys follow it, and a panel still slides in from the side of its tab."
+          }
+        ]
+      },
+      {
+        "name": "TabsList",
+        "description": "The row of tabs, a tablist. Give it a name with aria-label when the page has more than one set.",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"underline\" | \"pill\"",
+            "default": "\"underline\"",
+            "description": "Underline: a line slides along a hairline under the tabs. Pill: a filled pill slides on a muted track, like Switcher."
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "default": "true",
+            "description": "The arrow keys wrap from the last tab to the first."
+          }
+        ]
+      },
+      {
+        "name": "TabsTrigger",
+        "description": "One tab.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The panel this tab shows."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skips the tab."
+          }
+        ]
+      },
+      {
+        "name": "TabsContent",
+        "description": "One tab's panel, a tabpanel named by its tab. It comes in through a blur and slides 12px from the side you moved towards, while its height glides from the last panel's.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The tab that shows this panel."
+          },
+          {
+            "name": "forceMount",
+            "type": "true",
+            "description": "Keeps the panel's content mounted while it's hidden, so it keeps its state (a half-filled form) and stays in the HTML."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Tabs"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "switcher",
+      "accordion",
+      "toggle-group"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Tabs to switch between panels of related content in one place, like settings sections or Preview and Code. Use Switcher when the options change one view rather than each showing its own panel, Accordion when people should scan several sections in order, and links to move between pages."
+    },
+    "controls": {},
+    "href": "/components/tabs",
+    "dir": "components/tabs",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "text-effects",
+    "title": "Text Effects",
+    "description": "Accessible React text effects for Next.js and Tailwind CSS: a shimmer, a word-by-word reveal and a typewriter, all real text and off with reduced motion.",
+    "kind": "component",
+    "category": "Effects",
+    "tags": [
+      "text animation",
+      "shimmer",
+      "text reveal",
+      "typewriter",
+      "typing effect",
+      "animated text"
+    ],
+    "keywords": [
+      "react text animation",
+      "text shimmer react",
+      "shimmer text tailwind",
+      "text reveal animation",
+      "typewriter effect react",
+      "typing animation nextjs",
+      "animated heading react",
+      "shadcn text effects",
+      "blur text reveal"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "text-effects.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { TextReveal, TextShimmer, Typewriter } from \"@/components/ui/text-effects\"\n\nexport function Hero() {\n  return (\n    <>\n      <TextReveal as=\"h1\">Ship it this afternoon</TextReveal>\n      <p>\n        Build <Typewriter phrases={[\"forms\", \"menus\", \"dialogs\"]} />\n      </p>\n      <TextShimmer>Generating a reply…</TextShimmer>\n    </>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "overview",
+        "title": "Shimmer, reveal and typewriter",
+        "description": "A light sweeps across the shimmer in one neutral hue. The reveal's words rise through the blur, 0.05s apart. The typewriter's caret stays solid while it types and breathes while it waits. Press Replay to play them again."
+      },
+      {
+        "name": "by-character",
+        "title": "Reveal by character",
+        "description": "by=\"character\" for a short line. Each word stays whole across a line break."
+      },
+      {
+        "name": "type-once",
+        "title": "Type once",
+        "description": "One phrase types once and stays; the caret breathes for a moment, then fades away."
+      }
+    ],
+    "api": [
+      {
+        "name": "TextShimmer",
+        "description": "A span whose text is muted-foreground, with a foreground sheen sweeping across it every 2s, in step with Skeleton's sheen. It stops with reduced motion. Also accepts every native span prop.",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "description": "The text. Keep it to text: it's drawn twice."
+          }
+        ]
+      },
+      {
+        "name": "TextReveal",
+        "description": "Reveals its text once, a word or a character at a time. A visually hidden copy carries the text for screen readers and search engines. With reduced motion it's simply there. Also accepts every native prop of its element.",
+        "props": [
+          {
+            "name": "children",
+            "type": "string",
+            "required": true,
+            "description": "The text to reveal."
+          },
+          {
+            "name": "as",
+            "type": "\"p\" | \"span\" | \"div\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"blockquote\" | \"li\"",
+            "default": "\"p\"",
+            "description": "The element to render, for example h2 for a heading."
+          },
+          {
+            "name": "by",
+            "type": "\"word\" | \"character\"",
+            "default": "\"word\"",
+            "description": "Reveal word by word, or character by character for a short line."
+          },
+          {
+            "name": "delay",
+            "type": "number",
+            "default": "0",
+            "description": "Seconds before the first piece rises."
+          },
+          {
+            "name": "startOnView",
+            "type": "boolean",
+            "default": "true",
+            "description": "Reveal once it scrolls into view. With false, it reveals as soon as it mounts."
+          }
+        ]
+      },
+      {
+        "name": "Typewriter",
+        "description": "Types its phrases in turn. It starts once it's in view and rests off-screen. Screen readers hear every phrase once, as plain text, and never the typing; nothing is announced as it changes. With reduced motion the first phrase is simply there. Also accepts every native span prop.",
+        "props": [
+          {
+            "name": "phrases",
+            "type": "string | string[]",
+            "required": true,
+            "description": "One phrase, or several to type in turn."
+          },
+          {
+            "name": "loop",
+            "type": "boolean",
+            "description": "Start over after the last phrase. On by default for several phrases, off for one."
+          },
+          {
+            "name": "typeSpeed",
+            "type": "number",
+            "default": "0.08",
+            "description": "Seconds per character typed."
+          },
+          {
+            "name": "deleteSpeed",
+            "type": "number",
+            "default": "0.04",
+            "description": "Seconds per character deleted."
+          },
+          {
+            "name": "hold",
+            "type": "number",
+            "default": "2",
+            "description": "Seconds a typed phrase stays before it's deleted."
+          },
+          {
+            "name": "delay",
+            "type": "number",
+            "default": "0",
+            "description": "Seconds before the first character."
+          },
+          {
+            "name": "cursor",
+            "type": "boolean",
+            "default": "true",
+            "description": "Show the caret. It fades away once a phrase typed only once is done."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Web Animations API"
+    ],
+    "motion": {
+      "animated": true
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "number-ticker",
+      "skeleton",
+      "marquee"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use TextReveal for a heading or line that should rise into place once as it scrolls into view, Typewriter for a short phrase that cycles (\"Build forms, menus, dialogs\"), and TextShimmer for a label that says something is working, such as an AI reply being generated. Keep them for one or two moments per page."
+    },
+    "controls": {},
+    "href": "/components/text-effects",
+    "dir": "components/text-effects",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "textarea",
+    "title": "Textarea",
+    "description": "An accessible React textarea for Next.js that grows smoothly with its content, with min and max rows, styled like Input with Tailwind CSS.",
+    "kind": "component",
+    "category": "Forms",
+    "tags": [
+      "textarea",
+      "text area",
+      "multiline",
+      "auto resize",
+      "form"
+    ],
+    "keywords": [
+      "react textarea",
+      "nextjs textarea",
+      "tailwind textarea",
+      "shadcn textarea",
+      "auto resize textarea",
+      "autosize textarea react",
+      "auto growing textarea",
+      "textarea character counter"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "textarea.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Textarea } from \"@/components/ui/textarea\"\n\nexport function MessageField() {\n  return (\n    <>\n      <label htmlFor=\"message\">Message</label>\n      <Textarea id=\"message\" minRows={2} maxRows={6} />\n    </>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "default",
+        "title": "Default",
+        "description": "Type a few lines: the field glides taller a line at a time, up to 6 lines, then scrolls. Delete them and it glides back to 2."
+      },
+      {
+        "name": "counter",
+        "title": "Character counter",
+        "description": "maxLength stops the text at 160 characters. Each digit of the count swaps through the blur on its own, rising as you type and falling as you delete."
+      },
+      {
+        "name": "disabled",
+        "title": "Disabled"
+      }
+    ],
+    "api": [
+      {
+        "name": "Textarea",
+        "description": "Also accepts every native textarea prop except rows (use minRows). Grows with its text; with reduced motion it resizes at once.",
+        "props": [
+          {
+            "name": "minRows",
+            "type": "number",
+            "default": "3",
+            "description": "The lines it shows when empty. It never gets shorter."
+          },
+          {
+            "name": "maxRows",
+            "type": "number",
+            "description": "The lines it grows to before it scrolls. Unlimited when left out."
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "Marks the value as wrong: the border and focus ring turn destructive."
+          },
+          {
+            "name": "maxLength",
+            "type": "number",
+            "description": "The most characters it accepts."
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Prevents editing."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md"
+    },
+    "related": [
+      "input"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Textarea for multi-line text such as messages, comments, descriptions and bios, always with a visible label. Set minRows and maxRows to bound how far it grows. Use Input for a single line."
+    },
+    "controls": {},
+    "href": "/components/textarea",
+    "dir": "components/textarea",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
     "name": "theme-toggle",
     "title": "Theme Toggle",
     "description": "An accessible React dark mode toggle for Next.js that reveals the new theme from the button with a View Transition: a circle, ink, a wave or a page turn.",
@@ -1419,6 +7598,314 @@ export const items: Item[] = [
         "tokens",
         "motion",
         "button"
+      ]
+    }
+  },
+  {
+    "name": "toast",
+    "title": "Toast",
+    "description": "An accessible React toast for Next.js: notifications that slide in, stack like a deck and swipe away, with a toast() function and Radix Toast parts.",
+    "kind": "component",
+    "category": "Feedback",
+    "tags": [
+      "toast",
+      "notification",
+      "snackbar",
+      "toaster",
+      "alert",
+      "message",
+      "promise"
+    ],
+    "keywords": [
+      "react toast",
+      "nextjs toast",
+      "shadcn toast",
+      "sonner alternative",
+      "toast notification",
+      "react notification",
+      "tailwind toast",
+      "radix toast",
+      "toast promise",
+      "snackbar react"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "toast.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Toaster, toast } from \"@/components/ui/toast\"\n\n// Once, in your root layout\nexport function Providers({ children }: { children: React.ReactNode }) {\n  return (\n    <>\n      {children}\n      <Toaster />\n    </>\n  )\n}\n\n// Anywhere in a client component\nexport function SaveButton() {\n  return <button onClick={() => toast.success(\"Changes saved\")}>Save</button>\n}"
+    },
+    "demos": [
+      {
+        "name": "types",
+        "title": "Types",
+        "description": "Default, success, error and with an action. Show a few in a row: they stack like a deck, and hovering or focusing them fans them out into a list. Swipe one sideways to dismiss it."
+      },
+      {
+        "name": "promise",
+        "title": "Promise",
+        "description": "toast.promise shows a spinner until the work settles, then swaps the same toast to the result through the blur."
+      },
+      {
+        "name": "composed",
+        "title": "Composing the parts",
+        "description": "For a toast you render yourself: ToastProvider, Toast with your own open state, and ToastViewport placed once. It still stacks and plays its exit."
+      }
+    ],
+    "api": [
+      {
+        "name": "Toaster",
+        "description": "Shows the toasts from toast(). Place it once, for example in your root layout; if several mount, only the first shows toasts. Also accepts every ToastViewport prop.",
+        "props": [
+          {
+            "name": "position",
+            "type": "\"top-left\" | \"top-center\" | \"top-right\" | \"bottom-left\" | \"bottom-center\" | \"bottom-right\"",
+            "default": "\"bottom-right\"",
+            "description": "Where toasts appear. They swipe towards the nearer side: left for left positions, right otherwise."
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "default": "5000",
+            "description": "Milliseconds each toast stays open, unless it sets its own."
+          },
+          {
+            "name": "expand",
+            "type": "boolean",
+            "default": "false",
+            "description": "Always show the toasts as a list, instead of a deck that fans out on hover or focus."
+          },
+          {
+            "name": "visibleToasts",
+            "type": "number",
+            "default": "3",
+            "description": "How many toasts show at once. Older ones wait out of sight until newer ones close."
+          }
+        ]
+      },
+      {
+        "name": "toast",
+        "description": "A function, callable from any client code once a Toaster is mounted. Each call returns the toast's id.",
+        "props": [
+          {
+            "name": "toast(title, options?)",
+            "type": "(title: ReactNode, options?: ToastOptions) => string",
+            "description": "Shows a toast."
+          },
+          {
+            "name": "toast.success / toast.error",
+            "type": "(title: ReactNode, options?: ToastOptions) => string",
+            "description": "With a check, or a cross and the title in the destructive colour. Both draw themselves in."
+          },
+          {
+            "name": "toast.loading",
+            "type": "(title: ReactNode, options?: ToastOptions) => string",
+            "description": "With a spinner. It stays until you update it (pass its id) or dismiss it."
+          },
+          {
+            "name": "toast.promise",
+            "type": "(promise, { loading, success, error }, options?) => string",
+            "description": "Shows loading until the promise settles, then success or error in the same toast. success and error can be functions of the result."
+          },
+          {
+            "name": "toast.dismiss",
+            "type": "(id?: string) => void",
+            "description": "Closes one toast, or every toast without an id."
+          },
+          {
+            "name": "options.id",
+            "type": "string",
+            "description": "Updates the toast with this id, if it's showing, instead of adding another."
+          },
+          {
+            "name": "options.description",
+            "type": "ReactNode",
+            "description": "A second line under the title."
+          },
+          {
+            "name": "options.action",
+            "type": "{ label: string; onClick?: (event) => void; altText?: string }",
+            "description": "A button such as Undo. It closes the toast after onClick, unless onClick calls preventDefault. altText (the label by default) says what it does for screen readers."
+          },
+          {
+            "name": "options.duration",
+            "type": "number",
+            "description": "Milliseconds before this toast closes; Infinity keeps it until it's dismissed."
+          }
+        ]
+      },
+      {
+        "name": "ToastProvider",
+        "description": "Wraps your toasts and their viewport, for the parts. Built on Radix Toast's provider.",
+        "props": [
+          {
+            "name": "duration",
+            "type": "number",
+            "default": "5000",
+            "description": "Milliseconds a toast stays open, unless it sets its own."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "default": "\"Notification\"",
+            "description": "Said by screen readers before each toast."
+          },
+          {
+            "name": "swipeThreshold",
+            "type": "number",
+            "default": "50",
+            "description": "Pixels a swipe must travel to dismiss the toast; shorter swipes spring back."
+          }
+        ]
+      },
+      {
+        "name": "Toast",
+        "description": "One notification, built on Radix Toast's root. Put a ToastTitle, ToastDescription, ToastAction and ToastClose inside. Escape, a swipe, ToastClose and ToastAction close it; its timer pauses while it's hovered or focused.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it shows, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "true",
+            "description": "Whether it shows at first, when you don't."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes, including when its time is up."
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"destructive\"",
+            "default": "\"default\"",
+            "description": "Destructive turns the title the destructive colour, on the same neutral surface."
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "description": "Milliseconds before it closes, overriding the provider's."
+          },
+          {
+            "name": "type",
+            "type": "\"foreground\" | \"background\"",
+            "default": "\"foreground\"",
+            "description": "Foreground (a result of what the person did) is read out at once; background waits its turn."
+          },
+          {
+            "name": "onExitComplete",
+            "type": "() => void",
+            "description": "Called once it has finished leaving, for example to drop it from your own list."
+          }
+        ]
+      },
+      {
+        "name": "ToastViewport",
+        "description": "Where the toasts appear: a list fixed to the screen, portalled to the end of the body. Place it once inside ToastProvider. F8 moves focus to it.",
+        "props": [
+          {
+            "name": "position",
+            "type": "ToastPosition",
+            "default": "\"bottom-right\"",
+            "description": "The corner, or the middle of the top or bottom edge."
+          },
+          {
+            "name": "expand",
+            "type": "boolean",
+            "default": "false",
+            "description": "Always show the toasts as a list."
+          },
+          {
+            "name": "visibleToasts",
+            "type": "number",
+            "default": "3",
+            "description": "How many toasts show at once."
+          },
+          {
+            "name": "hotkey",
+            "type": "string[]",
+            "default": "[\"F8\"]",
+            "description": "The keys that move focus to the toasts."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "default": "\"Notifications ({hotkey})\"",
+            "description": "The region's name for screen readers."
+          }
+        ]
+      },
+      {
+        "name": "ToastTitle",
+        "description": "The toast's first line.",
+        "props": []
+      },
+      {
+        "name": "ToastDescription",
+        "description": "A second, muted line.",
+        "props": []
+      },
+      {
+        "name": "ToastAction",
+        "description": "A small outline button that acts on the toast, then closes it.",
+        "props": [
+          {
+            "name": "altText",
+            "type": "string",
+            "required": true,
+            "description": "How to do the same without the toast, for screen readers, which may hear the toast after it's gone."
+          }
+        ]
+      },
+      {
+        "name": "ToastClose",
+        "description": "An X button that closes the toast, named \"Close\". Pass children to replace the X.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Radix Toast",
+      "Button",
+      "Spinner"
+    ],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "loading-button",
+      "progress"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use toast() with one <Toaster /> for brief messages about something that just happened (saved, sent, failed), with an optional Undo action; use toast.promise for async work. Use Dialog when the person must respond before going on."
+    },
+    "controls": {},
+    "href": "/components/toast",
+    "dir": "components/toast",
+    "install": {
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button",
+        "spinner"
       ]
     }
   },
@@ -1566,8 +8053,488 @@ export const items: Item[] = [
         "motion"
       ]
     }
+  },
+  {
+    "name": "tooltip",
+    "title": "Tooltip",
+    "description": "An accessible React tooltip for Next.js and Tailwind CSS: a short hint on hover and keyboard focus, fast across a toolbar, built on Radix Tooltip.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "tooltip",
+      "hint",
+      "overlay",
+      "toolbar",
+      "icon button"
+    ],
+    "keywords": [
+      "react tooltip",
+      "nextjs tooltip",
+      "shadcn tooltip",
+      "tailwind tooltip",
+      "radix tooltip",
+      "animated tooltip",
+      "icon button tooltip",
+      "toolbar tooltip"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "tooltip.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Button } from \"@/components/ui/button\"\nimport {\n  Tooltip,\n  TooltipContent,\n  TooltipProvider,\n  TooltipTrigger,\n} from \"@/components/ui/tooltip\"\nimport { Undo2Icon } from \"lucide-react\"\n\nexport function UndoButton() {\n  return (\n    <TooltipProvider>\n      <Tooltip>\n        <TooltipTrigger asChild>\n          <Button variant=\"ghost\" size=\"icon\" aria-label=\"Undo\">\n            <Undo2Icon />\n          </Button>\n        </TooltipTrigger>\n        <TooltipContent>Undo</TooltipContent>\n      </Tooltip>\n    </TooltipProvider>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "toolbar",
+        "title": "A toolbar",
+        "description": "Hover a button, or reach it with Tab: after a moment its tooltip opens out of it. Then move along the row and the next tooltips appear at once, each taking the last one's place. Escape closes it."
+      }
+    ],
+    "api": [
+      {
+        "name": "TooltipProvider",
+        "description": "Wrap a toolbar, or your whole app, so its tooltips share the delay: once one has opened, the next open at once. A Tooltip without a provider gets its own. Also accepts every Radix Tooltip Provider prop.",
+        "props": [
+          {
+            "name": "delayDuration",
+            "type": "number",
+            "default": "300",
+            "description": "Milliseconds the pointer rests on a trigger before its tooltip opens."
+          },
+          {
+            "name": "skipDelayDuration",
+            "type": "number",
+            "default": "300",
+            "description": "Milliseconds after a tooltip closes during which the next one opens at once, without the delay or the opening animation."
+          },
+          {
+            "name": "disableHoverableContent",
+            "type": "boolean",
+            "default": "false",
+            "description": "Closes the tooltip as soon as the pointer leaves the trigger, even towards the tooltip."
+          }
+        ]
+      },
+      {
+        "name": "Tooltip",
+        "description": "One trigger and its tooltip. Also accepts every Radix Tooltip Root prop.",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open, when you control it."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Whether it starts open."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called when it opens or closes."
+          },
+          {
+            "name": "delayDuration",
+            "type": "number",
+            "description": "Overrides the provider's delay for this tooltip."
+          }
+        ]
+      },
+      {
+        "name": "TooltipTrigger",
+        "description": "What the tooltip describes. It opens on hover and on keyboard focus, and closes on click and Escape. Use asChild with a Button; an icon-only Button still needs its own aria-label, since the tooltip only describes it.",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "default": "false",
+            "description": "Render the single child (for example a Button) as the trigger."
+          }
+        ]
+      },
+      {
+        "name": "TooltipContent",
+        "description": "The hint: short text, inverted from the page. It opens out of its trigger through a soft blur. Also accepts every Radix Tooltip Content prop.",
+        "props": [
+          {
+            "name": "side",
+            "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+            "default": "\"top\"",
+            "description": "The side of the trigger it shows on. It flips when there's no room."
+          },
+          {
+            "name": "align",
+            "type": "\"start\" | \"center\" | \"end\"",
+            "default": "\"center\"",
+            "description": "How it lines up with the trigger along that side."
+          },
+          {
+            "name": "sideOffset",
+            "type": "number",
+            "default": "4",
+            "description": "Gap between the trigger and the tooltip, in px."
+          }
+        ]
+      }
+    ],
+    "primitives": [
+      "Radix Tooltip"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "popover",
+      "hover-card",
+      "button"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Tooltip for a short text hint on a control, most often the name of an icon button, shown on hover and focus. Keep anything interactive or long out of it: use Popover for that, and Hover Card for a preview of a link."
+    },
+    "controls": {},
+    "href": "/components/tooltip",
+    "dir": "components/tooltip",
+    "install": {
+      "dependencies": [
+        "radix-ui@^1.7.0"
+      ],
+      "registry": [
+        "tokens"
+      ]
+    }
+  },
+  {
+    "name": "dot-grid",
+    "title": "Dot Grid",
+    "description": "A React dot grid background for Next.js and Tailwind CSS: a fine dot pattern that fades out at the edges, with dots that brighten near the pointer.",
+    "kind": "background",
+    "category": "Backgrounds",
+    "tags": [
+      "background",
+      "dot pattern",
+      "grid",
+      "hero",
+      "pattern"
+    ],
+    "keywords": [
+      "react dot pattern",
+      "dot grid background",
+      "tailwind dot background",
+      "nextjs hero background",
+      "css dot pattern",
+      "dotted background",
+      "shadcn background",
+      "interactive background"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "dot-grid.tsx",
+      "dot-grid-highlight.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { DotGrid } from \"@/components/ui/dot-grid\"\n\nexport function Hero() {\n  return (\n    <section className=\"relative isolate py-24 text-center\">\n      <DotGrid highlight />\n      <h1>Ship your next idea</h1>\n    </section>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "hero",
+        "title": "Behind a hero",
+        "description": "Move the mouse over it: the dots near the pointer brighten a step, and the light follows on a soft spring."
+      }
+    ],
+    "api": [
+      {
+        "name": "DotGrid",
+        "description": "A layer that fills its parent from behind (absolute, -z-10, aria-hidden, ignoring the pointer). Put it first inside a relative isolate section. The dots take the text colour: text-muted-foreground by default, any text-* class to change it. Server-safe: the pattern renders without JavaScript, and only highlight adds a small client part. Also accepts every div prop.",
+        "props": [
+          {
+            "name": "size",
+            "type": "number",
+            "default": "16",
+            "description": "The distance between dots, in px."
+          },
+          {
+            "name": "dotSize",
+            "type": "number",
+            "default": "2",
+            "description": "The diameter of each dot, in px."
+          },
+          {
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "description": "Fade the pattern out towards the edges, so it never ends on a hard line."
+          },
+          {
+            "name": "opacity",
+            "type": "number",
+            "default": "0.4",
+            "description": "The pattern's opacity, from 0 to 1."
+          },
+          {
+            "name": "highlight",
+            "type": "boolean",
+            "default": "false",
+            "description": "Brighten the dots near the pointer. It listens on the parent element, with a mouse only, and is off with reduced motion."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "line-grid",
+      "gradient-drift"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use DotGrid as a quiet texture behind a hero or a section. Use LineGrid for a more structured, technical look, and GradientDrift for soft light with no pattern."
+    },
+    "controls": {},
+    "href": "/backgrounds/dot-grid",
+    "dir": "components/dot-grid",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "gradient-drift",
+    "title": "Gradient Drift",
+    "description": "A React animated gradient background for Next.js and Tailwind CSS: soft, single-colour light that drifts very slowly behind a hero or a section.",
+    "kind": "background",
+    "category": "Backgrounds",
+    "tags": [
+      "background",
+      "gradient",
+      "animated gradient",
+      "hero",
+      "mesh gradient"
+    ],
+    "keywords": [
+      "react animated gradient",
+      "animated gradient background",
+      "tailwind gradient background",
+      "nextjs hero background",
+      "mesh gradient react",
+      "soft gradient background",
+      "shadcn background",
+      "blurred gradient background"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "gradient-drift.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { GradientDrift } from \"@/components/ui/gradient-drift\"\n\nexport function Hero() {\n  return (\n    <section className=\"relative isolate py-24 text-center\">\n      <GradientDrift />\n      <h1>Ship your next idea</h1>\n    </section>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "hero",
+        "title": "Behind a hero",
+        "description": "Three soft pools of one colour drift there and back at their own pace, so the light never settles into a pattern."
+      }
+    ],
+    "api": [
+      {
+        "name": "GradientDrift",
+        "description": "A layer that fills its parent from behind (absolute, -z-10, aria-hidden, ignoring the pointer). Put it first inside a relative isolate section. The blur is baked into radial gradients, so only transforms move. It renders on the server as a still field, pauses off-screen and while the tab is hidden, and holds still with reduced motion. Also accepts every div prop.",
+        "props": [
+          {
+            "name": "tone",
+            "type": "\"neutral\" | \"primary\"",
+            "default": "\"neutral\"",
+            "description": "Neutral greys (foreground and muted-foreground), or the theme's primary colour."
+          },
+          {
+            "name": "opacity",
+            "type": "number",
+            "default": "0.05",
+            "description": "The field's opacity, from 0 to 1. The default keeps the light within a small lightness step, so it stays calm."
+          },
+          {
+            "name": "speed",
+            "type": "number",
+            "default": "1",
+            "description": "How fast it drifts: 1 is the calm default (20 seconds or more each way), 2 twice as fast. 0 holds it still."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "dot-grid",
+      "line-grid"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use GradientDrift for soft, slowly moving light behind a hero or a section, with no pattern. Use DotGrid or LineGrid for a texture instead."
+    },
+    "controls": {},
+    "href": "/backgrounds/gradient-drift",
+    "dir": "components/gradient-drift",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
+  },
+  {
+    "name": "line-grid",
+    "title": "Line Grid",
+    "description": "A React grid background for Next.js and Tailwind CSS: thin grid lines that fade out at the edges, with an optional slow, seamless pan.",
+    "kind": "background",
+    "category": "Backgrounds",
+    "tags": [
+      "background",
+      "grid",
+      "grid lines",
+      "hero",
+      "pattern"
+    ],
+    "keywords": [
+      "react grid background",
+      "grid pattern background",
+      "tailwind grid background",
+      "nextjs hero background",
+      "css grid lines background",
+      "animated grid background",
+      "shadcn background",
+      "graph paper background"
+    ],
+    "status": "stable",
+    "addedAt": "2026-10-16",
+    "updatedAt": "2026-10-16",
+    "tier": "free",
+    "files": [
+      "line-grid.tsx",
+      "line-grid-pan.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { LineGrid } from \"@/components/ui/line-grid\"\n\nexport function Hero() {\n  return (\n    <section className=\"relative isolate py-24 text-center\">\n      <LineGrid pan />\n      <h1>Ship your next idea</h1>\n    </section>\n  )\n}"
+    },
+    "demos": [
+      {
+        "name": "hero",
+        "title": "Behind a hero",
+        "description": "With pan on, the lines slide one cell every 12 seconds and loop without a seam. The fade at the edges stays put."
+      }
+    ],
+    "api": [
+      {
+        "name": "LineGrid",
+        "description": "A layer that fills its parent from behind (absolute, -z-10, aria-hidden, ignoring the pointer). Put it first inside a relative isolate section. The lines take the text colour: text-border by default, any text-* class to change it. Server-safe: the lines render without JavaScript, and only pan adds a small client part. Also accepts every div prop.",
+        "props": [
+          {
+            "name": "size",
+            "type": "number",
+            "default": "40",
+            "description": "The size of each cell, in px."
+          },
+          {
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "description": "Fade the lines out towards the edges, so the grid never ends on a hard line."
+          },
+          {
+            "name": "opacity",
+            "type": "number",
+            "default": "1",
+            "description": "The lines' opacity, from 0 to 1."
+          },
+          {
+            "name": "pan",
+            "type": "boolean",
+            "default": "false",
+            "description": "Slide the grid slowly and endlessly. It pauses off-screen and while the tab is hidden, and is off with reduced motion."
+          },
+          {
+            "name": "speed",
+            "type": "number",
+            "default": "1",
+            "description": "How fast it pans: 1 is a cell every 12 seconds, 2 twice as fast. 0 holds it still."
+          }
+        ]
+      }
+    ],
+    "primitives": [],
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "lg",
+      "card": "card"
+    },
+    "related": [
+      "dot-grid",
+      "gradient-drift"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use LineGrid behind a hero or a section for a structured, technical look; add pan for a slow sense of motion. Use DotGrid for a lighter texture, and GradientDrift for soft light with no pattern."
+    },
+    "controls": {},
+    "href": "/backgrounds/line-grid",
+    "dir": "components/line-grid",
+    "install": {
+      "dependencies": [
+        "motion@^14.0.0"
+      ],
+      "registry": [
+        "tokens",
+        "motion"
+      ]
+    }
   }
 ];
 
 /** The tokens item as CSS to paste, for the Manual install route (generated from tokens.css and theme.css) */
-export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-popover: 1400;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";
+export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --size-roll-fade: 0.25em;\n  --size-roll-fade-x: 0.5em;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-overlay: 1200;\n  --z-modal: 1300;\n  --z-popover: 1400;\n  --z-toast: 1500;\n  --z-tooltip: 1600;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n  --overlay: color-mix(in oklch, oklch(0 0 0) 40%, transparent);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n  --overlay: color-mix(in oklch, oklch(0 0 0) 60%, transparent);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --animate-collapsible-open: collapsible-open var(--duration-slow) cubic-bezier(0.22, 1, 0.36, 1);\n  --animate-collapsible-close: collapsible-close var(--duration-base) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-overlay: var(--overlay);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n  }\n  @keyframes collapsible-open {\n    from {\n      height: 0;\n      opacity: 0;\n      filter: blur(6px);\n    }\n    to {\n      height: var(--collapsible-height);\n      opacity: 1;\n      filter: blur(0);\n    }\n  }\n  @keyframes collapsible-close {\n    from {\n      height: var(--collapsible-height);\n      opacity: 1;\n      filter: blur(0);\n    }\n    to {\n      height: 0;\n      opacity: 0;\n      filter: blur(6px);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";

@@ -45,7 +45,10 @@ export const kinds = {
     plural: "Backgrounds",
     segment: "backgrounds",
     order: 2,
-    registryType: "registry:component",
+    // registry:ui, like components: shadcn installs them into components/ui, which is where the import rewrite
+    // (@/components/ui/<file>) and the Manual install paths point. registry:component landed them in
+    // components/ and broke the imports between a background's own files (2026-10-16).
+    registryType: "registry:ui",
     template: "full-bleed",
     heading: "React backgrounds",
     intro: "Free, open-source background effects for React and Next.js, built with Tailwind CSS.",

@@ -1,0 +1,50 @@
+# Toast: decisions
+
+**Status:** published directly, without a Lab step (2026-10-16, built from the roadmap note "Notifications that slide in and stack"). The page opens on Types: one outline button per kind (Default, Success, Error, With action, each button named by its label), with a Position Select at the top right. Examples: Promise, and Composing the parts. The index card is a still deck (`preview.card`).
+
+- **What it is:** short notifications at a corner of the screen that stack and close on their own. Two ways in, one file:
+  - **`<Toaster />` + `toast()`**, like sonner (which shadcn now recommends): `toast("Saved")`, `toast.success`, `toast.error`, `toast.loading`, `toast.promise(promise, { loading, success, error })` and `toast.dismiss(id?)`. Options: `id` (update that toast instead of adding one), `description`, `action` (`{ label, onClick, altText }`), `duration`. Every call returns the id.
+  - **The parts**, shaped like shadcn's original Toast: `ToastProvider`, `Toast` (`open`, `defaultOpen`, `onOpenChange`, `variant`), `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, `ToastViewport`. They stack and animate exactly like the Toaster's.
+- **Built on Radix Toast**, which gives:
+  - an announcement for each toast (a visually hidden `role="status"`, assertive for the default `type="foreground"`)
+  - F8 to focus the toasts, and Tab through them newest first
+  - Escape: closes the focused toast, or the newest when focus is elsewhere
+  - swipe handling (a 50px threshold, pointer capture)
+- **The close timer is ours, not Radix's** (Radix gets `duration={Infinity}`). Radix keeps its "paused" flag in a ref that only its viewport listeners reset, and those detach when the last toast unmounts. Close a toast with its X (focus moves to the list, which pauses), click elsewhere, then show another toast: it never closes on its own. Confirmed against bare Radix Toast 1.2.2 in a throwaway test.
+  - Ours waits on the same state the deck uses (the pointer on the toasts, or any focus in them) and on the window being in the background, as Radix's did. The listeners stay attached, and the state resets when the last toast goes.
+  - The time left carries over a pause; a new duration (`toast.promise` settling) or reopening starts it again.
+  - A regression test covers that flow.
+- **The store:** a module-level list read with `useSyncExternalStore` (an empty server snapshot, so nothing renders on the server). Ids are `toast-1`, `toast-2`…, counted on calls, never at render.
+  - `dismiss` marks a toast closed; it leaves the list once its exit has played (`Toast`'s `onExitComplete`), so the exit always plays.
+  - An update (same `id`, or `toast.promise` settling) bumps a version, and the content swaps.
+  - **Only the first mounted Toaster shows toasts.** Placing two (a layout and a page, or two demos on one docs page) never doubles them. A Toaster that takes over drops records that closed while no Toaster could play their exit. Rejected for now: sonner's `toasterId` for several independent Toasters (more API than the library needs yet).
+- **The open state lives in `Toast`**, controlled or not, and the Radix root sits inside `AnimatePresence`. Radix's own Presence waits only for CSS animations, and the deck needs JavaScript motion, so the root is unmounted by motion once the exit ends (the modal-surface pattern from Dialog).
+- **The viewport is portalled** to the end of the body (Radix Portal). A `fixed` list inside a transformed, filtered or clipped parent (the docs preview tabs animate `transform` and `filter`) would be trapped there. Placing it at the root, as shadcn says, still works the same.
+- **Look:** `toastVariants`: `rounded-lg border border-border bg-popover text-popover-foreground shadow-lg`, `z-(--z-toast)`, 16px in from the screen's edges, full width on phones and 24rem (`w-sm`) from `sm`. Content: `py-3 ps-4 pe-3`, `text-sm`, title `font-medium`, description muted. The action is an outline `sm` Button with a transparent fill; the close is a 24px ghost icon button, muted until hovered.
+- **Error colour:** the neutral surface stays; the title and the cross turn `text-destructive`, so a stack never shows a red slab (Alert's destructive variant did the same, until the owner removed Alert on 2026-10-19). **Open question for the owner:** Loading Button's error went solid red after a comparison (2026-10-14). If toasts should match it, it's one class on the root for `data-variant=destructive` (`bg-destructive text-destructive-foreground`, with the description and close button lightened).
+- **Success stays neutral** (Loading Button's decision): the drawn check carries the meaning. Loading shows the library's Spinner, hidden from screen readers.
+- **Motion** (`.agents/rules/motion.md`):
+  - **Arriving:** it slides in from the screen edge (`y` from 100% of its height) through the blur, on `spring.snappy`, with opacity and blur on `duration.base` + `ease.out`. A success or error mark draws itself in (`pathLength`, Loading Button's check and cross).
+  - **Leaving** (timer, close, Escape, action): back out to the same edge through the blur, on a timed `duration.base` + `ease.in`, so it's quickly gone. It leaves the stack at once, so the others move into place while it goes.
+  - **The deck:** older toasts tuck behind the newest. Each sits 12px further out and 5% narrower (scaled from the side that shows), and takes the front toast's height, so only an even edge shows. Their content fades out through the blur; it comes back the same way as the deck fans out. These values match the look of sonner's deck (about 12px per toast); they're constants at the top of the file (`PEEK`, `GAP`, `SHRINK`).
+  - **Fanning out:** hovering the toasts, or keyboard focus inside them, turns the deck into a list 12px apart. Every position change is on `spring.snappy`. Focus from a click doesn't count (`:focus-visible`), so closing one with the mouse doesn't leave the list open after the pointer leaves.
+  - **Height** is the documented exception: a tucked toast takes the front toast's height, and a toast whose content changes resizes. Both glide on an eased tween (`duration.slow`, `ease.out`), never a spring. Heights are measured from the content (a tucked toast's own box is the front one's), in a layout effect and then a ResizeObserver.
+  - **The hit area:** the list is as tall as the deck or the fanned-out toasts, so the pointer in a gap between two toasts still counts as hovering. Native listeners on the list, because Radix portals the toasts in: they're its children in the DOM but not in React's tree.
+  - **Swipe:** sideways, towards the nearer side of the screen (left for left positions, right otherwise). It follows the finger exactly (`x`, set with `jump()`); short of the threshold it springs back on `spring.snappy`; past it, it carries on off the screen (`duration.base`, `ease.out`) while fading through the blur. The swipe moves `x` only, so it never fights the deck's `y` and `scale`.
+  - **Changing content** (`toast.promise` settling, an update by id): the old content lifts away blurring as the new rises in (`swap`), in the same cell, while the height glides.
+  - **Order:** the newest is on top (z-index from its place). A toast past `visibleToasts` (3) waits behind the last one shown, invisible and `inert`, until newer ones close.
+  - **Reduced motion:** opacity only. The toasts sit in a plain list (always fanned out), places change at once, nothing draws in, and a swipe fades out where it was let go.
+- **Accessibility:**
+  - Radix reads a toast out once, when it opens. An update would be silent, so the Toaster keeps a polite live region and puts the updated title and description in it.
+  - Tucked content stays in the HTML; keyboard focus entering the toasts fans the deck out.
+  - `ToastAction` needs `altText` (Radix's rule): what to do without the toast, since a screen reader may read it after it's gone. `toast()` uses the label when none is given.
+  - The close button is named "Close".
+- **Card demo:** a still deck drawn with `toastVariants`. Live toasts on the index page would appear at the screen's corner and be read out on every visit, even inside the card's inert preview (Radix portals the announcement to the body).
+- **Tests:** shows and announces; success, error and loading kinds; `toast.promise` (success in place, read out; failure as an error); update by id; the close button, Escape (newest only) and `toast.dismiss` (one, then all); the action runs and closes; closes after its duration but not while the pointer is on it; doesn't stay paused after the last toast is closed from its button; the deck tucks and fans out on hover; `visibleToasts`; one Toaster's worth of toasts with two mounted; the parts (own state, exit, top-centre position, Escape while focused); axe on both.
+- **Not built yet:**
+  - info and warning kinds: status colours aren't in the portable vocabulary
+  - a custom icon option, `toast.custom`, and `unwrap()` on `toast.promise`
+  - several independent Toasters (`toasterId`)
+  - vertical swipes for the centre positions, and swiping either way
+  - right-to-left layouts (the swipe and the start-aligned content assume left to right)
+- **Fixed in integration (2026-10-16): the card demo is a client component.** It calls `toastVariants()` from `toast.tsx` (`"use client"`); calling it on the server threw. That broke every page whose related cards include Toast (Alert and Progress showed "not found").

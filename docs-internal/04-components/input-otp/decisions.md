@@ -1,0 +1,36 @@
+# Input OTP: decisions
+
+**Status:** published directly, without a Lab step (2026-10-16, roadmap build). Waiting for the owner's review on the dev server.
+
+- **What it is:** one-time code boxes on Radix One-Time Password Field (`unstable_OneTimePasswordField` in `radix-ui`). Radix does the behaviour:
+  - each character goes in its own `<input>`, and focus moves on as you type
+  - Backspace in an empty box moves back; in a filled box it clears it and moves back
+  - a pasted or autofilled code (`autocomplete="one-time-code"`) spreads across the boxes
+  - `validationType` (numeric by default) ignores other characters
+  - a hidden input submits the code with `name`; `autoSubmit` submits the form once it's full
+  - roving focus: Tab enters at the next box to fill, arrow keys move between boxes
+- **API:** shadcn's part names, `InputOTP`, `InputOTPGroup`, `InputOTPSlot` (`index`), `InputOTPSeparator`, plus `size` (`sm | md | lg`). Differences from shadcn, which wraps the `input-otp` package:
+  - **No `maxLength`:** the number of slots sets the length (that's how Radix counts).
+  - **`onValueChange`, not `onChange`:** Radix's name, and the library's. `onChange` on the root would be React's bubbling change event.
+  - **No `pattern` or `containerClassName`:** `validationType` / `sanitizeValue` replace `pattern`, and `className` styles the container.
+  - **`InputOTPSlot` renders a real input per box,** so other props on it go to that input. `className` styles the box.
+  - **`aria-invalid` on `InputOTP`** is moved to every box's input (it isn't allowed on a group), and turns the borders destructive.
+  - **`status` (`"success" | "error"`, added 2026-10-21, owner: "it needs a success animation and a failed animation of shake"):** the result of checking the code, set by the app after its own check. `error` also marks every box invalid (so `aria-invalid` isn't needed with it); `success` makes the borders solid `primary`. Unset while the code is typed or checked. The root carries `data-status`, each box `data-success`. A status, not a callback or a `verify` prop: checking is the app's business (a server round trip), and the field only shows the result.
+- **Look:** each box is Input's field: `--size-control-*` squares, `rounded-lg` (`rounded-md` small), `border-input`, Input's `shadow-xs`, a destructive border when invalid. Boxes stand apart (`gap-2`) rather than joined like shadcn's, so the focus box can be seen travelling between them. Text is `text-base` (`text-sm` small), medium, tabular.
+- **Motion:**
+  - **The focus box glides:** Input's focus (a `ring` border and the outline ring) is one element per field, a `layoutId` span inside the focused box, scoped with `LayoutGroup id={useId()}`, on `spring.snappy`. As you type it slides to the next box, so the eye follows. Boxes are all one size, so it only translates. It goes when focus leaves the field.
+  - **A full code lets the focus box go** (owner, 2026-10-21): once every box is filled, the focus box fades out (opacity, `duration.base`, `ease.out`; a ring, so no blur), so the finished code reads as a whole and the success wave or the shake isn't framed by it. Focus itself stays on the last box. To keep a visible focus for the keyboard (design.md), it comes back the moment you move (arrow keys, Home, End), click a box, arrive from outside the field (Tab), or change a digit. The slot count is read from the DOM after each render, so "full" needs no length prop.
+  - **Characters come through the blur:** the native text, caret and selection are transparent, and each box draws its character over the input. A typed character rises 6px in through the blur (`swap`). Typed over, the old lifts away as the new rises (`swap`'s exit); deleted, it sinks back the way it came (exit with `swap.initial`), chosen through AnimatePresence's `custom`.
+  - **A pasted code staggers:** when more than one character changes at once, they come in left to right 0.05s apart (the list stagger in motion.md).
+  - **A soft caret:** the empty focused box shows a 1px caret that breathes once a second (opacity 1 → 0 → 1 on `ease.inOut`, `duration.slower × 2`). Drawn with motion because `animate-caret-blink` is a site keyframe that isn't shipped.
+  - **Password:** `type="password"` draws a dot instead of the character.
+  - **Error, the head shake:** each time `status` becomes `error`, the whole field moves side to side and dies away (`x` through 0, −8, 7, −5, 3, −1, 0px on `duration.slower` + `ease.out`), the borders and focus box turning destructive with it. It's the owner's ask and a deliberate exception to motion.md's "no wiggles" and Loading Button's "no shake": a wrong code is the one place where a shake explains the change (the same "no" as a login form). It shakes again only after the status has left `error` (a digit changed and the code is checked anew). Transform only; the inline transform is cleared when it ends.
+  - **Success, the wave:** each box swells 6% and settles (`scale` 1 → 1.06 → 1, `duration.slow` + `ease.out`), left to right 0.05s apart (the list stagger), as its border fades to solid `primary`. Neutral, like Loading Button's success: no green. A named motion state, so it plays once per success, never on first paint.
+  - **First paint and reduced motion:** nothing animates on first paint (`initial={false}`). With reduced motion the characters only fade, the focus box jumps and the caret is still; success and error only change colour (no wave, no shake).
+- **Pitfalls checked:** the focus box is `layoutId`, which measures on-screen boxes, so a zoomed preview would double its trip. The hero isn't zoomed; don't add `zoom` to these demos.
+- **Demos:**
+  - **Hero:** six digits in two groups with a separator, a visible label, Size in the top-right corner, and the success and error states (owner, 2026-10-21: they belong in the first preview, so nobody has to scroll to the examples to see them). Once six digits are in, a pretend check runs for 600ms with a Spinner, then the wave (123456) or the shake (anything else). The message under the field swaps through `swap` in a polite live region: the hint, "Checking the code…", a drawn check with "Code verified", or the destructive error. Changing a digit goes back to the hint.
+  - **Card demo:** four boxes, because six don't fit an index tile.
+  - **Examples:** PIN (`type="password"`, autocomplete off). The Invalid example became a Success and error example, which was then folded into the hero (2026-10-21).
+- **Tests:** a named group of named boxes; typing moves focus and the focus box; letters ignored; paste fills every box, moves focus to the end and fills the hidden input; Backspace goes back and clears; the focus box fades once the code is full and comes back on an arrow key; invalid on every box and not on the group; the PIN dot; `status="error"` shakes (an inline transform mid-shake, none left after) and marks every box invalid, no shake on first paint, `status="success"` marks every box; axe empty, focused, invalid and verified.
+- **Not built yet:** a `pattern`-style regex prop (use `validationType="none"` with `sanitizeValue`); a joined-boxes variant like shadcn's; a vertical layout (Radix supports `orientation`, untested here).

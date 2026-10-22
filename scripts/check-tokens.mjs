@@ -27,8 +27,8 @@ const LIBRARY_BANS = [
     "a site type token. Library components use text-xs, text-sm or text-base.",
   ],
   [
-    /\b(?:bg|text|border|ring|outline|fill|stroke|from|via|to|decoration|divide|shadow|caret)-(?:brand|success|warning|danger|info|overlay|sidebar)\b/g,
-    "a site-only colour. Library components use shadcn's semantic colours.",
+    /\b(?:bg|text|border|ring|outline|fill|stroke|from|via|to|decoration|divide|shadow|caret)-(?:brand|success|warning|danger|info|sidebar)\b/g,
+    "a site-only colour. Library components use shadcn's semantic colours (and the shipped `overlay`).",
   ],
   [/\bshadow-(?:card|brand|highlight)\b/g, "a site-only shadow."],
   [

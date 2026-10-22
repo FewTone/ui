@@ -239,6 +239,7 @@ There are two layers:
 | `--space-page` | 40px | Page header to the first section; between index sections |
 | `--space-hero` | 24px | Item page: the description to the framed hero preview |
 | `--size-collapsed` / `--size-collapsed-fade` | 288px / 96px | A long section's starting height (Installation) and the fade at its foot (`Expandable`) |
+| `--size-roll-fade` / `--size-roll-fade-x` | 0.25em / 0.5em | The fade round a rolling number (Number Ticker): above and below, where digits spin out of sight, and at the sides, where characters come, go and glide. Shipped |
 | `--space-block` | 48px | Between examples; before Related |
 | `--space-heading` | 12px | Section heading to its content |
 | `--space-stack` | 16px | Section label to its grid; title row to description |
@@ -376,7 +377,7 @@ The shadows are neutral. Dark mode uses deeper shadows plus a lit top edge on ca
 | Not for | full-screen overlays, fills, highlights, hover or scroll-edge fades: those still only fade |
 | Reduced motion | opacity only |
 
-**Keyframe animations:** `animate-blur-in` and `animate-blur-out` (they were `fade-in` / `fade-out`), `animate-rise-in`, `animate-scale-in`, `animate-popover-in` / `animate-popover-out` (shipped to users), and `animate-caret-blink`.
+**Keyframe animations:** `animate-blur-in` and `animate-blur-out` (they were `fade-in` / `fade-out`), `animate-rise-in`, `animate-scale-in`, `animate-popover-in` / `animate-popover-out` and `animate-collapsible-open` / `animate-collapsible-close` (all four shipped to users), and `animate-caret-blink`.
 
 **Press feedback:** a colour step, not a scale (owner, 2026-10-14). The `--scale-press` token was removed.
 
@@ -433,11 +434,11 @@ Components are installed into other people's shadcn projects, which have shadcn'
 
 | Use | Not |
 |---|---|
-| shadcn colours: `background`, `foreground`, `primary`, `secondary`, `muted`, `accent`, `border`, `input`, `ring`, `popover`, `destructive` (+ `-foreground`) | `brand`, `success`, `warning`, `danger`, `info`, `overlay`, `sidebar` |
-| stock text sizes `text-xs`, `text-sm`, `text-base` (Tailwind's values, also defined on our site) | `text-label`, `text-body-sm` and the other named sizes |
-| shipped tokens via `(--token)`: `--size-control-*`, `--size-icon-*`, `--duration-*`, `--ease-spring`, `--z-popover`, `--focus-ring-*`, `--opacity-disabled` | `--space-*` and other site tokens |
+| shadcn colours: `background`, `foreground`, `primary`, `secondary`, `muted`, `accent`, `border`, `input`, `ring`, `popover`, `destructive` (+ `-foreground`), plus the shipped `overlay` (the backdrop behind dialogs and sheets, 2026-10-16) | `brand`, `success`, `warning`, `danger`, `info`, `sidebar` |
+| stock text sizes `text-xs`, `text-sm`, `text-base` (Tailwind's values, also defined on our site); demos that show a big number or heading may use the larger stock sizes `text-lg` to `text-9xl`, defined on our site at Tailwind's values since 2026-10-21 (they used to fall back to the body size) | `text-label`, `text-body-sm` and the other named sizes |
+| shipped tokens via `(--token)`: `--size-control-*`, `--size-icon-*`, `--duration-*`, `--ease-spring`, `--z-overlay` / `--z-modal` / `--z-popover` / `--z-toast` / `--z-tooltip` (2026-10-16), `--focus-ring-*`, `--opacity-disabled` | `--space-*` and other site tokens |
 | focus: `outline-ring focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset)` | the `focus-ring` utility |
-| popovers: `animate-popover-in` / `animate-popover-out` | `animate-scale-in` and the other site animations |
+| popovers: `animate-popover-in` / `animate-popover-out`; collapsing content: `animate-collapsible-open` / `animate-collapsible-close`, with `--collapsible-height` set from Radix's `--radix-*-content-height` (2026-10-16; Sidebar's groups. Accordion moved to motion on 2026-10-19 for its staged, interruptible glide) | `animate-scale-in` and the other site animations |
 | radius: `rounded-md` / `rounded-lg` (follows the user's `--radius`); `rounded-sm` and `rounded-xs` only for the smallest controls (Checkbox). `sm` follows `--radius` in shadcn's theme too; `xs` is Tailwind's 2px there, our 4px here. | fixed values |
 
 The shipped list lives in `packages/ui/src/registry/shared.ts`. To ship a new token, add it there, then use it. The registry generator reads its value from the token files.

@@ -89,6 +89,28 @@
   --text-sm--line-height: calc(1.25 / 0.875);
   --text-base: 1rem;
   --text-base--line-height: calc(1.5 / 1);
+  /* The larger stock sizes, for demos that show a big number or heading (Number Ticker). Users' projects already
+     have them, so a demo looks the same there; without them here, text-6xl silently fell back to the body size. */
+  --text-lg: 1.125rem;
+  --text-lg--line-height: calc(1.75 / 1.125);
+  --text-xl: 1.25rem;
+  --text-xl--line-height: calc(1.75 / 1.25);
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: calc(2 / 1.5);
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: calc(2.25 / 1.875);
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: calc(2.5 / 2.25);
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 1;
 
   /* Weights */
   --font-weight-regular: 400;
@@ -151,6 +173,14 @@
   /* Popovers (Select content and similar) open from and close to their trigger. Shipped to users (ADR 0009). */
   --animate-popover-in: popover-in var(--duration-fast) var(--ease-out) both;
   --animate-popover-out: popover-out var(--duration-instant) var(--ease-in) both;
+  /*
+   * Collapsing content (Accordion, Collapsible): the height glides on an eased tween, never a spring, while the
+   * content comes through the blur. The component sets --collapsible-height from Radix's
+   * --radix-*-content-height. Opening has no fill mode, so the height goes back to auto once it's open.
+   * Shipped to users (ADR 0009).
+   */
+  --animate-collapsible-open: collapsible-open var(--duration-slow) var(--ease-out);
+  --animate-collapsible-close: collapsible-close var(--duration-base) var(--ease-in) both;
 
   @keyframes blur-in {
     from {
@@ -225,6 +255,30 @@
       transform: scale(0.96);
     }
   }
+  @keyframes collapsible-open {
+    from {
+      height: 0;
+      opacity: 0;
+      filter: blur(6px);
+    }
+    to {
+      height: var(--collapsible-height);
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  @keyframes collapsible-close {
+    from {
+      height: var(--collapsible-height);
+      opacity: 1;
+      filter: blur(0);
+    }
+    to {
+      height: 0;
+      opacity: 0;
+      filter: blur(6px);
+    }
+  }
 }
 
 :root {
@@ -265,6 +319,11 @@
   /* Long sections (Installation) start at this height, fading into the page, with a button for the rest */
   --size-collapsed: 18rem;
   --size-collapsed-fade: 6rem;
+  /* A rolling number (Number Ticker): the room above and below it that the fade covers, so digits roll out of
+     sight inside it. In em, so it scales with the text. Shipped. */
+  --size-roll-fade: 0.25em;
+  /* …and the room at its sides, where characters fade as they come, go and glide. Shipped. */
+  --size-roll-fade-x: 0.5em;
 
   /* The card's corners stay concentric with the tile's (xl) around the frame */
   --radius-card: calc(var(--radius-xl) + var(--space-card-frame));

@@ -1,0 +1,45 @@
+# Combobox: decisions
+
+**Status:** published (2026-10-16), built from the roadmap note "Type to filter and pick, right in the field", on Command. Waiting for the owner's review on the dev server.
+
+- **What it is:** a form field you type into to filter a list of options and pick one, or several (`multiple`) shown as chips. The field is the text input, styled like Select's trigger (border, height, chevron, focus ring), and the options open in a list under it.
+- **Why the input is the field** (not shadcn's classic button that opens a popover with a search box):
+  - the roadmap asks for typing "right in the field"
+  - Select already is the button-plus-search version (`SelectContent searchable`); a Combobox that did the same would be a second Select
+  - it's WAI-ARIA's editable combobox with list autocomplete, and what shadcn's newer Base UI combobox does
+  - shadcn's Popover + Command recipe still works with our parts, for anyone who wants it (Command's height glide stands aside inside PopoverContent)
+- **API: one component, options as data.** `Combobox` takes `options` (`value`, `label`, `keywords`, `disabled`, `group`), `value` / `defaultValue` / `onValueChange` (a string, or a string[] with `multiple`; `""` is none), `placeholder`, `emptyText`, `size` (`sm` / `md`, Select's heights), `renderOption` (custom row content; the field still shows the label), `filter`, `onSearchChange` and `name`. Every other input prop goes to the input (`id` for a `<label htmlFor>`, `aria-*`, `autoFocus`, `ref`). `className` styles the field. There are no Combobox parts: the root has to know every label while the list is closed (for the field and the chips), so options as data is the clean shape, and anything more custom is Command's parts.
+- **Built on:**
+  - **Command** (`CommandProvider`, `useCommandInput`, `CommandList`, `CommandItem`, `CommandGroup`, `CommandEmpty`, `useGlidingHeight`): filtering and ranking, groups, the empty state, the gliding highlight and list height, aria-activedescendant and the keyboard. The input sits in the field and the list in a portal, both inside the provider; the list registers itself, so the DOM reads work across the portal.
+  - **Radix Popover** directly (not our PopoverContent): placement under the field (`PopoverAnchor`, the field's width), flipping, Escape and clicks outside, and its presence for the exit. Our PopoverContent would glide its own height around Command's list, and the two glides would fight; this way the list's glide (which carries on mid-glide) does it. Its `role="dialog"` is removed and it never takes focus: focus stays in the field.
+- **Behaviour:**
+  - **Opening:** typing, ArrowDown or ArrowUp, or a press on the field. Not on focus alone, so tabbing through a form doesn't pop lists open.
+  - **One value:** the field shows the chosen label. The first press selects that label, so typing replaces it (a tab into the field selects it natively). Typing filters from scratch; the list opens on the chosen option, highlighted and centred. Enter or a click picks and closes. Escape, a click outside or Tab closes and puts the label back; clearing the text and leaving clears the choice (`onValueChange("")`), the only way to empty it without a clear button.
+  - **Several:** chips sit before the input, the placeholder shows only while there are none, and the list stays open while you pick, so each check can be seen drawing in or erasing. Picking a chosen option unpicks it. Backspace in an empty field removes the last chip. A chip's × removes it; it's out of the tab order (Backspace and the list do the same from the keyboard), keeps focus in the field, and is named "Remove …". The search stays after a pick, so you can pick several from one filter; it clears when the list closes.
+  - **Keyboard:** the arrows, Enter and Escape as above; Home and End stay with the text (Command's jump is turned off). Enter with the list closed submits the form as usual.
+  - **Forms:** `name` adds hidden inputs (one per value with `multiple`).
+  - **States:** `disabled` (half opacity, no typing or opening); `aria-invalid` gives the field a destructive border and focus ring, as on Input and Select.
+- **Accessibility:** the input is the `combobox` (`aria-expanded`, `aria-controls`, `aria-autocomplete="list"`, `aria-activedescendant`), named by its label or `aria-label`. One value: `aria-selected` follows the highlight (the APG pattern) and the field shows the choice. Several: the listbox is `aria-multiselectable` and `aria-selected` says which options are chosen. The empty state is read from a status line (Command). The chevron is decorative.
+- **Motion** (`.agents/rules/motion.md`):
+  - **The check draws itself in** (`pathLength`, `duration.base`, `ease.out`) and erases the way it came (`duration.fast`, `ease.in`), Checkbox's path and stroke, with its opacity following so a round cap never leaves a dot. The detail that makes it: with several values the list stays open, so picking reads as ticking a box.
+  - **Chips come and go through the blur** (`blur` with a 96% scale, the popover family's entrance) and leave on `duration.fast` + `ease.in`. `AnimatePresence mode="popLayout"` takes a leaving chip out of the flow at once, so the others (and the input after them) glide into place on `spring.snappy` (`layout="position"`, transform only) while it fades where it was.
+  - **The field's height glides** when chips wrap onto another line or unwrap (`useGlidingHeight` on the field: an eased tween, `duration.slow`, never a spring, clipped only while it moves, carrying on mid-glide). The list follows the field down as it grows (Radix repositions on resize).
+  - **The list** opens out of the field and closes back into it through the blur (`animate-popover-in` / `out` from Radix's transform origin), and its height glides as results change (Command).
+  - **The chevron** turns over while open, as on Select.
+  - Nothing animates on first paint (chips there at mount, the chosen option's check when the list opens). Reduced motion: chips fade without the blur or the glide, the check and the heights jump.
+- **Look:**
+  - **The field:** Select's trigger: `rounded-lg border border-input`, `shadow-xs`, `text-sm`, the chevron 12px from the end, 36px tall (`md`) or 32px (`sm`). The text starts 13px in, the same as Select's value.
+  - **Wrapped lines** are the input's height (32 or 28px), with chips (24px, `rounded-md bg-secondary text-xs font-medium`) centred in them, so every line keeps the same rhythm.
+  - **The list:** the floating-surface family (`rounded-lg border bg-popover shadow-md`), as wide as the field. Rows use Select's spacing (`ps-2 pe-8`) with the check where Select's sits.
+- **Demos:**
+  - **Hero (One value or several):** Framework (one value, Next.js chosen) and Labels (several, Bug and Design as chips), each labelled, named underneath, with a Size setting (Small / Medium) in the top-right corner.
+  - **Groups and long lists:** time zones under three region headings, keywords for abbreviations and other names (IST, Pacific, Mumbai), and `renderOption` adding the country to each row. A client file, because `renderOption` is a function.
+  - **Card:** one field.
+- **Tests:** the combobox named by its label and closed at first; ArrowDown opening it with aria-controls on the listbox; aria-activedescendant moving and skipping disabled options; typing filtering (keywords too) and Enter picking and closing, with the label shown; a click picking and the list reopening on the chosen option with its check; the first press selecting the label so typing replaces it; Escape putting the label back; clearing the text clearing the choice; the empty state's status line; several: chips, aria-multiselectable, toggling from the list with aria-selected, Backspace removing the last chip after the search is gone, a chip's × removing it with focus kept; form values from `name`; axe closed and open.
+- **Not built yet:**
+  - a clear button in the field for one value (clearing the text does it)
+  - creating an option that doesn't exist ("Add “…”")
+  - async options (loading state, `shouldFilter={false}` passthrough)
+  - keyboard focus on chips (← into the chips, as Base UI does)
+  - controlled `open`
+  - a combobox that accepts free text (`freeSolo`)

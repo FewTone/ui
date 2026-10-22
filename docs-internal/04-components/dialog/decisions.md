@@ -1,0 +1,35 @@
+# Dialog: decisions
+
+- **What it is:** a modal window for a focused task (a short form, details that need an answer), built on Radix Dialog (2026-10-16, roadmap: "A modal that springs in and fades out, with focus handled"). Parts and props follow shadcn: `Dialog`, `DialogTrigger`, `DialogPortal`, `DialogOverlay`, `DialogContent` (with `showCloseButton`), `DialogHeader`, `DialogFooter`, `DialogTitle`, `DialogDescription`, `DialogClose`.
+- **Behaviour is Radix's:** focus moves to the first focusable element and stays inside, Escape and the backdrop close it, focus goes back to the trigger, and the page behind is hidden from screen readers (`aria-hidden` on everything else) and doesn't scroll. The title names it and the description describes it.
+- **The root keeps the open state** (the site's command menu and mobile nav pattern, made controllable). `Dialog` holds `open` itself, controlled (`open` / `onOpenChange`) or not (`defaultOpen`), and drives Radix with it. `DialogPortal` renders the Radix portal with `forceMount` inside `AnimatePresence` only while open, so the exit can play before Radix unmounts. Every part reads the state from a context; using one outside `Dialog` throws a clear error.
+- **Motion** (`.agents/rules/motion.md`, modal row):
+  - **Enter:** the window comes through the blur (`blur.hidden` → `blur.shown`) and scales up from 96%. The scale is on `spring.snappy`; the fade and blur are on `duration.base` + `ease.out`, so the blur never overshoots into a negative value.
+  - **Exit:** timed, `duration.base` + `ease.in`, back to 96% through the blur.
+  - **Backdrop:** `bg-overlay`, fading only (a full-screen blur would cost too much, ADR 0011).
+  - **Reduced motion:** opacity only (`blur.shown` and scale 1 as the hidden values).
+  - **First paint:** `AnimatePresence initial={false}`, so a dialog that starts open (`defaultOpen`) is simply there.
+- **The crafted detail: it grows out of what opened it.** The scale's `transform-origin` is the trigger's centre, so the window seems to come from that button and shrinks back into it as it closes. At 96% the window starts 4% of the distance towards the trigger: a few pixels for a button near the middle, about 25px for one in a corner of a laptop screen.
+  - **Which element:** the focused element when the window mounts (a key press, or a click in Chrome and Firefox), else the `DialogTrigger` (Safari doesn't focus buttons on click). A dialog opened from code with nothing focused grows from its own centre. A dialog opened from a menu item grows from that item.
+  - **Measured once,** in a ref callback as the window mounts, before Radix moves focus in (its focus runs in an effect). The window's own box comes from its offset in the positioner (layout pixels, untouched by the scale), not from its scaled on-screen rect. Reopening mid-exit keeps the same node, so the origin stays put.
+  - **Why this and not a rise from below on phones:** it explains where the window came from on every screen, it costs one measurement, and it stays within the existing scale (no new numbers). A phone layout that docks the window to the bottom would be a different component (a drawer).
+- **The page is usable at once after closing.** Radix keeps the backdrop clickable with an inline `pointer-events: auto`; while the exit plays, `DialogOverlay` overrides it to `none`, and the window gets `data-[state=closed]:pointer-events-none`. Radix 1.7 already stops blocking the page (`disableOutsidePointerEvents`) once it's closed.
+  - **Focus after that:** Radix moves focus to the trigger once the window unmounts, which would pull it away from a field someone clicked during the exit. `keepMovedFocus` (on `onCloseAutoFocus`, after the caller's own handler) lets focus stay put when it's on anything but the body; otherwise the focused element went with the window, and the trigger gets focus as usual.
+- **Layout:**
+  - **Positioner:** a `fixed inset-0 flex` layer (`data-slot="dialog-positioner"`, `z-(--z-modal)`, `p-4`, `pointer-events-none`) centres the window. It replaces shadcn's `translate(-50%, -50%)`, which needs an arbitrary `max-w-[calc(100%-2rem)]` to keep a margin and can land on half pixels.
+  - **Window:** `max-w-lg`, `max-h-full` of the positioner (16px clear on every side), so long content scrolls inside it rather than running off the screen. `rounded-lg border border-border bg-background shadow-lg`, `p-6`, `gap-4`.
+  - **Close button:** our `Button` (ghost, `icon-sm`), named "Close", muted until hovered, with Button's own tint as the hover. It's last in the DOM, so focus starts on the first field, not on Close. It sits at `top-5 end-4`: centred on the title's 24px line, its icon lined up with the window's 24px padding.
+  - **Header room:** with the close button shown, `DialogHeader` gets `pe-8` (through `**:data-[slot=dialog-header]`), so a long title never runs under it.
+  - **Footer:** stacked on phones with the last (main) action on top, a row at the end from `sm`, as in shadcn.
+  - **Type:** the title is `text-base font-semibold` (stock sizes only, so not shadcn's `text-lg`), the description `text-sm text-muted-foreground`.
+- **Shared with Alert Dialog:** `dialogStyles`, `dialogOverlayMotion`, `keepMovedFocus`, `useDialogState`, `useDialogWindow` and `useMergedRef` are exported from `dialog.tsx`, so the two always look and move the same. Installing Alert Dialog installs Dialog.
+- **Demos:**
+  - **Edit profile (hero):** Name and Username in a form; Save (or Enter in a field) closes it, so it's controlled. Cancel, the close button, Escape and the backdrop close it too.
+  - **Long content:** terms that scroll in a `max-h-72` area between a header and a footer that stay in place. The scrolling area is focusable (`tabIndex={0}`, named "Terms"), so the arrow keys scroll it.
+  - **No card demo:** the hero is one button.
+- **Tests:** the role and accessible name and description; focus moving in, Escape, and focus back on the trigger; focus left where it was put during the exit; Tab staying inside; the close button, `DialogClose` and the backdrop closing it; controlled `open`; `defaultOpen` without the close button; the origin measured from the trigger (layout stubbed, jsdom has none); axe closed and open.
+- **Not built yet:**
+  - a size prop (a wider or narrower window is a `max-w-*` class on `DialogContent`, as the hero's `max-w-md`)
+  - a scrolling body part with edge fades (the Long content demo uses a plain scrolling `section`)
+  - a nested-dialog treatment (the parent stepping back)
+  - a full-screen variant on phones

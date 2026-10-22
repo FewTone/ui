@@ -1,0 +1,30 @@
+# Number Ticker: decisions
+
+**Status:** published directly, without a Lab step (2026-10-16, built from the roadmap note "Numbers that roll to their value"). Category Effects. Reworked on 2026-10-21 (below). The page opens on "A changing value": one big price (`text-5xl`, `text-6xl` from `sm`), Decrease / Shuffle / Increase, Format in the top-right corner. The one example is "Stats on view" (users, revenue in USD and uptime at `text-5xl`, with Replay). The index card shows one stat at `text-3xl` (`preview.card`).
+
+- **What it is:** a number that flows to its value, for prices, stats and counters. Not a shadcn component. The API follows the library's shape: `value`, `from` (0), `format` (`Intl.NumberFormatOptions`), `locale` (`"en-US"`), `prefix`, `suffix`, `direction` (`up | down`, from the numbers by default), `continuous` (true), `delay` (seconds), `startOnView` (true).
+- **Licence (keep):** the engine, its stylesheet and the `flow` timing curve are adapted from an MIT-licensed open-source project. MIT requires its copyright and permission notice to travel with the code, so the full notice sits in `number-ticker.tsx` and a one-line notice on the `flow` preset in `lib/motion.ts`. Don't remove them; everything else about the source is our own, and no package is installed (the owner, 2026-10-21, asked for no dependency and no references beyond what the licence needs).
+
+## How it moves (2026-10-21)
+
+- **Digits:** each is a column of ten rows. CSS places every row from one number, the digit shown plus a registered custom property (`--_ticker-d`), through `mod()` and `round()`, so only the neighbours of the current digit are ever in view and nothing reflows. A spin animates that one property from minus the distance to 0 (`composite: "accumulate"`, so a spin mid-spin carries on).
+- **The spin's distance** follows the trend (`Math.sign(new − old)` by default; `direction` forces up or down): the short way, or round the column when the trend says so.
+- **Continuous** (on by default, because the owner wanted 9 → 2,481 to look like counting up): when a higher place changes, the unchanged places below it spin one whole turn. `continuous={false}` makes each digit take the short way.
+- **Sections:** what comes before the number, the integer part held to its right, the fraction held to its left, and what comes after. Each character that stays glides to its new place from where it was drawn (FLIP on `getBoundingClientRect`, accumulating), and each section glides too.
+- **Width:** the number's frame animates its width as a counter-scaled transform (`--_ticker-d-width` and `--_ticker-dx`, the inner part scaling back), so it costs no layout and text beside it glides.
+- **Coming and going:** a new character fades in (`--_ticker-d-opacity`); a new digit starts at 0 and spins up as it does. A character that goes is popped out where it was (absolute, `inert`) and fades out, a leaving digit spinning down to 0, then it's removed once every animation has finished. A changed symbol (a sign) cross-fades, `mix-blend-mode: plus-lighter` so the overlap doesn't dip.
+- **The fade:** the frame is masked 0.25em above and below and 0.5em at the sides, with rounded corners (radial gradients), through the shipped `--size-roll-fade` (0.25em) and `--size-roll-fade-x` (0.5em).
+- **Timings:** the `flow` preset in `lib/motion.ts`: a spring sampled into `linear()` over 900ms for moves, width and spin, and 450ms `ease-out` for fades. Not `spring.smooth`: the owner wanted this exact feel.
+- **When it can't animate** (no `mod()`, no `linear()`, no registered properties, reduced motion, a hidden tab or a box with no size), it changes without moving, and characters that go are removed at once.
+- **Light DOM:** the stylesheet is a React 19 `<style href precedence>`, which React hoists to the head and keeps once however many tickers; the custom properties are registered once with `CSS.registerProperty`. Class names are `ticker-*`. Its working variables (`--current`, `--n`, `--length`, `--offset`, `--y`, `--scale-x`, `--width`) and the mask's `#000` (alpha only) are documented `check-tokens-ignore` exceptions.
+- **Server markup:** the server sends the final value as plain spans (padded like the columns, so the first paint doesn't shift), inside a span React never touches again (`dangerouslySetInnerHTML`, fixed at the first render); the engine builds its columns there in a layout effect, before the first paint.
+- **`from`, `startOnView` and `delay`:** on the client it starts at `from` without animating, then flows to the value once it's half in view (or on mount), after `delay`. A value that changes before then waits.
+- **Accessibility:** the host is `role="img"` named by the formatted value, so the columns are never read.
+- **Replaced the same day:** an odometer staggered from the right; slot reels (laps, a click, a motion blur); a spring-smooth rebuild with FLIP and blur exits; counting laps; a left-to-right landing stagger. None felt premium enough.
+
+## Other decisions
+
+- **`locale` defaults to en-US,** not the runtime's: the server's locale and the browser's can differ, and the text would then mismatch on hydration. Pass the visitor's locale when it's known on both sides.
+- **Line height 1:** the columns' spacing depends on it, so give the ticker its own size class. The demos use the larger stock sizes (`text-3xl`, `text-5xl`, `text-6xl`), defined on our site since 2026-10-21; before that they silently fell back to the body size.
+- **Tests** (jsdom has no `mod()`, `linear()` or registered properties, so they run the still path): an image named by the formatted value; a column of ten rows per digit showing its digit, one row reachable; the separator as a symbol; Intl formats, prefix and suffix; changing value (2,481, then 7); reduced motion showing the value at once; the server's plain markup; axe. The motion is checked by eye.
+- **Not built yet:** a per-place maximum (`max: 5` for a countdown's tens of seconds), syncing several tickers that move each other, start and finish events; announcing changes (left to the caller's live region).

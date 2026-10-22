@@ -17,12 +17,18 @@ export const shippedVariables = [
   "size-icon-sm",
   "size-icon-md",
   "size-icon-lg",
+  "size-roll-fade",
+  "size-roll-fade-x",
   "duration-instant",
   "duration-fast",
   "duration-base",
   "duration-slow",
   "duration-slower",
+  "z-overlay",
+  "z-modal",
   "z-popover",
+  "z-toast",
+  "z-tooltip",
   "focus-ring-width",
   "focus-ring-offset",
   "opacity-disabled",
@@ -32,10 +38,15 @@ export const shippedVariables = [
 export const shippedEasings = ["ease-spring"] as const;
 
 /** Colours components need that shadcn's current themes don't define; resolved to literal light and dark values */
-export const shippedColors = ["destructive-foreground"] as const;
+export const shippedColors = ["destructive-foreground", "overlay"] as const;
 
 /** Keyframe animations components use; their easing is written out literally for users */
-export const shippedAnimations = ["popover-in", "popover-out"] as const;
+export const shippedAnimations = [
+  "popover-in",
+  "popover-out",
+  "collapsible-open",
+  "collapsible-close",
+] as const;
 
 /** The standard shadcn colour variables every user project already has */
 export const shadcnVariables = [
