@@ -68,7 +68,7 @@ docs-internal/             long-term project memory (see map below)
 | `pnpm build` | Production build |
 | `pnpm index` | Rebuild the item index and the registry after editing any `*.meta.ts` or component |
 | `pnpm test` | Vitest + Testing Library + axe for every component (packages/ui) |
-| `pnpm check` | Lint + item index freshness + typecheck + token check + tests. **Run this before saying work is done.** |
+| `pnpm check` | Lint + item index freshness + typecheck + token check + tests. **Run this before saying work is done.** CI runs it, and `pnpm build`, on every push to main and every PR (`.github/workflows/ci.yml`, ADR 0015). |
 | `REGISTRY_URL=http://localhost:3000 pnpm dev` | Serve the registry with local dependency URLs, to test `npx shadcn add http://localhost:3000/r/<name>.json` in a scratch app |
 | `pnpm lint` / `pnpm format` | Biome |
 | `pnpm tokens` | Regenerate `palette.css` after changing hues in `scripts/tokens/generate-palette.mjs` |
@@ -118,7 +118,7 @@ The owner asks for components one at a time; build only the one requested.
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade), 0012 the MCP server (hosted, keyless, read-only, at /mcp), 0013 the Smooth UI skill (our motion and polish lessons as a public skill for any project), 0014 llms.txt, llms-full.txt and a `.md` version of every page |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade), 0012 the MCP server (hosted, keyless, read-only, at /mcp), 0013 the Smooth UI skill (our motion and polish lessons as a public skill for any project), 0014 llms.txt, llms-full.txt and a `.md` version of every page, 0015 CI on GitHub Actions (`pnpm check` and `pnpm build` on every push and PR) |
 | `04-components/` | One folder per component with `decisions.md`: why it's built the way it is, and what's deliberately not built yet |
 | `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
@@ -164,7 +164,7 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
   - MCP server (2026-10-22, ADR 0012): hosted at `/mcp`, keyless and read-only, with five tools (search, list, get a component, get an example, the install command); setup for each assistant at `/docs/mcp`
 
 **Next:**
-- the internal Lab with knobs (`/lab/<name>`), and CI (GitHub Actions running `pnpm check`)
+- the internal Lab with knobs (`/lab/<name>`) (CI is done, 2026-10-23, ADR 0015)
 - the owner's review of the 43 new items, then the changes it asks for
 - new roadmap entries once the review is done (every current entry is built)
 - AI layer: a "how to use FewTone UI" skill (the MCP server, the Smooth UI skill, llms.txt and the `.md` pages are done, 2026-10-22/23)

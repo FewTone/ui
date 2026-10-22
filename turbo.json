@@ -5,7 +5,14 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/packages/ui/src/**", "$TURBO_ROOT$/scripts/**"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "public/r/**"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "dist/**",
+        "public/r/**",
+        "public/skills/**"
+      ],
       "env": ["REGISTRY_URL"]
     },
     "dev": {

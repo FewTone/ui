@@ -36,6 +36,12 @@ export async function ogFonts() {
   ];
 }
 
+/**
+ * Geist has no ⌘, so the renderer tried to download a fallback font for it at build time, failed and left the
+ * symbol out of the card ("a K palette"). Spell it out instead.
+ */
+const drawable = (text: string) => text.replace(/⌘/g, "Cmd+");
+
 export function OgCard({
   eyebrow,
   title,
@@ -72,10 +78,12 @@ export function OgCard({
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
-        <span style={{ fontSize: 26, color: colors.muted }}>{eyebrow}</span>
-        <span style={{ fontSize: 76, fontWeight: 600, letterSpacing: -3, lineHeight: 1.05 }}>{title}</span>
+        <span style={{ fontSize: 26, color: colors.muted }}>{drawable(eyebrow)}</span>
+        <span style={{ fontSize: 76, fontWeight: 600, letterSpacing: -3, lineHeight: 1.05 }}>
+          {drawable(title)}
+        </span>
         <span style={{ fontSize: 30, color: colors.muted, lineHeight: 1.4, maxWidth: 940 }}>
-          {description}
+          {drawable(description)}
         </span>
       </div>
       <span style={{ fontSize: 24, color: colors.muted }}>ui.fewtone.com</span>
