@@ -18,11 +18,17 @@
   - **`field-sizing` alone:** it grows instantly, with no glide, and isn't in every browser.
   - **A wrapper that glides around a borderless textarea** (no scroll to hold): it moves `className` off the textarea and breaks shadcn's API and Input's "no wrapper" decision.
   - **A hidden mirror element** sized by the text: it has to copy every text style to wrap the same way, and it's still instant.
+- **Drag to resize** (owner, 2026-10-22: "can drag to resize it in height like a normal textarea, but in our style and tokens"):
+  - **No drawn grip** (owner, 2026-10-22: a two-stroke grip drawn from a shipped `--grip-resize` token was built, then removed as not needed). The bottom-right corner (a `--size-icon-sm` square) is the handle; the cursor shows it.
+  - **Still no wrapper:** the drag is the textarea's own pointer events, so `className` and `ref` stay on the textarea (the earlier decision).
+  - **The drag:** pressing inside the corner's square (on-screen pixels, scaled, so a zoomed preview matches) captures the pointer and stops the press from placing the caret or selecting. The height follows the pointer exactly, with no glide; the min and max heights hold it between `minRows` and `maxRows`. `ns-resize` cursor over the corner (`data-grip`) and while dragging (`data-resizing`). Height only, like `resize: vertical`; the width follows the layout.
+  - **With the growth:** the height you drag to becomes the floor. Typing keeps it and grows past it when the text needs more room; dragged shorter than the text, it scrolls until you type again, when it fits the text. Clearing the value or a form reset glides back to the floor, not to `minRows`.
+  - **Not keyboard reachable,** like the native grip; the field still grows on its own.
 - **`rows` is left out of the props;** `minRows` does its job. Users who override the vertical padding should know the min and max heights assume `py-2` and a 1px border.
 - **No sizes.** shadcn's Textarea has none, and its height comes from its rows.
 - **Demos:**
-  - **Hero:** a "Message" field (2 to 6 lines). It's small enough for the index card, so there's no card demo.
+  - **Hero:** a "Message" field (4 to 10 lines, `max-w-md`; owner 2026-10-22: "a little bigger"). It's small enough for the index card, so there's no card demo.
   - **Examples:** Character counter (`maxLength` 160; each digit of the count swaps through the blur on its own with Copy Button's `swap`, rising as the count goes up and falling as it goes down, keyed by place so only the changed digits move; the count is linked with `aria-describedby` as text), Disabled.
-- **Tests:** label and typing, a long first value fits at once, growing and shrinking line by line, stopping at `maxRows` with scrolling, a controlled value cleared from outside, `rows`, refs and native props, axe (invalid and disabled). jsdom has no layout, so `scrollHeight`, `clientWidth` and `offsetHeight` are stubbed per test.
+- **Tests:** label and typing, a long first value fits at once, growing and shrinking line by line, stopping at `maxRows` with scrolling, dragging the corner (the height follows and stays as the floor while typing) and a press away from it doing nothing, a controlled value cleared from outside, `rows`, refs and native props, axe (invalid and disabled). jsdom has no layout, so `scrollHeight`, `clientWidth` and `offsetHeight` are stubbed per test.
 - **Not verified by eye:** the hold on the scroll while growing. Chrome and Safari scroll the caret into view as part of the edit, before our handler, so the hold should win; if a browser scrolls later, the text could flicker for a frame on a new line. Also unchecked: typing at the very bottom of the viewport, where the page may not scroll to follow the new line once the glide ends (field-sizing alone would).
-- **Not built yet:** a character counter inside the component (it's a demo), resizing by dragging (off: `resize-none`), a submit-on-Enter option.
+- **Not built yet:** a character counter inside the component (it's a demo), a submit-on-Enter option.

@@ -20,7 +20,7 @@ export default {
   ],
   status: "stable",
   addedAt: "2026-10-16",
-  updatedAt: "2026-10-16",
+  updatedAt: "2026-10-22",
   files: ["textarea.tsx"],
   usage: {
     code: `import { Textarea } from "@/components/ui/textarea"
@@ -39,7 +39,7 @@ export function MessageField() {
       name: "default",
       title: "Default",
       description:
-        "Type a few lines: the field glides taller a line at a time, up to 6 lines, then scrolls. Delete them and it glides back to 2.",
+        "Type a few lines: the field glides taller a line at a time, up to 10 lines, then scrolls. Delete them and it glides back to 4. Drag its bottom-right corner to set its height.",
     },
     {
       name: "counter",
@@ -53,7 +53,7 @@ export function MessageField() {
     {
       name: "Textarea",
       description:
-        "Also accepts every native textarea prop except rows (use minRows). Grows with its text; with reduced motion it resizes at once.",
+        "Also accepts every native textarea prop except rows (use minRows). Grows with its text; with reduced motion it resizes at once. Drag its bottom-right corner to resize it in height: the height you drag to becomes its floor.",
       props: [
         {
           name: "minRows",

@@ -69,6 +69,64 @@ describe("Textarea", () => {
     await vi.waitFor(() => expect(field.style.height).toBe(tall(2)));
   });
 
+  it("resizes by dragging its corner, and keeps that height as the floor", async () => {
+    render(<Textarea aria-label="Message" minRows={2} />);
+    const field = screen.getByRole("textbox", { name: "Message" }) as HTMLTextAreaElement;
+    // A drawn box for the corner to sit in: 320px wide, as tall as the field
+    field.getBoundingClientRect = () =>
+      ({
+        left: 0,
+        top: 0,
+        right: 320,
+        width: 320,
+        bottom: field.offsetHeight,
+        height: field.offsetHeight,
+      }) as DOMRect;
+    const pointer = (type: string, clientX: number, clientY: number) =>
+      field.dispatchEvent(
+        new MouseEvent(type, { bubbles: true, cancelable: true, button: 0, clientX, clientY }),
+      );
+
+    const start = field.offsetHeight;
+    pointer("pointermove", 316, start - 4);
+    expect(field.hasAttribute("data-grip")).toBe(true);
+    pointer("pointerdown", 316, start - 4);
+    expect(field.hasAttribute("data-resizing")).toBe(true);
+    pointer("pointermove", 316, start + 56);
+    expect(field.style.height).toBe(`${start + 60}px`);
+    pointer("pointerup", 316, start + 56);
+    expect(field.hasAttribute("data-resizing")).toBe(false);
+
+    // A short line doesn't shrink it back below the dragged height
+    await userEvent.type(field, "Hi");
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(field.style.height).toBe(`${start + 60}px`);
+  });
+
+  it("ignores a press away from the corner", () => {
+    render(<Textarea aria-label="Message" minRows={2} />);
+    const field = screen.getByRole("textbox", { name: "Message" }) as HTMLTextAreaElement;
+    field.getBoundingClientRect = () =>
+      ({
+        left: 0,
+        top: 0,
+        right: 320,
+        width: 320,
+        bottom: field.offsetHeight,
+        height: field.offsetHeight,
+      }) as DOMRect;
+    const press = new MouseEvent("pointerdown", {
+      bubbles: true,
+      cancelable: true,
+      button: 0,
+      clientX: 40,
+      clientY: 10,
+    });
+    field.dispatchEvent(press);
+    expect(press.defaultPrevented).toBe(false);
+    expect(field.hasAttribute("data-resizing")).toBe(false);
+  });
+
   it("stops at maxRows and scrolls the rest", async () => {
     // jsdom can't resolve the lh-based max height, so the test gives the max in pixels (4 lines)
     render(<Textarea aria-label="Message" minRows={2} maxRows={4} style={{ maxHeight: tall(4) }} />);

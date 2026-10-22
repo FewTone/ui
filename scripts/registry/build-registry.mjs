@@ -171,7 +171,8 @@ export async function createRegistry({ root, items, kinds }) {
   try {
     for (const name of shared.shippedVariables) {
       if (rootVars[name] === undefined) throw new Error(`--${name} is not in tokens.css :root`);
-      light[name] = resolve(rootVars[name], [rootVars, themeVars]);
+      // shadcn's colour variables stay as variables: every user project has them, themed light and dark
+      light[name] = resolve(rootVars[name], [rootVars, themeVars], new Set(shared.shadcnVariables));
     }
     for (const name of shared.shippedEasings) light[name] = resolve(themeVars[name], [themeVars]);
     for (const name of shared.shippedColors) {
