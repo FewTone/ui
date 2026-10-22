@@ -12,6 +12,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRegistry } from "./registry/build-registry.mjs";
+import { buildSkillZips } from "./skills/build-skill-zips.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
 const SRC = join(ROOT, "packages", "ui", "src");
@@ -143,7 +144,9 @@ if (CHECK) {
 } else {
   for (const [path, source] of outputs) writeFileSync(path, source);
   const written = registry.write();
+  // The public skills' downloads (apps/www/public/skills, ADR 0013)
+  const skills = buildSkillZips(ROOT);
   console.log(
-    `Wrote the item index (${items.length} item${items.length === 1 ? "" : "s"}) and ${written} registry files.`,
+    `Wrote the item index (${items.length} item${items.length === 1 ? "" : "s"}), ${written} registry files and ${skills.length} skill zip${skills.length === 1 ? "" : "s"}.`,
   );
 }

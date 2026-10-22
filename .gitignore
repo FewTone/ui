@@ -30,3 +30,5 @@ npm-debug.log*
 
 # Generated shadcn registry (scripts/registry/build-registry.mjs)
 apps/www/public/r/
+# Generated skill downloads (scripts/skills/build-skill-zips.mjs)
+apps/www/public/skills/

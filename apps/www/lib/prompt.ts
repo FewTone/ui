@@ -152,3 +152,188 @@ Reply with a short list of every file you created or changed, and anything you s
 
   return `${sections.join("\n\n")}\n`;
 }
+
+/**
+ * "Copy prompt" on the MCP guide (/docs/mcp): a brief that has a coding assistant connect itself to the FewTone
+ * UI MCP server. The assistant knows which tool it is, so the brief gives the setup for each one and asks it to
+ * pick its own. It edits only the MCP config, merging into what's there, and checks the connection at the end.
+ */
+export function mcpPrompt() {
+  const url = absoluteUrl("/mcp");
+  const entry = (body: string) => `${fence}json\n${body}\n${fence}`;
+  return `# Connect yourself to the FewTone UI MCP server
+
+FewTone UI is a library of accessible React components for Next.js and Tailwind CSS v4, installed as source code with the shadcn CLI. Its MCP server lets you search the components, read their docs, props and examples, and get the command that installs them. Add it to your own MCP configuration so you can use it in this project.
+
+- **Server:** \`fewtone-ui\`
+- **URL:** ${url}
+- **Transport:** Streamable HTTP (remote). No API key, no login, no headers. It's read-only: it never sees or changes code.
+- **Docs:** ${absoluteUrl("/docs/mcp")}
+
+## Rules
+
+- Change only the MCP configuration. Don't touch any other file, setting or server.
+- If the config file already exists, merge the \`fewtone-ui\` entry into it. Keep every other entry exactly as it is, and keep the file valid JSON.
+- If a \`fewtone-ui\` entry already exists with this URL, leave it. If it points somewhere else, ask me before changing it.
+- If something below doesn't match your setup, stop and ask me instead of guessing.
+
+## 1. Work out which assistant you are, then add the server
+
+Use the setup for yourself. Prefer the project's config, so it's shared with the repo, unless I asked for it everywhere.
+
+**Claude Code:** run this in the project's root:
+
+${fence}bash
+claude mcp add --transport http fewtone-ui ${url}
+${fence}
+
+(Add \`--scope project\` to write it to \`.mcp.json\` for everyone on the repo, or \`--scope user\` for all my projects.)
+
+**Cursor:** in \`.cursor/mcp.json\` (this project) or \`~/.cursor/mcp.json\` (all projects):
+
+${entry(`{
+  "mcpServers": {
+    "fewtone-ui": { "url": "${url}" }
+  }
+}`)}
+
+**VS Code (GitHub Copilot):** in \`.vscode/mcp.json\`. Note the key is \`servers\`, not \`mcpServers\`, and \`type\` is required:
+
+${entry(`{
+  "servers": {
+    "fewtone-ui": { "type": "http", "url": "${url}" }
+  }
+}`)}
+
+**Windsurf:** in \`~/.codeium/windsurf/mcp_config.json\`. Note the key is \`serverUrl\`:
+
+${entry(`{
+  "mcpServers": {
+    "fewtone-ui": { "serverUrl": "${url}" }
+  }
+}`)}
+
+**Claude desktop app or claude.ai:** you can't add it yourself. Tell me to open Settings → Connectors → Add custom connector, and paste ${url}.
+
+**Any other assistant:** if it supports remote MCP servers over Streamable HTTP, add \`${url}\` the way its docs describe. If it only runs local (stdio) servers, connect through mcp-remote (it needs Node.js):
+
+${entry(`{
+  "mcpServers": {
+    "fewtone-ui": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "${url}"]
+    }
+  }
+}`)}
+
+## 2. Check that it works
+
+1. Some assistants only load new servers after a restart or a reload. If the FewTone UI tools don't show up, tell me exactly what to restart and stop there.
+2. Once it's connected, you should have five tools: \`search_components\`, \`list_components\`, \`get_component\`, \`get_component_example\` and \`get_install_command\`.
+3. Call \`search_components\` with the query "button" and confirm that Button comes back.
+
+## 3. How to use it from now on
+
+When I ask for UI that FewTone UI might have:
+
+1. Find the component with \`search_components\` (describe what I need) or \`list_components\`.
+2. Read it with \`get_component\` before using it, and \`get_component_example\` for its examples.
+3. Install it with the command from \`get_install_command\`, using this project's package manager. It needs \`components.json\`. Never run \`shadcn init\` in a project that already has it: it rewrites the theme.
+4. Import it from \`@/components/ui/<name>\` and follow its usage.
+
+## When you're done
+
+Reply with the config file you changed (or the command you ran), whether the test search worked, and anything I still need to do, such as restarting.
+`;
+}
+
+/**
+ * "Copy prompt" on the Smooth UI guide (/docs/smooth-ui): a brief that has a coding assistant install the Smooth
+ * UI skill in the project it's working in, check the install, and then use it. Like the MCP brief, the assistant
+ * picks its own setup. It adds only the skill's folder, never overwrites one without asking, and doesn't start
+ * changing the UI until asked: installing a skill is setup, not permission to restyle the app.
+ */
+export function skillPrompt() {
+  const zip = absoluteUrl("/skills/smooth-ui.zip");
+  const page = absoluteUrl("/docs/smooth-ui");
+  return `# Install the Smooth UI skill in this project
+
+Smooth UI is an Agent Skill: Markdown instructions that teach you how to make a web interface feel smooth, calm and premium. It holds motion rules, exact timings, which animation pattern fits which change, recipes for about 40 common controls, working React code, known pitfalls and a step-by-step audit. It's free and MIT licensed, and it isn't tied to any component library.
+
+- **Skill:** \`smooth-ui\` (a folder with \`SKILL.md\` and \`references/\`)
+- **Download:** ${zip}
+- **Docs:** ${page}
+
+Install it for this project, check it, then read it. Don't change any UI yet.
+
+## Rules
+
+- Add only the \`smooth-ui\` skill folder. Don't change any other file, setting or dependency.
+- If a \`smooth-ui\` skill folder already exists, stop and ask me before replacing it.
+- If the project is a git repository, don't commit anything.
+- If something below doesn't match your setup, stop and ask me instead of guessing.
+
+## 1. Install it
+
+**Preferred, the skills CLI** (it puts the skill where your assistant reads skills from). Run it in the project's root:
+
+${fence}bash
+npx skills add FewTone/ui --skill smooth-ui
+${fence}
+
+If it asks which assistant or where to install, choose this project (not global) and the assistant you are. If the command fails (no network to GitHub, or it can't find the skill), use the download instead.
+
+**Fallback, the download.** Work out which skills folder you read from:
+
+- Claude Code: \`.claude/skills/\`
+- Assistants that follow the shared convention (Codex, Cursor, others): \`.agents/skills/\`
+- Anything else: the folder your own docs name for skills. If you don't support skills at all, say so and skip to step 4.
+
+Then download the zip and unzip it into that folder, so the result is \`<skills folder>/smooth-ui/SKILL.md\`. The zip already contains the \`smooth-ui/\` folder, so unzip into the skills folder itself, not into a new \`smooth-ui\` folder.
+
+macOS, Linux or Git Bash:
+
+${fence}bash
+mkdir -p .claude/skills
+curl -fsSL ${zip} -o smooth-ui.zip
+unzip -q smooth-ui.zip -d .claude/skills
+rm smooth-ui.zip
+${fence}
+
+Windows PowerShell:
+
+${fence}powershell
+New-Item -ItemType Directory -Force .claude/skills | Out-Null
+Invoke-WebRequest ${zip} -OutFile smooth-ui.zip
+Expand-Archive smooth-ui.zip -DestinationPath .claude/skills
+Remove-Item smooth-ui.zip
+${fence}
+
+(Replace \`.claude/skills\` with your own skills folder.)
+
+## 2. Check the install
+
+1. \`<skills folder>/smooth-ui/SKILL.md\` exists, and its frontmatter says \`name: smooth-ui\`.
+2. \`<skills folder>/smooth-ui/references/\` holds \`tokens.md\`, \`patterns.md\`, \`components.md\`, \`code.md\`, \`pitfalls.md\` and \`audit.md\`.
+3. There's no extra nesting such as \`smooth-ui/smooth-ui/SKILL.md\`. If there is, move the inner folder up one level.
+
+Some assistants only pick up a new skill after a restart or a reload. If yours does, tell me exactly what to restart.
+
+## 3. Read it now
+
+Read \`SKILL.md\` in full (it's short). Don't read the reference files yet: open each one when a task needs it, as \`SKILL.md\` says. From now on, follow it whenever you build or change UI in this project.
+
+## 4. If you don't support skills
+
+Tell me, and suggest adding one line to this project's agent instructions (\`AGENTS.md\`, \`CLAUDE.md\` or your rules file) that points to the skill's \`SKILL.md\`. Only add it if I say yes.
+
+## When you're done
+
+Reply with:
+
+- where the skill is now (the folder path) and how you installed it
+- whether the check passed, and anything I need to restart
+- three short lines on what the skill will change about how you build UI
+- one question: would I like you to run its audit (\`references/audit.md\`) on this project now?
+`;
+}

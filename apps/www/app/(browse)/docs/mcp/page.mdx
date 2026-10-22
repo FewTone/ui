@@ -1,0 +1,141 @@
+export const metadata = {
+  title: { absolute: "FewTone UI MCP Server for Claude Code, Cursor and VS Code" },
+  description:
+    "Connect your AI assistant to the FewTone UI MCP server: it finds the right React component, reads its docs and examples, and installs it with the shadcn CLI. Free, no key.",
+  alternates: { canonical: "/docs/mcp" },
+  openGraph: {
+    type: "article",
+    url: "/docs/mcp",
+    title: "FewTone UI MCP Server for Claude Code, Cursor and VS Code",
+    description:
+      "Connect your AI assistant to the FewTone UI MCP server: it finds the right React component, reads its docs and examples, and installs it with the shadcn CLI. Free, no key.",
+  },
+}
+
+<McpTitle>MCP server</McpTitle>
+
+Connect your AI coding assistant to FewTone UI. It can then find the component that fits what you're building, read its docs, props and examples, and install it in your project with the shadcn CLI, without you copying anything. Quickest way: press **Copy prompt** and paste it into your assistant, and it sets itself up.
+
+The server is free and needs no key or account. It only reads the component catalogue: it never sees or changes your code. Your assistant runs the install command in your project, as it would any other.
+
+```txt
+https://ui.fewtone.com/mcp
+```
+
+## Connect your assistant
+
+### Claude Code
+
+Run this in your project:
+
+```bash
+claude mcp add --transport http fewtone-ui https://ui.fewtone.com/mcp
+```
+
+Add `--scope user` to use it in every project.
+
+### Cursor
+
+Add the server to `.cursor/mcp.json` in your project, or to `~/.cursor/mcp.json` for every project:
+
+```json
+{
+  "mcpServers": {
+    "fewtone-ui": {
+      "url": "https://ui.fewtone.com/mcp"
+    }
+  }
+}
+```
+
+### VS Code (GitHub Copilot)
+
+Add the server to `.vscode/mcp.json` in your project:
+
+```json
+{
+  "servers": {
+    "fewtone-ui": {
+      "type": "http",
+      "url": "https://ui.fewtone.com/mcp"
+    }
+  }
+}
+```
+
+### Windsurf
+
+Add the server to `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "fewtone-ui": {
+      "serverUrl": "https://ui.fewtone.com/mcp"
+    }
+  }
+}
+```
+
+### Claude desktop app and claude.ai
+
+Open **Settings → Connectors**, choose **Add custom connector**, name it FewTone UI and paste `https://ui.fewtone.com/mcp` as the URL.
+
+### Other assistants
+
+Any assistant that supports remote MCP servers (Streamable HTTP) can use the URL above. For one that only runs local servers, connect through [mcp-remote](https://www.npmjs.com/package/mcp-remote):
+
+```json
+{
+  "mcpServers": {
+    "fewtone-ui": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://ui.fewtone.com/mcp"]
+    }
+  }
+}
+```
+
+## Try it
+
+Ask your assistant in plain words. For example:
+
+- "Which FewTone UI component should I use to confirm before deleting an account?"
+- "Add a FewTone UI date picker to the booking form."
+- "Show me the props of the FewTone UI Tabs and an example with icons."
+- "Install the FewTone UI button, dialog and toast with pnpm."
+
+Mention FewTone UI in the request the first time, so your assistant knows to use the server.
+
+## Tools
+
+| Tool | What it does |
+| --- | --- |
+| `search_components` | Finds the components that fit a need, from keywords or a description of what you're building |
+| `list_components` | Lists every component by category, or one category |
+| `get_component` | A component's docs: when to use it, the install command, usage, every prop, its examples, and optionally its source |
+| `get_component_example` | The code of one of a component's examples |
+| `get_install_command` | One shadcn CLI command for one or more components, for pnpm, npm, yarn or bun |
+
+Components install with the shadcn CLI, so the project needs `components.json`. See [Installation](/docs/installation) for setting up a new project.
+
+## With the shadcn MCP server
+
+FewTone UI is a shadcn registry, so [shadcn's own MCP server](https://ui.shadcn.com/docs/mcp) can browse and install it too. Add the registry to `components.json`:
+
+```json
+{
+  "registries": {
+    "@fewtone": "https://ui.fewtone.com/r/{name}.json"
+  }
+}
+```
+
+The FewTone UI server knows more about each component, such as when to use it and its examples, so you can connect both.
+
+## Next steps
+
+- [Browse all components](/components).
+- [Read the installation guide](/docs/installation) for requirements, theming and troubleshooting.
+
+<GuideJsonLd href="/docs/mcp" />

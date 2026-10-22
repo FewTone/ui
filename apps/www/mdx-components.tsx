@@ -2,7 +2,14 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import type { ReactElement } from "react";
 import { CodeBlock } from "@/components/docs/code-block";
-import { Faq, GuideJsonLd, InstallCommand, InstallTable } from "@/components/docs/guide-blocks";
+import {
+  Faq,
+  GuideJsonLd,
+  InstallCommand,
+  InstallTable,
+  McpTitle,
+  SkillTitle,
+} from "@/components/docs/guide-blocks";
 
 /** How guide pages (app/(browse)/docs/**\/page.mdx) render: tokens only, code highlighted on the server */
 const components: MDXComponents = {
@@ -58,6 +65,8 @@ const components: MDXComponents = {
   GuideJsonLd,
   InstallCommand,
   InstallTable,
+  McpTitle,
+  SkillTitle,
 };
 
 export function useMDXComponents(): MDXComponents {

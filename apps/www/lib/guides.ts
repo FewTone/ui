@@ -23,6 +23,22 @@ export const guides = [
     updatedAt: "2026-10-13",
   },
   {
+    title: "MCP Server",
+    headline: "FewTone UI MCP Server for Claude Code, Cursor and VS Code",
+    href: "/docs/mcp",
+    description:
+      "Connect your AI assistant to the FewTone UI MCP server: it finds the right React component, reads its docs and examples, and installs it with the shadcn CLI. Free, no key.",
+    updatedAt: "2026-10-22",
+  },
+  {
+    title: "Smooth UI Skill",
+    headline: "Smooth UI: an Agent Skill That Makes Any Web UI Feel Smooth and Premium",
+    href: "/docs/smooth-ui",
+    description:
+      "A free Agent Skill for Claude Code, Cursor and other AI assistants: motion rules, timings, patterns and React code that make any web interface smoother and more polished.",
+    updatedAt: "2026-10-22",
+  },
+  {
     title: "Roadmap",
     headline: "FewTone UI Roadmap: Upcoming React Components for Next.js",
     href: "/roadmap",

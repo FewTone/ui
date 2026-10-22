@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   // Guides are `page.mdx` files inside app/
   pageExtensions: ["ts", "tsx", "mdx"],
   transpilePackages: ["@fewtone/ui"],
+  // The MCP server (app/mcp) reads component and demo source at request time, so ship those files with it
+  outputFileTracingIncludes: {
+    "/mcp": ["../../packages/ui/src/components/**/*.tsx"],
+  },
   // Theming was folded into Installation (owner, 2026-10-13); keep the old address working for links and search
   redirects() {
     return [
