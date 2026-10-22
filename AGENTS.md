@@ -37,6 +37,7 @@ apps/www/                  website (ADR 0007)
   app/(browse)/roadmap/    public roadmap; the plan is lib/roadmap.ts (status comes from the index: Available / Next up / Planned)
   app/lab/                 dev-only Lab: the home (/lab) holds components being built before they get a meta file (none right now); /lab/tokens; the header shows a Lab link in development only
   app/mcp/route.ts         the hosted MCP server (ui.fewtone.com/mcp, ADR 0012); its answers are lib/mcp.ts
+  app/md/ · llms.txt/ · llms-full.txt/   every page as Markdown at its URL + `.md`, and the llms files (ADR 0014); built by lib/llms.ts
   app/sitemap.ts · robots.ts · opengraph-image.tsx   SEO, all from metadata
   components/docs/         preview tabs, install, code blocks, props table, cards, sidebar
   components/motion/       site motion: Pill (sliding tabs) · RowIndicator (sidebar, search)
@@ -117,7 +118,7 @@ The owner asks for components one at a time; build only the one requested.
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade), 0012 the MCP server (hosted, keyless, read-only, at /mcp), 0013 the Smooth UI skill (our motion and polish lessons as a public skill for any project) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade), 0012 the MCP server (hosted, keyless, read-only, at /mcp), 0013 the Smooth UI skill (our motion and polish lessons as a public skill for any project), 0014 llms.txt, llms-full.txt and a `.md` version of every page |
 | `04-components/` | One folder per component with `decisions.md`: why it's built the way it is, and what's deliberately not built yet |
 | `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
@@ -166,7 +167,7 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
 - the internal Lab with knobs (`/lab/<name>`), and CI (GitHub Actions running `pnpm check`)
 - the owner's review of the 43 new items, then the changes it asks for
 - new roadmap entries once the review is done (every current entry is built)
-- AI layer: llms.txt, `.md` pages, the public skill (the MCP server is done, 2026-10-22)
+- AI layer: a "how to use FewTone UI" skill (the MCP server, the Smooth UI skill, llms.txt and the `.md` pages are done, 2026-10-22/23)
 - npm package and CLI
 
 **Open (owner actions):**

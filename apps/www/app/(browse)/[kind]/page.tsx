@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/[kind]">): Promis
   return {
     title: kind.heading,
     description: kind.intro,
-    alternates: { canonical: href },
+    alternates: { canonical: href, types: { "text/markdown": `${href}.md` } },
     openGraph: {
       type: "website",
       siteName: site.name,

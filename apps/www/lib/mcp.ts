@@ -3,7 +3,7 @@ import type { Item } from "@fewtone/ui/registry/schema";
 import { readSource, toProjectImports } from "./code";
 import { items } from "./content";
 import { addCommands, type PackageManager, registryTarget } from "./install";
-import { itemMarkdown } from "./markdown";
+import { itemFacts, itemMarkdown } from "./markdown";
 import { absoluteUrl, site } from "./site";
 
 /*
@@ -140,19 +140,6 @@ async function sourceFiles(item: Item) {
 
 /** The component page as Markdown, with what an assistant needs before using it */
 export async function getComponent(item: Item, includeSource: boolean) {
-  const builtOn = item.install.registry.filter((name) => name !== "tokens" && name !== "motion");
-  const facts = [
-    item.status === "beta" ? "**Status:** beta, the API may change." : null,
-    item.ai.whenToUse ? `**When to use it:** ${item.ai.whenToUse}` : null,
-    item.primitives.length > 0 ? `**Built on:** ${item.primitives.join(", ")}.` : null,
-    item.ariaPattern ? `**Accessibility pattern:** ${item.ariaPattern}` : null,
-    item.install.dependencies.length > 0
-      ? `**npm packages (installed by the CLI):** ${item.install.dependencies.join(", ")}.`
-      : null,
-    builtOn.length > 0
-      ? `**Installs these FewTone UI components with it:** ${builtOn.map((name) => `\`${name}\``).join(", ")}.`
-      : null,
-  ].filter((fact) => fact !== null);
   const examples = item.demos
     .map((demo) => `- \`${demo.name}\`: ${demo.title}${demo.description ? `. ${demo.description}` : ""}`)
     .join("\n");
@@ -161,7 +148,7 @@ export async function getComponent(item: Item, includeSource: boolean) {
 
   const parts = [
     itemMarkdown(item).trimEnd(),
-    facts.join("\n"),
+    itemFacts(item),
     `## Examples\nRead the code of one with get_component_example.\n\n${examples}`,
     related,
   ];

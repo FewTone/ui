@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: PageProps<"/[kind]/[slug]">):
   return {
     title,
     description,
-    alternates: { canonical: item.href },
+    // The Markdown version, for AI tools (lib/llms.ts)
+    alternates: { canonical: item.href, types: { "text/markdown": `${item.href}.md` } },
     openGraph: {
       type: "article",
       siteName: site.name,

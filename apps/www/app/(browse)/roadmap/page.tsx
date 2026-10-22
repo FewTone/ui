@@ -17,7 +17,7 @@ const page = guides.find((guide) => guide.href === "/roadmap");
 export const metadata: Metadata = {
   title: { absolute: page?.headline ?? "FewTone UI Roadmap" },
   description: page?.description,
-  alternates: { canonical: "/roadmap" },
+  alternates: { canonical: "/roadmap", types: { "text/markdown": "/roadmap.md" } },
   openGraph: { type: "website", url: "/roadmap", title: page?.headline, description: page?.description },
 };
 

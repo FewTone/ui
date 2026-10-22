@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
       { source: "/docs/theming", destination: "/docs/installation#customize-the-theme", permanent: true },
     ];
   },
+  // Every page's Markdown version (lib/llms.ts): its address plus `.md`
+  rewrites() {
+    return [{ source: "/:path*.md", destination: "/md/:path*" }];
+  },
   // The shadcn registry (public/r, generated): readable from anywhere, kept out of search results (ADR 0009)
   headers() {
     return [
@@ -27,6 +31,9 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex" },
         ],
       },
+      // Markdown copies are for AI tools; search engines keep the HTML page (the canonical)
+      { source: "/:path*.md", headers: [{ key: "X-Robots-Tag", value: "noindex" }] },
+      { source: "/md/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex" }] },
     ];
   },
   turbopack: {

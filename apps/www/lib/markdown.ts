@@ -4,6 +4,25 @@ import { absoluteUrl } from "./site";
 
 const fence = "```";
 
+/** What to know before using an item: its status, when to use it, what it's built on and what it installs */
+export function itemFacts(item: Item) {
+  const builtOn = item.install.registry.filter((name) => name !== "tokens" && name !== "motion");
+  return [
+    item.status === "beta" ? "**Status:** beta, the API may change." : null,
+    item.ai.whenToUse ? `**When to use it:** ${item.ai.whenToUse}` : null,
+    item.primitives.length > 0 ? `**Built on:** ${item.primitives.join(", ")}.` : null,
+    item.ariaPattern ? `**Accessibility pattern:** ${item.ariaPattern}` : null,
+    item.install.dependencies.length > 0
+      ? `**npm packages (installed by the CLI):** ${item.install.dependencies.join(", ")}.`
+      : null,
+    builtOn.length > 0
+      ? `**Installs these FewTone UI components with it:** ${builtOn.map((name) => `\`${name}\``).join(", ")}.`
+      : null,
+  ]
+    .filter((fact) => fact !== null)
+    .join("\n");
+}
+
 /** The page as Markdown, for "Copy page" and AI assistants */
 export function itemMarkdown(item: Item) {
   const parts = [
