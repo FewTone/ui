@@ -103,51 +103,46 @@ import Demo99 from "../components/slider/demos/labelled";
 import Demo100 from "../components/slider/demos/vertical";
 import Demo101 from "../components/slider/demos/card";
 import Demo102 from "../components/spinner/demos/sizes";
-import Demo103 from "../components/spinner/demos/with-text";
-import Demo104 from "../components/spinner/demos/card";
-import Demo105 from "../components/stepper/demos/checkout";
-import Demo106 from "../components/stepper/demos/vertical";
-import Demo107 from "../components/stepper/demos/card";
-import Demo108 from "../components/switch/demos/default";
-import Demo109 from "../components/switch/demos/settings";
-import Demo110 from "../components/switch/demos/sizes";
-import Demo111 from "../components/switch/demos/disabled";
-import Demo112 from "../components/switcher/demos/variants";
-import Demo113 from "../components/switcher/demos/icons";
-import Demo114 from "../components/switcher/demos/icons-and-text";
-import Demo115 from "../components/switcher/demos/card";
-import Demo116 from "../components/table/demos/invoices";
-import Demo117 from "../components/table/demos/card";
-import Demo118 from "../components/tabs/demos/variants";
-import Demo119 from "../components/tabs/demos/icons";
-import Demo120 from "../components/tabs/demos/disabled";
-import Demo121 from "../components/tabs/demos/card";
-import Demo122 from "../components/text-effects/demos/overview";
-import Demo123 from "../components/text-effects/demos/by-character";
-import Demo124 from "../components/text-effects/demos/type-once";
-import Demo125 from "../components/text-effects/demos/card";
-import Demo126 from "../components/textarea/demos/default";
-import Demo127 from "../components/textarea/demos/counter";
-import Demo128 from "../components/textarea/demos/disabled";
-import Demo129 from "../components/theme-toggle/demos/reveals";
-import Demo130 from "../components/theme-toggle/demos/switch";
-import Demo131 from "../components/theme-toggle/demos/card";
-import Demo132 from "../components/toast/demos/types";
-import Demo133 from "../components/toast/demos/promise";
-import Demo134 from "../components/toast/demos/composed";
-import Demo135 from "../components/toast/demos/card";
-import Demo136 from "../components/toggle-group/demos/variants";
-import Demo137 from "../components/toggle-group/demos/days";
-import Demo138 from "../components/toggle-group/demos/disabled";
-import Demo139 from "../components/toggle-group/demos/card";
-import Demo140 from "../components/tooltip/demos/toolbar";
-import Demo141 from "../components/tooltip/demos/card";
-import Demo142 from "../components/dot-grid/demos/hero";
-import Demo143 from "../components/dot-grid/demos/card";
-import Demo144 from "../components/gradient-drift/demos/hero";
-import Demo145 from "../components/gradient-drift/demos/card";
-import Demo146 from "../components/line-grid/demos/hero";
-import Demo147 from "../components/line-grid/demos/card";
+import Demo103 from "../components/spinner/demos/finish";
+import Demo104 from "../components/spinner/demos/with-text";
+import Demo105 from "../components/spinner/demos/card";
+import Demo106 from "../components/stepper/demos/checkout";
+import Demo107 from "../components/stepper/demos/vertical";
+import Demo108 from "../components/stepper/demos/card";
+import Demo109 from "../components/switch/demos/default";
+import Demo110 from "../components/switch/demos/settings";
+import Demo111 from "../components/switch/demos/sizes";
+import Demo112 from "../components/switch/demos/disabled";
+import Demo113 from "../components/switcher/demos/variants";
+import Demo114 from "../components/switcher/demos/icons";
+import Demo115 from "../components/switcher/demos/icons-and-text";
+import Demo116 from "../components/switcher/demos/card";
+import Demo117 from "../components/table/demos/invoices";
+import Demo118 from "../components/table/demos/card";
+import Demo119 from "../components/tabs/demos/variants";
+import Demo120 from "../components/tabs/demos/icons";
+import Demo121 from "../components/tabs/demos/disabled";
+import Demo122 from "../components/tabs/demos/card";
+import Demo123 from "../components/text-effects/demos/overview";
+import Demo124 from "../components/text-effects/demos/by-character";
+import Demo125 from "../components/text-effects/demos/type-once";
+import Demo126 from "../components/text-effects/demos/card";
+import Demo127 from "../components/textarea/demos/default";
+import Demo128 from "../components/textarea/demos/counter";
+import Demo129 from "../components/textarea/demos/disabled";
+import Demo130 from "../components/theme-toggle/demos/reveals";
+import Demo131 from "../components/theme-toggle/demos/switch";
+import Demo132 from "../components/theme-toggle/demos/card";
+import Demo133 from "../components/toast/demos/types";
+import Demo134 from "../components/toast/demos/promise";
+import Demo135 from "../components/toast/demos/composed";
+import Demo136 from "../components/toast/demos/card";
+import Demo137 from "../components/toggle-group/demos/variants";
+import Demo138 from "../components/toggle-group/demos/days";
+import Demo139 from "../components/toggle-group/demos/disabled";
+import Demo140 from "../components/toggle-group/demos/card";
+import Demo141 from "../components/tooltip/demos/toolbar";
+import Demo142 from "../components/tooltip/demos/card";
 
 /** Every demo component, keyed by "<item>/<demo>" */
 export const demos: Record<string, ComponentType> = {
@@ -254,49 +249,44 @@ export const demos: Record<string, ComponentType> = {
   "slider/vertical": Demo100,
   "slider/card": Demo101,
   "spinner/sizes": Demo102,
-  "spinner/with-text": Demo103,
-  "spinner/card": Demo104,
-  "stepper/checkout": Demo105,
-  "stepper/vertical": Demo106,
-  "stepper/card": Demo107,
-  "switch/default": Demo108,
-  "switch/settings": Demo109,
-  "switch/sizes": Demo110,
-  "switch/disabled": Demo111,
-  "switcher/variants": Demo112,
-  "switcher/icons": Demo113,
-  "switcher/icons-and-text": Demo114,
-  "switcher/card": Demo115,
-  "table/invoices": Demo116,
-  "table/card": Demo117,
-  "tabs/variants": Demo118,
-  "tabs/icons": Demo119,
-  "tabs/disabled": Demo120,
-  "tabs/card": Demo121,
-  "text-effects/overview": Demo122,
-  "text-effects/by-character": Demo123,
-  "text-effects/type-once": Demo124,
-  "text-effects/card": Demo125,
-  "textarea/default": Demo126,
-  "textarea/counter": Demo127,
-  "textarea/disabled": Demo128,
-  "theme-toggle/reveals": Demo129,
-  "theme-toggle/switch": Demo130,
-  "theme-toggle/card": Demo131,
-  "toast/types": Demo132,
-  "toast/promise": Demo133,
-  "toast/composed": Demo134,
-  "toast/card": Demo135,
-  "toggle-group/variants": Demo136,
-  "toggle-group/days": Demo137,
-  "toggle-group/disabled": Demo138,
-  "toggle-group/card": Demo139,
-  "tooltip/toolbar": Demo140,
-  "tooltip/card": Demo141,
-  "dot-grid/hero": Demo142,
-  "dot-grid/card": Demo143,
-  "gradient-drift/hero": Demo144,
-  "gradient-drift/card": Demo145,
-  "line-grid/hero": Demo146,
-  "line-grid/card": Demo147,
+  "spinner/finish": Demo103,
+  "spinner/with-text": Demo104,
+  "spinner/card": Demo105,
+  "stepper/checkout": Demo106,
+  "stepper/vertical": Demo107,
+  "stepper/card": Demo108,
+  "switch/default": Demo109,
+  "switch/settings": Demo110,
+  "switch/sizes": Demo111,
+  "switch/disabled": Demo112,
+  "switcher/variants": Demo113,
+  "switcher/icons": Demo114,
+  "switcher/icons-and-text": Demo115,
+  "switcher/card": Demo116,
+  "table/invoices": Demo117,
+  "table/card": Demo118,
+  "tabs/variants": Demo119,
+  "tabs/icons": Demo120,
+  "tabs/disabled": Demo121,
+  "tabs/card": Demo122,
+  "text-effects/overview": Demo123,
+  "text-effects/by-character": Demo124,
+  "text-effects/type-once": Demo125,
+  "text-effects/card": Demo126,
+  "textarea/default": Demo127,
+  "textarea/counter": Demo128,
+  "textarea/disabled": Demo129,
+  "theme-toggle/reveals": Demo130,
+  "theme-toggle/switch": Demo131,
+  "theme-toggle/card": Demo132,
+  "toast/types": Demo133,
+  "toast/promise": Demo134,
+  "toast/composed": Demo135,
+  "toast/card": Demo136,
+  "toggle-group/variants": Demo137,
+  "toggle-group/days": Demo138,
+  "toggle-group/disabled": Demo139,
+  "toggle-group/card": Demo140,
+  "tooltip/toolbar": Demo141,
+  "tooltip/card": Demo142,
 };

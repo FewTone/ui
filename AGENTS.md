@@ -36,6 +36,7 @@ apps/www/                  website (ADR 0007)
   app/(browse)/docs/       guides as page.mdx files (/docs, /docs/installation); blocks in components/docs/guide-blocks.tsx
   app/(browse)/roadmap/    public roadmap; the plan is lib/roadmap.ts (status comes from the index: Available / Next up / Planned)
   app/lab/                 dev-only Lab: the home (/lab) holds components being built before they get a meta file (none right now); /lab/tokens; the header shows a Lab link in development only
+  app/mcp/route.ts         the hosted MCP server (ui.fewtone.com/mcp, ADR 0012); its answers are lib/mcp.ts
   app/sitemap.ts · robots.ts · opengraph-image.tsx   SEO, all from metadata
   components/docs/         preview tabs, install, code blocks, props table, cards, sidebar
   components/motion/       site motion: Pill (sliding tabs) · RowIndicator (sidebar, search)
@@ -53,6 +54,7 @@ scripts/tokens/            colour generator (pnpm tokens)
 scripts/check-tokens.mjs   design-system enforcement (pnpm check:tokens)
 .agents/rules/              always-on standards: design.md, motion.md, components.md
 .agents/skills/             workflows (new-component); .claude/skills/ points to them for Claude Code
+skills/smooth-ui/           PUBLIC Agent Skill for any project: our motion and polish rules, patterns and code (ADR 0013); /docs/smooth-ui, zipped by pnpm index into public/skills (generated, gitignored)
 docs-internal/             long-term project memory (see map below)
 ```
 
@@ -115,7 +117,7 @@ The owner asks for components one at a time; build only the one requested.
 | Folder | Contents |
 |---|---|
 | `01-brand/` | `design-system.md`, the spec for every visual value |
-| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade) |
+| `03-decisions/` | ADRs: 0001 typography (Geist), 0002 brand colour (Navy), 0003 brand direction (neutral first, plus rejected directions; read this before proposing visual changes), 0004 library name (FewTone UI), 0005 hosting (Vercel on ui.fewtone.com), 0006 logo (the FewTone mark, unchanged; lists every rejected direction), 0007 website structure and component pages, 0008 content model and SEO baseline, 0009 component distribution (registry, tokens item, portable vocabulary), 0010 Theme Toggle reveals (View Transitions; the site plays a random reveal at slow speed), 0011 the blur for content that comes and goes (instead of a plain fade), 0012 the MCP server (hosted, keyless, read-only, at /mcp), 0013 the Smooth UI skill (our motion and polish lessons as a public skill for any project) |
 | `04-components/` | One folder per component with `decisions.md`: why it's built the way it is, and what's deliberately not built yet |
 | `06-research/` | Research with sources. The 2026-10-12 note covers how 12 UI libraries build component pages (layout, conventions, SEO); read it before changing the docs site. |
 | `08-log/` | Dated session notes |
@@ -153,16 +155,18 @@ Exploration files (mockups, drafts) are temporary. Once a decision is made, reco
     - Feedback: Toast, Badge, Progress, Skeleton, Spinner (Alert was built too, then removed by the owner on 2026-10-19)
     - Display: Card, Avatar, Table, Scroll Area (Empty State, Kbd and Separator were built too, then removed by the owner on 2026-10-21)
     - Effects: Number Ticker, Marquee, Text Effects, Stepper
-    - Backgrounds (their own kind, `/backgrounds`): Dot Grid, Line Grid, Gradient Drift
+    - Backgrounds (their own kind, `/backgrounds`): Dot Grid, Line Grid and Gradient Drift were built, then removed by the owner on 2026-10-22; the kind stays, with no items
   - Vitest with axe
   - site motion: underline tabs, gliding sidebar and search indicators, drawer slide
   - FewTone identity over beUI: framed gallery cards with live previews, underline tabs, Copy prompt for AI assistants
+  - Smooth UI skill (2026-10-22, ADR 0013): `skills/smooth-ui/`, a public Agent Skill for any project with the library's motion rules, timings, patterns, component recipes, checked code, pitfalls and an audit; not about FewTone UI. Keep it in step when motion.md changes
+  - MCP server (2026-10-22, ADR 0012): hosted at `/mcp`, keyless and read-only, with five tools (search, list, get a component, get an example, the install command); setup for each assistant at `/docs/mcp`
 
 **Next:**
 - the internal Lab with knobs (`/lab/<name>`), and CI (GitHub Actions running `pnpm check`)
 - the owner's review of the 43 new items, then the changes it asks for
 - new roadmap entries once the review is done (every current entry is built)
-- AI layer (llms.txt, `.md` pages, MCP, skills)
+- AI layer: llms.txt, `.md` pages, the public skill (the MCP server is done, 2026-10-22)
 - npm package and CLI
 
 **Open (owner actions):**

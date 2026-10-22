@@ -6125,7 +6125,7 @@ export const items: Item[] = [
   {
     "name": "slider",
     "title": "Slider",
-    "description": "An accessible React slider for Next.js and Tailwind: one value or a range, with a thumb that glides to a click and an optional value tooltip, on Radix.",
+    "description": "An accessible React slider for Next.js and Tailwind: one value or a range, with a thumb that grows into a pill showing its value as you reach for it.",
     "kind": "component",
     "category": "Forms",
     "tags": [
@@ -6162,23 +6162,23 @@ export const items: Item[] = [
       {
         "name": "single-and-range",
         "title": "Single and range",
-        "description": "Hover and the track wakes, thickening under the hand. Click it and the thumb glides there, stretching on the way; drag and it follows the pointer exactly. Drag past an end and the track stretches like elastic, then snaps back when you let go. The value rises into a tooltip above the thumb."
+        "description": "Reach for a thumb (hover, Tab, drag) and it grows from a dot into a pill with its value inside, the number flowing as it changes, while the track thickens. Click the track and the thumb glides there; drag and it follows the pointer, the pill stretching with its speed."
       },
       {
         "name": "labelled",
         "title": "With a label",
-        "description": "A visible label names the thumb through aria-labelledby, with the value beside it. formatValue gives screen readers the same text."
+        "description": "A visible label names the thumb through aria-labelledby, with the value beside it. An Intl format (hours) shows in the pill and gives screen readers the same text."
       },
       {
         "name": "vertical",
         "title": "Vertical",
-        "description": "orientation=\"vertical\": at least 11rem tall, filling a taller container. Up and Right raise the value, and the tooltip sits beside the thumb."
+        "description": "orientation=\"vertical\": at least 11rem tall, filling a taller container. Up and Right raise the value, and the pill grows from the thumb just the same."
       }
     ],
     "api": [
       {
         "name": "Slider",
-        "description": "Also accepts every Radix Slider prop. One number in value for one thumb, two for a range. aria-label or aria-labelledby names the thumbs.",
+        "description": "Also accepts every native div prop. One number in value for one thumb, two for a range. aria-label or aria-labelledby names the thumbs; each thumb is a role=\"slider\" with the full keyboard.",
         "props": [
           {
             "name": "value",
@@ -6226,15 +6226,15 @@ export const items: Item[] = [
             "description": "How many steps a range's thumbs keep apart."
           },
           {
-            "name": "tooltip",
-            "type": "boolean",
-            "default": "false",
-            "description": "Shows the value above the thumb while it's dragged or moved with the keys."
+            "name": "format",
+            "type": "Intl.NumberFormatOptions",
+            "description": "How the value is written in the thumb's pill and for screen readers (aria-valuetext), for example { style: \"currency\", currency: \"USD\" }."
           },
           {
-            "name": "formatValue",
-            "type": "(value: number) => string",
-            "description": "Formats the value for the tooltip and for screen readers (aria-valuetext)."
+            "name": "locale",
+            "type": "string",
+            "default": "\"en-US\"",
+            "description": "The locale to format in. Fixed by default so the server and the browser agree."
           },
           {
             "name": "thumbLabels",
@@ -6268,7 +6268,7 @@ export const items: Item[] = [
       }
     ],
     "primitives": [
-      "Radix Slider"
+      "WAI-ARIA slider pattern"
     ],
     "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/slider/",
     "motion": {
@@ -6292,19 +6292,19 @@ export const items: Item[] = [
     "dir": "components/slider",
     "install": {
       "dependencies": [
-        "motion@^14.0.0",
-        "radix-ui@^1.7.0"
+        "motion@^14.0.0"
       ],
       "registry": [
         "tokens",
-        "motion"
+        "motion",
+        "number-ticker"
       ]
     }
   },
   {
     "name": "spinner",
     "title": "Spinner",
-    "description": "An accessible React spinner for Next.js and Tailwind CSS: a small loading indicator in three sizes that takes the text's colour and pulses with reduced motion.",
+    "description": "An accessible React spinner for Next.js and Tailwind CSS: one line going round an infinity that fills it once the task is done.",
     "kind": "component",
     "category": "Feedback",
     "tags": [
@@ -6312,7 +6312,8 @@ export const items: Item[] = [
       "loading",
       "loader",
       "progress",
-      "busy"
+      "busy",
+      "infinity"
     ],
     "keywords": [
       "react spinner",
@@ -6321,11 +6322,13 @@ export const items: Item[] = [
       "nextjs loading spinner",
       "tailwind spinner",
       "loading indicator",
-      "react loader"
+      "react loader",
+      "infinity loader",
+      "animated loading icon"
     ],
     "status": "stable",
     "addedAt": "2026-10-16",
-    "updatedAt": "2026-10-16",
+    "updatedAt": "2026-10-22",
     "tier": "free",
     "files": [
       "spinner.tsx"
@@ -6339,7 +6342,12 @@ export const items: Item[] = [
       {
         "name": "sizes",
         "title": "Sizes",
-        "description": "The three icon sizes, and one inside a button. The arc turns once a second; with reduced motion it pulses instead."
+        "description": "The three icon sizes, and one inside a button. One line goes round the infinity at an even pace; with reduced motion it pulses instead."
+      },
+      {
+        "name": "finish",
+        "title": "Finish",
+        "description": "Set done when the task is finished: the line stops where it is and grows until it fills the whole infinity. Back to loading, it shrinks and travels on."
       },
       {
         "name": "with-text",
@@ -6363,6 +6371,18 @@ export const items: Item[] = [
             "type": "string",
             "default": "\"Loading\"",
             "description": "What's loading, for screen readers. Inside a button or beside text that already says it, pass aria-hidden instead."
+          },
+          {
+            "name": "done",
+            "type": "boolean",
+            "default": "false",
+            "description": "The task is finished: the line fills the whole infinity and stops."
+          },
+          {
+            "name": "doneLabel",
+            "type": "string",
+            "default": "\"Done\"",
+            "description": "Its name for screen readers once done."
           }
         ]
       }
@@ -6382,7 +6402,7 @@ export const items: Item[] = [
     ],
     "seo": {},
     "ai": {
-      "whenToUse": "Use Spinner while something loads and there's no way to tell how far along it is: a panel fetching data, a button submitting. Use LoadingButton for a button that shows loading, success and error by itself."
+      "whenToUse": "Use Spinner while something loads and there's no way to tell how far along it is: a panel fetching data, a button submitting. Set done when it finishes to fill the infinity. Use LoadingButton for a button that shows loading, success and error by itself."
     },
     "controls": {},
     "href": "/components/spinner",
@@ -7134,6 +7154,7 @@ export const items: Item[] = [
     },
     "preview": {
       "height": "md",
+      "align": "top",
       "card": "card"
     },
     "related": [
@@ -7367,7 +7388,7 @@ export const items: Item[] = [
     ],
     "status": "stable",
     "addedAt": "2026-10-16",
-    "updatedAt": "2026-10-16",
+    "updatedAt": "2026-10-22",
     "tier": "free",
     "files": [
       "textarea.tsx"
@@ -7381,7 +7402,7 @@ export const items: Item[] = [
       {
         "name": "default",
         "title": "Default",
-        "description": "Type a few lines: the field glides taller a line at a time, up to 6 lines, then scrolls. Delete them and it glides back to 2."
+        "description": "Type a few lines: the field glides taller a line at a time, up to 10 lines, then scrolls. Delete them and it glides back to 4. Drag its bottom-right corner to set its height."
       },
       {
         "name": "counter",
@@ -7396,7 +7417,7 @@ export const items: Item[] = [
     "api": [
       {
         "name": "Textarea",
-        "description": "Also accepts every native textarea prop except rows (use minRows). Grows with its text; with reduced motion it resizes at once.",
+        "description": "Also accepts every native textarea prop except rows (use minRows). Grows with its text; with reduced motion it resizes at once. Drag its bottom-right corner to resize it in height: the height you drag to becomes its floor.",
         "props": [
           {
             "name": "minRows",
@@ -8214,323 +8235,6 @@ export const items: Item[] = [
       ],
       "registry": [
         "tokens"
-      ]
-    }
-  },
-  {
-    "name": "dot-grid",
-    "title": "Dot Grid",
-    "description": "A React dot grid background for Next.js and Tailwind CSS: a fine dot pattern that fades out at the edges, with dots that brighten near the pointer.",
-    "kind": "background",
-    "category": "Backgrounds",
-    "tags": [
-      "background",
-      "dot pattern",
-      "grid",
-      "hero",
-      "pattern"
-    ],
-    "keywords": [
-      "react dot pattern",
-      "dot grid background",
-      "tailwind dot background",
-      "nextjs hero background",
-      "css dot pattern",
-      "dotted background",
-      "shadcn background",
-      "interactive background"
-    ],
-    "status": "stable",
-    "addedAt": "2026-10-16",
-    "updatedAt": "2026-10-16",
-    "tier": "free",
-    "files": [
-      "dot-grid.tsx",
-      "dot-grid-highlight.tsx"
-    ],
-    "dependencies": [],
-    "registryDependencies": [],
-    "usage": {
-      "code": "import { DotGrid } from \"@/components/ui/dot-grid\"\n\nexport function Hero() {\n  return (\n    <section className=\"relative isolate py-24 text-center\">\n      <DotGrid highlight />\n      <h1>Ship your next idea</h1>\n    </section>\n  )\n}"
-    },
-    "demos": [
-      {
-        "name": "hero",
-        "title": "Behind a hero",
-        "description": "Move the mouse over it: the dots near the pointer brighten a step, and the light follows on a soft spring."
-      }
-    ],
-    "api": [
-      {
-        "name": "DotGrid",
-        "description": "A layer that fills its parent from behind (absolute, -z-10, aria-hidden, ignoring the pointer). Put it first inside a relative isolate section. The dots take the text colour: text-muted-foreground by default, any text-* class to change it. Server-safe: the pattern renders without JavaScript, and only highlight adds a small client part. Also accepts every div prop.",
-        "props": [
-          {
-            "name": "size",
-            "type": "number",
-            "default": "16",
-            "description": "The distance between dots, in px."
-          },
-          {
-            "name": "dotSize",
-            "type": "number",
-            "default": "2",
-            "description": "The diameter of each dot, in px."
-          },
-          {
-            "name": "fade",
-            "type": "boolean",
-            "default": "true",
-            "description": "Fade the pattern out towards the edges, so it never ends on a hard line."
-          },
-          {
-            "name": "opacity",
-            "type": "number",
-            "default": "0.4",
-            "description": "The pattern's opacity, from 0 to 1."
-          },
-          {
-            "name": "highlight",
-            "type": "boolean",
-            "default": "false",
-            "description": "Brighten the dots near the pointer. It listens on the parent element, with a mouse only, and is off with reduced motion."
-          }
-        ]
-      }
-    ],
-    "primitives": [],
-    "motion": {
-      "animated": false
-    },
-    "preview": {
-      "height": "lg",
-      "card": "card"
-    },
-    "related": [
-      "line-grid",
-      "gradient-drift"
-    ],
-    "seo": {},
-    "ai": {
-      "whenToUse": "Use DotGrid as a quiet texture behind a hero or a section. Use LineGrid for a more structured, technical look, and GradientDrift for soft light with no pattern."
-    },
-    "controls": {},
-    "href": "/backgrounds/dot-grid",
-    "dir": "components/dot-grid",
-    "install": {
-      "dependencies": [
-        "motion@^14.0.0"
-      ],
-      "registry": [
-        "tokens",
-        "motion"
-      ]
-    }
-  },
-  {
-    "name": "gradient-drift",
-    "title": "Gradient Drift",
-    "description": "A React animated gradient background for Next.js and Tailwind CSS: soft, single-colour light that drifts very slowly behind a hero or a section.",
-    "kind": "background",
-    "category": "Backgrounds",
-    "tags": [
-      "background",
-      "gradient",
-      "animated gradient",
-      "hero",
-      "mesh gradient"
-    ],
-    "keywords": [
-      "react animated gradient",
-      "animated gradient background",
-      "tailwind gradient background",
-      "nextjs hero background",
-      "mesh gradient react",
-      "soft gradient background",
-      "shadcn background",
-      "blurred gradient background"
-    ],
-    "status": "stable",
-    "addedAt": "2026-10-16",
-    "updatedAt": "2026-10-16",
-    "tier": "free",
-    "files": [
-      "gradient-drift.tsx"
-    ],
-    "dependencies": [],
-    "registryDependencies": [],
-    "usage": {
-      "code": "import { GradientDrift } from \"@/components/ui/gradient-drift\"\n\nexport function Hero() {\n  return (\n    <section className=\"relative isolate py-24 text-center\">\n      <GradientDrift />\n      <h1>Ship your next idea</h1>\n    </section>\n  )\n}"
-    },
-    "demos": [
-      {
-        "name": "hero",
-        "title": "Behind a hero",
-        "description": "Three soft pools of one colour drift there and back at their own pace, so the light never settles into a pattern."
-      }
-    ],
-    "api": [
-      {
-        "name": "GradientDrift",
-        "description": "A layer that fills its parent from behind (absolute, -z-10, aria-hidden, ignoring the pointer). Put it first inside a relative isolate section. The blur is baked into radial gradients, so only transforms move. It renders on the server as a still field, pauses off-screen and while the tab is hidden, and holds still with reduced motion. Also accepts every div prop.",
-        "props": [
-          {
-            "name": "tone",
-            "type": "\"neutral\" | \"primary\"",
-            "default": "\"neutral\"",
-            "description": "Neutral greys (foreground and muted-foreground), or the theme's primary colour."
-          },
-          {
-            "name": "opacity",
-            "type": "number",
-            "default": "0.05",
-            "description": "The field's opacity, from 0 to 1. The default keeps the light within a small lightness step, so it stays calm."
-          },
-          {
-            "name": "speed",
-            "type": "number",
-            "default": "1",
-            "description": "How fast it drifts: 1 is the calm default (20 seconds or more each way), 2 twice as fast. 0 holds it still."
-          }
-        ]
-      }
-    ],
-    "primitives": [],
-    "motion": {
-      "animated": false
-    },
-    "preview": {
-      "height": "lg",
-      "card": "card"
-    },
-    "related": [
-      "dot-grid",
-      "line-grid"
-    ],
-    "seo": {},
-    "ai": {
-      "whenToUse": "Use GradientDrift for soft, slowly moving light behind a hero or a section, with no pattern. Use DotGrid or LineGrid for a texture instead."
-    },
-    "controls": {},
-    "href": "/backgrounds/gradient-drift",
-    "dir": "components/gradient-drift",
-    "install": {
-      "dependencies": [
-        "motion@^14.0.0"
-      ],
-      "registry": [
-        "tokens",
-        "motion"
-      ]
-    }
-  },
-  {
-    "name": "line-grid",
-    "title": "Line Grid",
-    "description": "A React grid background for Next.js and Tailwind CSS: thin grid lines that fade out at the edges, with an optional slow, seamless pan.",
-    "kind": "background",
-    "category": "Backgrounds",
-    "tags": [
-      "background",
-      "grid",
-      "grid lines",
-      "hero",
-      "pattern"
-    ],
-    "keywords": [
-      "react grid background",
-      "grid pattern background",
-      "tailwind grid background",
-      "nextjs hero background",
-      "css grid lines background",
-      "animated grid background",
-      "shadcn background",
-      "graph paper background"
-    ],
-    "status": "stable",
-    "addedAt": "2026-10-16",
-    "updatedAt": "2026-10-16",
-    "tier": "free",
-    "files": [
-      "line-grid.tsx",
-      "line-grid-pan.tsx"
-    ],
-    "dependencies": [],
-    "registryDependencies": [],
-    "usage": {
-      "code": "import { LineGrid } from \"@/components/ui/line-grid\"\n\nexport function Hero() {\n  return (\n    <section className=\"relative isolate py-24 text-center\">\n      <LineGrid pan />\n      <h1>Ship your next idea</h1>\n    </section>\n  )\n}"
-    },
-    "demos": [
-      {
-        "name": "hero",
-        "title": "Behind a hero",
-        "description": "With pan on, the lines slide one cell every 12 seconds and loop without a seam. The fade at the edges stays put."
-      }
-    ],
-    "api": [
-      {
-        "name": "LineGrid",
-        "description": "A layer that fills its parent from behind (absolute, -z-10, aria-hidden, ignoring the pointer). Put it first inside a relative isolate section. The lines take the text colour: text-border by default, any text-* class to change it. Server-safe: the lines render without JavaScript, and only pan adds a small client part. Also accepts every div prop.",
-        "props": [
-          {
-            "name": "size",
-            "type": "number",
-            "default": "40",
-            "description": "The size of each cell, in px."
-          },
-          {
-            "name": "fade",
-            "type": "boolean",
-            "default": "true",
-            "description": "Fade the lines out towards the edges, so the grid never ends on a hard line."
-          },
-          {
-            "name": "opacity",
-            "type": "number",
-            "default": "1",
-            "description": "The lines' opacity, from 0 to 1."
-          },
-          {
-            "name": "pan",
-            "type": "boolean",
-            "default": "false",
-            "description": "Slide the grid slowly and endlessly. It pauses off-screen and while the tab is hidden, and is off with reduced motion."
-          },
-          {
-            "name": "speed",
-            "type": "number",
-            "default": "1",
-            "description": "How fast it pans: 1 is a cell every 12 seconds, 2 twice as fast. 0 holds it still."
-          }
-        ]
-      }
-    ],
-    "primitives": [],
-    "motion": {
-      "animated": false
-    },
-    "preview": {
-      "height": "lg",
-      "card": "card"
-    },
-    "related": [
-      "dot-grid",
-      "gradient-drift"
-    ],
-    "seo": {},
-    "ai": {
-      "whenToUse": "Use LineGrid behind a hero or a section for a structured, technical look; add pan for a slow sense of motion. Use DotGrid for a lighter texture, and GradientDrift for soft light with no pattern."
-    },
-    "controls": {},
-    "href": "/backgrounds/line-grid",
-    "dir": "components/line-grid",
-    "install": {
-      "dependencies": [
-        "motion@^14.0.0"
-      ],
-      "registry": [
-        "tokens",
-        "motion"
       ]
     }
   }
