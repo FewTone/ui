@@ -66,7 +66,7 @@ docs-internal/             long-term project memory (see map below)
 |---|---|
 | `pnpm dev` | Run the site (rebuilds the item index first). The token reference is at `/lab/tokens`. |
 | `pnpm build` | Production build |
-| `pnpm index` | Rebuild the item index and the registry after editing any `*.meta.ts` or component |
+| `pnpm index` | Rebuild the item index and the registry after editing any `*.meta.ts` or component. It also writes the README's component table (between its `components:start` / `components:end` markers) and the skill zips. |
 | `pnpm test` | Vitest + Testing Library + axe for every component (packages/ui) |
 | `pnpm check` | Lint + item index freshness + typecheck + token check + tests. **Run this before saying work is done.** CI runs it, and `pnpm build`, on every push to main and every PR (`.github/workflows/ci.yml`, ADR 0015). |
 | `REGISTRY_URL=http://localhost:3000 pnpm dev` | Serve the registry with local dependency URLs, to test `npx shadcn add http://localhost:3000/r/<name>.json` in a scratch app |

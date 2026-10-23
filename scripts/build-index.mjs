@@ -124,9 +124,49 @@ export const demos: Record<string, ComponentType> = {
 ${entries}};
 `;
 
+// The README's component list, between its markers, so the repo's front page never drifts from the index
+const README = join(ROOT, "README.md");
+// The published site, never a local REGISTRY_URL: the README links to the real pages
+const { registryBase } = await import(pathToFileURL(join(SRC, "registry", "shared.ts")).href);
+const siteUrl = new URL(registryBase).origin;
+
+function readmeSource() {
+  const current = readFileSync(README, "utf8").replace(/\r\n/g, "\n");
+  const markers = /(<!-- components:start[^>]*-->\n)[\s\S]*?(<!-- components:end -->)/;
+  if (!markers.test(current)) {
+    console.error("README.md is missing its <!-- components:start --> / <!-- components:end --> markers.");
+    process.exit(1);
+  }
+  const shown = items.filter((item) => item.status !== "draft");
+  const rows = [];
+  for (const [name, kind] of Object.entries(kinds).sort(([, a], [, b]) => a.order - b.order)) {
+    const groups = new Map();
+    for (const item of shown.filter((entry) => entry.kind === name)) {
+      // Components by category; any other kind (backgrounds, blocks…) as one row
+      const label = name === "component" ? item.category : kind.plural;
+      groups.set(label, [...(groups.get(label) ?? []), item]);
+    }
+    for (const [label, members] of [...groups].sort(([a], [b]) => a.localeCompare(b))) {
+      rows.push(
+        `| ${label} | ${members.map((item) => `[${item.title}](${siteUrl}${item.href})`).join(", ")} |`,
+      );
+    }
+  }
+  const count = shown.filter((item) => item.kind === "component").length;
+  const section = [
+    `${count} components, each with a live preview, examples and its API on [ui.fewtone.com](${siteUrl}/components).`,
+    "",
+    "| Category | Components |",
+    "| --- | --- |",
+    ...rows,
+  ].join("\n");
+  return current.replace(markers, (_, start, end) => `${start}${section}\n${end}`);
+}
+
 const outputs = [
   [OUT_INDEX, indexSource],
   [OUT_DEMOS, demosSource],
+  [README, readmeSource()],
 ];
 
 if (CHECK) {
