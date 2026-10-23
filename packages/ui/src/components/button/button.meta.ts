@@ -4,14 +4,14 @@ export default {
   name: "button",
   title: "Button",
   description:
-    "An accessible React button with six variants, three sizes, icon support and a spring press, built on a native button.",
+    "An accessible React button for Next.js and Tailwind CSS with six variants, three sizes, icons and a soft tint on hover and press, built on a native button.",
   kind: "component",
   category: "Buttons",
   tags: ["button", "action", "link"],
   keywords: ["react button", "nextjs button", "tailwind button", "shadcn button", "button component"],
   status: "stable",
   addedAt: "2026-10-13",
-  updatedAt: "2026-10-14",
+  updatedAt: "2026-10-23",
   files: ["button.tsx"],
   usage: {
     code: `import { Button } from "@/components/ui/button"

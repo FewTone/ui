@@ -31,7 +31,8 @@ import {
  *   hears "Olivia Martin" whether or not the picture has loaded. With alt="" (a name beside it) they're hidden too.
  * - Radix mounts the img only once it has loaded, and drops its own fallback that moment. So the fallback here is
  *   our own span, which the picture tells when it's fully in.
- * - In a group, a ring in the page's background colour separates the overlapping circles.
+ * - In a group, a ring in the page's background colour separates the overlapping circles. The overlap follows the
+ *   size, and each covered avatar's initials centre in its visible part, so two letters are never cut.
  */
 
 /** Where the picture is: not on screen, coming in over the initials, or fully in */
@@ -206,6 +207,11 @@ function AvatarFallback({ className, delayMs, ...props }: AvatarFallbackProps) {
       className={cn(
         "flex size-full items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground",
         "group-data-[size=sm]/avatar:text-xs group-data-[size=lg]/avatar:text-base",
+        // In a group the next circle covers this one's end edge (its overlap plus its ring), so the initials centre
+        // in the part that stays visible and are never cut
+        "in-data-[slot=avatar-group]:group-not-last/avatar:pe-2",
+        "group-data-[size=sm]/avatar:in-data-[slot=avatar-group]:group-not-last/avatar:pe-1",
+        "group-data-[size=lg]/avatar:in-data-[slot=avatar-group]:group-not-last/avatar:pe-2.5",
         className,
       )}
       {...props}
@@ -224,7 +230,9 @@ function AvatarGroup({ className, ...props }: ComponentProps<"div">) {
       role="group"
       data-slot="avatar-group"
       className={cn(
-        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
+        // The overlap follows the size (2, 6 or 8px), small enough that two initials still fit beside it
+        "group/avatar-group flex -space-x-1.5 has-data-[size=sm]:-space-x-0.5 has-data-[size=lg]:-space-x-2",
+        "*:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
         className,
       )}
       {...props}

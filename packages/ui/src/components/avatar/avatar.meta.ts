@@ -20,7 +20,7 @@ export default {
   ],
   status: "stable",
   addedAt: "2026-10-16",
-  updatedAt: "2026-10-16",
+  updatedAt: "2026-10-23",
   files: ["avatar.tsx"],
   usage: {
     code: `import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -97,7 +97,7 @@ export function UserAvatar({ user }) {
     {
       name: "AvatarGroup",
       description:
-        'Overlapping avatars, each ringed in the page\'s background colour. A group (role="group"): name it with aria-label.',
+        'Overlapping avatars, each ringed in the page\'s background colour. The overlap follows their size, and initials centre in the part left visible. A group (role="group"): name it with aria-label.',
       props: [],
     },
     {

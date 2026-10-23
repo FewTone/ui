@@ -404,7 +404,7 @@ export const items: Item[] = [
     ],
     "status": "stable",
     "addedAt": "2026-10-16",
-    "updatedAt": "2026-10-16",
+    "updatedAt": "2026-10-23",
     "tier": "free",
     "files": [
       "avatar.tsx"
@@ -473,7 +473,7 @@ export const items: Item[] = [
       },
       {
         "name": "AvatarGroup",
-        "description": "Overlapping avatars, each ringed in the page's background colour. A group (role=\"group\"): name it with aria-label.",
+        "description": "Overlapping avatars, each ringed in the page's background colour. The overlap follows their size, and initials centre in the part left visible. A group (role=\"group\"): name it with aria-label.",
         "props": []
       },
       {
@@ -760,7 +760,7 @@ export const items: Item[] = [
   {
     "name": "button",
     "title": "Button",
-    "description": "An accessible React button with six variants, three sizes, icon support and a spring press, built on a native button.",
+    "description": "An accessible React button for Next.js and Tailwind CSS with six variants, three sizes, icons and a soft tint on hover and press, built on a native button.",
     "kind": "component",
     "category": "Buttons",
     "tags": [
@@ -777,7 +777,7 @@ export const items: Item[] = [
     ],
     "status": "stable",
     "addedAt": "2026-10-13",
-    "updatedAt": "2026-10-14",
+    "updatedAt": "2026-10-23",
     "tier": "free",
     "files": [
       "button.tsx"
