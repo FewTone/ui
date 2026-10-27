@@ -1,10 +1,10 @@
 import { cn } from "@fewtone/ui/lib/utils";
 
-export type Status = "Beta" | "Draft";
+export type Status = "Beta" | "New" | "Draft";
 
 /**
- * Status signals (there are no "New" tags, owner 2026-10-14). "Beta" is one of the few places the brand
- * colour appears (AGENTS.md rule 2):
+ * Status signals. "Beta" (the API may change) and "New" (just added, owner 2026-10-27) are one of the few places
+ * the brand colour appears (AGENTS.md rule 2):
  * a solid Navy edge with two light shines travelling round it (the `edge-shine` utility, owner 2026-10-13).
  * The badge is transparent inside, so it sits on any surface. "Draft" is neutral, since it only shows in
  * development.

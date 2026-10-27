@@ -324,6 +324,11 @@
   --size-roll-fade: 0.25em;
   /* …and the room at its sides, where characters fade as they come, go and glide. Shipped. */
   --size-roll-fade-x: 0.5em;
+  /* Drawer as a bottom sheet (iOS): the gap it always leaves above it, clear of the status bar (44px at least),
+     the tallest it grows, and the room under its last row (16px plus the home indicator's safe area). Shipped. */
+  --size-sheet-top-gap: max(2.75rem, calc(env(safe-area-inset-top) + 0.5rem));
+  --size-sheet-max: calc(100svh - var(--size-sheet-top-gap));
+  --size-sheet-inset-bottom: calc(1rem + env(safe-area-inset-bottom));
 
   /* The card's corners stay concentric with the tile's (xl) around the frame */
   --radius-card: calc(var(--radius-xl) + var(--space-card-frame));

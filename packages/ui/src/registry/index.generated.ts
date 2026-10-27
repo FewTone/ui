@@ -2820,6 +2820,170 @@ export const items: Item[] = [
     }
   },
   {
+    "name": "drawer",
+    "title": "Drawer",
+    "description": "An accessible React drawer for Next.js and Tailwind CSS: an iOS bottom sheet on phones that drags to close and works with the keyboard, a dialog on larger screens.",
+    "kind": "component",
+    "category": "Overlays",
+    "tags": [
+      "drawer",
+      "bottom sheet",
+      "sheet",
+      "modal",
+      "mobile",
+      "ios"
+    ],
+    "keywords": [
+      "react drawer",
+      "react bottom sheet",
+      "shadcn drawer",
+      "nextjs drawer",
+      "ios bottom sheet",
+      "vaul drawer",
+      "mobile modal",
+      "responsive dialog",
+      "swipe to close"
+    ],
+    "status": "new",
+    "addedAt": "2026-10-26",
+    "updatedAt": "2026-10-26",
+    "tier": "free",
+    "files": [
+      "drawer.tsx"
+    ],
+    "dependencies": [],
+    "registryDependencies": [],
+    "usage": {
+      "code": "import { Button } from \"@/components/ui/button\"\nimport {\n  Drawer,\n  DrawerClose,\n  DrawerContent,\n  DrawerDescription,\n  DrawerFooter,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger,\n} from \"@/components/ui/drawer\"\n\nexport function MoveToTrash() {\n  return (\n    <Drawer>\n      <DrawerTrigger asChild>\n        <Button variant=\"outline\">Move to trash</Button>\n      </DrawerTrigger>\n      <DrawerContent>\n        <DrawerHeader>\n          <DrawerTitle>Move to trash?</DrawerTitle>\n          <DrawerDescription>You can restore it for 30 days.</DrawerDescription>\n        </DrawerHeader>\n        <DrawerFooter>\n          <DrawerClose asChild>\n            <Button variant=\"outline\">Cancel</Button>\n          </DrawerClose>\n          <Button variant=\"destructive\">Move to trash</Button>\n        </DrawerFooter>\n      </DrawerContent>\n    </Drawer>\n  )\n}\n\n// For the page to step back behind the sheet, wrap your app once (app/layout.tsx):\n// <body>\n//   <div data-vaul-drawer-wrapper=\"\" className=\"min-h-svh bg-background\">{children}</div>\n// </body>\n// and let content reach the screen's edges, so the sheet clears the home indicator:\n// export const viewport = { viewportFit: \"cover\" }"
+    },
+    "demos": [
+      {
+        "name": "profile",
+        "title": "Edit profile",
+        "description": "A form in a sheet. On a phone, the sheet sits on the keyboard and keeps the focused field in view above the pinned buttons. The setting picks what it opens as: an app usually leaves it on auto, a sheet on phones and a dialog elsewhere."
+      },
+      {
+        "name": "scrolling",
+        "title": "Long content",
+        "description": "The sheet grows to just under the status bar; its content scrolls on its own and the buttons stay pinned."
+      },
+      {
+        "name": "nested",
+        "title": "A sheet on a sheet",
+        "description": "A drawer opened from a sheet: the first steps back behind the second."
+      }
+    ],
+    "api": [
+      {
+        "name": "Drawer",
+        "description": "Holds the open state. What it opens as is chosen as it opens and kept while it's open, so it never swaps mid-use.",
+        "props": [
+          {
+            "name": "mode",
+            "type": "\"auto\" | \"sheet\" | \"dialog\"",
+            "default": "\"auto\"",
+            "description": "A sheet on phones (under 768px) and a dialog elsewhere, or always one of them."
+          },
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "Whether it's open (controlled)."
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Open on first render."
+          },
+          {
+            "name": "onOpenChange",
+            "type": "(open: boolean) => void",
+            "description": "Called as it opens and closes, by any means (a drag, Escape, the backdrop, a button)."
+          }
+        ]
+      },
+      {
+        "name": "DrawerTrigger",
+        "description": "Opens it. Use asChild to make your Button the trigger.",
+        "props": []
+      },
+      {
+        "name": "DrawerContent",
+        "description": "The sheet (with a grabber, and a body that scrolls) or the dialog window. Focus goes into it, not to its first field, so the keyboard doesn't jump up. Also accepts every Radix Dialog Content prop.",
+        "props": [
+          {
+            "name": "showCloseButton",
+            "type": "boolean",
+            "default": "true",
+            "description": "Show a close button in the top corner."
+          }
+        ]
+      },
+      {
+        "name": "DrawerHeader",
+        "description": "The title and description, stopping short of the close button.",
+        "props": []
+      },
+      {
+        "name": "DrawerFooter",
+        "description": "Actions. In the sheet they're pinned to the bottom, full width with the last one on top, above the home indicator; in the dialog, a row at the end. Put the main action last.",
+        "props": []
+      },
+      {
+        "name": "DrawerTitle",
+        "description": "Names the drawer for screen readers. Required.",
+        "props": []
+      },
+      {
+        "name": "DrawerDescription",
+        "description": "Describes it, read after the title.",
+        "props": []
+      },
+      {
+        "name": "DrawerClose",
+        "description": "Closes it. Use asChild with a Button.",
+        "props": []
+      }
+    ],
+    "primitives": [
+      "Vaul",
+      "Radix Dialog"
+    ],
+    "ariaPattern": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "motion": {
+      "animated": false
+    },
+    "preview": {
+      "height": "md",
+      "card": "card"
+    },
+    "related": [
+      "dialog",
+      "sheet",
+      "alert-dialog"
+    ],
+    "seo": {},
+    "ai": {
+      "whenToUse": "Use Drawer for anything that should open as an iOS bottom sheet on phones (forms, confirmations, pickers, details) and as a dialog on larger screens. Use Sheet for a panel from the side beside the page, and Dialog when it should always be a centred window. Wrap the app in data-vaul-drawer-wrapper so the page steps back."
+    },
+    "controls": {},
+    "href": "/components/drawer",
+    "dir": "components/drawer",
+    "install": {
+      "dependencies": [
+        "lucide-react@^1.52.0",
+        "motion@^14.0.0",
+        "vaul@1.1.2"
+      ],
+      "registry": [
+        "tokens",
+        "motion",
+        "button",
+        "dialog"
+      ]
+    }
+  },
+  {
     "name": "dropdown-menu",
     "title": "Dropdown Menu",
     "description": "An accessible React dropdown menu for Next.js with a highlight that glides between items, shortcuts, checkbox and radio items and sub-menus, built on Radix.",
@@ -8241,4 +8405,4 @@ export const items: Item[] = [
 ];
 
 /** The tokens item as CSS to paste, for the Manual install route (generated from tokens.css and theme.css) */
-export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --size-roll-fade: 0.25em;\n  --size-roll-fade-x: 0.5em;\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-overlay: 1200;\n  --z-modal: 1300;\n  --z-popover: 1400;\n  --z-toast: 1500;\n  --z-tooltip: 1600;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n  --overlay: color-mix(in oklch, oklch(0 0 0) 40%, transparent);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n  --overlay: color-mix(in oklch, oklch(0 0 0) 60%, transparent);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --animate-collapsible-open: collapsible-open var(--duration-slow) cubic-bezier(0.22, 1, 0.36, 1);\n  --animate-collapsible-close: collapsible-close var(--duration-base) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-overlay: var(--overlay);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n  }\n  @keyframes collapsible-open {\n    from {\n      height: 0;\n      opacity: 0;\n      filter: blur(6px);\n    }\n    to {\n      height: var(--collapsible-height);\n      opacity: 1;\n      filter: blur(0);\n    }\n  }\n  @keyframes collapsible-close {\n    from {\n      height: var(--collapsible-height);\n      opacity: 1;\n      filter: blur(0);\n    }\n    to {\n      height: 0;\n      opacity: 0;\n      filter: blur(6px);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";
+export const tokensCss = ":root {\n  --size-control-sm: 2rem;\n  --size-control-md: 2.25rem;\n  --size-control-lg: 2.5rem;\n  --size-icon-sm: 0.875rem;\n  --size-icon-md: 1rem;\n  --size-icon-lg: 1.25rem;\n  --size-roll-fade: 0.25em;\n  --size-roll-fade-x: 0.5em;\n  --size-sheet-top-gap: max(2.75rem, calc(env(safe-area-inset-top) + 0.5rem));\n  --size-sheet-max: calc(100svh - max(2.75rem, calc(env(safe-area-inset-top) + 0.5rem)));\n  --size-sheet-inset-bottom: calc(1rem + env(safe-area-inset-bottom));\n  --duration-instant: 80ms;\n  --duration-fast: 150ms;\n  --duration-base: 220ms;\n  --duration-slow: 350ms;\n  --duration-slower: 500ms;\n  --z-overlay: 1200;\n  --z-modal: 1300;\n  --z-popover: 1400;\n  --z-toast: 1500;\n  --z-tooltip: 1600;\n  --focus-ring-width: 2px;\n  --focus-ring-offset: 2px;\n  --opacity-disabled: 0.5;\n  --ease-spring: linear(0, 0.157, 0.48, 0.77, 0.97, 1.07, 1.1, 1.09, 1.05, 1.02, 1, 0.995, 1);\n  --destructive-foreground: oklch(1 0 0);\n  --overlay: color-mix(in oklch, oklch(0 0 0) 40%, transparent);\n}\n\n.dark {\n  --destructive-foreground: oklch(1 0 0);\n  --overlay: color-mix(in oklch, oklch(0 0 0) 60%, transparent);\n}\n\n@theme inline {\n  --animate-popover-in: popover-in var(--duration-fast) cubic-bezier(0.22, 1, 0.36, 1) both;\n  --animate-popover-out: popover-out var(--duration-instant) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --animate-collapsible-open: collapsible-open var(--duration-slow) cubic-bezier(0.22, 1, 0.36, 1);\n  --animate-collapsible-close: collapsible-close var(--duration-base) cubic-bezier(0.55, 0, 1, 0.45) both;\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-overlay: var(--overlay);\n  @keyframes popover-in {\n    from {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n    to {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n  }\n  @keyframes popover-out {\n    from {\n      opacity: 1;\n      filter: blur(0);\n      transform: scale(1);\n    }\n    to {\n      opacity: 0;\n      filter: blur(6px);\n      transform: scale(0.96);\n    }\n  }\n  @keyframes collapsible-open {\n    from {\n      height: 0;\n      opacity: 0;\n      filter: blur(6px);\n    }\n    to {\n      height: var(--collapsible-height);\n      opacity: 1;\n      filter: blur(0);\n    }\n  }\n  @keyframes collapsible-close {\n    from {\n      height: var(--collapsible-height);\n      opacity: 1;\n      filter: blur(0);\n    }\n    to {\n      height: 0;\n      opacity: 0;\n      filter: blur(6px);\n    }\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  :root {\n    --duration-instant: 1ms;\n    --duration-fast: 1ms;\n    --duration-base: 1ms;\n    --duration-slow: 1ms;\n    --duration-slower: 1ms;\n  }\n}";

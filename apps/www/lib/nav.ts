@@ -1,7 +1,7 @@
 import { getKinds } from "./content";
 import { guides } from "./guides";
 
-export type NavLink = { title: string; href: string; badge?: "Beta" };
+export type NavLink = { title: string; href: string; badge?: "Beta" | "New" };
 export type NavSection = {
   id: string;
   /** Shown above the links; a section without one (Home) is just its links */
@@ -29,8 +29,9 @@ export function getNavSections(): NavSection[] {
       links: kind.items.map((item) => ({
         title: item.title,
         href: item.href,
-        // No "New" badges (owner, 2026-10-14); Beta still says the API may change
-        badge: item.status === "beta" ? ("Beta" as const) : undefined,
+        // Beta says the API may change; New marks a component just added (owner, 2026-10-27)
+        badge:
+          item.status === "beta" ? ("Beta" as const) : item.status === "new" ? ("New" as const) : undefined,
       })),
     })),
   ];

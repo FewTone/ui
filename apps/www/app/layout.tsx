@@ -1,6 +1,6 @@
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { site } from "@/lib/site";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -16,11 +16,19 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
+// Pages reach the screen's edges, so Drawer's sheet can sit right above a phone's home indicator (safe areas)
+export const viewport: Viewport = { viewportFit: "cover" };
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <body className="flex min-h-dvh flex-col">
-        <Providers>{children}</Providers>
+        <Providers>
+          {/* What steps back, scaled with rounded corners, while a Drawer's sheet is open (Vaul) */}
+          <div data-vaul-drawer-wrapper="" className="flex flex-1 flex-col bg-background">
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

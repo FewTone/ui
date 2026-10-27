@@ -45,104 +45,108 @@ import Demo41 from "../components/date-picker/demos/presets";
 import Demo42 from "../components/date-picker/demos/card";
 import Demo43 from "../components/dialog/demos/edit-profile";
 import Demo44 from "../components/dialog/demos/scrolling";
-import Demo45 from "../components/dropdown-menu/demos/account";
-import Demo46 from "../components/dropdown-menu/demos/options";
-import Demo47 from "../components/dropdown-menu/demos/icons";
-import Demo48 from "../components/hover-card/demos/profile";
-import Demo49 from "../components/input/demos/default";
-import Demo50 from "../components/input/demos/invalid";
-import Demo51 from "../components/input/demos/sizes";
-import Demo52 from "../components/input/demos/disabled";
-import Demo53 from "../components/input-otp/demos/code";
-import Demo54 from "../components/input-otp/demos/pin";
-import Demo55 from "../components/input-otp/demos/card";
-import Demo56 from "../components/loading-button/demos/async";
-import Demo57 from "../components/loading-button/demos/states";
-import Demo58 from "../components/loading-button/demos/card";
-import Demo59 from "../components/marquee/demos/rows";
-import Demo60 from "../components/marquee/demos/vertical";
-import Demo61 from "../components/marquee/demos/card";
-import Demo62 from "../components/navigation-menu/demos/header";
-import Demo63 from "../components/navigation-menu/demos/without-viewport";
-import Demo64 from "../components/navigation-menu/demos/card";
-import Demo65 from "../components/number-input/demos/fields";
-import Demo66 from "../components/number-input/demos/percent";
-import Demo67 from "../components/number-input/demos/disabled";
-import Demo68 from "../components/number-input/demos/card";
-import Demo69 from "../components/number-ticker/demos/flow";
-import Demo70 from "../components/number-ticker/demos/stats";
-import Demo71 from "../components/number-ticker/demos/card";
-import Demo72 from "../components/pagination/demos/pages";
-import Demo73 from "../components/pagination/demos/card";
-import Demo74 from "../components/popover/demos/uses";
-import Demo75 from "../components/popover/demos/sides";
-import Demo76 from "../components/popover/demos/anchor";
-import Demo77 from "../components/progress/demos/overview";
-import Demo78 from "../components/progress/demos/with-label";
-import Demo79 from "../components/progress/demos/ring-sizes";
-import Demo80 from "../components/progress/demos/card";
-import Demo81 from "../components/radio-group/demos/travel";
-import Demo82 from "../components/radio-group/demos/horizontal";
-import Demo83 from "../components/radio-group/demos/cards";
-import Demo84 from "../components/radio-group/demos/disabled";
-import Demo85 from "../components/radio-group/demos/card";
-import Demo86 from "../components/scroll-area/demos/directions";
-import Demo87 from "../components/scroll-area/demos/card";
-import Demo88 from "../components/select/demos/default";
-import Demo89 from "../components/select/demos/groups";
-import Demo90 from "../components/select/demos/searchable";
-import Demo91 from "../components/select/demos/sizes";
-import Demo92 from "../components/sheet/demos/sides";
-import Demo93 from "../components/sidebar/demos/app-shell";
-import Demo94 from "../components/sidebar/demos/card";
-import Demo95 from "../components/skeleton/demos/placeholders";
-import Demo96 from "../components/skeleton/demos/loading";
-import Demo97 from "../components/skeleton/demos/card";
-import Demo98 from "../components/slider/demos/single-and-range";
-import Demo99 from "../components/slider/demos/labelled";
-import Demo100 from "../components/slider/demos/vertical";
-import Demo101 from "../components/slider/demos/card";
-import Demo102 from "../components/spinner/demos/sizes";
-import Demo103 from "../components/spinner/demos/finish";
-import Demo104 from "../components/spinner/demos/with-text";
-import Demo105 from "../components/spinner/demos/card";
-import Demo106 from "../components/stepper/demos/checkout";
-import Demo107 from "../components/stepper/demos/vertical";
-import Demo108 from "../components/stepper/demos/card";
-import Demo109 from "../components/switch/demos/default";
-import Demo110 from "../components/switch/demos/settings";
-import Demo111 from "../components/switch/demos/sizes";
-import Demo112 from "../components/switch/demos/disabled";
-import Demo113 from "../components/switcher/demos/variants";
-import Demo114 from "../components/switcher/demos/icons";
-import Demo115 from "../components/switcher/demos/icons-and-text";
-import Demo116 from "../components/switcher/demos/card";
-import Demo117 from "../components/table/demos/invoices";
-import Demo118 from "../components/table/demos/card";
-import Demo119 from "../components/tabs/demos/variants";
-import Demo120 from "../components/tabs/demos/icons";
-import Demo121 from "../components/tabs/demos/disabled";
-import Demo122 from "../components/tabs/demos/card";
-import Demo123 from "../components/text-effects/demos/overview";
-import Demo124 from "../components/text-effects/demos/by-character";
-import Demo125 from "../components/text-effects/demos/type-once";
-import Demo126 from "../components/text-effects/demos/card";
-import Demo127 from "../components/textarea/demos/default";
-import Demo128 from "../components/textarea/demos/counter";
-import Demo129 from "../components/textarea/demos/disabled";
-import Demo130 from "../components/theme-toggle/demos/reveals";
-import Demo131 from "../components/theme-toggle/demos/switch";
-import Demo132 from "../components/theme-toggle/demos/card";
-import Demo133 from "../components/toast/demos/types";
-import Demo134 from "../components/toast/demos/promise";
-import Demo135 from "../components/toast/demos/composed";
-import Demo136 from "../components/toast/demos/card";
-import Demo137 from "../components/toggle-group/demos/variants";
-import Demo138 from "../components/toggle-group/demos/days";
-import Demo139 from "../components/toggle-group/demos/disabled";
-import Demo140 from "../components/toggle-group/demos/card";
-import Demo141 from "../components/tooltip/demos/toolbar";
-import Demo142 from "../components/tooltip/demos/card";
+import Demo45 from "../components/drawer/demos/profile";
+import Demo46 from "../components/drawer/demos/scrolling";
+import Demo47 from "../components/drawer/demos/nested";
+import Demo48 from "../components/drawer/demos/card";
+import Demo49 from "../components/dropdown-menu/demos/account";
+import Demo50 from "../components/dropdown-menu/demos/options";
+import Demo51 from "../components/dropdown-menu/demos/icons";
+import Demo52 from "../components/hover-card/demos/profile";
+import Demo53 from "../components/input/demos/default";
+import Demo54 from "../components/input/demos/invalid";
+import Demo55 from "../components/input/demos/sizes";
+import Demo56 from "../components/input/demos/disabled";
+import Demo57 from "../components/input-otp/demos/code";
+import Demo58 from "../components/input-otp/demos/pin";
+import Demo59 from "../components/input-otp/demos/card";
+import Demo60 from "../components/loading-button/demos/async";
+import Demo61 from "../components/loading-button/demos/states";
+import Demo62 from "../components/loading-button/demos/card";
+import Demo63 from "../components/marquee/demos/rows";
+import Demo64 from "../components/marquee/demos/vertical";
+import Demo65 from "../components/marquee/demos/card";
+import Demo66 from "../components/navigation-menu/demos/header";
+import Demo67 from "../components/navigation-menu/demos/without-viewport";
+import Demo68 from "../components/navigation-menu/demos/card";
+import Demo69 from "../components/number-input/demos/fields";
+import Demo70 from "../components/number-input/demos/percent";
+import Demo71 from "../components/number-input/demos/disabled";
+import Demo72 from "../components/number-input/demos/card";
+import Demo73 from "../components/number-ticker/demos/flow";
+import Demo74 from "../components/number-ticker/demos/stats";
+import Demo75 from "../components/number-ticker/demos/card";
+import Demo76 from "../components/pagination/demos/pages";
+import Demo77 from "../components/pagination/demos/card";
+import Demo78 from "../components/popover/demos/uses";
+import Demo79 from "../components/popover/demos/sides";
+import Demo80 from "../components/popover/demos/anchor";
+import Demo81 from "../components/progress/demos/overview";
+import Demo82 from "../components/progress/demos/with-label";
+import Demo83 from "../components/progress/demos/ring-sizes";
+import Demo84 from "../components/progress/demos/card";
+import Demo85 from "../components/radio-group/demos/travel";
+import Demo86 from "../components/radio-group/demos/horizontal";
+import Demo87 from "../components/radio-group/demos/cards";
+import Demo88 from "../components/radio-group/demos/disabled";
+import Demo89 from "../components/radio-group/demos/card";
+import Demo90 from "../components/scroll-area/demos/directions";
+import Demo91 from "../components/scroll-area/demos/card";
+import Demo92 from "../components/select/demos/default";
+import Demo93 from "../components/select/demos/groups";
+import Demo94 from "../components/select/demos/searchable";
+import Demo95 from "../components/select/demos/sizes";
+import Demo96 from "../components/sheet/demos/sides";
+import Demo97 from "../components/sidebar/demos/app-shell";
+import Demo98 from "../components/sidebar/demos/card";
+import Demo99 from "../components/skeleton/demos/placeholders";
+import Demo100 from "../components/skeleton/demos/loading";
+import Demo101 from "../components/skeleton/demos/card";
+import Demo102 from "../components/slider/demos/single-and-range";
+import Demo103 from "../components/slider/demos/labelled";
+import Demo104 from "../components/slider/demos/vertical";
+import Demo105 from "../components/slider/demos/card";
+import Demo106 from "../components/spinner/demos/sizes";
+import Demo107 from "../components/spinner/demos/finish";
+import Demo108 from "../components/spinner/demos/with-text";
+import Demo109 from "../components/spinner/demos/card";
+import Demo110 from "../components/stepper/demos/checkout";
+import Demo111 from "../components/stepper/demos/vertical";
+import Demo112 from "../components/stepper/demos/card";
+import Demo113 from "../components/switch/demos/default";
+import Demo114 from "../components/switch/demos/settings";
+import Demo115 from "../components/switch/demos/sizes";
+import Demo116 from "../components/switch/demos/disabled";
+import Demo117 from "../components/switcher/demos/variants";
+import Demo118 from "../components/switcher/demos/icons";
+import Demo119 from "../components/switcher/demos/icons-and-text";
+import Demo120 from "../components/switcher/demos/card";
+import Demo121 from "../components/table/demos/invoices";
+import Demo122 from "../components/table/demos/card";
+import Demo123 from "../components/tabs/demos/variants";
+import Demo124 from "../components/tabs/demos/icons";
+import Demo125 from "../components/tabs/demos/disabled";
+import Demo126 from "../components/tabs/demos/card";
+import Demo127 from "../components/text-effects/demos/overview";
+import Demo128 from "../components/text-effects/demos/by-character";
+import Demo129 from "../components/text-effects/demos/type-once";
+import Demo130 from "../components/text-effects/demos/card";
+import Demo131 from "../components/textarea/demos/default";
+import Demo132 from "../components/textarea/demos/counter";
+import Demo133 from "../components/textarea/demos/disabled";
+import Demo134 from "../components/theme-toggle/demos/reveals";
+import Demo135 from "../components/theme-toggle/demos/switch";
+import Demo136 from "../components/theme-toggle/demos/card";
+import Demo137 from "../components/toast/demos/types";
+import Demo138 from "../components/toast/demos/promise";
+import Demo139 from "../components/toast/demos/composed";
+import Demo140 from "../components/toast/demos/card";
+import Demo141 from "../components/toggle-group/demos/variants";
+import Demo142 from "../components/toggle-group/demos/days";
+import Demo143 from "../components/toggle-group/demos/disabled";
+import Demo144 from "../components/toggle-group/demos/card";
+import Demo145 from "../components/tooltip/demos/toolbar";
+import Demo146 from "../components/tooltip/demos/card";
 
 /** Every demo component, keyed by "<item>/<demo>" */
 export const demos: Record<string, ComponentType> = {
@@ -191,102 +195,106 @@ export const demos: Record<string, ComponentType> = {
   "date-picker/card": Demo42,
   "dialog/edit-profile": Demo43,
   "dialog/scrolling": Demo44,
-  "dropdown-menu/account": Demo45,
-  "dropdown-menu/options": Demo46,
-  "dropdown-menu/icons": Demo47,
-  "hover-card/profile": Demo48,
-  "input/default": Demo49,
-  "input/invalid": Demo50,
-  "input/sizes": Demo51,
-  "input/disabled": Demo52,
-  "input-otp/code": Demo53,
-  "input-otp/pin": Demo54,
-  "input-otp/card": Demo55,
-  "loading-button/async": Demo56,
-  "loading-button/states": Demo57,
-  "loading-button/card": Demo58,
-  "marquee/rows": Demo59,
-  "marquee/vertical": Demo60,
-  "marquee/card": Demo61,
-  "navigation-menu/header": Demo62,
-  "navigation-menu/without-viewport": Demo63,
-  "navigation-menu/card": Demo64,
-  "number-input/fields": Demo65,
-  "number-input/percent": Demo66,
-  "number-input/disabled": Demo67,
-  "number-input/card": Demo68,
-  "number-ticker/flow": Demo69,
-  "number-ticker/stats": Demo70,
-  "number-ticker/card": Demo71,
-  "pagination/pages": Demo72,
-  "pagination/card": Demo73,
-  "popover/uses": Demo74,
-  "popover/sides": Demo75,
-  "popover/anchor": Demo76,
-  "progress/overview": Demo77,
-  "progress/with-label": Demo78,
-  "progress/ring-sizes": Demo79,
-  "progress/card": Demo80,
-  "radio-group/travel": Demo81,
-  "radio-group/horizontal": Demo82,
-  "radio-group/cards": Demo83,
-  "radio-group/disabled": Demo84,
-  "radio-group/card": Demo85,
-  "scroll-area/directions": Demo86,
-  "scroll-area/card": Demo87,
-  "select/default": Demo88,
-  "select/groups": Demo89,
-  "select/searchable": Demo90,
-  "select/sizes": Demo91,
-  "sheet/sides": Demo92,
-  "sidebar/app-shell": Demo93,
-  "sidebar/card": Demo94,
-  "skeleton/placeholders": Demo95,
-  "skeleton/loading": Demo96,
-  "skeleton/card": Demo97,
-  "slider/single-and-range": Demo98,
-  "slider/labelled": Demo99,
-  "slider/vertical": Demo100,
-  "slider/card": Demo101,
-  "spinner/sizes": Demo102,
-  "spinner/finish": Demo103,
-  "spinner/with-text": Demo104,
-  "spinner/card": Demo105,
-  "stepper/checkout": Demo106,
-  "stepper/vertical": Demo107,
-  "stepper/card": Demo108,
-  "switch/default": Demo109,
-  "switch/settings": Demo110,
-  "switch/sizes": Demo111,
-  "switch/disabled": Demo112,
-  "switcher/variants": Demo113,
-  "switcher/icons": Demo114,
-  "switcher/icons-and-text": Demo115,
-  "switcher/card": Demo116,
-  "table/invoices": Demo117,
-  "table/card": Demo118,
-  "tabs/variants": Demo119,
-  "tabs/icons": Demo120,
-  "tabs/disabled": Demo121,
-  "tabs/card": Demo122,
-  "text-effects/overview": Demo123,
-  "text-effects/by-character": Demo124,
-  "text-effects/type-once": Demo125,
-  "text-effects/card": Demo126,
-  "textarea/default": Demo127,
-  "textarea/counter": Demo128,
-  "textarea/disabled": Demo129,
-  "theme-toggle/reveals": Demo130,
-  "theme-toggle/switch": Demo131,
-  "theme-toggle/card": Demo132,
-  "toast/types": Demo133,
-  "toast/promise": Demo134,
-  "toast/composed": Demo135,
-  "toast/card": Demo136,
-  "toggle-group/variants": Demo137,
-  "toggle-group/days": Demo138,
-  "toggle-group/disabled": Demo139,
-  "toggle-group/card": Demo140,
-  "tooltip/toolbar": Demo141,
-  "tooltip/card": Demo142,
+  "drawer/profile": Demo45,
+  "drawer/scrolling": Demo46,
+  "drawer/nested": Demo47,
+  "drawer/card": Demo48,
+  "dropdown-menu/account": Demo49,
+  "dropdown-menu/options": Demo50,
+  "dropdown-menu/icons": Demo51,
+  "hover-card/profile": Demo52,
+  "input/default": Demo53,
+  "input/invalid": Demo54,
+  "input/sizes": Demo55,
+  "input/disabled": Demo56,
+  "input-otp/code": Demo57,
+  "input-otp/pin": Demo58,
+  "input-otp/card": Demo59,
+  "loading-button/async": Demo60,
+  "loading-button/states": Demo61,
+  "loading-button/card": Demo62,
+  "marquee/rows": Demo63,
+  "marquee/vertical": Demo64,
+  "marquee/card": Demo65,
+  "navigation-menu/header": Demo66,
+  "navigation-menu/without-viewport": Demo67,
+  "navigation-menu/card": Demo68,
+  "number-input/fields": Demo69,
+  "number-input/percent": Demo70,
+  "number-input/disabled": Demo71,
+  "number-input/card": Demo72,
+  "number-ticker/flow": Demo73,
+  "number-ticker/stats": Demo74,
+  "number-ticker/card": Demo75,
+  "pagination/pages": Demo76,
+  "pagination/card": Demo77,
+  "popover/uses": Demo78,
+  "popover/sides": Demo79,
+  "popover/anchor": Demo80,
+  "progress/overview": Demo81,
+  "progress/with-label": Demo82,
+  "progress/ring-sizes": Demo83,
+  "progress/card": Demo84,
+  "radio-group/travel": Demo85,
+  "radio-group/horizontal": Demo86,
+  "radio-group/cards": Demo87,
+  "radio-group/disabled": Demo88,
+  "radio-group/card": Demo89,
+  "scroll-area/directions": Demo90,
+  "scroll-area/card": Demo91,
+  "select/default": Demo92,
+  "select/groups": Demo93,
+  "select/searchable": Demo94,
+  "select/sizes": Demo95,
+  "sheet/sides": Demo96,
+  "sidebar/app-shell": Demo97,
+  "sidebar/card": Demo98,
+  "skeleton/placeholders": Demo99,
+  "skeleton/loading": Demo100,
+  "skeleton/card": Demo101,
+  "slider/single-and-range": Demo102,
+  "slider/labelled": Demo103,
+  "slider/vertical": Demo104,
+  "slider/card": Demo105,
+  "spinner/sizes": Demo106,
+  "spinner/finish": Demo107,
+  "spinner/with-text": Demo108,
+  "spinner/card": Demo109,
+  "stepper/checkout": Demo110,
+  "stepper/vertical": Demo111,
+  "stepper/card": Demo112,
+  "switch/default": Demo113,
+  "switch/settings": Demo114,
+  "switch/sizes": Demo115,
+  "switch/disabled": Demo116,
+  "switcher/variants": Demo117,
+  "switcher/icons": Demo118,
+  "switcher/icons-and-text": Demo119,
+  "switcher/card": Demo120,
+  "table/invoices": Demo121,
+  "table/card": Demo122,
+  "tabs/variants": Demo123,
+  "tabs/icons": Demo124,
+  "tabs/disabled": Demo125,
+  "tabs/card": Demo126,
+  "text-effects/overview": Demo127,
+  "text-effects/by-character": Demo128,
+  "text-effects/type-once": Demo129,
+  "text-effects/card": Demo130,
+  "textarea/default": Demo131,
+  "textarea/counter": Demo132,
+  "textarea/disabled": Demo133,
+  "theme-toggle/reveals": Demo134,
+  "theme-toggle/switch": Demo135,
+  "theme-toggle/card": Demo136,
+  "toast/types": Demo137,
+  "toast/promise": Demo138,
+  "toast/composed": Demo139,
+  "toast/card": Demo140,
+  "toggle-group/variants": Demo141,
+  "toggle-group/days": Demo142,
+  "toggle-group/disabled": Demo143,
+  "toggle-group/card": Demo144,
+  "tooltip/toolbar": Demo145,
+  "tooltip/card": Demo146,
 };

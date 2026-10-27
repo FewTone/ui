@@ -9,7 +9,7 @@ Always on, for every UI change. The spec with every value is `docs-internal/01-b
   - badge edges
   - text selection
 
-  There are no "New" tags anywhere (owner, 2026-10-14). The Beta badge (`StatusBadge`, a Navy edge with travelling shines) still marks an API that may change, and Draft shows in development only.
+  The Beta badge (`StatusBadge`, a Navy edge with travelling shines) marks an API that may change, and the New badge (the same look) a component just added, only when its meta says `status: "new"` (owner, 2026-10-27; New tags were removed on 2026-10-14 and brought back for this). Draft shows in development only.
 
   Primary buttons are neutral.
 - **No glow and no grain.** Gradients keep one hue and move lightness only (about ±0.055). There are never multi-colour gradients.

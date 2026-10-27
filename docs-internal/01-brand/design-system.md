@@ -64,7 +64,7 @@ Apps import the whole system with one line: `@import "@fewtone/ui/globals.css";`
 |---|---|
 | Footer | `surface-brand-footer`, with the wordmark in `text-gradient-on-brand` |
 | Pro and premium cards | `surface-brand` |
-| Beta badge | `edge-shine` badge: a solid Navy edge with two light shines travelling round it. (It was the "New" badge; New tags were removed everywhere, owner 2026-10-14.) |
+| Beta and New badges | `edge-shine` badge: a solid Navy edge with two light shines travelling round it. Beta: the API may change. New: a component just added (`status: "new"`, owner 2026-10-27; New tags were removed on 2026-10-14 and came back for this). |
 | Announcement pill, Pro link | `edge-brand` (border fades from brand to neutral) |
 | Text selection | automatic (`--selection`) |
 | Info status | `info-*` tokens alias the brand scale |
@@ -240,6 +240,7 @@ There are two layers:
 | `--space-hero` | 24px | Item page: the description to the framed hero preview |
 | `--size-collapsed` / `--size-collapsed-fade` | 288px / 96px | A long section's starting height (Installation) and the fade at its foot (`Expandable`) |
 | `--size-roll-fade` / `--size-roll-fade-x` | 0.25em / 0.5em | The fade round a rolling number (Number Ticker): above and below, where digits spin out of sight, and at the sides, where characters come, go and glide. Shipped |
+| `--size-sheet-top-gap` / `--size-sheet-max` / `--size-sheet-inset-bottom` | max(44px, safe area + 8px) / 100svh − the gap / 16px + safe area | Drawer as a bottom sheet (iOS): the gap it leaves above it, clear of the status bar; the tallest it grows; the room under its last row, above the home indicator. Shipped |
 | `--space-block` | 48px | Between examples; before Related |
 | `--space-heading` | 12px | Section heading to its content |
 | `--space-stack` | 16px | Section label to its grid; title row to description |

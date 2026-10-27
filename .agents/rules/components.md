@@ -36,7 +36,7 @@ After any change to these, run `pnpm index`, which regenerates the index and the
 - **Comments** explain why: a short block at the top of the file, and a line wherever something isn't obvious. Match the density of the existing components.
 
 ## Metadata and demos
-- `status: "stable"` (or `beta` while the API may change). There are no "New" tags (owner, 2026-10-14). Set `addedAt` / `updatedAt`, and bump `updatedAt` on every user-visible change.
+- `status: "stable"` (or `beta` while the API may change, or `new` for a component just added: a New badge in the sidebar, owner 2026-10-27; back to `stable` once it has settled). Set `addedAt` / `updatedAt`, and bump `updatedAt` on every user-visible change.
 - `description` in search words ("An accessible React … for Next.js …").
 - `keywords` people actually type, `related` items, `primitives`, `ariaPattern`, and `ai.whenToUse`.
 - **API table:** every prop with its type, default and a plain-English description. Mention what it builds on ("Also accepts every Button prop").

@@ -114,6 +114,8 @@ Prefer an accessible primitive library (Radix, React Aria, Headless UI, Ark) for
 
 **Sheet / drawer** — slides from its edge (spring snappy), 8px extended past the edge so overshoot never shows a gap; no blur on the panel.
 
+**Bottom sheet (phones)** — use Vaul (iOS curve and drag) and keep its timing. The sheet itself never scrolls: a fixed shell with a body inside that does (`min-h-0 flex-1 overflow-y-auto`, one `minmax(0,1fr)` column). Handle the keyboard yourself (`repositionInputs={false}`): from `visualViewport`, lift the sheet by what the keyboard covers and cap its height to what's left; while it's up, drag only by the grabber. Fields 16px on phones (iOS zooms below that). Pin actions at the bottom above the home indicator (`env(safe-area-inset-bottom)`, needs `viewport-fit=cover`). Decide sheet or dialog when it opens, never while open. Reduced motion: fade, no background scale.
+
 **Toast** — slides from the edge through the blur; stacked deck that fans out on hover/focus; swipe to dismiss; timer pauses on hover, focus and hidden tab; updates swap in place.
 
 ## Navigation

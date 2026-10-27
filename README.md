@@ -46,7 +46,7 @@ Use pnpm, yarn or bun in place of npx (`pnpm dlx`, `yarn dlx`, `bunx --bun`). Ma
 ## Components
 
 <!-- components:start (written by `pnpm index` from packages/ui; don't edit by hand) -->
-46 components, each with a live preview, examples and its API on [ui.fewtone.com](https://ui.fewtone.com/components).
+47 components, each with a live preview, examples and its API on [ui.fewtone.com](https://ui.fewtone.com/components).
 
 | Category | Components |
 | --- | --- |
@@ -56,7 +56,7 @@ Use pnpm, yarn or bun in place of npx (`pnpm dlx`, `yarn dlx`, `bunx --bun`). Ma
 | Feedback | [Badge](https://ui.fewtone.com/components/badge), [Progress](https://ui.fewtone.com/components/progress), [Skeleton](https://ui.fewtone.com/components/skeleton), [Spinner](https://ui.fewtone.com/components/spinner), [Toast](https://ui.fewtone.com/components/toast) |
 | Forms | [Calendar](https://ui.fewtone.com/components/calendar), [Checkbox](https://ui.fewtone.com/components/checkbox), [Combobox](https://ui.fewtone.com/components/combobox), [Date Picker](https://ui.fewtone.com/components/date-picker), [Input](https://ui.fewtone.com/components/input), [Input OTP](https://ui.fewtone.com/components/input-otp), [Number Input](https://ui.fewtone.com/components/number-input), [Radio Group](https://ui.fewtone.com/components/radio-group), [Select](https://ui.fewtone.com/components/select), [Slider](https://ui.fewtone.com/components/slider), [Switch](https://ui.fewtone.com/components/switch), [Textarea](https://ui.fewtone.com/components/textarea) |
 | Navigation | [Accordion](https://ui.fewtone.com/components/accordion), [Breadcrumb](https://ui.fewtone.com/components/breadcrumb), [Command](https://ui.fewtone.com/components/command), [Navigation Menu](https://ui.fewtone.com/components/navigation-menu), [Pagination](https://ui.fewtone.com/components/pagination), [Sidebar](https://ui.fewtone.com/components/sidebar), [Tabs](https://ui.fewtone.com/components/tabs) |
-| Overlays | [Alert Dialog](https://ui.fewtone.com/components/alert-dialog), [Context Menu](https://ui.fewtone.com/components/context-menu), [Dialog](https://ui.fewtone.com/components/dialog), [Dropdown Menu](https://ui.fewtone.com/components/dropdown-menu), [Hover Card](https://ui.fewtone.com/components/hover-card), [Popover](https://ui.fewtone.com/components/popover), [Sheet](https://ui.fewtone.com/components/sheet), [Tooltip](https://ui.fewtone.com/components/tooltip) |
+| Overlays | [Alert Dialog](https://ui.fewtone.com/components/alert-dialog), [Context Menu](https://ui.fewtone.com/components/context-menu), [Dialog](https://ui.fewtone.com/components/dialog), [Drawer](https://ui.fewtone.com/components/drawer), [Dropdown Menu](https://ui.fewtone.com/components/dropdown-menu), [Hover Card](https://ui.fewtone.com/components/hover-card), [Popover](https://ui.fewtone.com/components/popover), [Sheet](https://ui.fewtone.com/components/sheet), [Tooltip](https://ui.fewtone.com/components/tooltip) |
 <!-- components:end -->
 
 ## For AI assistants
